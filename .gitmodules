@@ -1,0 +1,3 @@
+[submodule "lib/tailwindcss-material3-plugin"]
+	path = lib/tailwindcss-material3-plugin
+	url = https://github.com/canoypa/tailwindcss-material3-plugin.git
