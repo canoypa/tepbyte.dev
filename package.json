@@ -16,7 +16,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwindcss": "^3.2.4",
-    "tailwindcss-material3-plugin": "file:lib/tailwindcss-material3-plugin"
+    "tailwindcss-material3-plugin": "file:lib/tailwindcss-material3-plugin",
+    "tepbyte-markdown": "file:lib/tepbyte-markdown"
   },
   "devDependencies": {
     "@types/node": "^18.11.9",

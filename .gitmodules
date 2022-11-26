@@ -1,3 +1,6 @@
 [submodule "lib/tailwindcss-material3-plugin"]
 	path = lib/tailwindcss-material3-plugin
 	url = https://github.com/canoypa/tailwindcss-material3-plugin.git
+[submodule "lib/tepbyte-markdown"]
+	path = lib/tepbyte-markdown
+	url = https://github.com/canoypa/tepbyte-markdown.git
