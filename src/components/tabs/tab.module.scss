@@ -1,5 +1,5 @@
 .root {
-  @apply inline-flex flex-col items-center h-[48px] min-w-[64px] px-[16px] cursor-pointer;
+  @apply inline-flex flex-col items-center h-[48px] min-w-[64px] px-[16px] cursor-pointer text-label-large font-comfortaa;
 
   &:hover {
     @apply bg-primary/hover;
