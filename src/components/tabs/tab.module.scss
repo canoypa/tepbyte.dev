@@ -1,0 +1,24 @@
+.root {
+  @apply inline-flex flex-col items-center h-[48px] min-w-[64px] px-[16px] cursor-pointer;
+
+  &:hover {
+    @apply bg-primary/hover;
+  }
+
+  &:focus {
+    @apply bg-primary/focus;
+  }
+}
+
+.label {
+  @apply flex-grow flex items-center;
+}
+
+.indicator {
+  @apply h-[3px] w-1/2 rounded-tr-full rounded-tl-full bg-primary;
+  @apply transition-transform duration-short4 ease-standard origin-bottom;
+
+  :not(.active) > & {
+    @apply scale-y-0;
+  }
+}
