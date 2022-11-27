@@ -1,7 +1,7 @@
 import { Comfortaa } from "@next/font/google";
 import { FC, PropsWithChildren } from "react";
-import { Header } from "../features/header";
-import "../styles/globals.css";
+import { Header } from "~/features/header";
+import "~/styles/globals.css";
 
 const comfortaa = Comfortaa({
   display: "swap",

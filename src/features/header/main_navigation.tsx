@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { FC } from "react";
-import { Tabs } from "../../components/tabs";
+import { Tabs } from "~/components/tabs";
 
 export const MainNavigation: FC = () => {
   const { push } = useRouter();
