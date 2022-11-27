@@ -1,5 +1,6 @@
 import { Comfortaa } from "@next/font/google";
 import { FC, PropsWithChildren } from "react";
+import { Header } from "../features/header";
 import "../styles/globals.css";
 
 const comfortaa = Comfortaa({
@@ -15,7 +16,11 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
         <meta name="viewport" content="width=device-width" />
       </head>
 
-      <body>{children}</body>
+      <body>
+        <Header />
+
+        {children}
+      </body>
     </html>
   );
 };
