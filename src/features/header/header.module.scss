@@ -1,3 +1,8 @@
 .root {
-  @apply sticky top-0 flex justify-center bg-surface/70 backdrop-blur-lg;
+  @apply sticky top-0 flex justify-center bg-surface/70 backdrop-blur-lg duration-short-2 ease-standard;
+  transition-property: background-color, box-shadow;
+
+  &.floating {
+    @apply elevation-2;
+  }
 }
