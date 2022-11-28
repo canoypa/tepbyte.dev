@@ -15,6 +15,7 @@
     "next": "^13.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-use": "^17.4.0",
     "tailwindcss": "^3.2.4",
     "tailwindcss-material3-plugin": "file:lib/tailwindcss-material3-plugin",
     "tepbyte-markdown": "file:lib/tepbyte-markdown"
