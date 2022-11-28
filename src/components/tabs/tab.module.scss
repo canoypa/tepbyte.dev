@@ -16,7 +16,7 @@
 
 .indicator {
   @apply h-[3px] w-1/2 rounded-tr-full rounded-tl-full bg-primary;
-  @apply transition-transform duration-short4 ease-standard origin-bottom;
+  @apply transition-transform duration-short-4 ease-standard origin-bottom;
 
   :not(.active) > & {
     @apply scale-y-0;
