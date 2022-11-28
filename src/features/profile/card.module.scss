@@ -1,0 +1,20 @@
+.root {
+  @apply inline-grid grid-cols-1 grid-rows-1 h-[300px] aspect-square rounded-extra-large overflow-hidden;
+  @apply md:h-[400px] md:aspect-[3/4];
+}
+
+.image {
+  @apply row-span-full col-span-full;
+}
+.img {
+  @apply w-full h-full object-cover;
+}
+
+.content {
+  @apply flex flex-col gap-8 items-center justify-center row-span-full col-span-full bg-surface/70 backdrop-blur-lg;
+}
+
+.name {
+  @apply text-display-medium;
+  @apply md:text-display-small;
+}

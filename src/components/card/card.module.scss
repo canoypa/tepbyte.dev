@@ -1,0 +1,52 @@
+.root {
+  @apply gap-6 p-4 rounded-medium elevation-1 duration-medium1;
+  transition-property: background-color, box-shadow;
+
+  &.clickable {
+    @apply cursor-pointer;
+  }
+
+  &.row {
+    @apply flex flex-row items-center;
+  }
+
+  &.column {
+    @apply inline-flex flex-col;
+  }
+
+  &:hover {
+    @apply elevation-2;
+  }
+}
+
+.media {
+  @apply flex-1 rounded-medium overflow-hidden aspect-[16/9];
+
+  .row & {
+    @apply min-w-[80px] max-w-[240px];
+  }
+
+  .column & {
+    @apply min-h-[80px] max-h-[200px];
+  }
+}
+
+.img {
+  @apply w-full h-full object-cover transition-transform duration-long1;
+
+  .root:hover & {
+    @apply scale-105;
+  }
+}
+
+.content {
+  @apply flex flex-col gap-2;
+}
+
+.title {
+  @apply text-title-large;
+}
+
+.summery {
+  @apply text-body-large;
+}
