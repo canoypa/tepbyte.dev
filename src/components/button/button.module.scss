@@ -1,0 +1,24 @@
+.root {
+  @apply inline-flex items-center justify-center gap-x-2 px-3 h-[40px] min-w-[64px] rounded-full text-label-large text-primary;
+
+  &:hover {
+    @apply bg-primary/hover;
+  }
+
+  &:focus {
+    @apply bg-primary/focus;
+  }
+}
+
+.leading,
+.trailing {
+  @apply w-[18px] h-[18px];
+}
+
+.leading {
+  @apply -mr-2;
+}
+
+.trailing {
+  @apply -ml-2;
+}
