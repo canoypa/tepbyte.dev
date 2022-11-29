@@ -1,10 +1,11 @@
 import { FC } from "react";
+import { MainContents } from "~/features/main_contents";
 
 const PostPage: FC = () => {
   return (
-    <div>
+    <MainContents>
       <p>Post</p>
-    </div>
+    </MainContents>
   );
 };
 export default PostPage;

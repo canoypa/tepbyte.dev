@@ -1,10 +1,11 @@
 import { FC } from "react";
+import { MainContents } from "~/features/main_contents";
 
 const AboutPage: FC = () => {
   return (
-    <div>
+    <MainContents>
       <p>About</p>
-    </div>
+    </MainContents>
   );
 };
 export default AboutPage;
