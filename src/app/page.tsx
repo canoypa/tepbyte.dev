@@ -1,10 +1,13 @@
-import { FC } from "react";
+import { fetchProfileMeta } from "~/api/profile";
 import { MainContents } from "~/features/main_contents";
+import { Hero } from "~/features/profile";
 
-const HomePage: FC = () => {
+const HomePage = async () => {
+  const profile = await fetchProfileMeta();
+
   return (
     <MainContents>
-      <p>Home</p>
+      <Hero profile={profile} />
     </MainContents>
   );
 };

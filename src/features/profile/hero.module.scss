@@ -1,0 +1,16 @@
+.root {
+  @apply flex flex-col px-8 py-16 gap-16;
+  @apply md:flex-row md:items-center;
+}
+
+.card {
+  @apply grid place-items-center;
+}
+
+.info {
+  @apply flex flex-col gap-8;
+}
+
+.subhead {
+  @apply text-headline-medium;
+}
