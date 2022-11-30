@@ -10,10 +10,28 @@ export const fetchChangeFiles = async (ref: string): Promise<ChangeFile[]> => {
 
   const fileChanges = commit.data.files ?? [];
 
-  const changeFiles = fileChanges.map((change) => ({
-    filename: change.filename,
-    status: change.status,
-  }));
+  const changeFiles = fileChanges.flatMap<ChangeFile>((change) => {
+    if (
+      change.status === "added" ||
+      change.status === "copied" ||
+      change.status === "modified"
+    ) {
+      return [{ filename: change.filename, action: "update" }];
+    }
+
+    if (change.status === "removed") {
+      return [{ filename: change.filename, action: "remove" }];
+    }
+
+    if (change.status === "renamed" && change.previous_filename) {
+      return [
+        { filename: change.previous_filename, action: "remove" },
+        { filename: change.filename, action: "update" },
+      ];
+    }
+
+    return [];
+  });
 
   return changeFiles;
 };
