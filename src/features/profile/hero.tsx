@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FC } from "react";
 import { Button } from "~/components/button";
 import { ProfileCard } from "./card";
@@ -22,7 +23,9 @@ export const Hero: FC<HeroProps> = ({ profile }) => {
         <span className={styles.subhead}>{profile.subhead}</span>
         <ProfileLink links={profile.links} />
         <span>
-          <Button label="Read more" trailing=">" />
+          <Link href="/about">
+            <Button label="Read more" trailing=">" />
+          </Link>
         </span>
       </div>
     </div>
