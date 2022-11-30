@@ -35,3 +35,14 @@ export const postUpdater = async (change: ChangeFile) => {
     .file(`posts/${slug}/_parsed.json`)
     .save(JSON.stringify(root));
 };
+
+export const PostRemover = async (change: ChangeFile) => {
+  const firestore = getFirestore(firebaseApp);
+  const storage = getStorage(firebaseApp);
+
+  const match = change.filename.match(/^posts\/(?<slug>\w+)\/index\.md$/)!;
+  const slug = match.groups!.slug;
+
+  await firestore.doc(`posts/${slug}`).delete();
+  await storage.bucket().file(`posts/${slug}/_parsed.json`).delete();
+};

@@ -1,11 +1,8 @@
-import { https } from "firebase-functions/v2";
+import { region } from "firebase-functions";
 import { fetchChangeFiles } from "./changes_fetcher";
 import { updateProcessor } from "./contents/update";
 
-export const update = https.onRequest(
-  {
-    region: "asia-northeast1",
-  },
+export const update = region("asia-northeast1").https.onRequest(
   async (request, response) => {
     if (request.method !== "POST") {
       response.status(405).end();
