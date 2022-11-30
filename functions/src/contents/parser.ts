@@ -1,4 +1,4 @@
-import { parseMarkdown } from "tepbyte-markdown";
+import parseMarkdown from "tepbyte-markdown";
 import { ghRest } from "../client/github";
 
 export const fetchParsedMarkdown = async (path: string) => {

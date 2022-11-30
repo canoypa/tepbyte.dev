@@ -12,6 +12,6 @@ export const privacyUpdater = async (change: ChangeFile) => {
 
   await storage
     .bucket()
-    .file(`privacy/data/_parsed.json`)
+    .file("privacy/data/_parsed.json")
     .save(JSON.stringify(root));
 };
