@@ -3,6 +3,6 @@
   transition-property: background-color, box-shadow;
 
   &.floating {
-    @apply elevation-2;
+    @apply shadow-2 z-2;
   }
 }

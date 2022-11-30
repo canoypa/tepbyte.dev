@@ -36,3 +36,14 @@ export const productUpdater = async (change: ChangeFile) => {
     .file(`products/${slug}/_parsed.json`)
     .save(JSON.stringify(root));
 };
+
+export const productRemover = async (change: ChangeFile) => {
+  const firestore = getFirestore(firebaseApp);
+  const storage = getStorage(firebaseApp);
+
+  const match = change.filename.match(/^products\/(?<slug>\w+)\/index\.md$/)!;
+  const slug = match.groups!.slug;
+
+  await firestore.doc(`products/${slug}`).delete();
+  await storage.bucket().file(`products/${slug}/_parsed.json`).delete();
+};
