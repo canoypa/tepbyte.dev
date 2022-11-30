@@ -26,7 +26,7 @@ export const fetchProductList = async (limit?: number) => {
 
   if (snapshot.empty) return [];
 
-  const data = snapshot.docs.map((v) => v.data());
+  const data = snapshot.docs.map((v) => ({ id: v.id, ...v.data() }));
 
   return data;
 };
