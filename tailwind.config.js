@@ -2,7 +2,7 @@ const { fontFamily } = require("tailwindcss/defaultTheme");
 
 const lineClampPlugin = require("@tailwindcss/line-clamp");
 
-const m3Plugin = require("tailwindcss-material3-plugin")({
+const m3Plugin = require("tailwindcss-material3-plugin").Material3Plugin({
   sourceColor: 0x6750A4,
 });
 
