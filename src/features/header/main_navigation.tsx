@@ -17,7 +17,7 @@ export const MainNavigation: FC = () => {
           { label: "Products", value: "/products" },
           { label: "Blog", value: "/blog" },
         ]}
-        active={`/${layout}` ?? undefined}
+        active={layout ? `/${layout}` : "/"}
         onChange={push}
       />
     </nav>
