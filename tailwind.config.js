@@ -8,7 +8,7 @@ const m3Plugin = require("tailwindcss-material3-plugin").Material3Plugin({
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.tsx"],
+  content: ["./src/**/*.tsx", "./src/**/*.module.scss"],
   theme: {
     extend: {
       fontFamily: {
