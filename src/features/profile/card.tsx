@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { resolveImagePath } from "~/core/image_path_resolver";
 import { Avatar } from "./avatar";
 import styles from "./card.module.scss";
 
@@ -12,7 +13,11 @@ export const ProfileCard: FC<ProfileCardProps> = ({ name, photo, image }) => {
   return (
     <div className={styles.root}>
       <div className={styles.image}>
-        <img src={image} alt="" className={styles.img} />
+        <img
+          src={resolveImagePath("profile", image)}
+          alt=""
+          className={styles.img}
+        />
       </div>
       <div className={styles.content}>
         <Avatar photo={photo} />

@@ -1,5 +1,6 @@
 import { fetchProduct } from "~/api/product";
 import { MainContents } from "~/features/main_contents";
+import { MarkdownRenderer } from "~/features/markdown";
 import { Info, Screenshot } from "~/features/product";
 
 const ProductPage = async ({
@@ -13,6 +14,7 @@ const ProductPage = async ({
     <MainContents>
       <Screenshot images={product.frontmatter.images} />
       <Info product={product.frontmatter} />
+      <MarkdownRenderer tree={product} />
     </MainContents>
   );
 };
