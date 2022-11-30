@@ -1,10 +1,12 @@
 import { FC } from "react";
+import { MainContents } from "~/features/main_contents";
+import { PageHeadline } from "~/features/page_headline";
 
 const PrivacyPage: FC = () => {
   return (
-    <div>
-      <p>Privacy</p>
-    </div>
+    <MainContents>
+      <PageHeadline>Privacy</PageHeadline>
+    </MainContents>
   );
 };
 export default PrivacyPage;

@@ -1,0 +1,15 @@
+.root {
+  @apply flex flex-col gap-6;
+}
+
+.primary {
+  @apply flex gap-6 items-center;
+}
+
+.name {
+  @apply text-headline-large;
+}
+
+.subhead {
+  @apply text-title-medium;
+}

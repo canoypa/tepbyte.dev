@@ -1,0 +1,14 @@
+.root {
+  @apply flex gap-8 h-[260px] overflow-x-scroll;
+
+  // hidden scrollbar
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.image {
+  @apply rounded-extra-large h-full aspect-video object-cover;
+}

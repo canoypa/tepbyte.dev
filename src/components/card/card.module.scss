@@ -1,5 +1,5 @@
 .root {
-  @apply gap-6 p-4 rounded-medium elevation-1 duration-medium-1;
+  @apply gap-6 p-4 rounded-medium bg-primary/1 shadow-1 z-1  duration-medium-1;
   transition-property: background-color, box-shadow;
 
   &.clickable {
@@ -15,7 +15,7 @@
   }
 
   &:hover {
-    @apply elevation-2;
+    @apply bg-primary/2 shadow-2 z-2;
   }
 }
 

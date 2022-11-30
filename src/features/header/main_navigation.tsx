@@ -1,12 +1,12 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter, useSelectedLayoutSegment } from "next/navigation";
 import { FC } from "react";
 import { Tabs } from "~/components/tabs";
 
 export const MainNavigation: FC = () => {
   const { push } = useRouter();
-  const pathname = usePathname();
+  const layout = useSelectedLayoutSegment();
 
   return (
     <nav>
@@ -17,7 +17,7 @@ export const MainNavigation: FC = () => {
           { label: "Products", value: "/products" },
           { label: "Blog", value: "/blog" },
         ]}
-        active={pathname ?? undefined}
+        active={`/${layout}` ?? undefined}
         onChange={push}
       />
     </nav>
