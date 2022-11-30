@@ -1,10 +1,18 @@
-import { FC } from "react";
+import { fetchProduct } from "~/api/product";
 import { MainContents } from "~/features/main_contents";
+import { Info, Screenshot } from "~/features/product";
 
-const ProductPage: FC = () => {
+const ProductPage = async ({
+  params: { slug },
+}: {
+  params: { slug: string };
+}) => {
+  const product = await fetchProduct(slug);
+
   return (
     <MainContents>
-      <p>Product</p>
+      <Screenshot images={product.frontmatter.images} />
+      <Info product={product.frontmatter} />
     </MainContents>
   );
 };
