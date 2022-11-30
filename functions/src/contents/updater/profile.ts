@@ -21,9 +21,9 @@ export const profileUpdater = async (change: ChangeFile) => {
     links: frontmatter.links,
   };
 
-  await firestore.doc(`profile/data`).set(meta);
+  await firestore.doc("profile/data").set(meta);
   await storage
     .bucket()
-    .file(`profile/data/_parsed.json`)
+    .file("profile/data/_parsed.json")
     .save(JSON.stringify(root));
 };

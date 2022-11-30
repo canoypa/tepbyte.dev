@@ -26,6 +26,7 @@ const processMatcher: [
     /^profile\/index\.md$/,
     {
       update: profileUpdater,
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
       remove: () => {},
     },
   ],
@@ -33,6 +34,7 @@ const processMatcher: [
     /^privacy\/index\.md$/,
     {
       update: privacyUpdater,
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
       remove: () => {},
     },
   ],
