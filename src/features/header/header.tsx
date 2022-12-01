@@ -16,7 +16,9 @@ export const Header: FC = () => {
         [styles.floating]: isFloating,
       })}
     >
-      <MainNavigation />
+      <div className={styles.container}>
+        <MainNavigation />
+      </div>
     </header>
   );
 };
