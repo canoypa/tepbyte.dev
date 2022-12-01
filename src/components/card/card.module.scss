@@ -11,7 +11,7 @@
   }
 
   &.column {
-    @apply inline-flex flex-col;
+    @apply inline-flex flex-col max-w-[600px];
   }
 
   &:hover {
@@ -27,7 +27,7 @@
   }
 
   .column & {
-    @apply min-h-[80px] max-h-[200px];
+    @apply min-h-[80px];
   }
 }
 
