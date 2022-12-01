@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { resolveImagePath } from "~/core/image_path_resolver";
 import styles from "./thumbnail.module.scss";
 
 export type ThumbnailProps = {
@@ -6,5 +7,11 @@ export type ThumbnailProps = {
 };
 
 export const Thumbnail: FC<ThumbnailProps> = ({ image }) => {
-  return <img src={image} alt="" className={styles.root} />;
+  return (
+    <img
+      src={resolveImagePath("posts", image)}
+      alt=""
+      className={styles.root}
+    />
+  );
 };
