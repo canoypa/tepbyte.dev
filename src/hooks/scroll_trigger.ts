@@ -13,22 +13,24 @@ import {
 import { useEvent } from "react-use";
 
 export type UseScrollTriggerOptions = {
-  target: Window | Element;
+  target: Window | Element | null;
   threshold: number;
   disableHysteresis: boolean;
 };
 
 const defaultOptions = {
-  target: window,
+  target: typeof window !== "undefined" ? window : null,
   threshold: 100,
   disableHysteresis: false,
 };
 
 const scrollHandler = (
-  cur: MutableRefObject<number | undefined>,
+  cur: MutableRefObject<number>,
   options: UseScrollTriggerOptions
 ): boolean => {
   const { target, threshold, disableHysteresis } = options;
+
+  if (!target) return false;
 
   const previous = cur.current;
   cur.current = target instanceof Window ? target.scrollY : target.scrollTop;
@@ -47,7 +49,7 @@ export const useScrollTrigger = (
 ) => {
   const opt = useMemo(() => ({ ...defaultOptions, ...options }), [options]);
 
-  const cur = useRef<number>();
+  const cur = useRef<number>(0);
   const [trigger, setTrigger] = useState<boolean>(() =>
     scrollHandler(cur, opt)
   );
