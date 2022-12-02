@@ -1,5 +1,5 @@
 .root {
-  @apply flex gap-8 h-[260px] overflow-x-scroll;
+  @apply flex gap-4 overflow-x-auto;
 
   // hidden scrollbar
   -ms-overflow-style: none;
@@ -10,5 +10,5 @@
 }
 
 .image {
-  @apply rounded-extra-large h-full aspect-video object-cover;
+  @apply max-h-[260px] aspect-video rounded-extra-large object-cover;
 }
