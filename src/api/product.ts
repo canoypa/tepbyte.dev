@@ -1,8 +1,9 @@
 import { getFirestore } from "firebase-admin/firestore";
 import { getStorage } from "firebase-admin/storage";
+import { cache } from "react";
 import { firebaseAdminApp } from "~/client/firebase-admin";
 
-export const fetchProduct = async (slug: string) => {
+export const fetchProduct = cache(async (slug: string) => {
   const storage = getStorage(firebaseAdminApp);
 
   const query = storage
@@ -14,9 +15,9 @@ export const fetchProduct = async (slug: string) => {
   const data = JSON.parse(snapshot.toString());
 
   return data;
-};
+});
 
-export const fetchProductList = async (limit?: number) => {
+export const fetchProductList = cache(async (limit?: number) => {
   const firestore = getFirestore(firebaseAdminApp);
 
   let query = firestore.collection("products").orderBy("published_at");
@@ -29,4 +30,4 @@ export const fetchProductList = async (limit?: number) => {
   const data = snapshot.docs.map((v) => ({ id: v.id, ...v.data() }));
 
   return data;
-};
+});

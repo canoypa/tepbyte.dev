@@ -1,7 +1,8 @@
 import { getStorage } from "firebase-admin/storage";
+import { cache } from "react";
 import { firebaseAdminApp } from "~/client/firebase-admin";
 
-export const fetchPrivacy = async () => {
+export const fetchPrivacy = cache(async () => {
   const storage = getStorage(firebaseAdminApp);
 
   const query = storage
@@ -13,4 +14,4 @@ export const fetchPrivacy = async () => {
   const data = JSON.parse(snapshot.toString());
 
   return data;
-};
+});

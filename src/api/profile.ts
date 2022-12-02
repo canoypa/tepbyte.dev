@@ -1,8 +1,9 @@
 import { getFirestore } from "firebase-admin/firestore";
 import { getStorage } from "firebase-admin/storage";
+import { cache } from "react";
 import { firebaseAdminApp } from "~/client/firebase-admin";
 
-export const fetchProfile = async () => {
+export const fetchProfile = cache(async () => {
   const storage = getStorage(firebaseAdminApp);
 
   const query = storage
@@ -13,9 +14,9 @@ export const fetchProfile = async () => {
   const data = JSON.parse(snapshot.toString());
 
   return data;
-};
+});
 
-export const fetchProfileMeta = async () => {
+export const fetchProfileMeta = cache(async () => {
   const firestore = getFirestore(firebaseAdminApp);
 
   const query = firestore.doc("profile/data");
@@ -24,4 +25,4 @@ export const fetchProfileMeta = async () => {
   const data = snapshot.data();
 
   return data;
-};
+});
