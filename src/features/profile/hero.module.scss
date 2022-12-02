@@ -1,10 +1,10 @@
 .root {
-  @apply flex flex-col px-8 py-16 gap-16;
-  @apply md:flex-row md:items-center;
+  @apply flex flex-col px-8 py-16 gap-16 items-center;
+  @apply md:flex-row;
 }
 
 .card {
-  @apply grid place-items-center;
+  @apply flex justify-center;
 }
 
 .info {
@@ -12,5 +12,6 @@
 }
 
 .subhead {
-  @apply text-headline-medium;
+  @apply text-headline-small;
+  @apply md:text-headline-medium;
 }
