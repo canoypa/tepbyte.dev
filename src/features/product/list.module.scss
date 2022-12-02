@@ -3,3 +3,7 @@
   @apply sm:grid-cols-2;
   @apply lg:grid-cols-3;
 }
+
+.link {
+  @apply contents;
+}
