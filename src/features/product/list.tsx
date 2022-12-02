@@ -11,7 +11,7 @@ export const ProductList: FC<ProductListProps> = ({ items }) => {
   return (
     <div className={styles.root}>
       {items.map((v) => (
-        <Link key={v.id} href={`/products/${v.id}`}>
+        <Link key={v.id} href={`/products/${v.id}`} className={styles.link}>
           <Card
             direction="column"
             title={v.title}

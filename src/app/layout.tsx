@@ -12,10 +12,6 @@ const comfortaa = Comfortaa({
 const Layout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <html className={comfortaa.variable}>
-      <head>
-        <meta name="viewport" content="width=device-width" />
-      </head>
-
       <body>
         <Header />
 

@@ -1,8 +1,16 @@
 .root {
-  @apply sticky top-0 flex justify-center bg-surface/70 backdrop-blur-lg duration-short-2 ease-standard;
-  transition-property: background-color, box-shadow;
+  @apply sticky top-0 bg-surface/70 backdrop-blur-lg;
 
   &.floating {
     @apply shadow-2 z-2;
+  }
+}
+
+.container {
+  @apply flex justify-center duration-short-2 ease-standard;
+  transition-property: background-color, box-shadow;
+
+  .floating & {
+    @apply bg-primary/2;
   }
 }
