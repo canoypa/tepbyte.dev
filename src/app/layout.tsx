@@ -11,7 +11,7 @@ const comfortaa = Comfortaa({
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {
   return (
-    <html className={comfortaa.variable}>
+    <html lang="ja" className={comfortaa.variable}>
       <body>
         <Header />
 
