@@ -15,7 +15,7 @@ export const update = region("asia-northeast1").https.onRequest(
     }
 
     const changeFiles = await fetchChangeFiles(request.body.sha);
-    updateProcessor(changeFiles);
+    await updateProcessor(changeFiles);
 
     response.status(200).end();
   }

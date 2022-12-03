@@ -6,7 +6,9 @@ import { profileUpdater } from "./updater/profile";
 
 const processMatcher: [
   RegExp,
-  { [key in ChangeFile["action"]]: (change: ChangeFile) => void }
+  {
+    [key in ChangeFile["action"]]: (change: ChangeFile) => Promise<void> | void;
+  }
 ][] = [
   [
     /^posts\/(?<slug>\w+)\/index\.md$/,
@@ -49,10 +51,10 @@ export const updateProcessor = async (changeFiles: ChangeFile[]) => {
     if (!match) return;
 
     if (change.action === "update") {
-      match[1].update(change);
+      return match[1].update(change);
     }
     if (change.action === "remove") {
-      match[1].remove(change);
+      return match[1].remove(change);
     }
   });
 
