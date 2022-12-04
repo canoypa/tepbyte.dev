@@ -8,7 +8,7 @@ export const postUpdater = async (change: ChangeFile) => {
   const firestore = getFirestore(firebaseApp);
   const storage = getStorage(firebaseApp);
 
-  const match = change.filename.match(/^posts\/(?<slug>\w+)\/index\.md$/)!;
+  const match = change.filename.match(/^posts\/(?<slug>.+)\/index\.md$/)!;
   const slug = match.groups!.slug;
 
   const parsedMd = await fetchParsedMarkdown(change.filename);
@@ -40,7 +40,7 @@ export const PostRemover = async (change: ChangeFile) => {
   const firestore = getFirestore(firebaseApp);
   const storage = getStorage(firebaseApp);
 
-  const match = change.filename.match(/^posts\/(?<slug>\w+)\/index\.md$/)!;
+  const match = change.filename.match(/^posts\/(?<slug>.+)\/index\.md$/)!;
   const slug = match.groups!.slug;
 
   await firestore.doc(`posts/${slug}`).delete();

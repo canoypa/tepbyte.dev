@@ -7,7 +7,7 @@ export const postAssetUpdater = async (change: ChangeFile) => {
   const storage = getStorage(firebaseApp);
 
   const match = change.filename.match(
-    /^posts\/(?<slug>\w+)\/(?<filename>.+\.(?:png|jpg))$/
+    /^posts\/(?<slug>.+)\/(?<filename>.+\.(?:png|jpg))$/
   )!;
   const slug = match.groups!.slug;
   const filename = match.groups!.filename;
@@ -32,7 +32,7 @@ export const postAssetRemover = async (change: ChangeFile) => {
   const storage = getStorage(firebaseApp);
 
   const match = change.filename.match(
-    /^posts\/(?<slug>\w+)\/(?<filename>.+\.(?:png|jpg))$/
+    /^posts\/(?<slug>.+)\/(?<filename>.+\.(?:png|jpg))$/
   )!;
   const slug = match.groups!.slug;
   const filename = match.groups!.filename;

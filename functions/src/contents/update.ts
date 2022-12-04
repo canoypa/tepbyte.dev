@@ -16,28 +16,28 @@ const processMatcher: [
   }
 ][] = [
   [
-    /^posts\/(?<slug>\w+)\/index\.md$/,
+    /^posts\/(?<slug>.+)\/index\.md$/,
     {
       update: postUpdater,
       remove: PostRemover,
     },
   ],
   [
-    /^posts\/(?<slug>\w+)\/(?<filename>.+\.(?:png|jpg))$/,
+    /^posts\/(?<slug>.+)\/(?<filename>.+\.(?:png|jpg))$/,
     {
       update: postAssetUpdater,
       remove: postAssetRemover,
     },
   ],
   [
-    /^products\/(?<slug>\w+)\/index\.md$/,
+    /^products\/(?<slug>.+)\/index\.md$/,
     {
       update: productUpdater,
       remove: productRemover,
     },
   ],
   [
-    /^products\/(?<slug>\w+)\/(?<filename>.+\.(?:png|jpg))$/,
+    /^products\/(?<slug>.+)\/(?<filename>.+\.(?:png|jpg))$/,
     {
       update: productAssetUpdater,
       remove: productAssetRemover,

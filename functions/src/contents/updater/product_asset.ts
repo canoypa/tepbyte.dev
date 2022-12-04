@@ -7,7 +7,7 @@ export const productAssetUpdater = async (change: ChangeFile) => {
   const storage = getStorage(firebaseApp);
 
   const match = change.filename.match(
-    /^products\/(?<slug>\w+)\/(?<filename>.+\.(?:png|jpg))$/
+    /^products\/(?<slug>.+)\/(?<filename>.+\.(?:png|jpg))$/
   )!;
   const slug = match.groups!.slug;
   const filename = match.groups!.filename;
@@ -32,7 +32,7 @@ export const productAssetRemover = async (change: ChangeFile) => {
   const storage = getStorage(firebaseApp);
 
   const match = change.filename.match(
-    /^products\/(?<slug>\w+)\/(?<filename>.+\.(?:png|jpg))$/
+    /^products\/(?<slug>.+)\/(?<filename>.+\.(?:png|jpg))$/
   )!;
   const slug = match.groups!.slug;
   const filename = match.groups!.filename;
