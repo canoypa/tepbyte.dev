@@ -20,7 +20,7 @@ export const fetchProduct = cache(async (slug: string) => {
 export const fetchProductList = cache(async (limit?: number) => {
   const firestore = getFirestore(firebaseAdminApp);
 
-  let query = firestore.collection("products").orderBy("published_at");
+  let query = firestore.collection("products").orderBy("published_at", "desc");
   if (limit) query = query.limit(limit);
 
   const snapshot = await query.get();
