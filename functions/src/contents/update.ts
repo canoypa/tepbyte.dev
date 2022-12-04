@@ -1,7 +1,12 @@
 import { ChangeFile } from "../types";
 import { PostRemover, postUpdater } from "./updater/post";
+import { postAssetRemover, postAssetUpdater } from "./updater/post_asset";
 import { privacyUpdater } from "./updater/privacy";
 import { productRemover, productUpdater } from "./updater/product";
+import {
+  productAssetRemover,
+  productAssetUpdater,
+} from "./updater/product_asset";
 import { profileUpdater } from "./updater/profile";
 
 const processMatcher: [
@@ -18,10 +23,24 @@ const processMatcher: [
     },
   ],
   [
+    /^posts\/(?<slug>\w+)\/(?<filename>.+\.(?:png|jpg))$/,
+    {
+      update: postAssetUpdater,
+      remove: postAssetRemover,
+    },
+  ],
+  [
     /^products\/(?<slug>\w+)\/index\.md$/,
     {
       update: productUpdater,
       remove: productRemover,
+    },
+  ],
+  [
+    /^products\/(?<slug>\w+)\/(?<filename>.+\.(?:png|jpg))$/,
+    {
+      update: productAssetUpdater,
+      remove: productAssetRemover,
     },
   ],
   [
