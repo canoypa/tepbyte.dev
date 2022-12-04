@@ -23,7 +23,7 @@ export const postAssetUpdater = async (change: ChangeFile) => {
     throw new Error("Invalid data");
   }
 
-  const fileContent = Buffer.from(file.data.content, "base64").toString();
+  const fileContent = Buffer.from(file.data.content, "base64");
 
   await storage.bucket().file(`posts/${slug}/${filename}`).save(fileContent);
 };
