@@ -1,6 +1,7 @@
 import { region } from "firebase-functions";
 import { fetchChangeFiles } from "./changes_fetcher";
 import { updateProcessor } from "./contents/update";
+import { revalidate } from "./revalidate";
 
 export const update = region("asia-northeast1").https.onRequest(
   async (request, response) => {
@@ -16,6 +17,7 @@ export const update = region("asia-northeast1").https.onRequest(
 
     const changeFiles = await fetchChangeFiles(request.body.sha);
     await updateProcessor(changeFiles);
+    revalidate(changeFiles);
 
     response.status(200).end();
   }
