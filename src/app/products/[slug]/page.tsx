@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { fetchProduct, fetchProductList } from "~/api/product";
 import { MainContents } from "~/features/main_contents";
 import { MarkdownRenderer } from "~/features/markdown";
@@ -15,6 +16,10 @@ const ProductPage = async ({
   params: { slug: string };
 }) => {
   const product = await fetchProduct(slug);
+
+  if (product === null) {
+    notFound();
+  }
 
   return (
     <MainContents>

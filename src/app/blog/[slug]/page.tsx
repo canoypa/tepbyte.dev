@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { fetchPost, fetchPostList } from "~/api/post";
 import { PostInfo, Thumbnail } from "~/features/blog";
 import { MainContents } from "~/features/main_contents";
@@ -11,6 +12,10 @@ export const generateStaticParams = async () => {
 
 const PostPage = async ({ params: { slug } }: { params: { slug: string } }) => {
   const post = await fetchPost(slug);
+
+  if (post === null) {
+    notFound();
+  }
 
   return (
     <MainContents>
