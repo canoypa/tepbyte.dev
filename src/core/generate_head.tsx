@@ -5,13 +5,25 @@ export type HeadOptions = Partial<{
   title: string;
   /** Remove site name suffix */
   titleSuffix: boolean;
+
+  /** Is page not found */
+  notFound: boolean;
 }>;
 
+const resolveTitle = (options: HeadOptions = {}) => {
+  if (options.notFound) {
+    return "404 Not Found - Tepbyte";
+  }
+
+  if (options.title && options.titleSuffix !== false) {
+    return `${options.title} - Tepbyte`;
+  }
+
+  return "Tepbyte";
+};
+
 export const generateHead = (options: HeadOptions = {}): ReactElement => {
-  const title =
-    options.title && options.titleSuffix !== false
-      ? `${options.title} - Tepbyte`
-      : "Tepbyte";
+  const title = resolveTitle(options);
 
   return (
     <>

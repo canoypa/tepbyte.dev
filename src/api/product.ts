@@ -10,7 +10,12 @@ export const fetchProduct = cache(async (slug: string) => {
     .bucket("tepbyte.appspot.com")
     .file(`products/${slug}/_parsed.json`);
 
-  const snapshot = await query.download();
+  const snapshot = await query.download().catch(() => {
+    return null;
+  });
+  if (snapshot === null) {
+    return null;
+  }
 
   const data = JSON.parse(snapshot.toString());
 
