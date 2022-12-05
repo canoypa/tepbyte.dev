@@ -1,0 +1,14 @@
+.root {
+  &.task {
+    list-style-type: none;
+
+    & > input[type="checkbox"] {
+      margin-inline-start: -1rem;
+      margin-inline-end: 0.3rem;
+    }
+
+    & > p {
+      display: inline;
+    }
+  }
+}
