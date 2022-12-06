@@ -1,4 +1,3 @@
-import { getAnalytics } from "firebase/analytics";
 import { FirebaseOptions, getApp, getApps, initializeApp } from "firebase/app";
 
 const options: FirebaseOptions = {
@@ -13,5 +12,3 @@ const options: FirebaseOptions = {
 
 export const firebaseApp =
   getApps().length > 0 ? getApp() : initializeApp(options);
-
-getAnalytics(firebaseApp);
