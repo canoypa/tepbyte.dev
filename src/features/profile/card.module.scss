@@ -4,14 +4,14 @@
 }
 
 .image {
-  @apply row-span-full col-span-full;
+  @apply row-span-full col-span-full brightness-[0.4];
 }
 .img {
   @apply w-full h-full object-cover;
 }
 
 .content {
-  @apply flex flex-col gap-8 items-center justify-center row-span-full col-span-full bg-surface/70 backdrop-blur-lg;
+  @apply flex flex-col gap-8 items-center justify-center row-span-full col-span-full backdrop-blur-lg;
 }
 
 .name {
