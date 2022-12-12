@@ -2,7 +2,7 @@
 
 import { useRouter, useSelectedLayoutSegment } from "next/navigation";
 import { FC } from "react";
-import { Tabs } from "~/components/tabs";
+import { Tab, Tabs } from "~/components/tabs";
 
 export const MainNavigation: FC = () => {
   const { push } = useRouter();
@@ -17,8 +17,15 @@ export const MainNavigation: FC = () => {
           { label: "Products", value: "/products" },
           { label: "Blog", value: "/blog" },
         ]}
-        active={layout ? `/${layout}` : "/"}
-        onChange={push}
+        renderItem={(item) => (
+          <Tab
+            key={item.value}
+            label={item.label}
+            value={item.value}
+            active={`/${layout ?? ""}` === item.value}
+            onClick={push}
+          />
+        )}
       />
     </nav>
   );
