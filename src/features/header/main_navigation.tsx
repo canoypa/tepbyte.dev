@@ -1,11 +1,11 @@
 "use client";
 
-import { useRouter, useSelectedLayoutSegment } from "next/navigation";
+import Link from "next/link";
+import { useSelectedLayoutSegment } from "next/navigation";
 import { FC } from "react";
 import { Tab, Tabs } from "~/components/tabs";
 
 export const MainNavigation: FC = () => {
-  const { push } = useRouter();
   const layout = useSelectedLayoutSegment();
 
   return (
@@ -18,13 +18,13 @@ export const MainNavigation: FC = () => {
           { label: "Blog", value: "/blog" },
         ]}
         renderItem={(item) => (
-          <Tab
-            key={item.value}
-            label={item.label}
-            value={item.value}
-            active={`/${layout ?? ""}` === item.value}
-            onClick={push}
-          />
+          <Link key={item.value} href={item.value}>
+            <Tab
+              label={item.label}
+              value={item.value}
+              active={`/${layout ?? ""}` === item.value}
+            />
+          </Link>
         )}
       />
     </nav>
