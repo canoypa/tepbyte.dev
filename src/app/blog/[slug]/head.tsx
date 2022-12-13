@@ -13,6 +13,7 @@ const Head = async ({ params: { slug } }: { params: { slug: string } }) => {
 
   return generateHead({
     title: post.frontmatter.title,
+    description: post.frontmatter.subhead,
     path: `/blog/${slug}`,
   });
 };
