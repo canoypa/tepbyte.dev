@@ -8,7 +8,7 @@ declare global {
   }
 }
 
-export const ClientProvider: FC = () => {
+export const ExternalScripts: FC = () => {
   return (
     <>
       {/* Google tag */}
