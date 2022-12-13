@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-const BASE_URL = "https://www.tepbyte.dev";
+const ORIGIN = "https://www.tepbyte.dev";
 
 export type HeadOptions = Partial<{
   /** Page title */
@@ -35,9 +35,9 @@ const resolveTitle = (options: HeadOptions) => {
 export const AppHead: FC<HeadOptions> = (options) => {
   const title = resolveTitle(options);
   const description = options.description ?? "Cano's portfolio site.";
-  const url = new URL(options.path, BASE_URL);
+  const url = new URL(options.path, ORIGIN);
 
-  const ogImageUrl = new URL("/assets/og-image.png", BASE_URL);
+  const ogImageUrl = new URL("/assets/og-image.png", ORIGIN);
 
   return (
     <>
