@@ -15,6 +15,7 @@ export const ExternalScripts: FC = () => {
       <Script
         async
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+        strategy="afterInteractive"
         onLoad={() => {
           window.dataLayer = window.dataLayer || [];
 
@@ -35,9 +36,9 @@ export const ExternalScripts: FC = () => {
       {/* Google AdSense */}
       <Script
         async
-        strategy="beforeInteractive"
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4830238557928139"
         crossOrigin="anonymous"
+        strategy="lazyOnload"
       />
     </>
   );
