@@ -37,6 +37,8 @@ export const generateHead = (options: HeadOptions): ReactElement => {
   const description = options.description ?? "Cano's portfolio site.";
   const url = new URL(options.path, BASE_URL);
 
+  const ogImageUrl = new URL("/assets/og-image.png", BASE_URL);
+
   return (
     <>
       <title>{title}</title>
@@ -46,6 +48,13 @@ export const generateHead = (options: HeadOptions): ReactElement => {
       <link rel="icon" href="/favicon.ico" sizes="any" />
       <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="Tepbyte" />
+      <meta property="og:url" content={url.href} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:image" content={ogImageUrl.href} />
 
       <meta name="viewport" content="width=device-width" />
     </>
