@@ -11,12 +11,14 @@ export type HeadOptions = Partial<{
 }>;
 
 const resolveTitle = (options: HeadOptions = {}) => {
+  const suffix = options.titleSuffix !== false ? " - Tepbyte" : "";
+
   if (options.notFound) {
-    return "404 Not Found - Tepbyte";
+    return `404 Not Found${suffix}`;
   }
 
-  if (options.title && options.titleSuffix !== false) {
-    return `${options.title} - Tepbyte`;
+  if (options.title) {
+    return `${options.title}${suffix}`;
   }
 
   return "Tepbyte";
