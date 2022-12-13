@@ -1,5 +1,7 @@
 import { ReactElement } from "react";
 
+const BASE_URL = "https://www.tepbyte.dev";
+
 export type HeadOptions = Partial<{
   /** Page title */
   title: string;
@@ -11,9 +13,12 @@ export type HeadOptions = Partial<{
 
   /** Is page not found */
   notFound: boolean;
-}>;
+}> & {
+  /** URL path */
+  path: string;
+};
 
-const resolveTitle = (options: HeadOptions = {}) => {
+const resolveTitle = (options: HeadOptions) => {
   const suffix = options.titleSuffix !== false ? " - Tepbyte" : "";
 
   if (options.notFound) {
@@ -27,14 +32,16 @@ const resolveTitle = (options: HeadOptions = {}) => {
   return "Tepbyte";
 };
 
-export const generateHead = (options: HeadOptions = {}): ReactElement => {
+export const generateHead = (options: HeadOptions): ReactElement => {
   const title = resolveTitle(options);
   const description = options.description ?? "Cano's portfolio site.";
+  const url = new URL(options.path, BASE_URL);
 
   return (
     <>
       <title>{title}</title>
       <meta name="description" content={description} />
+      <meta name="canonical" content={url.href} />
 
       <link rel="icon" href="/favicon.ico" sizes="any" />
       <link rel="icon" href="/favicon.svg" type="image/svg+xml" />

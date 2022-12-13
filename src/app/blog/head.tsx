@@ -4,6 +4,7 @@ import { generateHead } from "~/core/generate_head";
 const Head: FC = () => {
   return generateHead({
     title: "Blog",
+    path: "/blog",
   });
 };
 export default Head;

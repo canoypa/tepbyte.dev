@@ -7,11 +7,13 @@ const Head = async ({ params: { slug } }: { params: { slug: string } }) => {
   if (product === null) {
     return generateHead({
       notFound: true,
+      path: `/products/${slug}`,
     });
   }
 
   return generateHead({
     title: product.frontmatter.title,
+    path: `/products/${slug}`,
   });
 };
 export default Head;
