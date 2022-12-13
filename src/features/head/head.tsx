@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { FC } from "react";
 
 const BASE_URL = "https://www.tepbyte.dev";
 
@@ -32,7 +32,7 @@ const resolveTitle = (options: HeadOptions) => {
   return "Tepbyte";
 };
 
-export const generateHead = (options: HeadOptions): ReactElement => {
+export const AppHead: FC<HeadOptions> = (options) => {
   const title = resolveTitle(options);
   const description = options.description ?? "Cano's portfolio site.";
   const url = new URL(options.path, BASE_URL);

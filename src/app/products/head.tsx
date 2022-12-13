@@ -1,10 +1,7 @@
 import { FC } from "react";
-import { generateHead } from "~/core/generate_head";
+import { AppHead } from "~/features/head";
 
 const Head: FC = () => {
-  return generateHead({
-    title: "Products",
-    path: "/products",
-  });
+  return <AppHead title="Products" path="/products" />;
 };
 export default Head;
