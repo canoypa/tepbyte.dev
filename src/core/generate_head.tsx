@@ -6,6 +6,9 @@ export type HeadOptions = Partial<{
   /** Remove site name suffix */
   titleSuffix: boolean;
 
+  /** Description */
+  description: string;
+
   /** Is page not found */
   notFound: boolean;
 }>;
@@ -26,10 +29,12 @@ const resolveTitle = (options: HeadOptions = {}) => {
 
 export const generateHead = (options: HeadOptions = {}): ReactElement => {
   const title = resolveTitle(options);
+  const description = options.description ?? "Cano's portfolio site.";
 
   return (
     <>
       <title>{title}</title>
+      <meta name="description" content={description} />
 
       <link rel="icon" href="/favicon.ico" sizes="any" />
       <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
