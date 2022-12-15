@@ -1,6 +1,6 @@
 import { Comfortaa } from "@next/font/google";
 import { FC, PropsWithChildren } from "react";
-import { ClientProvider } from "~/features/client_provider";
+import { ExternalScripts } from "~/features/external_scripts";
 import { Footer } from "~/features/footer";
 import { Header } from "~/features/header";
 import "~/styles/globals.css";
@@ -15,7 +15,7 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <html lang="ja" className={comfortaa.variable}>
       <body>
-        <ClientProvider />
+        <ExternalScripts />
 
         <Header />
         <div className="flex-grow">{children}</div>
