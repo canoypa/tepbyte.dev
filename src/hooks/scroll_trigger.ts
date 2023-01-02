@@ -10,25 +10,19 @@ import {
   useRef,
   useState,
 } from "react";
-import { useEvent } from "react-use";
+import { useEffectOnce, useEvent } from "react-use";
 
-export type UseScrollTriggerOptions = {
-  target: Window | Element | null;
+export type UseScrollTriggerOptions = Partial<{
+  target: Window | Element;
   threshold: number;
   disableHysteresis: boolean;
-};
+}>;
 
-const defaultOptions = {
-  target: typeof window !== "undefined" ? window : null,
-  threshold: 100,
-  disableHysteresis: false,
-};
-
-const scrollHandler = (
+const trigger = (
   cur: MutableRefObject<number>,
   options: UseScrollTriggerOptions
 ): boolean => {
-  const { target, threshold, disableHysteresis } = options;
+  const { target, threshold = 100, disableHysteresis = false } = options;
 
   if (!target) return false;
 
@@ -44,21 +38,25 @@ const scrollHandler = (
   return cur.current > threshold;
 };
 
-export const useScrollTrigger = (
-  options: Partial<UseScrollTriggerOptions> | undefined = {}
-) => {
-  const opt = useMemo(() => ({ ...defaultOptions, ...options }), [options]);
+const defaultTarget = typeof window !== "undefined" ? window : undefined;
 
-  const cur = useRef<number>(0);
-  const [trigger, setTrigger] = useState<boolean>(() =>
-    scrollHandler(cur, opt)
+export const useScrollTrigger = (
+  options: UseScrollTriggerOptions = {}
+): boolean => {
+  const opt = useMemo<UseScrollTriggerOptions>(
+    () => ({ target: defaultTarget, ...options }),
+    [options]
   );
 
+  const cur = useRef<number>(0);
+  const [state, setState] = useState<boolean>(false);
+
   const handler = useCallback(() => {
-    setTrigger(scrollHandler(cur, opt));
+    setState(trigger(cur, opt));
   }, [opt]);
 
+  useEffectOnce(handler);
   useEvent("scroll", handler, options.target, { passive: true });
 
-  return trigger;
+  return state;
 };
