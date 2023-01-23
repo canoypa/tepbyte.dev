@@ -1,5 +1,5 @@
 .root {
-  @apply gap-6 p-4 rounded-medium bg-primary/1 shadow-1 duration-medium-1;
+  @apply p-4 rounded-medium bg-primary/1 shadow-1 duration-medium-1;
   transition-property: background-color, box-shadow;
 
   &.clickable {
@@ -7,11 +7,11 @@
   }
 
   &.row {
-    @apply flex flex-row items-center;
+    @apply flex flex-row gap-6 items-center;
   }
 
   &.column {
-    @apply inline-flex flex-col max-w-[600px];
+    @apply inline-flex gap-4 flex-col max-w-[600px];
   }
 
   &:hover {
