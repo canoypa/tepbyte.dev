@@ -2,8 +2,9 @@ export type ImageMeta = {
   url: string;
   blurhash: string;
   attribution?: {
-    username: string;
+    user_name: string;
     user_url: string;
+    site_name: string;
     site_url: string;
   };
 };
