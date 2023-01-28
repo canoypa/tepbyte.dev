@@ -1,38 +1,29 @@
-import { getFirestore } from "firebase-admin/firestore";
-import { getStorage } from "firebase-admin/storage";
+import { getFunctions, httpsCallableFromURL } from "firebase/functions";
 import { cache } from "react";
-import { firebaseAdminApp } from "~/client/firebase-admin";
+import { firebaseApp } from "~/client/firebase";
 
 export const fetchProduct = cache(async (slug: string) => {
-  const storage = getStorage(firebaseAdminApp);
+  const functions = getFunctions(firebaseApp);
 
-  const query = storage
-    .bucket("tepbyte.appspot.com")
-    .file(`products/${slug}/_parsed.json`);
+  const productsGet = httpsCallableFromURL(
+    functions,
+    "https://products-get-qy5wbcvsoq-uc.a.run.app"
+  );
 
-  const snapshot = await query.download().catch(() => {
-    return null;
-  });
-  if (snapshot === null) {
-    return null;
-  }
+  const response = await productsGet({ slug });
 
-  const data = JSON.parse(snapshot.toString());
-
-  return data;
+  return response.data as any;
 });
 
 export const fetchProductList = cache(async (limit?: number) => {
-  const firestore = getFirestore(firebaseAdminApp);
+  const functions = getFunctions(firebaseApp);
 
-  let query = firestore.collection("products").orderBy("published_at", "desc");
-  if (limit) query = query.limit(limit);
+  const productsList = httpsCallableFromURL(
+    functions,
+    "https://products-list-qy5wbcvsoq-uc.a.run.app"
+  );
 
-  const snapshot = await query.get();
+  const response = await productsList({ limit });
 
-  if (snapshot.empty) return [];
-
-  const data = snapshot.docs.map((v) => ({ id: v.id, ...v.data() }));
-
-  return data;
+  return response.data as any;
 });

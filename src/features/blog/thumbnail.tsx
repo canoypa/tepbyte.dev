@@ -1,17 +1,11 @@
 import { FC } from "react";
-import { resolveImagePath } from "~/core/image_path_resolver";
+import { ImageMeta } from "~/types/parsed";
 import styles from "./thumbnail.module.scss";
 
 export type ThumbnailProps = {
-  image: string;
+  image: ImageMeta;
 };
 
 export const Thumbnail: FC<ThumbnailProps> = ({ image }) => {
-  return (
-    <img
-      src={resolveImagePath("posts", image)}
-      alt=""
-      className={styles.root}
-    />
-  );
+  return <img src={image.url} alt="" className={styles.root} />;
 };

@@ -7,7 +7,7 @@ import { MarkdownRenderer } from "~/features/markdown";
 export const generateStaticParams = async () => {
   const posts = await fetchPostList();
 
-  return posts.map((post) => ({ slug: post.id }));
+  return posts.map((v: any) => ({ slug: v.slug }));
 };
 
 const PostPage = async ({ params: { slug } }: { params: { slug: string } }) => {

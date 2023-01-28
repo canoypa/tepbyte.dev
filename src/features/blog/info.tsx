@@ -1,8 +1,9 @@
 import { FC } from "react";
+import { ArticleMeta } from "~/types/parsed";
 import styles from "./info.module.scss";
 
 export type PostInfoProps = {
-  post: any;
+  post: ArticleMeta;
 };
 
 export const PostInfo: FC<PostInfoProps> = ({ post }) => {
@@ -13,11 +14,11 @@ export const PostInfo: FC<PostInfoProps> = ({ post }) => {
         <p className={styles.subhead}>{post.subhead}</p>
       </div>
       <div className={styles.date}>
-        <span>{post["published-at"]}</span>
-        {post["updated-at"] && (
+        <span>{post.publishedAt}</span>
+        {post.updatedAt && (
           <>
             <span>-</span>
-            <span>Updated {post["updated-at"]}</span>
+            <span>Updated {post.updatedAt}</span>
           </>
         )}
       </div>

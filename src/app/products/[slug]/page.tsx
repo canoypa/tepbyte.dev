@@ -7,7 +7,7 @@ import { Info, Screenshot } from "~/features/product";
 export const generateStaticParams = async () => {
   const products = await fetchProductList();
 
-  return products.map((product) => ({ slug: product.id }));
+  return products.map((v: any) => ({ slug: v.slug }));
 };
 
 const ProductPage = async ({
