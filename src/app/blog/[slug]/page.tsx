@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { fetchPost, fetchPostList } from "~/api/post";
-import { PostInfo, Thumbnail } from "~/features/blog";
+import { PostInfo, Tags, Thumbnail } from "~/features/blog";
 import { MainContents } from "~/features/main_contents";
 import { MarkdownRenderer } from "~/features/markdown";
 
@@ -22,6 +22,7 @@ const PostPage = async ({ params: { slug } }: { params: { slug: string } }) => {
       <Thumbnail image={post.frontmatter.image} />
       <PostInfo post={post.frontmatter} />
       <MarkdownRenderer tree={post} />
+      <Tags tags={post.frontmatter.tags} />
     </MainContents>
   );
 };

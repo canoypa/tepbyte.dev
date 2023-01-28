@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { fetchProduct, fetchProductList } from "~/api/product";
 import { MainContents } from "~/features/main_contents";
 import { MarkdownRenderer } from "~/features/markdown";
-import { Info, Screenshot } from "~/features/product";
+import { Info, Screenshot, Tags } from "~/features/product";
 
 export const generateStaticParams = async () => {
   const products = await fetchProductList();
@@ -26,6 +26,7 @@ const ProductPage = async ({
       <Screenshot images={product.frontmatter.images} />
       <Info product={product.frontmatter} />
       <MarkdownRenderer tree={product} />
+      <Tags tags={product.frontmatter.tags} />
     </MainContents>
   );
 };
