@@ -26,6 +26,7 @@ export type ProfileMeta = {
 };
 
 export type ProductMeta = {
+  slug: string;
   title: string;
   subhead: string;
   links: LinkData[];
@@ -34,6 +35,7 @@ export type ProductMeta = {
 };
 
 export type ArticleMeta = {
+  slug: string;
   title: string;
   subhead: string;
   image: ImageMeta;

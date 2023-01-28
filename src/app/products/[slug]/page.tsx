@@ -7,7 +7,7 @@ import { Info, Screenshot, Tags } from "~/features/product";
 export const generateStaticParams = async () => {
   const products = await fetchProductList();
 
-  return products.map((v: any) => ({ slug: v.slug }));
+  return products.map(({ slug }) => ({ slug }));
 };
 
 const ProductPage = async ({
@@ -23,10 +23,10 @@ const ProductPage = async ({
 
   return (
     <MainContents>
-      <Screenshot images={product.frontmatter.images} />
-      <Info product={product.frontmatter} />
-      <MarkdownRenderer tree={product} />
-      <Tags tags={product.frontmatter.tags} />
+      <Screenshot images={product.meta.images} />
+      <Info product={product.meta} />
+      <MarkdownRenderer tree={product.body} />
+      <Tags tags={product.meta.tags} />
     </MainContents>
   );
 };

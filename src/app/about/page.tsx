@@ -10,8 +10,8 @@ const AboutPage = async () => {
   return (
     <MainContents>
       <PageHeadline>About</PageHeadline>
-      <Profile profile={profile.frontmatter} />
-      <MarkdownRenderer tree={profile} />
+      <Profile profile={profile.meta} />
+      <MarkdownRenderer tree={profile.body} />
     </MainContents>
   );
 };

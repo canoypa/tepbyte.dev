@@ -7,7 +7,7 @@ import { MarkdownRenderer } from "~/features/markdown";
 export const generateStaticParams = async () => {
   const posts = await fetchPostList();
 
-  return posts.map((v: any) => ({ slug: v.slug }));
+  return posts.map(({ slug }) => ({ slug }));
 };
 
 const PostPage = async ({ params: { slug } }: { params: { slug: string } }) => {
@@ -19,10 +19,10 @@ const PostPage = async ({ params: { slug } }: { params: { slug: string } }) => {
 
   return (
     <MainContents>
-      <Thumbnail image={post.frontmatter.image} />
-      <PostInfo post={post.frontmatter} />
-      <MarkdownRenderer tree={post} />
-      <Tags tags={post.frontmatter.tags} />
+      <Thumbnail image={post.meta.image} />
+      <PostInfo post={post.meta} />
+      <MarkdownRenderer tree={post.body} />
+      <Tags tags={post.meta.tags} />
     </MainContents>
   );
 };

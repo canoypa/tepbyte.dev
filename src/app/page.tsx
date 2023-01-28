@@ -7,7 +7,7 @@ const HomePage = async () => {
 
   return (
     <MainContents>
-      <Hero profile={profile.frontmatter} />
+      <Hero profile={profile.meta} />
     </MainContents>
   );
 };

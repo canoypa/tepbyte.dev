@@ -9,7 +9,7 @@ const PrivacyPage = async () => {
   return (
     <MainContents>
       <PageHeadline>Privacy</PageHeadline>
-      <MarkdownRenderer tree={privacy} />
+      <MarkdownRenderer tree={privacy.body} />
     </MainContents>
   );
 };
