@@ -5,3 +5,7 @@
 .img {
   @apply w-full h-full max-h-[260px] aspect-video rounded-extra-large object-cover;
 }
+
+.attribution {
+  @apply text-label-medium;
+}
