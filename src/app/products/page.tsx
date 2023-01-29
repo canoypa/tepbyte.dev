@@ -8,7 +8,7 @@ const ProductsPage = async () => {
 
   return (
     <MainContents>
-      <PageHeadline>Products</PageHeadline>
+      <PageHeadline title="Products" />
       <ProductList items={products} />
     </MainContents>
   );

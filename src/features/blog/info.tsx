@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { ArticleMeta } from "~/types/parsed";
+import { PageHeadline } from "../page_headline";
 import styles from "./info.module.scss";
 
 export type PostInfoProps = {
@@ -15,10 +16,7 @@ export const PostInfo: FC<PostInfoProps> = ({ post }) => {
 
   return (
     <div className={styles.root}>
-      <div className={styles.primary}>
-        <h1 className={styles.title}>{post.title}</h1>
-        <p className={styles.subhead}>{post.subhead}</p>
-      </div>
+      <PageHeadline title={post.title} subhead={post.subhead} />
       <div className={styles.dateTime}>
         <time dateTime={post.publishedAt}>{publishedAt}</time>
         {updatedAt && (

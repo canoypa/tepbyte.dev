@@ -1,3 +1,11 @@
 .root {
+  @apply flex flex-col gap-y-2;
+}
+
+.title {
   @apply text-display-medium font-comfortaa;
+}
+
+.subhead {
+  @apply text-title-medium;
 }

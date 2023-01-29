@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { ProductMeta } from "~/types/parsed";
+import { PageHeadline } from "../page_headline";
 import styles from "./info.module.scss";
 import { Link } from "./link";
 
@@ -10,10 +11,7 @@ export type InfoProps = {
 export const Info: FC<InfoProps> = ({ product }) => {
   return (
     <div className={styles.root}>
-      <div className={styles.primary}>
-        <h1 className={styles.title}>{product.title}</h1>
-        <p className={styles.subhead}>{product.subhead}</p>
-      </div>
+      <PageHeadline title={product.title} subhead={product.subhead} />
       <Link links={product.links} />
     </div>
   );

@@ -8,7 +8,7 @@ const BlogPage = async () => {
 
   return (
     <MainContents>
-      <PageHeadline>Blog</PageHeadline>
+      <PageHeadline title="Blog" />
       <BlogList items={posts} />
     </MainContents>
   );

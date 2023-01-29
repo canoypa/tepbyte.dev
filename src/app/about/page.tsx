@@ -9,7 +9,7 @@ const AboutPage = async () => {
 
   return (
     <MainContents>
-      <PageHeadline>About</PageHeadline>
+      <PageHeadline title="About" />
       <Profile profile={profile.meta} />
       <MarkdownRenderer tree={profile.body} />
     </MainContents>
