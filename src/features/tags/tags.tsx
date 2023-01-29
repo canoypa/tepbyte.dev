@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { LabelData } from "~/types/parsed";
-import { Tag } from "../tag";
+import { Tag } from "./tag";
 import styles from "./tags.module.scss";
 
 type Props = {

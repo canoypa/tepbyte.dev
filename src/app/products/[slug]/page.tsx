@@ -2,7 +2,8 @@ import { notFound } from "next/navigation";
 import { fetchProduct, fetchProductList } from "~/api/product";
 import { MainContents } from "~/features/main_contents";
 import { MarkdownRenderer } from "~/features/markdown";
-import { Info, Screenshot, Tags } from "~/features/product";
+import { Info, Screenshot } from "~/features/product";
+import { Tags } from "~/features/tags";
 
 export const generateStaticParams = async () => {
   const products = await fetchProductList();
@@ -26,7 +27,7 @@ const ProductPage = async ({
       <Screenshot images={product.meta.images} />
       <Info product={product.meta} />
       <MarkdownRenderer tree={product.body} />
-      <Tags tags={product.meta.tags} />
+      {product.meta.tags.length > 0 && <Tags tags={product.meta.tags} />}
     </MainContents>
   );
 };
