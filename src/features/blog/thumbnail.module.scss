@@ -3,7 +3,8 @@
 }
 
 .img {
-  @apply w-full h-full max-h-[260px] aspect-video rounded-extra-large object-cover;
+  @apply w-full h-[216px] rounded-extra-large object-cover;
+  @apply md:h-[288px];
 }
 
 .attribution {
