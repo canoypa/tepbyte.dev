@@ -19,7 +19,7 @@ export const PostInfo: FC<PostInfoProps> = ({ post }) => {
         <h1 className={styles.title}>{post.title}</h1>
         <p className={styles.subhead}>{post.subhead}</p>
       </div>
-      <div>
+      <div className={styles.dateTime}>
         <time dateTime={post.publishedAt}>{publishedAt}</time>
         {updatedAt && (
           <>
