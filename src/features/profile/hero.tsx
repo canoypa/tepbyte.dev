@@ -26,7 +26,7 @@ export const Hero: FC<HeroProps> = ({ profile }) => {
         <ProfileLink links={profile.links} />
         <span>
           <Link href="/about">
-            <Button label="Read more" trailing={<NavigateNext />} />
+            <Button label="See full profile" trailing={<NavigateNext />} />
           </Link>
         </span>
       </div>
