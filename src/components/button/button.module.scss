@@ -1,5 +1,5 @@
 .root {
-  @apply inline-flex items-center justify-center gap-x-2 px-3 h-[40px] min-w-[48px] rounded-full text-label-large text-primary fill-primary;
+  @apply inline-flex items-center justify-center gap-x-2 px-3 h-[40px] min-w-[48px] rounded-full text-label-large font-comfortaa text-primary fill-primary;
 
   &:hover {
     @apply bg-primary/hover;

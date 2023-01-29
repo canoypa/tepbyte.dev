@@ -1,5 +1,5 @@
 .root {
-  @apply gap-6 p-4 rounded-medium bg-primary/1 shadow-1 duration-medium-1;
+  @apply p-4 rounded-medium bg-primary/1 shadow-1 duration-medium-1;
   transition-property: background-color, box-shadow;
 
   &.clickable {
@@ -7,11 +7,11 @@
   }
 
   &.row {
-    @apply flex flex-row items-center;
+    @apply flex flex-row gap-6 items-center;
   }
 
   &.column {
-    @apply inline-flex flex-col max-w-[600px];
+    @apply inline-flex gap-4 flex-col max-w-[600px];
   }
 
   &:hover {
@@ -20,15 +20,16 @@
 }
 
 .media {
-  @apply rounded-medium overflow-hidden aspect-[16/9];
+  @apply rounded-medium overflow-hidden;
 
   .row & {
-    @apply min-w-[80px] max-w-[120px];
-    @apply sm:max-w-[240px];
+    @apply h-[80px] aspect-square;
+    @apply sm:h-[80px] sm:aspect-video;
+    @apply md:h-[120px];
   }
 
   .column & {
-    @apply min-h-[80px];
+    @apply min-h-[80px] max-h-[200px] aspect-video;
   }
 }
 
@@ -45,7 +46,7 @@
 }
 
 .title {
-  @apply text-title-medium line-clamp-1;
+  @apply text-title-medium line-clamp-2 font-comfortaa;
   @apply sm:text-title-large;
 }
 

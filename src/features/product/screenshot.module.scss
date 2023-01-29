@@ -10,5 +10,6 @@
 }
 
 .image {
-  @apply max-h-[260px] aspect-video rounded-extra-large object-cover;
+  @apply max-w-fit h-[216px] rounded-extra-large object-cover;
+  @apply md:h-[288px];
 }

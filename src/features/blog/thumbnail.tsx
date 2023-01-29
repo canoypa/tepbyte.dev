@@ -12,12 +12,12 @@ export const Thumbnail: FC<ThumbnailProps> = ({ image }) => {
       <img src={image.url} alt="" className={styles.img} />
 
       {image.attribution && (
-        <i className={styles.attribution}>
+        <small className={styles.attribution}>
           <span>Photo by </span>
           <a href={image.attribution.user_url}>{image.attribution.user_name}</a>
           <span> on </span>
           <a href={image.attribution.site_url}>{image.attribution.site_name}</a>
-        </i>
+        </small>
       )}
     </div>
   );

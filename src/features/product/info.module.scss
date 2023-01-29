@@ -1,15 +1,3 @@
 .root {
   @apply flex flex-col gap-6;
 }
-
-.primary {
-  @apply flex flex-col gap-4;
-}
-
-.title {
-  @apply text-display-medium font-comfortaa;
-}
-
-.subhead {
-  @apply text-body-large;
-}

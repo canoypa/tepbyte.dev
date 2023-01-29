@@ -1,6 +1,15 @@
-import { FC, PropsWithChildren } from "react";
+import { FC } from "react";
 import styles from "./page_headline.module.scss";
 
-export const PageHeadline: FC<PropsWithChildren> = ({ children }) => {
-  return <h1 className={styles.root}>{children}</h1>;
+type Props = {
+  title: string;
+  subhead?: string;
+};
+export const PageHeadline: FC<Props> = ({ title, subhead }) => {
+  return (
+    <div className={styles.root}>
+      <h1 className={styles.title}>{title}</h1>
+      {subhead && <p className={styles.subhead}>{subhead}</p>}
+    </div>
+  );
 };
