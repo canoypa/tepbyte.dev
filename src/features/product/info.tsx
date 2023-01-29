@@ -1,9 +1,10 @@
 import { FC } from "react";
+import { ProductMeta } from "~/types/parsed";
 import styles from "./info.module.scss";
 import { Link } from "./link";
 
 export type InfoProps = {
-  product: any;
+  product: ProductMeta;
 };
 
 export const Info: FC<InfoProps> = ({ product }) => {
@@ -13,7 +14,7 @@ export const Info: FC<InfoProps> = ({ product }) => {
         <h1 className={styles.title}>{product.title}</h1>
         <p className={styles.subhead}>{product.subhead}</p>
       </div>
-      <Link links={product} />
+      <Link links={product.links} />
     </div>
   );
 };

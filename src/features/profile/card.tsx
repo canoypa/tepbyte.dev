@@ -1,26 +1,22 @@
 import { FC } from "react";
-import { resolveImagePath } from "~/core/image_path_resolver";
+import { ImageMeta } from "~/types/parsed";
 import { Avatar } from "./avatar";
 import styles from "./card.module.scss";
 
 export type ProfileCardProps = {
   name: string;
-  photo: string;
-  image: string;
+  photo: ImageMeta;
+  image: ImageMeta;
 };
 
 export const ProfileCard: FC<ProfileCardProps> = ({ name, photo, image }) => {
   return (
     <div className={styles.root}>
       <div className={styles.image}>
-        <img
-          src={resolveImagePath("profile", image)}
-          alt=""
-          className={styles.img}
-        />
+        <img src={image.url} alt="" className={styles.img} />
       </div>
       <div className={styles.content}>
-        <Avatar photo={photo} />
+        <Avatar photo={photo.url} />
         <span className={styles.name}>{name}</span>
       </div>
     </div>

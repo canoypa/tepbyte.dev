@@ -1,3 +1,11 @@
 .root {
-  @apply max-h-[260px] aspect-video rounded-extra-large object-cover;
+  @apply flex flex-col gap-y-2;
+}
+
+.img {
+  @apply w-full h-full max-h-[260px] aspect-video rounded-extra-large object-cover;
+}
+
+.attribution {
+  @apply text-label-medium;
 }
