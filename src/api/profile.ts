@@ -1,28 +1,17 @@
-import { getFirestore } from "firebase-admin/firestore";
-import { getStorage } from "firebase-admin/storage";
+import { getFunctions, httpsCallableFromURL } from "firebase/functions";
 import { cache } from "react";
-import { firebaseAdminApp } from "~/client/firebase-admin";
+import { firebaseApp } from "~/client/firebase";
+import { ProfileMeta } from "~/types/parsed";
 
 export const fetchProfile = cache(async () => {
-  const storage = getStorage(firebaseAdminApp);
+  const functions = getFunctions(firebaseApp);
 
-  const query = storage
-    .bucket("tepbyte.appspot.com")
-    .file("profile/data/_parsed.json");
-  const snapshot = await query.download();
+  const profileGet = httpsCallableFromURL(
+    functions,
+    "https://profile-get-qy5wbcvsoq-an.a.run.app"
+  );
 
-  const data = JSON.parse(snapshot.toString());
+  const response = await profileGet();
 
-  return data;
-});
-
-export const fetchProfileMeta = cache(async () => {
-  const firestore = getFirestore(firebaseAdminApp);
-
-  const query = firestore.doc("profile/data");
-  const snapshot = await query.get();
-
-  const data = snapshot.data();
-
-  return data;
+  return response.data as { meta: ProfileMeta; body: any };
 });

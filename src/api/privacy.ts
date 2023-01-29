@@ -1,17 +1,16 @@
-import { getStorage } from "firebase-admin/storage";
+import { getFunctions, httpsCallableFromURL } from "firebase/functions";
 import { cache } from "react";
-import { firebaseAdminApp } from "~/client/firebase-admin";
+import { firebaseApp } from "~/client/firebase";
 
 export const fetchPrivacy = cache(async () => {
-  const storage = getStorage(firebaseAdminApp);
+  const functions = getFunctions(firebaseApp);
 
-  const query = storage
-    .bucket("tepbyte.appspot.com")
-    .file("privacy/data/_parsed.json");
+  const privacyGet = httpsCallableFromURL(
+    functions,
+    "https://privacy-get-qy5wbcvsoq-an.a.run.app"
+  );
 
-  const snapshot = await query.download();
+  const response = await privacyGet();
 
-  const data = JSON.parse(snapshot.toString());
-
-  return data;
+  return response.data as { body: any };
 });

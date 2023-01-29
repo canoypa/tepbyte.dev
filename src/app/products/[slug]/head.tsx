@@ -10,8 +10,8 @@ const Head = async ({ params: { slug } }: { params: { slug: string } }) => {
 
   return (
     <AppHead
-      title={product.frontmatter.title}
-      description={product.frontmatter.subhead}
+      title={product.meta.title}
+      description={product.meta.subhead}
       path={`/products/${slug}`}
     />
   );
