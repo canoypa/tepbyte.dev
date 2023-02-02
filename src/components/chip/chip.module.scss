@@ -2,10 +2,10 @@
   @apply inline-flex items-center h-8 px-4 border rounded-small text-label-large font-comfortaa cursor-pointer transition-colors duration-medium-1;
 
   &:hover {
-    @apply bg-primary/hover;
+    @apply bg-dark-primary/hover;
   }
 
   &:focus {
-    @apply bg-primary/focus;
+    @apply bg-dark-primary/focus;
   }
 }
