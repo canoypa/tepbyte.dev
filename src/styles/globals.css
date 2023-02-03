@@ -8,12 +8,14 @@
   }
 
   body {
-    @apply flex flex-col min-h-screen bg-surface text-on-surface fill-on-surface;
+    @apply flex flex-col min-h-screen bg-dark-surface text-dark-on-surface fill-dark-on-surface;
 
     scroll-behavior: smooth;
   }
 
   * {
+    @apply border-dark shadow-dark;
+
     -webkit-tap-highlight-color: transparent;
   }
 }

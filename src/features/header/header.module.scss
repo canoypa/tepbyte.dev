@@ -1,5 +1,5 @@
 .root {
-  @apply sticky top-0 bg-surface/70 backdrop-blur-lg;
+  @apply sticky top-0 bg-dark-surface/70 backdrop-blur-lg;
 
   &.floating {
     @apply shadow-2 z-2;
@@ -11,6 +11,6 @@
   transition-property: background-color, box-shadow;
 
   .floating & {
-    @apply bg-primary/2;
+    @apply bg-dark-primary/2;
   }
 }

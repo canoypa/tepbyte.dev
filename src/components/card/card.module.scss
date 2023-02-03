@@ -1,5 +1,5 @@
 .root {
-  @apply p-4 rounded-medium bg-primary/1 shadow-1 duration-medium-1;
+  @apply p-4 rounded-medium bg-dark-primary/1 shadow-1 duration-medium-1;
   transition-property: background-color, box-shadow;
 
   &.clickable {
@@ -15,7 +15,7 @@
   }
 
   &:hover {
-    @apply bg-primary/2 shadow-2;
+    @apply bg-dark-primary/2 shadow-2;
   }
 }
 

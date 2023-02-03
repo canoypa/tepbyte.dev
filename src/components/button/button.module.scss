@@ -1,12 +1,12 @@
 .root {
-  @apply inline-flex items-center justify-center gap-x-2 px-3 h-[40px] min-w-[48px] rounded-full text-label-large font-comfortaa text-primary fill-primary;
+  @apply inline-flex items-center justify-center gap-x-2 px-3 h-[40px] min-w-[48px] rounded-full text-label-large font-comfortaa text-dark-primary fill-dark-primary;
 
   &:hover {
-    @apply bg-primary/hover;
+    @apply bg-dark-primary/hover;
   }
 
   &:focus {
-    @apply bg-primary/focus;
+    @apply bg-dark-primary/focus;
   }
 
   &.withIcon {
