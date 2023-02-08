@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
-export * from "./tab";
-export * from "./tabs";
+export * from './tab';
+export * from './tabs';

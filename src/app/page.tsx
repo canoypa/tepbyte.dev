@@ -1,6 +1,6 @@
-import { fetchProfile } from "~/api/profile";
-import { MainContents } from "~/features/main_contents";
-import { Hero } from "~/features/profile";
+import { fetchProfile } from '~/api/profile';
+import { MainContents } from '~/features/main_contents';
+import { Hero } from '~/features/profile';
 
 const HomePage = async () => {
   const profile = await fetchProfile();

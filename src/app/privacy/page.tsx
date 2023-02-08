@@ -1,7 +1,7 @@
-import { fetchPrivacy } from "~/api/privacy";
-import { MainContents } from "~/features/main_contents";
-import { MarkdownRenderer } from "~/features/markdown";
-import { PageHeadline } from "~/features/page_headline";
+import { fetchPrivacy } from '~/api/privacy';
+import { MainContents } from '~/features/main_contents';
+import { MarkdownRenderer } from '~/features/markdown';
+import { PageHeadline } from '~/features/page_headline';
 
 const PrivacyPage = async () => {
   const privacy = await fetchPrivacy();

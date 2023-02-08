@@ -1,6 +1,6 @@
-import { FC } from "react";
-import { Tag as IconTag } from "~/components/icons/tag";
-import styles from "./tag.module.scss";
+import { FC } from 'react';
+import { Tag as IconTag } from '~/components/icons/tag';
+import styles from './tag.module.scss';
 
 type Props = {
   label: string;

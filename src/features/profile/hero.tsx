@@ -1,11 +1,11 @@
-import Link from "next/link";
-import { FC } from "react";
-import { Button } from "~/components/button";
-import { NavigateNext } from "~/components/icons/navigate_next";
-import { ProfileMeta } from "~/types/parsed";
-import { ProfileCard } from "./card";
-import styles from "./hero.module.scss";
-import { ProfileLink } from "./profile_link";
+import Link from 'next/link';
+import { FC } from 'react';
+import { Button } from '~/components/button';
+import { NavigateNext } from '~/components/icons/navigate_next';
+import { ProfileMeta } from '~/types/parsed';
+import { ProfileCard } from './card';
+import styles from './hero.module.scss';
+import { ProfileLink } from './profile_link';
 
 export type HeroProps = {
   profile: ProfileMeta;

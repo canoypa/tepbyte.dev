@@ -1,6 +1,6 @@
-import { FC } from "react";
-import { ImageMeta } from "~/types/parsed";
-import styles from "./screenshot.module.scss";
+import { FC } from 'react';
+import { ImageMeta } from '~/types/parsed';
+import styles from './screenshot.module.scss';
 
 export type ScreenshotProps = {
   images: ImageMeta[];

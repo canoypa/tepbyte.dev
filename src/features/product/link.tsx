@@ -1,8 +1,8 @@
-import { default as NextLink } from "next/link";
-import { FC } from "react";
-import { Chip } from "~/components/chip";
-import { LinkData } from "~/types/parsed";
-import styles from "./link.module.scss";
+import { default as NextLink } from 'next/link';
+import { FC } from 'react';
+import { Chip } from '~/components/chip';
+import { LinkData } from '~/types/parsed';
+import styles from './link.module.scss';
 
 export type LinkProps = {
   links: LinkData[];

@@ -1,14 +1,14 @@
-import { FC } from "react";
-import { ArticleMeta } from "~/types/parsed";
-import { PageHeadline } from "../page_headline";
-import styles from "./info.module.scss";
+import { FC } from 'react';
+import { ArticleMeta } from '~/types/parsed';
+import { PageHeadline } from '../page_headline';
+import styles from './info.module.scss';
 
 export type PostInfoProps = {
   post: ArticleMeta;
 };
 
 export const PostInfo: FC<PostInfoProps> = ({ post }) => {
-  const dateFormatter = Intl.DateTimeFormat("en-us", { dateStyle: "long" });
+  const dateFormatter = Intl.DateTimeFormat('en-us', { dateStyle: 'long' });
 
   const publishedAt = dateFormatter.format(Date.parse(post.publishedAt));
   const updatedAt =

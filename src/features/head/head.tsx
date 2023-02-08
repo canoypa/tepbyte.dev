@@ -1,6 +1,6 @@
-import { FC } from "react";
+import { FC } from 'react';
 
-const ORIGIN = "https://www.tepbyte.dev";
+const ORIGIN = 'https://www.tepbyte.dev';
 
 export type HeadOptions = Partial<{
   /** Page title */
@@ -19,7 +19,7 @@ export type HeadOptions = Partial<{
 };
 
 const resolveTitle = (options: HeadOptions) => {
-  const suffix = options.titleSuffix !== false ? " - Tepbyte" : "";
+  const suffix = options.titleSuffix !== false ? ' - Tepbyte' : '';
 
   if (options.notFound) {
     return `404 Not Found${suffix}`;
@@ -29,7 +29,7 @@ const resolveTitle = (options: HeadOptions) => {
     return `${options.title}${suffix}`;
   }
 
-  return "Tepbyte";
+  return 'Tepbyte';
 };
 
 export const AppHead: FC<HeadOptions> = (options) => {
@@ -37,7 +37,7 @@ export const AppHead: FC<HeadOptions> = (options) => {
   const description = options.description ?? "Cano's portfolio site.";
   const url = new URL(options.path, ORIGIN);
 
-  const ogImageUrl = new URL("/assets/og-image.png", ORIGIN);
+  const ogImageUrl = new URL('/assets/og-image.png', ORIGIN);
 
   return (
     <>

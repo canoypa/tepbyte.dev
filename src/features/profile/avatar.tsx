@@ -1,5 +1,5 @@
-import { FC } from "react";
-import styles from "./avatar.module.scss";
+import { FC } from 'react';
+import styles from './avatar.module.scss';
 
 export type AvatarProps = {
   photo: string;

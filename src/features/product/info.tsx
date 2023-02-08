@@ -1,8 +1,8 @@
-import { FC } from "react";
-import { ProductMeta } from "~/types/parsed";
-import { PageHeadline } from "../page_headline";
-import styles from "./info.module.scss";
-import { Link } from "./link";
+import { FC } from 'react';
+import { ProductMeta } from '~/types/parsed';
+import { PageHeadline } from '../page_headline';
+import styles from './info.module.scss';
+import { Link } from './link';
 
 export type InfoProps = {
   product: ProductMeta;

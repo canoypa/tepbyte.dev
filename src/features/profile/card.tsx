@@ -1,7 +1,7 @@
-import { FC } from "react";
-import { ImageMeta } from "~/types/parsed";
-import { Avatar } from "./avatar";
-import styles from "./card.module.scss";
+import { FC } from 'react';
+import { ImageMeta } from '~/types/parsed';
+import { Avatar } from './avatar';
+import styles from './card.module.scss';
 
 export type ProfileCardProps = {
   name: string;

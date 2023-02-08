@@ -1,6 +1,6 @@
-import clsx from "clsx";
-import { FC, ReactNode } from "react";
-import styles from "./button.module.scss";
+import clsx from 'clsx';
+import { FC, ReactNode } from 'react';
+import styles from './button.module.scss';
 
 export type ButtonProps = {
   label: string;

@@ -1,5 +1,5 @@
-import { FC } from "react";
-import styles from "./chip.module.scss";
+import { FC } from 'react';
+import styles from './chip.module.scss';
 
 export type ChipProps = {
   label: string;

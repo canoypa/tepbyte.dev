@@ -1,6 +1,6 @@
-import { FC } from "react";
-import { ImageMeta } from "~/types/parsed";
-import styles from "./thumbnail.module.scss";
+import { FC } from 'react';
+import { ImageMeta } from '~/types/parsed';
+import styles from './thumbnail.module.scss';
 
 export type ThumbnailProps = {
   image: ImageMeta;

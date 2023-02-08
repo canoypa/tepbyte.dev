@@ -1,10 +1,10 @@
-import clsx from "clsx";
-import { MdFC } from "../types";
-import styles from "./heading.module.scss";
+import clsx from 'clsx';
+import { MdFC } from '../types';
+import styles from './heading.module.scss';
 
 export const Heading: MdFC = ({ node, children }) => {
   const H = (
-    node.depth <= 3 ? `h${node.depth}` : "p"
+    node.depth <= 3 ? `h${node.depth}` : 'p'
   ) as keyof JSX.IntrinsicElements;
 
   return (

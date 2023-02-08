@@ -1,12 +1,12 @@
-import clsx from "clsx";
-import { FC } from "react";
-import styles from "./card.module.scss";
+import clsx from 'clsx';
+import { FC } from 'react';
+import styles from './card.module.scss';
 
 type CardProps = {
   title: string;
   summery: string;
   media: string;
-  direction?: "row" | "column";
+  direction?: 'row' | 'column';
   onClick?: () => void;
 };
 
@@ -14,14 +14,14 @@ export const Card: FC<CardProps> = ({
   title,
   summery,
   media,
-  direction = "row",
+  direction = 'row',
   onClick,
 }) => {
   return (
     <div
       className={clsx(styles.root, {
-        [styles.row]: direction === "row",
-        [styles.column]: direction === "column",
+        [styles.row]: direction === 'row',
+        [styles.column]: direction === 'column',
         [styles.clickable]: onClick !== undefined,
       })}
       onClick={onClick}

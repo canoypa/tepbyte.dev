@@ -1,9 +1,9 @@
-import { notFound } from "next/navigation";
-import { fetchPost, fetchPostList } from "~/api/post";
-import { PostInfo, Thumbnail } from "~/features/blog";
-import { MainContents } from "~/features/main_contents";
-import { MarkdownRenderer } from "~/features/markdown";
-import { Tags } from "~/features/tags";
+import { notFound } from 'next/navigation';
+import { fetchPost, fetchPostList } from '~/api/post';
+import { PostInfo, Thumbnail } from '~/features/blog';
+import { MainContents } from '~/features/main_contents';
+import { MarkdownRenderer } from '~/features/markdown';
+import { Tags } from '~/features/tags';
 
 export const generateStaticParams = async () => {
   const posts = await fetchPostList();

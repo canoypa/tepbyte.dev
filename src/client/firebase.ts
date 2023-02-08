@@ -1,4 +1,4 @@
-import { FirebaseOptions, getApp, getApps, initializeApp } from "firebase/app";
+import { FirebaseOptions, getApp, getApps, initializeApp } from 'firebase/app';
 
 const options: FirebaseOptions = {
   apiKey: process.env.API_KEY,
