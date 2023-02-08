@@ -1,18 +1,18 @@
 import { notFound } from "next/navigation";
-import { fetchPost, fetchPostList } from "~/api/post";
 import { PostInfo, Thumbnail } from "~/features/blog";
 import { MainContents } from "~/features/main_contents";
 import { MarkdownRenderer } from "~/features/markdown";
 import { Tags } from "~/features/tags";
+import { api } from "~/lib/api";
 
 export const generateStaticParams = async () => {
-  const posts = await fetchPostList();
+  const posts = await api.posts.list();
 
   return posts.map(({ slug }) => ({ slug }));
 };
 
 const PostPage = async ({ params: { slug } }: { params: { slug: string } }) => {
-  const post = await fetchPost(slug);
+  const post = await api.posts.get({ slug });
 
   if (post === null) {
     notFound();

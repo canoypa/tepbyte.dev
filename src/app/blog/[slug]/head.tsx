@@ -1,8 +1,8 @@
-import { fetchPost } from "~/api/post";
 import { AppHead } from "~/features/head";
+import { api } from "~/lib/api";
 
 const Head = async ({ params: { slug } }: { params: { slug: string } }) => {
-  const post = await fetchPost(slug);
+  const post = await api.posts.get({ slug });
 
   if (post === null) {
     return <AppHead notFound path={`/blog/${slug}`} />;

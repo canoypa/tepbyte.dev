@@ -1,12 +1,12 @@
 import { notFound } from "next/navigation";
-import { fetchProduct, fetchProductList } from "~/api/product";
 import { MainContents } from "~/features/main_contents";
 import { MarkdownRenderer } from "~/features/markdown";
 import { Info, Screenshot } from "~/features/product";
 import { Tags } from "~/features/tags";
+import { api } from "~/lib/api";
 
 export const generateStaticParams = async () => {
-  const products = await fetchProductList();
+  const products = await api.products.list();
 
   return products.map(({ slug }) => ({ slug }));
 };
@@ -16,7 +16,7 @@ const ProductPage = async ({
 }: {
   params: { slug: string };
 }) => {
-  const product = await fetchProduct(slug);
+  const product = await api.products.get({ slug });
 
   if (product === null) {
     notFound();
