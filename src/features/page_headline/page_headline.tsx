@@ -1,5 +1,5 @@
-import { FC } from "react";
-import styles from "./page_headline.module.scss";
+import { FC } from 'react';
+import styles from './page_headline.module.scss';
 
 type Props = {
   title: string;

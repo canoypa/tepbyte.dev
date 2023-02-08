@@ -1,5 +1,5 @@
-import { FC, ReactElement } from "react";
-import styles from "./tabs.module.scss";
+import { FC, ReactElement } from 'react';
+import styles from './tabs.module.scss';
 
 export type TabItemType = {
   label: string;

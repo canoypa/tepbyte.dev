@@ -1,8 +1,8 @@
-import Link from "next/link";
-import { FC } from "react";
-import { Chip } from "~/components/chip";
-import { LinkData } from "~/types/parsed";
-import styles from "./profile_link.module.scss";
+import Link from 'next/link';
+import { FC } from 'react';
+import { Chip } from '~/components/chip';
+import { LinkData } from '~/types/parsed';
+import styles from './profile_link.module.scss';
 
 export type ProfileLinkProps = {
   links: LinkData[];

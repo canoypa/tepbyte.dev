@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC } from 'react';
 
 export type SvgProps = Partial<{
   width: number;

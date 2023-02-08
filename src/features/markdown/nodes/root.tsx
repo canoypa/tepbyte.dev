@@ -1,4 +1,4 @@
-import { MdFC } from "../types";
+import { MdFC } from '../types';
 
 export const Root: MdFC = ({ children }) => {
   return <>{children}</>;

@@ -1,9 +1,9 @@
-import clsx from "clsx";
-import { MdFC } from "../types";
-import styles from "./list.module.scss";
+import clsx from 'clsx';
+import { MdFC } from '../types';
+import styles from './list.module.scss';
 
 export const List: MdFC = ({ node, children }) => {
-  const L = node.ordered ? "ol" : "ul";
+  const L = node.ordered ? 'ol' : 'ul';
 
   return (
     <L

@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { Button } from "~/components/button";
-import { MainContents } from "~/features/main_contents";
+import Link from 'next/link';
+import { Button } from '~/components/button';
+import { MainContents } from '~/features/main_contents';
 
 const NotFound = () => {
   return (

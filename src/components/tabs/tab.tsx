@@ -1,6 +1,6 @@
-import clsx from "clsx";
-import { FC, useCallback } from "react";
-import styles from "./tab.module.scss";
+import clsx from 'clsx';
+import { FC, useCallback } from 'react';
+import styles from './tab.module.scss';
 
 export type TabProps = {
   label: string;

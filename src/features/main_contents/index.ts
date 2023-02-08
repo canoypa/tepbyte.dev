@@ -1,1 +1,1 @@
-export * from "./main_contents";
+export * from './main_contents';

@@ -9,8 +9,8 @@ import {
   useMemo,
   useRef,
   useState,
-} from "react";
-import { useEffectOnce, useEvent } from "react-use";
+} from 'react';
+import { useEffectOnce, useEvent } from 'react-use';
 
 export type UseScrollTriggerOptions = Partial<{
   target: Window | Element;
@@ -38,7 +38,7 @@ const trigger = (
   return cur.current > threshold;
 };
 
-const defaultTarget = typeof window !== "undefined" ? window : undefined;
+const defaultTarget = typeof window !== 'undefined' ? window : undefined;
 
 export const useScrollTrigger = (
   options: UseScrollTriggerOptions = {}
@@ -56,7 +56,7 @@ export const useScrollTrigger = (
   }, [opt]);
 
   useEffectOnce(handler);
-  useEvent("scroll", handler, options.target, { passive: true });
+  useEvent('scroll', handler, options.target, { passive: true });
 
   return state;
 };

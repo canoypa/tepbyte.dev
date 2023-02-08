@@ -1,6 +1,6 @@
-import { FC } from "react";
-import { components } from "./nodes";
-import styles from "./renderer.module.scss";
+import { FC } from 'react';
+import { components } from './nodes';
+import styles from './renderer.module.scss';
 
 export type MarkdownRendererProps = {
   tree: any;
@@ -9,7 +9,7 @@ export type MarkdownRendererProps = {
 const RenderTree: FC<MarkdownRendererProps> = ({ tree }) => {
   const Component = components[tree.type];
 
-  if (typeof Component === "undefined") return null;
+  if (typeof Component === 'undefined') return null;
 
   if (tree.children) {
     return (

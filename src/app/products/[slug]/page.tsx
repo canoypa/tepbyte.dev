@@ -1,9 +1,9 @@
-import { notFound } from "next/navigation";
-import { fetchProduct, fetchProductList } from "~/api/product";
-import { MainContents } from "~/features/main_contents";
-import { MarkdownRenderer } from "~/features/markdown";
-import { Info, Screenshot } from "~/features/product";
-import { Tags } from "~/features/tags";
+import { notFound } from 'next/navigation';
+import { fetchProduct, fetchProductList } from '~/api/product';
+import { MainContents } from '~/features/main_contents';
+import { MarkdownRenderer } from '~/features/markdown';
+import { Info, Screenshot } from '~/features/product';
+import { Tags } from '~/features/tags';
 
 export const generateStaticParams = async () => {
   const products = await fetchProductList();

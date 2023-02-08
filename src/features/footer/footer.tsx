@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { FC } from "react";
-import { LogoLabel } from "../logo";
-import styles from "./footer.module.scss";
+import Link from 'next/link';
+import { FC } from 'react';
+import { LogoLabel } from '../logo';
+import styles from './footer.module.scss';
 
 export const Footer: FC = () => {
   return (

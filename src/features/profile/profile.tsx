@@ -1,8 +1,8 @@
-import { FC } from "react";
-import { ProfileMeta } from "~/types/parsed";
-import { Avatar } from "./avatar";
-import styles from "./profile.module.scss";
-import { ProfileLink } from "./profile_link";
+import { FC } from 'react';
+import { ProfileMeta } from '~/types/parsed';
+import { Avatar } from './avatar';
+import styles from './profile.module.scss';
+import { ProfileLink } from './profile_link';
 
 export type ProfileProps = {
   profile: ProfileMeta;

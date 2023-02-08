@@ -1,8 +1,8 @@
-import { fetchProfile } from "~/api/profile";
-import { MainContents } from "~/features/main_contents";
-import { MarkdownRenderer } from "~/features/markdown";
-import { PageHeadline } from "~/features/page_headline";
-import { Profile } from "~/features/profile/profile";
+import { fetchProfile } from '~/api/profile';
+import { MainContents } from '~/features/main_contents';
+import { MarkdownRenderer } from '~/features/markdown';
+import { PageHeadline } from '~/features/page_headline';
+import { Profile } from '~/features/profile/profile';
 
 const AboutPage = async () => {
   const profile = await fetchProfile();

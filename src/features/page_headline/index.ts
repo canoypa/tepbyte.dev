@@ -1,1 +1,1 @@
-export * from "./page_headline";
+export * from './page_headline';
