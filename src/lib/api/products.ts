@@ -10,7 +10,7 @@ export const get = cache(async (params: { slug: string }) => {
 });
 
 export const list = cache(async (params?: { limit?: number }) => {
-  const path = "products/get";
+  const path = "products/list";
   const data = await request<ProductMeta[]>(path, params);
   return data;
 });
