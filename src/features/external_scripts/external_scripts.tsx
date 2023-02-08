@@ -14,7 +14,7 @@ export const ExternalScripts: FC = () => {
       {/* Google tag */}
       <Script
         async
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+        src={"https://www.googletagmanager.com/gtag/js?id=G-EW7ZLDQTD1"}
         strategy="afterInteractive"
         onLoad={() => {
           window.dataLayer = window.dataLayer || [];
