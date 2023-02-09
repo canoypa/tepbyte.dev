@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { ComponentPropsWithoutRef, ElementType } from 'react';
 import { twMerge } from '~/lib/tailwind-merge';
 import { tw } from '~/lib/tw';
 
@@ -27,7 +27,8 @@ const styles = {
     sm:text-body-medium`,
 };
 
-type CardProps = {
+type InternalCardProps<T extends ElementType> = {
+  as?: T;
   title: string;
   summery: string;
   media: string;
@@ -35,15 +36,22 @@ type CardProps = {
   onClick?: () => void;
 };
 
-export const Card: FC<CardProps> = ({
+export type CardProps<T extends ElementType> = InternalCardProps<T> &
+  Omit<ComponentPropsWithoutRef<T>, keyof InternalCardProps<T>>;
+
+export const Card = <T extends ElementType = 'div'>({
+  as,
   title,
   summery,
   media,
   direction = 'row',
   onClick,
-}) => {
+  ...otherProps
+}: CardProps<T>) => {
+  const Component = as ?? 'div';
+
   return (
-    <div
+    <Component
       className={twMerge(
         styles.root,
         direction === 'row' && styles.row,
@@ -52,6 +60,7 @@ export const Card: FC<CardProps> = ({
       )}
       onClick={onClick}
       data-direction={direction}
+      {...otherProps}
     >
       <div
         className={twMerge(
@@ -66,6 +75,6 @@ export const Card: FC<CardProps> = ({
         <div className={styles.title}>{title}</div>
         <div className={styles.summery}>{summery}</div>
       </div>
-    </div>
+    </Component>
   );
 };

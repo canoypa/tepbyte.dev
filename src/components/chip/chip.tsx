@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { ComponentPropsWithoutRef, ElementType } from 'react';
 import { tw } from '~/lib/tw';
 
 const styles = {
@@ -7,15 +7,26 @@ const styles = {
     hover:bg-dark-primary/hover focus:bg-dark-primary/focus`,
 };
 
-export type ChipProps = {
+type InternalChipProps<T extends ElementType> = {
+  as?: T;
   label: string;
   onClick?: () => void;
 };
 
-export const Chip: FC<ChipProps> = ({ label, onClick }) => {
+export type ChipProps<T extends ElementType> = InternalChipProps<T> &
+  Omit<ComponentPropsWithoutRef<T>, keyof InternalChipProps<T>>;
+
+export const Chip = <T extends ElementType = 'span'>({
+  as,
+  label,
+  onClick,
+  ...otherProps
+}: ChipProps<T>) => {
+  const Component = as ?? 'span';
+
   return (
-    <span className={styles.root} onClick={onClick}>
+    <Component className={styles.root} onClick={onClick} {...otherProps}>
       {label}
-    </span>
+    </Component>
   );
 };

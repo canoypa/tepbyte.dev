@@ -1,4 +1,4 @@
-import { FC, useCallback } from 'react';
+import { ComponentPropsWithoutRef, ElementType, useCallback } from 'react';
 import { twMerge } from '~/lib/tailwind-merge';
 import { tw } from '~/lib/tw';
 
@@ -12,28 +12,42 @@ const styles = {
   active: /* Tailwind */ tw`scale-y-100`,
 };
 
-export type TabProps = {
+type InternalTabProps<T extends ElementType> = {
+  as?: T;
   label: string;
   value: string;
   active?: boolean;
   onClick?: (value: string) => void;
 };
 
-export const Tab: FC<TabProps> = ({ label, value, active, onClick }) => {
+export type TabProps<T extends ElementType> = InternalTabProps<T> &
+  Omit<ComponentPropsWithoutRef<T>, keyof InternalTabProps<T>>;
+
+export const Tab = <T extends ElementType = 'span'>({
+  as,
+  label,
+  value,
+  active,
+  onClick,
+  ...otherProps
+}: TabProps<T>) => {
+  const Component = as ?? 'span';
+
   const onClickHandler = useCallback(() => {
     onClick?.(value);
   }, [onClick, value]);
 
   return (
-    <div
+    <Component
       role="tab"
       aria-selected={active}
       tabIndex={0}
       className={styles.root}
       onClick={onClickHandler}
+      {...otherProps}
     >
       <span className={styles.label}>{label}</span>
       <span className={twMerge(styles.indicator, active && styles.active)} />
-    </div>
+    </Component>
   );
 };
