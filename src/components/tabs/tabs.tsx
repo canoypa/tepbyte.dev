@@ -1,4 +1,4 @@
-import { FC, ReactElement } from 'react';
+import { ComponentPropsWithoutRef, ElementType, ReactElement } from 'react';
 import { tw } from '~/lib/tw';
 
 const styles = {
@@ -10,15 +10,26 @@ export type TabItemType = {
   value: string;
 };
 
-export type TabsProps = {
+type InternalTabsProps<T extends ElementType> = {
+  as?: T;
   items: TabItemType[];
   renderItem: (item: TabItemType) => ReactElement;
 };
 
-export const Tabs: FC<TabsProps> = ({ items, renderItem }) => {
+export type TabsProps<T extends ElementType> = InternalTabsProps<T> &
+  Omit<ComponentPropsWithoutRef<T>, keyof InternalTabsProps<T>>;
+
+export const Tabs = <T extends ElementType = 'div'>({
+  as,
+  items,
+  renderItem,
+  ...otherProps
+}: TabsProps<T>) => {
+  const Component = as ?? 'div';
+
   return (
-    <div role="tablist" className={styles.root}>
+    <Component role="tablist" className={styles.root} {...otherProps}>
       {items.map((item) => renderItem(item))}
-    </div>
+    </Component>
   );
 };

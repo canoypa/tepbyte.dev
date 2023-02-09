@@ -16,9 +16,7 @@ export const ProfileLink: FC<ProfileLinkProps> = ({ links }) => {
   return (
     <div className={styles.root}>
       {links.map(({ label, url }) => (
-        <Link key={url} href={url}>
-          <Chip label={label} />
-        </Link>
+        <Chip key={url} as={Link} href={url} label={label} />
       ))}
     </div>
   );

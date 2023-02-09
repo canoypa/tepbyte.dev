@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react';
 import { twMerge } from '~/lib/tailwind-merge';
 import { tw } from '~/lib/tw';
 
@@ -12,24 +12,43 @@ const styles = {
   trailing: /* Tailwind */ tw`w-[18px] h-[18px] -mr-1`,
 };
 
-export type ButtonProps = {
+type InternalButtonProps<T extends ElementType> = {
+  as?: T;
   label: string;
   leading?: ReactNode;
   trailing?: ReactNode;
 };
 
-export const Button: FC<ButtonProps> = ({ label, leading, trailing }) => {
+export type ButtonProps<T extends ElementType> = InternalButtonProps<T> &
+  Omit<ComponentPropsWithoutRef<T>, keyof InternalButtonProps<T>>;
+
+export const Button = <T extends ElementType = 'button'>({
+  as,
+  label,
+  leading,
+  trailing,
+  ...otherProps
+}: ButtonProps<T>) => {
+  const props: Record<string, unknown> = {};
+
+  const Component = as ?? 'button';
+
+  if (Component === 'button') {
+    props['type'] = 'button';
+  }
+
   return (
-    <button
-      type="button"
+    <Component
       className={twMerge(
         styles.root,
         Boolean(leading || trailing) && styles.withIcon
       )}
+      {...props}
+      {...otherProps}
     >
       {leading && <span className={styles.leading}>{leading}</span>}
       <span>{label}</span>
       {trailing && <span className={styles.trailing}>{trailing}</span>}
-    </button>
+    </Component>
   );
 };

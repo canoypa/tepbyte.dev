@@ -16,9 +16,7 @@ export const Link: FC<LinkProps> = ({ links }) => {
   return (
     <div className={styles.root}>
       {links.map(({ label, url }) => (
-        <NextLink key={url} href={url}>
-          <Chip label={label} />
-        </NextLink>
+        <Chip key={url} as={NextLink} href={url} label={label} />
       ))}
     </div>
   );

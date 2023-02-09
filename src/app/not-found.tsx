@@ -13,9 +13,7 @@ const NotFound = () => {
       </div>
 
       <span>
-        <Link href="/">
-          <Button label="Back to Top Page" />
-        </Link>
+        <Button as={Link} href="/" label="Back to Top Page" />
       </span>
     </MainContents>
   );
