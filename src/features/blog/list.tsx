@@ -1,8 +1,14 @@
 import Link from 'next/link';
 import { FC } from 'react';
 import { Card } from '~/components/card';
+import { tw } from '~/lib/tw';
 import { ArticleMeta } from '~/types/parsed';
-import styles from './list.module.scss';
+
+const styles = {
+  root: /* Tailwind */ tw`
+    flex flex-col gap-4
+    sm:gap-6`,
+};
 
 export type BlogListProps = {
   items: Array<ArticleMeta & { slug: string }>;

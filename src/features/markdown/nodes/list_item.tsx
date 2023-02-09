@@ -1,18 +1,26 @@
-import clsx from 'clsx';
+import { twMerge } from '~/lib/tailwind-merge';
+import { tw } from '~/lib/tw';
 import { MdFC } from '../types';
-import styles from './list_item.module.scss';
+
+const styles = {
+  task: /* Tailwind */ tw`
+    list-none
+    [&>p]:inline`,
+  checkbox: /* Tailwind */ tw`-mis-4 mie-1`,
+};
 
 export const ListItem: MdFC = ({ node, children }) => {
   const isTaskListItem = node.checked !== null;
 
   return (
-    <li
-      className={clsx(styles.root, {
-        [styles.task]: isTaskListItem,
-      })}
-    >
+    <li className={twMerge(isTaskListItem && styles.task)}>
       {isTaskListItem && (
-        <input type="checkbox" checked={node.checked} readOnly />
+        <input
+          type="checkbox"
+          checked={node.checked}
+          readOnly
+          className={styles.checkbox}
+        />
       )}
       {children}
     </li>

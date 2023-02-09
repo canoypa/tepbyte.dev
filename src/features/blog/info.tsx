@@ -1,7 +1,12 @@
 import { FC } from 'react';
+import { tw } from '~/lib/tw';
 import { ArticleMeta } from '~/types/parsed';
 import { PageHeadline } from '../page_headline';
-import styles from './info.module.scss';
+
+const styles = {
+  root: /* Tailwind */ tw`flex flex-col gap-6`,
+  dateTime: /* Tailwind */ tw`text-body-medium font-comfortaa`,
+};
 
 export type PostInfoProps = {
   post: ArticleMeta;

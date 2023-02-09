@@ -1,6 +1,10 @@
 import { FC } from 'react';
+import { tw } from '~/lib/tw';
 import { components } from './nodes';
-import styles from './renderer.module.scss';
+
+const styles = {
+  root: /* Tailwind */ tw`flex flex-col gap-y-4`,
+};
 
 export type MarkdownRendererProps = {
   tree: any;

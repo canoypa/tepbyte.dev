@@ -1,8 +1,12 @@
 import { FC } from 'react';
+import { tw } from '~/lib/tw';
 import { ProductMeta } from '~/types/parsed';
 import { PageHeadline } from '../page_headline';
-import styles from './info.module.scss';
 import { Link } from './link';
+
+const styles = {
+  root: /* Tailwind */ tw`flex flex-col gap-6`,
+};
 
 export type InfoProps = {
   product: ProductMeta;

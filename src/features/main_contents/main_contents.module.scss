@@ -1,9 +1,0 @@
-.root {
-  @apply flex flex-col py-8 gap-8;
-
-  @apply max-sm:mx-[16px];
-  @apply sm:max-md:mx-[32px];
-  @apply md:max-lg:mx-auto md:max-lg:max-w-[840px];
-  @apply lg:max-xl:mx-[200px];
-  @apply xl:mx-auto xl:max-w-[1040px];
-}
