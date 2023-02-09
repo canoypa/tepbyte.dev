@@ -1,6 +1,21 @@
 import { FC } from 'react';
+import { tw } from '~/lib/tw';
 import { ImageMeta } from '~/types/parsed';
-import styles from './screenshot.module.scss';
+
+const styles = {
+  root: /* Tailwind */ tw`flex gap-4 overflow-x-auto`,
+
+  // TODO
+  // -ms-overflow-style: none;
+  // scrollbar-width: none;
+  // &::-webkit-scrollbar {
+  //   display: none;
+  // }
+
+  image: /* Tailwind */ tw`
+    max-w-fit h-[216px] rounded-extra-large object-cover
+    md:h-[288px]`,
+};
 
 export type ScreenshotProps = {
   images: ImageMeta[];

@@ -1,6 +1,31 @@
-import clsx from 'clsx';
 import { FC } from 'react';
-import styles from './card.module.scss';
+import { twMerge } from '~/lib/tailwind-merge';
+import { tw } from '~/lib/tw';
+
+const styles = {
+  root: /* Tailwind */ tw`
+    group/card p-4 rounded-medium bg-dark-primary/1 shadow-1 duration-medium-1 transition
+    hover:bg-dark-primary/2 hover:shadow-2`,
+  clickable: /* Tailwind */ tw`cursor-pointer`,
+  row: /* Tailwind */ tw`flex flex-row gap-6 items-center`,
+  column: /* Tailwind */ tw`inline-flex gap-4 flex-col max-w-[600px]`,
+  media: /* Tailwind */ tw`rounded-medium overflow-hidden`,
+  mediaRow: /* Tailwind */ tw`
+    h-[80px] aspect-square
+    sm:h-[80px] sm:aspect-video
+    md:h-[120px]`,
+  mediaColumn: /* Tailwind */ tw`min-h-[80px] max-h-[200px] aspect-video`,
+  img: /* Tailwind */ tw`
+    w-full h-full object-cover transition-transform duration-long-1
+    group-hover/card:scale-105`,
+  content: /* Tailwind */ tw`flex flex-col gap-2`,
+  title: /* Tailwind */ tw`
+    text-title-medium line-clamp-2 font-comfortaa
+    sm:text-title-large`,
+  summery: /* Tailwind */ tw`
+    text-body-small line-clamp-2
+    sm:text-body-medium`,
+};
 
 type CardProps = {
   title: string;
@@ -19,14 +44,22 @@ export const Card: FC<CardProps> = ({
 }) => {
   return (
     <div
-      className={clsx(styles.root, {
-        [styles.row]: direction === 'row',
-        [styles.column]: direction === 'column',
-        [styles.clickable]: onClick !== undefined,
-      })}
+      className={twMerge(
+        styles.root,
+        direction === 'row' && styles.row,
+        direction === 'column' && styles.column,
+        onClick !== undefined && styles.clickable
+      )}
       onClick={onClick}
+      data-direction={direction}
     >
-      <div className={styles.media}>
+      <div
+        className={twMerge(
+          styles.media,
+          direction === 'row' && styles.mediaRow,
+          direction === 'column' && styles.mediaColumn
+        )}
+      >
         <img className={styles.img} src={media} />
       </div>
       <div className={styles.content}>
