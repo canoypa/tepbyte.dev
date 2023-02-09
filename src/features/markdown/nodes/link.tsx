@@ -1,14 +1,6 @@
-import { tw } from '~/lib/tw';
+import { StyledLink } from '~/components/styled_link';
 import { MdFC } from '../types';
 
-const styles = {
-  root: /*Tailwind */ tw`underline`,
-};
-
 export const Link: MdFC = ({ node, children }) => {
-  return (
-    <a href={node.url} className={styles.root}>
-      {children}
-    </a>
-  );
+  return <StyledLink href={node.url}>{children}</StyledLink>;
 };
