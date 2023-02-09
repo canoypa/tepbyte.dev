@@ -1,8 +1,12 @@
-import { default as NextLink } from "next/link";
-import { FC } from "react";
-import { Chip } from "~/components/chip";
-import { LinkData } from "~/types/parsed";
-import styles from "./link.module.scss";
+import { default as NextLink } from 'next/link';
+import { FC } from 'react';
+import { Chip } from '~/components/chip';
+import { tw } from '~/lib/tw';
+import { LinkData } from '~/types/parsed';
+
+const styles = {
+  root: /* Tailwind */ tw`flex gap-2`,
+};
 
 export type LinkProps = {
   links: LinkData[];

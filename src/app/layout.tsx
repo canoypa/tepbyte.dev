@@ -1,14 +1,14 @@
-import { Comfortaa } from "@next/font/google";
-import { FC, PropsWithChildren } from "react";
-import { ExternalScripts } from "~/features/external_scripts";
-import { Footer } from "~/features/footer";
-import { Header } from "~/features/header";
-import "~/styles/globals.css";
+import { Comfortaa } from '@next/font/google';
+import { FC, PropsWithChildren } from 'react';
+import { ExternalScripts } from '~/features/external_scripts';
+import { Footer } from '~/features/footer';
+import { Header } from '~/features/header';
+import '~/styles/globals.css';
 
 const comfortaa = Comfortaa({
-  display: "swap",
-  subsets: ["latin"],
-  variable: "--font-comfortaa",
+  display: 'swap',
+  subsets: ['latin'],
+  variable: '--font-comfortaa',
 });
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {

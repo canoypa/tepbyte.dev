@@ -1,6 +1,14 @@
-import { FC } from "react";
-import { ImageMeta } from "~/types/parsed";
-import styles from "./thumbnail.module.scss";
+import { FC } from 'react';
+import { tw } from '~/lib/tw';
+import { ImageMeta } from '~/types/parsed';
+
+const styles = {
+  root: /* Tailwind */ tw`flex flex-col gap-y-2`,
+  img: /* Tailwind */ tw`
+    w-full h-[216px] rounded-extra-large object-cover
+    md:h-[288px]`,
+  attribution: /* Tailwind */ tw`text-label-medium font-comfortaa italic`,
+};
 
 export type ThumbnailProps = {
   image: ImageMeta;

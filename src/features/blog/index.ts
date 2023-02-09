@@ -1,3 +1,3 @@
-export * from "./info";
-export * from "./list";
-export * from "./thumbnail";
+export * from './info';
+export * from './list';
+export * from './thumbnail';

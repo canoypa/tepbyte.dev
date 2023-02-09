@@ -1,6 +1,6 @@
-import { MainContents } from "~/features/main_contents";
-import { Hero } from "~/features/profile";
-import { api } from "~/lib/api";
+import { MainContents } from '~/features/main_contents';
+import { Hero } from '~/features/profile';
+import { api } from '~/lib/api';
 
 const HomePage = async () => {
   const profile = await api.profile.get();

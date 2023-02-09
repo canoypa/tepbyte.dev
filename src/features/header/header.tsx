@@ -1,8 +1,16 @@
-import clsx from "clsx";
-import { FC } from "react";
-import { useScrollTrigger } from "~/hooks/scroll_trigger";
-import styles from "./header.module.scss";
-import { MainNavigation } from "./main_navigation";
+import { FC } from 'react';
+import { useScrollTrigger } from '~/hooks/scroll_trigger';
+import { tw } from '~/lib/tw';
+import { MainNavigation } from './main_navigation';
+
+const styles = {
+  root: /* Tailwind */ tw`
+    group/header sticky top-0 bg-dark-surface/70 backdrop-blur-lg
+    data-[floating=true]:shadow-2 z-2`,
+  container: /* Tailwind */ tw`
+    flex justify-center duration-short-2 ease-standard transition
+    group-data-[floating=true]/header:bg-dark-primary/2`,
+};
 
 export const Header: FC = () => {
   const isFloating = useScrollTrigger({
@@ -11,11 +19,7 @@ export const Header: FC = () => {
   });
 
   return (
-    <header
-      className={clsx(styles.root, {
-        [styles.floating]: isFloating,
-      })}
-    >
+    <header className={styles.root} data-floating={isFloating}>
       <div className={styles.container}>
         <MainNavigation />
       </div>

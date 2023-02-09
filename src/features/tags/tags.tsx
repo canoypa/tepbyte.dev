@@ -1,7 +1,11 @@
-import { FC } from "react";
-import { LabelData } from "~/types/parsed";
-import { Tag } from "./tag";
-import styles from "./tags.module.scss";
+import { FC } from 'react';
+import { tw } from '~/lib/tw';
+import { LabelData } from '~/types/parsed';
+import { Tag } from './tag';
+
+const styles = {
+  root: /* Tailwind */ tw`flex gap-2 flex-wrap`,
+};
 
 type Props = {
   tags: LabelData[];

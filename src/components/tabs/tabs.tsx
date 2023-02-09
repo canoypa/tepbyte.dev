@@ -1,5 +1,9 @@
-import { FC, ReactElement } from "react";
-import styles from "./tabs.module.scss";
+import { FC, ReactElement } from 'react';
+import { tw } from '~/lib/tw';
+
+const styles = {
+  root: /* Tailwind */ tw`flex`,
+};
 
 export type TabItemType = {
   label: string;

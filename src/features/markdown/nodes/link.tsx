@@ -1,5 +1,9 @@
-import { MdFC } from "../types";
-import styles from "./link.module.scss";
+import { tw } from '~/lib/tw';
+import { MdFC } from '../types';
+
+const styles = {
+  root: /*Tailwind */ tw`underline`,
+};
 
 export const Link: MdFC = ({ node, children }) => {
   return (

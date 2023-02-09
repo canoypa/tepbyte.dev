@@ -1,5 +1,5 @@
-import { AppHead } from "~/features/head";
-import { api } from "~/lib/api";
+import { AppHead } from '~/features/head';
+import { api } from '~/lib/api';
 
 const Head = async ({ params: { slug } }: { params: { slug: string } }) => {
   const product = await api.products.get({ slug });

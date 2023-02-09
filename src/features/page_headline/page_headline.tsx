@@ -1,5 +1,11 @@
-import { FC } from "react";
-import styles from "./page_headline.module.scss";
+import { FC } from 'react';
+import { tw } from '~/lib/tw';
+
+const styles = {
+  root: /* Tailwind */ tw`flex flex-col gap-y-2`,
+  title: /* Tailwind */ tw`text-display-medium font-comfortaa`,
+  subhead: /* Tailwind */ tw`text-title-medium`,
+};
 
 type Props = {
   title: string;
