@@ -1,8 +1,8 @@
-import { fetchProduct } from '~/api/product';
 import { AppHead } from '~/features/head';
+import { api } from '~/lib/api';
 
 const Head = async ({ params: { slug } }: { params: { slug: string } }) => {
-  const product = await fetchProduct(slug);
+  const product = await api.products.get({ slug });
 
   if (product === null) {
     return <AppHead notFound path={`/products/${slug}`} />;
