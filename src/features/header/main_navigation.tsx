@@ -9,24 +9,24 @@ export const MainNavigation: FC = () => {
   const layout = useSelectedLayoutSegment();
 
   return (
-    <nav>
-      <Tabs
-        items={[
-          { label: 'Home', value: '/' },
-          { label: 'About', value: '/about' },
-          { label: 'Products', value: '/products' },
-          { label: 'Blog', value: '/blog' },
-        ]}
-        renderItem={(item) => (
-          <Link key={item.value} href={item.value}>
-            <Tab
-              label={item.label}
-              value={item.value}
-              active={`/${layout ?? ''}` === item.value}
-            />
-          </Link>
-        )}
-      />
-    </nav>
+    <Tabs
+      as="nav"
+      items={[
+        { label: 'Home', value: '/' },
+        { label: 'About', value: '/about' },
+        { label: 'Products', value: '/products' },
+        { label: 'Blog', value: '/blog' },
+      ]}
+      renderItem={(item) => (
+        <Tab
+          key={item.value}
+          as={Link}
+          href={item.value}
+          label={item.label}
+          value={item.value}
+          active={`/${layout ?? ''}` === item.value}
+        />
+      )}
+    />
   );
 };
