@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { StyledLink } from '~/components/styled_link';
 import { tw } from '~/lib/tw';
 import { ImageMeta } from '~/types/parsed';
 
@@ -22,9 +23,13 @@ export const Thumbnail: FC<ThumbnailProps> = ({ image }) => {
       {image.attribution && (
         <small className={styles.attribution}>
           <span>Photo by </span>
-          <a href={image.attribution.user_url}>{image.attribution.user_name}</a>
+          <StyledLink href={image.attribution.user_url}>
+            {image.attribution.user_name}
+          </StyledLink>
           <span> on </span>
-          <a href={image.attribution.site_url}>{image.attribution.site_name}</a>
+          <StyledLink href={image.attribution.site_url}>
+            {image.attribution.site_name}
+          </StyledLink>
         </small>
       )}
     </div>
