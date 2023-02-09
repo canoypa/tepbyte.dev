@@ -3,7 +3,7 @@ import { tw } from '~/lib/tw';
 import { MdFC } from '../types';
 
 const styles = {
-  root: /* Tailwind */ tw`list-disc pl-6`, // TODO: padding-inline-start
+  root: /* Tailwind */ tw`list-disc pis-6`,
   ordered: /* Tailwind */ tw`list-decimal`,
 };
 

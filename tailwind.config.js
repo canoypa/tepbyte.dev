@@ -1,6 +1,7 @@
 const { fontFamily } = require("tailwindcss/defaultTheme");
 
 const lineClampPlugin = require("@tailwindcss/line-clamp");
+const plugin = require("tailwindcss/plugin");
 
 const m3Plugin = require("tailwindcss-material3-plugin").Material3Plugin({
   sourceColor: 0x8282f4,
@@ -10,6 +11,35 @@ const m3Plugin = require("tailwindcss-material3-plugin").Material3Plugin({
     { name: "success", value: 0x66bb6a, blend: true },
   ],
 });
+
+const utilPlugin = plugin(({ addUtilities, matchUtilities, theme }) => {
+  // inline margin/padding
+  matchUtilities(
+    {
+      "mi": (value) => ({ "margin-inline": `${value} ${value}` }),
+      "mis": (value) => ({ "margin-inline-start": `${value}` }),
+      "mie": (value) => ({ "margin-inline-end": `${value}` }),
+
+      "pi": (value) => ({ "padding-inline": `${value} ${value}` }),
+      "pis": (value) => ({ "padding-inline-start": `${value}` }),
+      "pie": (value) => ({ "padding-inline-end": `${value}` }),
+    },
+    { values: theme('spacing') }
+  );
+
+  // scrollbar
+  addUtilities({
+    ".scrollbar-thin": {
+      "scrollbar-width": "thin",
+      "&::-webkit-scrollbar": { width: "8px", height: "8px", "background-color": theme("colors.dark.surface-variant") },
+      "&::-webkit-scrollbar-thumb": { "background-color": theme("colors.dark.secondary") }
+    },
+    ".scrollbar-none": {
+      "scrollbar-width": "none",
+      "&::-webkit-scrollbar": { display: "none", }
+    }
+  })
+})
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -21,5 +51,5 @@ module.exports = {
       },
     },
   },
-  plugins: [lineClampPlugin, m3Plugin],
+  plugins: [lineClampPlugin, utilPlugin, m3Plugin],
 };

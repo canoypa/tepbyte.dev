@@ -6,7 +6,7 @@ const styles = {
   task: /* Tailwind */ tw`
     list-none
     [&>p]:inline`,
-  checkbox: /* Tailwind */ tw`-ml-4 mr-1`, // TODO: margin-inline-start/end
+  checkbox: /* Tailwind */ tw`-mis-4 mie-1`,
 };
 
 export const ListItem: MdFC = ({ node, children }) => {
