@@ -8,6 +8,15 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "browserslist": [
+    "last 3 chrome major versions",
+    "last 3 edge major versions",
+    "last 3 firefox major versions",
+    "last 3 safari major versions",
+    "last 3 chromeandroid major versions",
+    "last 3 firefoxandroid major versions",
+    "last 3 ios major versions"
+  ],
   "dependencies": {
     "@next/font": "^13.1.4",
     "@tailwindcss/line-clamp": "^0.4.2",
