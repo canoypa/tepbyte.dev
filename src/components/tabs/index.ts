@@ -1,5 +1,3 @@
-'use client';
-
 export { Tab } from './tab';
 export type { TabProps } from './tab';
 export { Tabs } from './tabs';
