@@ -1,3 +1,2 @@
-'use client';
-
-export * from './card';
+export { Card } from './card';
+export type { CardProps } from './card';

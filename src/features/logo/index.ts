@@ -1,1 +1,1 @@
-export * from './label';
+export { LogoLabel } from './label';

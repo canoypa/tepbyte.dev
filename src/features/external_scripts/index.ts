@@ -1,3 +1,1 @@
-'use client';
-
-export * from './external_scripts';
+export { ExternalScripts } from './external_scripts';

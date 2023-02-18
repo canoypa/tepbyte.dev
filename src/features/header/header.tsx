@@ -1,3 +1,5 @@
+'use client';
+
 import { FC } from 'react';
 import { useScrollTrigger } from '~/hooks/scroll_trigger';
 import { tw } from '~/lib/tw';

@@ -1,3 +1,5 @@
+'use client';
+
 import { ComponentPropsWithoutRef, ElementType } from 'react';
 import { twMerge } from '~/lib/tailwind-merge';
 import { tw } from '~/lib/tw';
