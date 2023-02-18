@@ -19,4 +19,11 @@
 
     -webkit-tap-highlight-color: transparent;
   }
+
+  :focus-visible {
+    @apply outline-dark-primary;
+    outline-style: solid;
+    outline-width: 2px;
+    outline-offset: 2px;
+  }
 }

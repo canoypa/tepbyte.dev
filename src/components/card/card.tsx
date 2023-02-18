@@ -7,7 +7,8 @@ import { tw } from '~/lib/tw';
 const styles = {
   root: /* Tailwind */ tw`
     group/card p-4 rounded-medium bg-dark-primary/1 shadow-1 duration-medium-1 transition
-    hover:bg-dark-primary/2 hover:shadow-2`,
+    hover:bg-dark-primary/2 hover:shadow-2
+    focus-visible:bg-dark-primary/2 focus-visible:shadow-2`,
   clickable: /* Tailwind */ tw`cursor-pointer`,
   row: /* Tailwind */ tw`flex flex-row gap-6 items-center`,
   column: /* Tailwind */ tw`inline-flex gap-4 flex-col max-w-[600px]`,
@@ -19,7 +20,8 @@ const styles = {
   mediaColumn: /* Tailwind */ tw`min-h-[80px] max-h-[200px] aspect-video`,
   img: /* Tailwind */ tw`
     w-full h-full object-cover transition-transform duration-long-1
-    group-hover/card:scale-105`,
+    group-hover/card:scale-105
+    group-focus-visible/card:scale-105`,
   content: /* Tailwind */ tw`flex flex-col gap-2`,
   title: /* Tailwind */ tw`
     text-title-medium line-clamp-2 font-comfortaa
