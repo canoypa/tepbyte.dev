@@ -6,7 +6,7 @@ const styles = {
   root: /* Tailwind */ tw`
     inline-flex items-center justify-center gap-x-2 px-3 h-[40px] min-w-[48px] rounded-full text-label-large font-comfortaa text-dark-primary fill-dark-primary
     hover:bg-dark-primary/hover
-    focus:bg-dark-primary/focus`,
+    focus-visible:bg-dark-primary/focus`,
   withIcon: /* Tailwind */ tw`px-4`,
   leading: /* Tailwind */ tw`w-[18px] h-[18px] -ml-1`,
   trailing: /* Tailwind */ tw`w-[18px] h-[18px] -mr-1`,
