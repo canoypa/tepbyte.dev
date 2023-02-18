@@ -6,17 +6,22 @@
   :root {
     color-scheme: dark;
     scrollbar-gutter: stable;
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
     @apply flex flex-col min-h-screen bg-dark-surface text-dark-on-surface fill-dark-on-surface;
-
-    scroll-behavior: smooth;
   }
 
   * {
     @apply border-dark shadow-dark;
+  }
 
-    -webkit-tap-highlight-color: transparent;
+  :focus-visible {
+    @apply outline-dark-primary;
+    outline-style: solid;
+    outline-width: 2px;
+    outline-offset: 2px;
   }
 }
