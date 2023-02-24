@@ -1,4 +1,4 @@
-import { Comfortaa } from '@next/font/google';
+import { Comfortaa } from 'next/font/google';
 import { FC, PropsWithChildren } from 'react';
 import { ExternalScripts } from '~/features/external_scripts';
 import { Footer } from '~/features/footer';
