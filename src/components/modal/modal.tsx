@@ -3,7 +3,13 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { FC, PropsWithChildren, useCallback, useEffect } from 'react';
 import { useLockBodyScroll } from 'react-use';
+import { tw } from '~/lib/tw';
 import { Portal } from '../portal';
+
+const styles = {
+  dialog: /* Tailwind */ tw`fixed inset-0 z-3 grid place-items-center`,
+  backdrop: /* Tailwind */ tw`absolute inset-0 -z-1`,
+};
 
 export type ModalProps = {
   open: boolean;
@@ -36,13 +42,9 @@ export const Modal: FC<ModalProps> = ({ open, onClose, children }) => {
     <Portal>
       <AnimatePresence>
         {open && (
-          <div
-            className="fixed inset-0 z-3 grid place-items-center"
-            role="dialog"
-            aria-modal
-          >
+          <div className={styles.dialog} role="dialog" aria-modal>
             <motion.div
-              className="absolute inset-0 -z-1"
+              className={styles.backdrop}
               initial={{
                 backgroundColor: 'rgba(0,0,0,0)',
                 backdropFilter: 'blur(0px)',
