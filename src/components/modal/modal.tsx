@@ -1,6 +1,6 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, Variants } from 'framer-motion';
 import { FC, PropsWithChildren, useCallback, useEffect } from 'react';
 import { useLockBodyScroll } from 'react-use';
 import { tw } from '~/lib/tw';
@@ -9,6 +9,17 @@ import { Portal } from '../portal';
 const styles = {
   dialog: /* Tailwind */ tw`fixed inset-0 z-3 grid place-items-center`,
   backdrop: /* Tailwind */ tw`absolute inset-0 -z-1`,
+};
+
+const scrimAnimationVariants: Variants = {
+  visible: {
+    backgroundColor: 'rgba(0,0,0,0.32)',
+    backdropFilter: 'blur(4px)',
+  },
+  invisible: {
+    backgroundColor: 'rgba(0,0,0,0)',
+    backdropFilter: 'blur(0)',
+  },
 };
 
 export type ModalProps = {
@@ -45,18 +56,10 @@ export const Modal: FC<ModalProps> = ({ open, onClose, children }) => {
           <div className={styles.dialog} role="dialog" aria-modal>
             <motion.div
               className={styles.backdrop}
-              initial={{
-                backgroundColor: 'rgba(0,0,0,0)',
-                backdropFilter: 'blur(0px)',
-              }}
-              animate={{
-                backgroundColor: 'rgba(0,0,0,0.32)',
-                backdropFilter: 'blur(4px)',
-              }}
-              exit={{
-                backgroundColor: 'rgba(0,0,0,0)',
-                backdropFilter: 'blur(0px)',
-              }}
+              variants={scrimAnimationVariants}
+              initial="invisible"
+              animate="visible"
+              exit="invisible"
               onClick={onClose}
             />
 
