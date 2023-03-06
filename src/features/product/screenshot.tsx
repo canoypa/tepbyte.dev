@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Image } from '~/components/image';
 import { tw } from '~/lib/tw';
 import { ImageMeta } from '~/types/parsed';
 
@@ -17,7 +18,13 @@ export const Screenshot: FC<ScreenshotProps> = ({ images }) => {
   return (
     <div className={styles.root}>
       {images.map((v) => (
-        <img key={v.url} src={v.url} alt="" className={styles.image} />
+        <Image
+          key={v.url}
+          src={v.url}
+          alt=""
+          className={styles.image}
+          lightbox
+        />
       ))}
     </div>
   );
