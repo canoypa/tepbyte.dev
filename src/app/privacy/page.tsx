@@ -27,7 +27,7 @@ export async function generateMetadata(
   };
 }
 
-const PrivacyPage = async () => {
+export default async function () {
   const privacy = await api.privacy.get();
 
   return (
@@ -36,5 +36,4 @@ const PrivacyPage = async () => {
       <MarkdownRenderer tree={privacy.body} />
     </MainContents>
   );
-};
-export default PrivacyPage;
+}

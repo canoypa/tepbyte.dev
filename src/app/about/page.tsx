@@ -28,7 +28,7 @@ export async function generateMetadata(
   };
 }
 
-const AboutPage = async () => {
+export default async function () {
   const profile = await api.profile.get();
 
   return (
@@ -38,5 +38,4 @@ const AboutPage = async () => {
       <MarkdownRenderer tree={profile.body} />
     </MainContents>
   );
-};
-export default AboutPage;
+}

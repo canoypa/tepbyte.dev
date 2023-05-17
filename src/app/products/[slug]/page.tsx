@@ -51,7 +51,7 @@ export async function generateMetadata(
   };
 }
 
-const ProductPage = async ({ params: { slug } }: Props) => {
+export default async function ({ params: { slug } }: Props) {
   const product = await api.products.get({ slug });
 
   if (product === null) {
@@ -66,5 +66,4 @@ const ProductPage = async ({ params: { slug } }: Props) => {
       {product.meta.tags.length > 0 && <Tags tags={product.meta.tags} />}
     </MainContents>
   );
-};
-export default ProductPage;
+}

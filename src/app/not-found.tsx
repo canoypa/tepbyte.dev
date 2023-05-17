@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Button } from '~/components/button';
 import { MainContents } from '~/features/main_contents';
 
-const NotFound = () => {
+export default function () {
   return (
     <MainContents>
       <div className="flex flex-col gap-4">
@@ -17,5 +17,4 @@ const NotFound = () => {
       </span>
     </MainContents>
   );
-};
-export default NotFound;
+}

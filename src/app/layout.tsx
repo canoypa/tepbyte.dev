@@ -38,7 +38,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const Layout = ({ children }: Props) => {
+export default async function ({ children }: Props) {
   return (
     <html lang="ja" className={comfortaa.variable}>
       <body>
@@ -50,5 +50,4 @@ const Layout = ({ children }: Props) => {
       </body>
     </html>
   );
-};
-export default Layout;
+}

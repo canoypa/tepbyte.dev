@@ -27,7 +27,7 @@ export async function generateMetadata(
   };
 }
 
-const BlogPage = async () => {
+export default async function () {
   const posts = await api.posts.list();
 
   return (
@@ -36,5 +36,4 @@ const BlogPage = async () => {
       <BlogList items={posts} />
     </MainContents>
   );
-};
-export default BlogPage;
+}

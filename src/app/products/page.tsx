@@ -27,7 +27,7 @@ export async function generateMetadata(
   };
 }
 
-const ProductsPage = async () => {
+export default async function () {
   const products = await api.products.list();
 
   return (
@@ -36,5 +36,4 @@ const ProductsPage = async () => {
       <ProductList items={products} />
     </MainContents>
   );
-};
-export default ProductsPage;
+}

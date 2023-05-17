@@ -1,6 +1,9 @@
-import { NextApiHandler } from 'next';
+import { NextApiRequest, NextApiResponse } from 'next';
 
-const handler: NextApiHandler = async (request, response) => {
+export default async function (
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
   if (request.method !== 'POST') {
     return response.status(405).end();
   }
@@ -15,5 +18,4 @@ const handler: NextApiHandler = async (request, response) => {
   } catch (err) {
     return response.status(500).end();
   }
-};
-export default handler;
+}

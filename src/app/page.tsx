@@ -23,7 +23,7 @@ export async function generateMetadata(
   };
 }
 
-const HomePage = async () => {
+export default async function () {
   const profile = await api.profile.get();
 
   return (
@@ -31,5 +31,4 @@ const HomePage = async () => {
       <Hero profile={profile.meta} />
     </MainContents>
   );
-};
-export default HomePage;
+}
