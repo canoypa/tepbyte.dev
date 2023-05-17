@@ -9,7 +9,7 @@ type Props = {};
 
 export async function generateMetadata(
   _: Props,
-  resolvingParent?: ResolvingMetadata
+  resolvingParent: ResolvingMetadata
 ): Promise<Metadata> {
   const parent = await resolvingParent;
 
