@@ -18,6 +18,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL('https://www.tepbyte.dev'),
 
+    colorScheme: 'dark',
+
     title: {
       template: '%s - Tepbyte',
       default: 'Tepbyte',
