@@ -1,7 +1,29 @@
+import { Metadata, ResolvingMetadata } from 'next';
 import { BlogList } from '~/features/blog';
 import { MainContents } from '~/features/main_contents';
 import { PageHeadline } from '~/features/page_headline';
 import { api } from '~/lib/api';
+
+export async function generateMetadata(
+  _: unknown,
+  resolvingParent?: ResolvingMetadata
+): Promise<Metadata> {
+  const parent = await resolvingParent;
+
+  return {
+    title: 'Blog',
+
+    openGraph: {
+      ...parent?.openGraph,
+      title: 'Blog',
+      url: '/blog',
+    },
+
+    alternates: {
+      canonical: '/blog',
+    },
+  };
+}
 
 const BlogPage = async () => {
   const posts = await api.posts.list();

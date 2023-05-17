@@ -1,3 +1,4 @@
+import { Metadata, ResolvingMetadata } from 'next';
 import { notFound } from 'next/navigation';
 import { MainContents } from '~/features/main_contents';
 import { MarkdownRenderer } from '~/features/markdown';
@@ -10,6 +11,41 @@ export const generateStaticParams = async () => {
 
   return products.map(({ slug }) => ({ slug }));
 };
+
+export async function generateMetadata(
+  {
+    params: { slug },
+  }: {
+    params: { slug: string };
+  },
+  resolvingParent?: ResolvingMetadata
+): Promise<Metadata> {
+  const parent = await resolvingParent;
+
+  const product = await api.products.get({ slug });
+
+  if (product === null) {
+    return {
+      title: '404 Not Found',
+    };
+  }
+
+  return {
+    title: product.meta.title,
+    description: product.meta.subhead,
+
+    openGraph: {
+      ...parent?.openGraph,
+      title: product.meta.title,
+      description: product.meta.subhead,
+      url: `/products/${slug}`,
+    },
+
+    alternates: {
+      canonical: `/products/${slug}`,
+    },
+  };
+}
 
 const ProductPage = async ({
   params: { slug },

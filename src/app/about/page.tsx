@@ -1,8 +1,30 @@
+import { Metadata, ResolvingMetadata } from 'next';
 import { MainContents } from '~/features/main_contents';
 import { MarkdownRenderer } from '~/features/markdown';
 import { PageHeadline } from '~/features/page_headline';
 import { Profile } from '~/features/profile/profile';
 import { api } from '~/lib/api';
+
+export async function generateMetadata(
+  _: unknown,
+  resolvingParent?: ResolvingMetadata
+): Promise<Metadata> {
+  const parent = await resolvingParent;
+
+  return {
+    title: 'About',
+
+    openGraph: {
+      ...parent?.openGraph,
+      title: 'About',
+      url: '/about',
+    },
+
+    alternates: {
+      canonical: '/about',
+    },
+  };
+}
 
 const AboutPage = async () => {
   const profile = await api.profile.get();

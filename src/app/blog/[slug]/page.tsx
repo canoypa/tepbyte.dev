@@ -1,3 +1,4 @@
+import { Metadata, ResolvingMetadata } from 'next';
 import { notFound } from 'next/navigation';
 import { PostInfo, Thumbnail } from '~/features/blog';
 import { MainContents } from '~/features/main_contents';
@@ -10,6 +11,41 @@ export const generateStaticParams = async () => {
 
   return posts.map(({ slug }) => ({ slug }));
 };
+
+export async function generateMetadata(
+  {
+    params: { slug },
+  }: {
+    params: { slug: string };
+  },
+  resolvingParent?: ResolvingMetadata
+): Promise<Metadata> {
+  const parent = await resolvingParent;
+
+  const product = await api.posts.get({ slug });
+
+  if (product === null) {
+    return {
+      title: '404 Not Found',
+    };
+  }
+
+  return {
+    title: product.meta.title,
+    description: product.meta.subhead,
+
+    openGraph: {
+      ...parent?.openGraph,
+      title: product.meta.title,
+      description: product.meta.subhead,
+      url: `/blog/${slug}`,
+    },
+
+    alternates: {
+      canonical: `/blog/${slug}`,
+    },
+  };
+}
 
 const PostPage = async ({ params: { slug } }: { params: { slug: string } }) => {
   const post = await api.posts.get({ slug });
