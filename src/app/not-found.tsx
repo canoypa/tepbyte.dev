@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Button } from '~/components/button';
 import { MainContents } from '~/features/main_contents';
 
-export default function () {
+export default async function () {
   return (
     <MainContents>
       <div className="flex flex-col gap-4">
