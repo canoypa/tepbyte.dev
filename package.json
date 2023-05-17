@@ -18,7 +18,6 @@
     "last 3 ios major versions"
   ],
   "dependencies": {
-    "@tailwindcss/line-clamp": "^0.4.2",
     "axios": "^1.3.2",
     "blurhash": "^2.0.4",
     "google-auth-library": "^8.7.0",
@@ -26,8 +25,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-use": "^17.4.0",
-    "tailwind-merge": "^1.9.0",
-    "tailwindcss": "^3.2.4",
+    "tailwind-merge": "^1.12.0",
+    "tailwindcss": "^3.3.2",
     "tailwindcss-material3-plugin": "^0.2.1"
   },
   "devDependencies": {
