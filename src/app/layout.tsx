@@ -1,10 +1,12 @@
 import { Metadata } from 'next';
 import { Comfortaa } from 'next/font/google';
-import { FC, PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import { ExternalScripts } from '~/features/external_scripts';
 import { Footer } from '~/features/footer';
 import { Header } from '~/features/header';
 import '~/styles/globals.css';
+
+type Props = PropsWithChildren;
 
 const comfortaa = Comfortaa({
   display: 'swap',
@@ -34,7 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const Layout: FC<PropsWithChildren> = ({ children }) => {
+const Layout = ({ children }: Props) => {
   return (
     <html lang="ja" className={comfortaa.variable}>
       <body>

@@ -6,18 +6,22 @@ import { MarkdownRenderer } from '~/features/markdown';
 import { Tags } from '~/features/tags';
 import { api } from '~/lib/api';
 
-export const generateStaticParams = async () => {
+type Params = {
+  slug: string;
+};
+
+type Props = {
+  params: Params;
+};
+
+export const generateStaticParams = async (): Promise<Params[]> => {
   const posts = await api.posts.list();
 
   return posts.map(({ slug }) => ({ slug }));
 };
 
 export async function generateMetadata(
-  {
-    params: { slug },
-  }: {
-    params: { slug: string };
-  },
+  { params: { slug } }: Props,
   resolvingParent?: ResolvingMetadata
 ): Promise<Metadata> {
   const parent = await resolvingParent;
@@ -47,7 +51,7 @@ export async function generateMetadata(
   };
 }
 
-const PostPage = async ({ params: { slug } }: { params: { slug: string } }) => {
+const PostPage = async ({ params: { slug } }: Props) => {
   const post = await api.posts.get({ slug });
 
   if (post === null) {

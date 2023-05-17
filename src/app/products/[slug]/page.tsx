@@ -6,18 +6,22 @@ import { Info, Screenshot } from '~/features/product';
 import { Tags } from '~/features/tags';
 import { api } from '~/lib/api';
 
-export const generateStaticParams = async () => {
+type Params = {
+  slug: string;
+};
+
+type Props = {
+  params: Params;
+};
+
+export const generateStaticParams = async (): Promise<Params[]> => {
   const products = await api.products.list();
 
   return products.map(({ slug }) => ({ slug }));
 };
 
 export async function generateMetadata(
-  {
-    params: { slug },
-  }: {
-    params: { slug: string };
-  },
+  { params: { slug } }: Props,
   resolvingParent?: ResolvingMetadata
 ): Promise<Metadata> {
   const parent = await resolvingParent;
@@ -47,11 +51,7 @@ export async function generateMetadata(
   };
 }
 
-const ProductPage = async ({
-  params: { slug },
-}: {
-  params: { slug: string };
-}) => {
+const ProductPage = async ({ params: { slug } }: Props) => {
   const product = await api.products.get({ slug });
 
   if (product === null) {

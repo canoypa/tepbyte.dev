@@ -3,8 +3,10 @@ import { MainContents } from '~/features/main_contents';
 import { Hero } from '~/features/profile';
 import { api } from '~/lib/api';
 
+type Props = {};
+
 export async function generateMetadata(
-  _: unknown,
+  _: Props,
   resolvingParent?: ResolvingMetadata
 ): Promise<Metadata> {
   const parent = await resolvingParent;

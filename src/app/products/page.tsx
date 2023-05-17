@@ -4,8 +4,10 @@ import { PageHeadline } from '~/features/page_headline';
 import { ProductList } from '~/features/product';
 import { api } from '~/lib/api';
 
+type Props = {};
+
 export async function generateMetadata(
-  _: unknown,
+  _: Props,
   resolvingParent?: ResolvingMetadata
 ): Promise<Metadata> {
   const parent = await resolvingParent;
