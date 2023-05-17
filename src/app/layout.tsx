@@ -22,14 +22,6 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     description: "Cano's portfolio site.",
 
-    icons: {
-      icon: [
-        { url: '/favicon.ico', sizes: 'any' },
-        { url: '/favicon.svg', type: 'image/svg+xml' },
-      ],
-      apple: ['/apple-touch-icon.png'],
-    },
-
     openGraph: {
       title: {
         template: '%s',
@@ -38,7 +30,6 @@ export async function generateMetadata(): Promise<Metadata> {
       type: 'website',
       siteName: 'Tepbyte',
       description: "Cano's portfolio site.",
-      images: ['/assets/og-image.png'],
     },
   };
 }
