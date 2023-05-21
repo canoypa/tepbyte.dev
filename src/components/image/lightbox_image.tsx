@@ -54,15 +54,15 @@ export const LightboxImage: FC<LightboxImageProps> = ({ ...otherProps }) => {
     animate(false);
   };
 
-  const viewTransitionName = inAnimation ? layoutId : undefined;
-
   return (
     <>
       <img
         {...otherProps}
         className={twMerge(otherProps.className, styles.img)}
-        style={{ viewTransitionName }}
-        hidden={open}
+        style={{
+          viewTransitionName: !open && inAnimation ? layoutId : undefined,
+          visibility: open ? 'hidden' : undefined,
+        }}
         onClick={openModal}
       />
 
@@ -70,7 +70,7 @@ export const LightboxImage: FC<LightboxImageProps> = ({ ...otherProps }) => {
         <img
           {...otherProps}
           className={twMerge(styles.lightbox)}
-          style={{ viewTransitionName }}
+          style={{ viewTransitionName: inAnimation ? layoutId : undefined }}
           onClick={closeModal}
         />
       </Modal>
