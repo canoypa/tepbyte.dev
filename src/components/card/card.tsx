@@ -6,9 +6,9 @@ import { tw } from '~/lib/tw';
 
 const styles = {
   root: /* Tailwind */ tw`
-    group/card p-4 rounded-medium bg-dark-primary/1 shadow-1 duration-medium-1 transition
-    hover:bg-dark-primary/2 hover:shadow-2
-    focus-visible:bg-dark-primary/2 focus-visible:shadow-2`,
+    group/card p-4 rounded-medium bg-dark-primary/1 duration-medium-1 transition
+    hover:bg-dark-primary/2
+    focus-visible:bg-dark-primary/2`,
   clickable: /* Tailwind */ tw`cursor-pointer`,
   row: /* Tailwind */ tw`flex flex-row gap-6 items-center`,
   column: /* Tailwind */ tw`inline-flex gap-4 flex-col max-w-[600px]`,
