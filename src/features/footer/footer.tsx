@@ -3,9 +3,7 @@ import { StyledLink } from '~/components/styled_link';
 import { tw } from '~/lib/tw';
 
 const styles = {
-  root: /* Tailwind */ tw`
-    flex items-center gap-x-4 px-6 py-8 text-dark-on-surface-variant fill-dark-on-surface-variant font-comfortaa text-body-medium
-    md:gap-x-8 md:px-16 md:py-12`,
+  root: /* Tailwind */ tw`mx-4 px-2 py-6 border-t-[1px] border-t-dark-outline-variant text-dark-on-surface-variant text-body-small`,
 };
 
 export const Footer: FC = () => {
