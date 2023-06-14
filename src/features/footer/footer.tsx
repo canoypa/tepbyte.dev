@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { StyledLink } from '~/components/styled_link';
 import { tw } from '~/lib/tw';
-import { LogoLabel } from '../logo';
 
 const styles = {
   root: /* Tailwind */ tw`
@@ -12,15 +11,12 @@ const styles = {
 export const Footer: FC = () => {
   return (
     <footer className={styles.root}>
-      <LogoLabel height={32} />
-      <p>
-        このサイトは Google Analytics を使用しています。詳しくは{' '}
-        <StyledLink href="https://policies.google.com/technologies/partner-sites">
-          Google のサービスを使用するサイトやアプリから収集した情報の Google
-          による使用
-        </StyledLink>{' '}
-        をご覧ください。
-      </p>
+      このサイトは Google Analytics を使用しています。詳しくは{' '}
+      <StyledLink href="https://policies.google.com/technologies/partner-sites">
+        Google のサービスを使用するサイトやアプリから収集した情報の Google
+        による使用
+      </StyledLink>{' '}
+      をご覧ください。
     </footer>
   );
 };
