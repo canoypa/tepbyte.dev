@@ -17,21 +17,23 @@ export type ThumbnailProps = {
 
 export const Thumbnail: FC<ThumbnailProps> = ({ image }) => {
   return (
-    <div className={styles.root}>
+    <figure className={styles.root}>
       <img src={image.url} alt="" className={styles.img} />
 
       {image.attribution && (
-        <small className={styles.attribution}>
-          <span>Photo by </span>
-          <StyledLink href={image.attribution.user_url}>
-            {image.attribution.user_name}
-          </StyledLink>
-          <span> on </span>
-          <StyledLink href={image.attribution.site_url}>
-            {image.attribution.site_name}
-          </StyledLink>
-        </small>
+        <figcaption>
+          <small className={styles.attribution}>
+            <span>Photo by </span>
+            <StyledLink href={image.attribution.user_url}>
+              {image.attribution.user_name}
+            </StyledLink>
+            <span> on </span>
+            <StyledLink href={image.attribution.site_url}>
+              {image.attribution.site_name}
+            </StyledLink>
+          </small>
+        </figcaption>
       )}
-    </div>
+    </figure>
   );
 };
