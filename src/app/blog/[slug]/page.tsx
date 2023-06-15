@@ -16,6 +16,7 @@ type Props = {
 
 export const generateStaticParams = async (): Promise<Params[]> => {
   const posts = await api.posts.list();
+  if (!posts) return [];
 
   return posts.map(({ slug }) => ({ slug }));
 };

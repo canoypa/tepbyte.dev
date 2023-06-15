@@ -30,6 +30,10 @@ export async function generateMetadata(
 export default async function () {
   const products = await api.products.list();
 
+  if (!products) {
+    throw new Error('API Error');
+  }
+
   return (
     <MainContents>
       <PageHeadline title="Products" />

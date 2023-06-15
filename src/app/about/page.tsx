@@ -31,6 +31,10 @@ export async function generateMetadata(
 export default async function () {
   const profile = await api.profile.get();
 
+  if (!profile) {
+    throw new Error('API Error');
+  }
+
   return (
     <MainContents>
       <PageHeadline title="About" />
