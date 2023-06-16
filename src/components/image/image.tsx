@@ -1,5 +1,6 @@
 'use client';
 
+import Head from 'next/head';
 import { FC, ImgHTMLAttributes, useId, useState } from 'react';
 import { flushSync } from 'react-dom';
 import { twMerge } from 'tailwind-merge';
@@ -25,10 +26,15 @@ const styles = {
 };
 
 export type ImageProps = ImgHTMLAttributes<HTMLImageElement> & {
+  priority?: boolean;
   lightbox?: boolean;
 };
 
-export const Image: FC<ImageProps> = ({ lightbox, ...otherProps }) => {
+export const Image: FC<ImageProps> = ({
+  priority,
+  lightbox,
+  ...otherProps
+}) => {
   const viewTransitionName = useId().replace(/:/g, '');
 
   const [isLightboxOpen, setLightboxOpen] = useState(false);
@@ -83,6 +89,17 @@ export const Image: FC<ImageProps> = ({ lightbox, ...otherProps }) => {
             onClick={closeModal}
           />
         </Modal>
+      ) : null}
+
+      {priority ? (
+        <Head>
+          <link
+            key={otherProps.src}
+            rel="preload"
+            as="image"
+            href={otherProps.src}
+          />
+        </Head>
       ) : null}
     </>
   );
