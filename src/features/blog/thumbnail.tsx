@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Image } from '~/components/image';
 import { StyledLink } from '~/components/styled_link';
 import { tw } from '~/lib/tw';
 import { ImageMeta } from '~/types/parsed';
@@ -18,7 +19,12 @@ export type ThumbnailProps = {
 export const Thumbnail: FC<ThumbnailProps> = ({ image }) => {
   return (
     <div className={styles.root}>
-      <img src={image.url} alt="" className={styles.img} />
+      <Image
+        src={image.url}
+        alt=""
+        className={styles.img}
+        blurDataUrl={image.blurDataUrl}
+      />
 
       {image.attribution && (
         <small className={styles.attribution}>

@@ -25,14 +25,18 @@ const styles = {
 
 export type ImageProps = ImgHTMLAttributes<HTMLImageElement> & {
   priority?: boolean;
+  blurDataUrl?: string;
   lightbox?: boolean;
 };
 
 export const Image: FC<ImageProps> = ({
   priority,
+  blurDataUrl,
   lightbox,
   ...otherProps
 }) => {
+  const [showBlur, setShowBlur] = useState(true);
+
   const viewTransitionName = useId().replace(/:/g, '');
 
   const [isLightboxOpen, setLightboxOpen] = useState(false);
@@ -66,12 +70,25 @@ export const Image: FC<ImageProps> = ({
       }
     : {};
 
+  const blurStyles: CSSProperties =
+    blurDataUrl && showBlur
+      ? {
+          backgroundSize: 'cover',
+          backgroundPosition: '50% 50%',
+          backgroundRepeat: 'no-repeat',
+          backgroundImage: `url(${blurDataUrl})`,
+        }
+      : {};
+
   return (
     <>
       <img
         {...otherProps}
-        style={lightboxStyles}
+        style={{ ...lightboxStyles, ...blurStyles }}
         onClick={lightbox ? openModal : undefined}
+        ref={(v) => {
+          v?.decode().finally(() => setShowBlur(false));
+        }}
       />
 
       {lightbox ? (

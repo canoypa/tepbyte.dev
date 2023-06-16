@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Image } from '~/components/image';
 import { tw } from '~/lib/tw';
 import { ImageMeta } from '~/types/parsed';
 import { Avatar } from './avatar';
@@ -25,10 +26,15 @@ export const ProfileCard: FC<ProfileCardProps> = ({ name, photo, image }) => {
   return (
     <div className={styles.root}>
       <div className={styles.image}>
-        <img src={image.url} alt="" className={styles.img} />
+        <Image
+          src={image.url}
+          alt=""
+          className={styles.img}
+          blurDataUrl={image.blurDataUrl}
+        />
       </div>
       <div className={styles.content}>
-        <Avatar photo={photo.url} />
+        <Avatar image={photo} />
         <span className={styles.name}>{name}</span>
       </div>
     </div>

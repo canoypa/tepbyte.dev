@@ -25,7 +25,11 @@ export const BlogList: FC<BlogListProps> = ({ items }) => {
     <div className={styles.root}>
       {items.map((v) => (
         <Card key={v.slug} as={Link} href={`/blog/${v.slug}`}>
-          <CardMedia src={v.image.url} alt="" />
+          <CardMedia
+            src={v.image.url}
+            alt=""
+            blurDataUrl={v.image.blurDataUrl}
+          />
           <CardContent>
             <CardTitle>{v.title}</CardTitle>
             <CardSummery>{v.subhead}</CardSummery>

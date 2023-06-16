@@ -31,7 +31,11 @@ export const ProductList: FC<ProductListProps> = ({ items }) => {
           href={`/products/${v.slug}`}
           direction="column"
         >
-          <CardMedia src={v.images[0].url} alt="" />
+          <CardMedia
+            src={v.images[0].url}
+            alt=""
+            blurDataUrl={v.images[0].blurDataUrl}
+          />
           <CardContent>
             <CardTitle>{v.title}</CardTitle>
             <CardSummery>{v.subhead}</CardSummery>
