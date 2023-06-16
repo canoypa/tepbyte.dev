@@ -1,5 +1,7 @@
 import { FC } from 'react';
+import { Image } from '~/components/image';
 import { tw } from '~/lib/tw';
+import { ImageMeta } from '~/types/parsed';
 
 const styles = {
   root: /* Tailwind */ tw`
@@ -8,9 +10,19 @@ const styles = {
 };
 
 export type AvatarProps = {
-  photo: string;
+  image: ImageMeta;
 };
 
-export const Avatar: FC<AvatarProps> = ({ photo }) => {
-  return <img src={photo} alt="" className={styles.root} />;
+export const Avatar: FC<AvatarProps> = ({ image }) => {
+  return (
+    <Image
+      src={image.url}
+      alt=""
+      width={image.width}
+      height={image.height}
+      className={styles.root}
+      blurDataUrl={image.blurDataUrl}
+      priority
+    />
+  );
 };

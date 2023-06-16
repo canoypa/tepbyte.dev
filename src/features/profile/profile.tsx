@@ -19,7 +19,7 @@ export const Profile: FC<ProfileProps> = ({ profile }) => {
   return (
     <div className={styles.root}>
       <div className={styles.primary}>
-        <Avatar photo={profile.photo.url} />
+        <Avatar image={profile.photo} />
         <span className={styles.name}>{profile.name}</span>
       </div>
       <div className={styles.subhead}>{profile.subhead}</div>

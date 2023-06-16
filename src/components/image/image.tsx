@@ -1,8 +1,8 @@
 'use client';
 
-import { FC, ImgHTMLAttributes, useId, useState } from 'react';
+import Head from 'next/head';
+import { CSSProperties, FC, ImgHTMLAttributes, useId, useState } from 'react';
 import { flushSync } from 'react-dom';
-import { twMerge } from 'tailwind-merge';
 import { tw } from '~/lib/tw';
 import { Modal } from '../modal';
 
@@ -20,15 +20,23 @@ declare global {
 }
 
 const styles = {
-  img: /* Tailwind */ tw`cursor-zoom-in`,
   lightbox: /* Tailwind */ tw`max-w-full max-h-full rounded-extra-small cursor-zoom-out`,
 };
 
 export type ImageProps = ImgHTMLAttributes<HTMLImageElement> & {
+  priority?: boolean;
+  blurDataUrl?: string;
   lightbox?: boolean;
 };
 
-export const Image: FC<ImageProps> = ({ lightbox, ...otherProps }) => {
+export const Image: FC<ImageProps> = ({
+  priority,
+  blurDataUrl,
+  lightbox,
+  ...otherProps
+}) => {
+  const [showBlur, setShowBlur] = useState(true);
+
   const viewTransitionName = useId().replace(/:/g, '');
 
   const [isLightboxOpen, setLightboxOpen] = useState(false);
@@ -51,30 +59,44 @@ export const Image: FC<ImageProps> = ({ lightbox, ...otherProps }) => {
   const openModal = () => animate(true);
   const closeModal = () => animate(false);
 
+  const lightboxStyles: CSSProperties = lightbox
+    ? {
+        cursor: 'zoom-in',
+        viewTransitionName:
+          !isLightboxOpen && isLightboxAnimating
+            ? viewTransitionName
+            : undefined,
+        visibility: isLightboxOpen ? 'hidden' : undefined,
+      }
+    : {};
+
+  const blurStyles: CSSProperties =
+    blurDataUrl && showBlur
+      ? {
+          backgroundSize: 'cover',
+          backgroundPosition: '50% 50%',
+          backgroundRepeat: 'no-repeat',
+          backgroundImage: `url(${blurDataUrl})`,
+        }
+      : {};
+
   return (
     <>
-      {lightbox ? (
-        <img
-          {...otherProps}
-          className={twMerge(otherProps.className, styles.img)}
-          style={{
-            viewTransitionName:
-              !isLightboxOpen && isLightboxAnimating
-                ? viewTransitionName
-                : undefined,
-            visibility: isLightboxOpen ? 'hidden' : undefined,
-          }}
-          onClick={openModal}
-        />
-      ) : (
-        <img {...otherProps} />
-      )}
+      <img
+        {...otherProps}
+        style={{ ...lightboxStyles, ...blurStyles }}
+        onClick={lightbox ? openModal : undefined}
+        ref={(v) => {
+          v?.decode().finally(() => setShowBlur(false));
+        }}
+        loading={priority ? undefined : 'lazy'}
+      />
 
       {lightbox ? (
         <Modal open={isLightboxOpen} onClose={closeModal} closeWithBackdrop>
           <img
             {...otherProps}
-            className={twMerge(styles.lightbox)}
+            className={styles.lightbox}
             style={{
               viewTransitionName: isLightboxAnimating
                 ? viewTransitionName
@@ -83,6 +105,17 @@ export const Image: FC<ImageProps> = ({ lightbox, ...otherProps }) => {
             onClick={closeModal}
           />
         </Modal>
+      ) : null}
+
+      {priority ? (
+        <Head>
+          <link
+            key={otherProps.src}
+            rel="preload"
+            as="image"
+            href={otherProps.src}
+          />
+        </Head>
       ) : null}
     </>
   );

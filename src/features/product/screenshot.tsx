@@ -17,12 +17,16 @@ export type ScreenshotProps = {
 export const Screenshot: FC<ScreenshotProps> = ({ images }) => {
   return (
     <div className={styles.root}>
-      {images.map((v) => (
+      {images.map((v, i) => (
         <Image
           key={v.url}
           src={v.url}
           alt=""
+          width={v.width}
+          height={v.height}
           className={styles.image}
+          blurDataUrl={v.blurDataUrl}
+          priority={i === 0}
           lightbox
         />
       ))}

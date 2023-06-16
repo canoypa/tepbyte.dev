@@ -1,11 +1,16 @@
 export type ImageMeta = {
   url: string;
-  blurhash: string;
+  width: number;
+  height: number;
+
+  blurDataUrl: string;
+  color: string;
+
   attribution?: {
-    user_name: string;
-    user_url: string;
-    site_name: string;
-    site_url: string;
+    authorName: string;
+    authorUrl: string;
+    siteName: string;
+    siteUrl: string;
   };
 };
 
