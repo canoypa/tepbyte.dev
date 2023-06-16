@@ -23,7 +23,7 @@ export type BlogListProps = {
 export const BlogList: FC<BlogListProps> = ({ items }) => {
   return (
     <div className={styles.root}>
-      {items.map((v) => (
+      {items.map((v, i) => (
         <Card key={v.slug} as={Link} href={`/blog/${v.slug}`}>
           <CardMedia
             src={v.image.url}
@@ -31,6 +31,7 @@ export const BlogList: FC<BlogListProps> = ({ items }) => {
             width={v.image.width}
             height={v.image.height}
             blurDataUrl={v.image.blurDataUrl}
+            priority={i <= 2}
           />
           <CardContent>
             <CardTitle>{v.title}</CardTitle>

@@ -24,7 +24,7 @@ export type ProductListProps = {
 export const ProductList: FC<ProductListProps> = ({ items }) => {
   return (
     <div className={styles.root}>
-      {items.map((v) => (
+      {items.map((v, i) => (
         <Card
           key={v.slug}
           as={Link}
@@ -37,6 +37,7 @@ export const ProductList: FC<ProductListProps> = ({ items }) => {
             width={v.images[0].width}
             height={v.images[0].height}
             blurDataUrl={v.images[0].blurDataUrl}
+            priority={i <= 2}
           />
           <CardContent>
             <CardTitle>{v.title}</CardTitle>

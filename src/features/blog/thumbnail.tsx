@@ -26,6 +26,7 @@ export const Thumbnail: FC<ThumbnailProps> = ({ image }) => {
         height={image.height}
         className={styles.img}
         blurDataUrl={image.blurDataUrl}
+        priority
       />
 
       {image.attribution && (

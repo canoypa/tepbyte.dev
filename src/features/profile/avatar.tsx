@@ -22,6 +22,7 @@ export const Avatar: FC<AvatarProps> = ({ image }) => {
       height={image.height}
       className={styles.root}
       blurDataUrl={image.blurDataUrl}
+      priority
     />
   );
 };

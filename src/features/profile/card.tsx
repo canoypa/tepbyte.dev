@@ -33,6 +33,7 @@ export const ProfileCard: FC<ProfileCardProps> = ({ name, photo, image }) => {
           height={image.height}
           className={styles.img}
           blurDataUrl={image.blurDataUrl}
+          priority
         />
       </div>
       <div className={styles.content}>
