@@ -1,8 +1,15 @@
 'use client';
 
-import { ComponentPropsWithoutRef, ElementType } from 'react';
+import {
+  ComponentPropsWithoutRef,
+  ElementType,
+  FC,
+  PropsWithChildren,
+  ReactNode,
+} from 'react';
 import { twMerge } from '~/lib/tailwind-merge';
 import { tw } from '~/lib/tw';
+import { Image, ImageProps } from '../image';
 
 const styles = {
   root: /* Tailwind */ tw`
@@ -12,12 +19,11 @@ const styles = {
   clickable: /* Tailwind */ tw`cursor-pointer`,
   row: /* Tailwind */ tw`flex flex-row gap-6 items-center`,
   column: /* Tailwind */ tw`inline-flex gap-4 flex-col max-w-[600px]`,
-  media: /* Tailwind */ tw`rounded-medium overflow-hidden`,
-  mediaRow: /* Tailwind */ tw`
-    h-[80px] aspect-square
-    sm:h-[80px] sm:aspect-video
-    md:h-[120px]`,
-  mediaColumn: /* Tailwind */ tw`min-h-[80px] max-h-[200px] aspect-video`,
+  media: /* Tailwind */ tw`rounded-medium overflow-hidden
+    group-data-[direction=row]/card:h-[80px] group-data-[direction=row]/card:aspect-square
+    group-data-[direction=row]/card:sm:h-[80px] group-data-[direction=row]/card:sm:aspect-video
+    group-data-[direction=row]/card:md:h-[120px]
+    group-data-[direction=column]/card:min-h-[80px] group-data-[direction=column]/card:max-h-[200px] group-data-[direction=column]/card:aspect-video`,
   img: /* Tailwind */ tw`
     w-full h-full object-cover transition-transform duration-long-1
     group-hover/card:scale-105
@@ -33,11 +39,9 @@ const styles = {
 
 type InternalCardProps<T extends ElementType> = {
   as?: T;
-  title: string;
-  summery: string;
-  media: string;
   direction?: 'row' | 'column';
   onClick?: () => void;
+  children: ReactNode;
 };
 
 export type CardProps<T extends ElementType> = InternalCardProps<T> &
@@ -45,11 +49,9 @@ export type CardProps<T extends ElementType> = InternalCardProps<T> &
 
 export const Card = <T extends ElementType = 'div'>({
   as,
-  title,
-  summery,
-  media,
   direction = 'row',
   onClick,
+  children,
   ...otherProps
 }: CardProps<T>) => {
   const Component = as ?? 'div';
@@ -66,19 +68,27 @@ export const Card = <T extends ElementType = 'div'>({
       data-direction={direction}
       {...otherProps}
     >
-      <div
-        className={twMerge(
-          styles.media,
-          direction === 'row' && styles.mediaRow,
-          direction === 'column' && styles.mediaColumn
-        )}
-      >
-        <img className={styles.img} src={media} />
-      </div>
-      <div className={styles.content}>
-        <div className={styles.title}>{title}</div>
-        <div className={styles.summery}>{summery}</div>
-      </div>
+      {children}
     </Component>
   );
+};
+
+export const CardMedia: FC<ImageProps> = (props) => {
+  return (
+    <div className={styles.media}>
+      <Image className={twMerge(props.className, styles.img)} {...props} />
+    </div>
+  );
+};
+
+export const CardContent: FC<PropsWithChildren> = ({ children }) => {
+  return <div className={styles.content}>{children}</div>;
+};
+
+export const CardTitle: FC<PropsWithChildren> = ({ children }) => {
+  return <div className={styles.title}>{children}</div>;
+};
+
+export const CardSummery: FC<PropsWithChildren> = ({ children }) => {
+  return <div className={styles.summery}>{children}</div>;
 };

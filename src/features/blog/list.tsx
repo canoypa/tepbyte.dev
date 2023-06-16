@@ -1,6 +1,12 @@
 import Link from 'next/link';
 import { FC } from 'react';
-import { Card } from '~/components/card';
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  CardSummery,
+  CardTitle,
+} from '~/components/card';
 import { tw } from '~/lib/tw';
 import { ArticleMeta } from '~/types/parsed';
 
@@ -18,14 +24,13 @@ export const BlogList: FC<BlogListProps> = ({ items }) => {
   return (
     <div className={styles.root}>
       {items.map((v) => (
-        <Card
-          key={v.slug}
-          as={Link}
-          href={`/blog/${v.slug}`}
-          title={v.title}
-          summery={v.subhead}
-          media={v.image.url}
-        />
+        <Card key={v.slug} as={Link} href={`/blog/${v.slug}`}>
+          <CardMedia src={v.image.url} alt="" />
+          <CardContent>
+            <CardTitle>{v.title}</CardTitle>
+            <CardSummery>{v.subhead}</CardSummery>
+          </CardContent>
+        </Card>
       ))}
     </div>
   );
