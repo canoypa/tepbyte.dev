@@ -23,12 +23,12 @@ export const Thumbnail: FC<ThumbnailProps> = ({ image }) => {
       {image.attribution && (
         <small className={styles.attribution}>
           <span>Photo by </span>
-          <StyledLink href={image.attribution.user_url}>
-            {image.attribution.user_name}
+          <StyledLink href={image.attribution.authorUrl}>
+            {image.attribution.authorName}
           </StyledLink>
           <span> on </span>
-          <StyledLink href={image.attribution.site_url}>
-            {image.attribution.site_name}
+          <StyledLink href={image.attribution.siteUrl}>
+            {image.attribution.siteName}
           </StyledLink>
         </small>
       )}
