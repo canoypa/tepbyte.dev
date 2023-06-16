@@ -22,6 +22,8 @@ export const Screenshot: FC<ScreenshotProps> = ({ images }) => {
           key={v.url}
           src={v.url}
           alt=""
+          width={v.width}
+          height={v.height}
           className={styles.image}
           blurDataUrl={v.blurDataUrl}
           lightbox

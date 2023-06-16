@@ -22,6 +22,8 @@ export const Thumbnail: FC<ThumbnailProps> = ({ image }) => {
       <Image
         src={image.url}
         alt=""
+        width={image.width}
+        height={image.height}
         className={styles.img}
         blurDataUrl={image.blurDataUrl}
       />

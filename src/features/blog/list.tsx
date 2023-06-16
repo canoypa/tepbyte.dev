@@ -28,6 +28,8 @@ export const BlogList: FC<BlogListProps> = ({ items }) => {
           <CardMedia
             src={v.image.url}
             alt=""
+            width={v.image.width}
+            height={v.image.height}
             blurDataUrl={v.image.blurDataUrl}
           />
           <CardContent>

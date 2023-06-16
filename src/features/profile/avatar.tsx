@@ -18,6 +18,8 @@ export const Avatar: FC<AvatarProps> = ({ image }) => {
     <Image
       src={image.url}
       alt=""
+      width={image.width}
+      height={image.height}
       className={styles.root}
       blurDataUrl={image.blurDataUrl}
     />

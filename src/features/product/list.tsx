@@ -34,6 +34,8 @@ export const ProductList: FC<ProductListProps> = ({ items }) => {
           <CardMedia
             src={v.images[0].url}
             alt=""
+            width={v.images[0].width}
+            height={v.images[0].height}
             blurDataUrl={v.images[0].blurDataUrl}
           />
           <CardContent>
