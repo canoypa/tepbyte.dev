@@ -89,6 +89,7 @@ export const Image: FC<ImageProps> = ({
         ref={(v) => {
           v?.decode().finally(() => setShowBlur(false));
         }}
+        loading={priority ? undefined : 'lazy'}
       />
 
       {lightbox ? (
