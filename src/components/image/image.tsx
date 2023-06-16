@@ -1,9 +1,8 @@
 'use client';
 
 import Head from 'next/head';
-import { FC, ImgHTMLAttributes, useId, useState } from 'react';
+import { CSSProperties, FC, ImgHTMLAttributes, useId, useState } from 'react';
 import { flushSync } from 'react-dom';
-import { twMerge } from 'tailwind-merge';
 import { tw } from '~/lib/tw';
 import { Modal } from '../modal';
 
@@ -21,7 +20,6 @@ declare global {
 }
 
 const styles = {
-  img: /* Tailwind */ tw`cursor-zoom-in`,
   lightbox: /* Tailwind */ tw`max-w-full max-h-full rounded-extra-small cursor-zoom-out`,
 };
 
@@ -57,30 +55,30 @@ export const Image: FC<ImageProps> = ({
   const openModal = () => animate(true);
   const closeModal = () => animate(false);
 
+  const lightboxStyles: CSSProperties = lightbox
+    ? {
+        cursor: 'zoom-in',
+        viewTransitionName:
+          !isLightboxOpen && isLightboxAnimating
+            ? viewTransitionName
+            : undefined,
+        visibility: isLightboxOpen ? 'hidden' : undefined,
+      }
+    : {};
+
   return (
     <>
-      {lightbox ? (
-        <img
-          {...otherProps}
-          className={twMerge(otherProps.className, styles.img)}
-          style={{
-            viewTransitionName:
-              !isLightboxOpen && isLightboxAnimating
-                ? viewTransitionName
-                : undefined,
-            visibility: isLightboxOpen ? 'hidden' : undefined,
-          }}
-          onClick={openModal}
-        />
-      ) : (
-        <img {...otherProps} />
-      )}
+      <img
+        {...otherProps}
+        style={lightboxStyles}
+        onClick={lightbox ? openModal : undefined}
+      />
 
       {lightbox ? (
         <Modal open={isLightboxOpen} onClose={closeModal} closeWithBackdrop>
           <img
             {...otherProps}
-            className={twMerge(styles.lightbox)}
+            className={styles.lightbox}
             style={{
               viewTransitionName: isLightboxAnimating
                 ? viewTransitionName
