@@ -1,16 +1,16 @@
-import { Metadata, ResolvingMetadata } from 'next';
-import { MainContents } from '~/features/main_contents';
-import { PageHeadline } from '~/features/page_headline';
-import { ProductList } from '~/features/product';
-import { api } from '~/lib/api';
+import { Metadata, ResolvingMetadata } from 'next'
+import { MainContents } from '~/features/main_contents'
+import { PageHeadline } from '~/features/page_headline'
+import { ProductList } from '~/features/product'
+import { api } from '~/lib/api'
 
-type Props = {};
+type Props = {}
 
 export async function generateMetadata(
   _: Props,
   resolvingParent: ResolvingMetadata
 ): Promise<Metadata> {
-  const parent = await resolvingParent;
+  const parent = await resolvingParent
 
   return {
     title: 'Products',
@@ -24,16 +24,16 @@ export async function generateMetadata(
     alternates: {
       canonical: '/products',
     },
-  };
+  }
 }
 
 export default async function () {
-  const products = await api.products.list();
+  const products = await api.products.list()
 
   return (
     <MainContents>
       <PageHeadline title="Products" />
       <ProductList items={products} />
     </MainContents>
-  );
+  )
 }

@@ -1,12 +1,12 @@
-'use client';
+'use client'
 
-import Link from 'next/link';
-import { useSelectedLayoutSegment } from 'next/navigation';
-import { FC } from 'react';
-import { Tab, Tabs } from '~/components/tabs';
+import Link from 'next/link'
+import { useSelectedLayoutSegment } from 'next/navigation'
+import { FC } from 'react'
+import { Tab, Tabs } from '~/components/tabs'
 
 export const MainNavigation: FC = () => {
-  const layout = useSelectedLayoutSegment();
+  const layout = useSelectedLayoutSegment()
 
   return (
     <Tabs
@@ -28,5 +28,5 @@ export const MainNavigation: FC = () => {
         />
       )}
     />
-  );
-};
+  )
+}

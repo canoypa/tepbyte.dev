@@ -1,8 +1,8 @@
-import { FC } from 'react';
-import { Image } from '~/components/image';
-import { StyledLink } from '~/components/styled_link';
-import { tw } from '~/lib/tw';
-import { ImageMeta } from '~/types/parsed';
+import { FC } from 'react'
+import { Image } from '~/components/image'
+import { StyledLink } from '~/components/styled_link'
+import { tw } from '~/lib/tw'
+import { ImageMeta } from '~/types/parsed'
 
 const styles = {
   root: /* Tailwind */ tw`flex flex-col gap-y-2`,
@@ -10,11 +10,11 @@ const styles = {
     w-full h-[216px] rounded-extra-large object-cover
     md:h-[288px]`,
   attribution: /* Tailwind */ tw`text-label-medium font-comfortaa italic`,
-};
+}
 
 export type ThumbnailProps = {
-  image: ImageMeta;
-};
+  image: ImageMeta
+}
 
 export const Thumbnail: FC<ThumbnailProps> = ({ image }) => {
   return (
@@ -42,5 +42,5 @@ export const Thumbnail: FC<ThumbnailProps> = ({ image }) => {
         </small>
       )}
     </div>
-  );
-};
+  )
+}

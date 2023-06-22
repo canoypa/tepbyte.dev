@@ -1,10 +1,10 @@
-import { FC } from 'react';
-import { StyledLink } from '~/components/styled_link';
-import { tw } from '~/lib/tw';
+import { FC } from 'react'
+import { StyledLink } from '~/components/styled_link'
+import { tw } from '~/lib/tw'
 
 const styles = {
   root: /* Tailwind */ tw`mx-4 px-2 py-6 border-t-[1px] border-t-dark-outline-variant text-dark-on-surface-variant text-body-small`,
-};
+}
 
 export const Footer: FC = () => {
   return (
@@ -16,5 +16,5 @@ export const Footer: FC = () => {
       </StyledLink>{' '}
       をご覧ください。
     </footer>
-  );
-};
+  )
+}

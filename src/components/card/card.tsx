@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import {
   ComponentPropsWithoutRef,
@@ -6,10 +6,10 @@ import {
   FC,
   PropsWithChildren,
   ReactNode,
-} from 'react';
-import { twMerge } from '~/lib/tailwind-merge';
-import { tw } from '~/lib/tw';
-import { Image, ImageProps } from '../image';
+} from 'react'
+import { twMerge } from '~/lib/tailwind-merge'
+import { tw } from '~/lib/tw'
+import { Image, ImageProps } from '../image'
 
 const styles = {
   root: /* Tailwind */ tw`
@@ -35,17 +35,17 @@ const styles = {
   summery: /* Tailwind */ tw`
     text-body-small line-clamp-2
     sm:text-body-medium`,
-};
+}
 
 type InternalCardProps<T extends ElementType> = {
-  as?: T;
-  direction?: 'row' | 'column';
-  onClick?: () => void;
-  children: ReactNode;
-};
+  as?: T
+  direction?: 'row' | 'column'
+  onClick?: () => void
+  children: ReactNode
+}
 
 export type CardProps<T extends ElementType> = InternalCardProps<T> &
-  Omit<ComponentPropsWithoutRef<T>, keyof InternalCardProps<T>>;
+  Omit<ComponentPropsWithoutRef<T>, keyof InternalCardProps<T>>
 
 export const Card = <T extends ElementType = 'div'>({
   as,
@@ -54,7 +54,7 @@ export const Card = <T extends ElementType = 'div'>({
   children,
   ...otherProps
 }: CardProps<T>) => {
-  const Component = as ?? 'div';
+  const Component = as ?? 'div'
 
   return (
     <Component
@@ -70,25 +70,25 @@ export const Card = <T extends ElementType = 'div'>({
     >
       {children}
     </Component>
-  );
-};
+  )
+}
 
 export const CardMedia: FC<ImageProps> = (props) => {
   return (
     <div className={styles.media}>
       <Image className={twMerge(props.className, styles.img)} {...props} />
     </div>
-  );
-};
+  )
+}
 
 export const CardContent: FC<PropsWithChildren> = ({ children }) => {
-  return <div className={styles.content}>{children}</div>;
-};
+  return <div className={styles.content}>{children}</div>
+}
 
 export const CardTitle: FC<PropsWithChildren> = ({ children }) => {
-  return <div className={styles.title}>{children}</div>;
-};
+  return <div className={styles.title}>{children}</div>
+}
 
 export const CardSummery: FC<PropsWithChildren> = ({ children }) => {
-  return <div className={styles.summery}>{children}</div>;
-};
+  return <div className={styles.summery}>{children}</div>
+}

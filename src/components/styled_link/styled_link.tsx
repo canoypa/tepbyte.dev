@@ -1,15 +1,15 @@
-import Link, { LinkProps } from 'next/link';
-import { forwardRef, ForwardRefRenderFunction } from 'react';
-import { tw } from '~/lib/tw';
+import Link, { LinkProps } from 'next/link'
+import { forwardRef, ForwardRefRenderFunction } from 'react'
+import { tw } from '~/lib/tw'
 
 const styles = {
   root: /* Tailwind */ tw`
     text-dark-info hover:underline
     focus-visible:underline`,
-};
+}
 
 export type StyledLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> &
-  LinkProps;
+  LinkProps
 
 export const StyledLinkView: ForwardRefRenderFunction<
   HTMLAnchorElement,
@@ -19,7 +19,7 @@ export const StyledLinkView: ForwardRefRenderFunction<
     <Link ref={ref} className={styles.root} {...otherProps}>
       {children}
     </Link>
-  );
-};
+  )
+}
 
-export const StyledLink = forwardRef(StyledLinkView);
+export const StyledLink = forwardRef(StyledLinkView)

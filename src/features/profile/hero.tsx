@@ -1,11 +1,11 @@
-import Link from 'next/link';
-import { FC } from 'react';
-import { Button } from '~/components/button';
-import { NavigateNext } from '~/components/icons/navigate_next';
-import { tw } from '~/lib/tw';
-import { ProfileMeta } from '~/types/parsed';
-import { ProfileCard } from './card';
-import { ProfileLink } from './profile_link';
+import Link from 'next/link'
+import { FC } from 'react'
+import { Button } from '~/components/button'
+import { NavigateNext } from '~/components/icons/navigate_next'
+import { tw } from '~/lib/tw'
+import { ProfileMeta } from '~/types/parsed'
+import { ProfileCard } from './card'
+import { ProfileLink } from './profile_link'
 
 const styles = {
   root: /* Tailwind */ tw`
@@ -16,11 +16,11 @@ const styles = {
   subhead: /* Tailwind */ tw`
     text-headline-small font-comfortaa
     md:text-headline-medium`,
-};
+}
 
 export type HeroProps = {
-  profile: ProfileMeta;
-};
+  profile: ProfileMeta
+}
 
 export const Hero: FC<HeroProps> = ({ profile }) => {
   return (
@@ -45,5 +45,5 @@ export const Hero: FC<HeroProps> = ({ profile }) => {
         </span>
       </div>
     </div>
-  );
-};
+  )
+}

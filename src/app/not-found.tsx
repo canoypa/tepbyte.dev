@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import { Button } from '~/components/button';
-import { MainContents } from '~/features/main_contents';
+import Link from 'next/link'
+import { Button } from '~/components/button'
+import { MainContents } from '~/features/main_contents'
 
 export default async function () {
   return (
@@ -16,5 +16,5 @@ export default async function () {
         <Button as={Link} href="/" label="Back to Top Page" />
       </span>
     </MainContents>
-  );
+  )
 }

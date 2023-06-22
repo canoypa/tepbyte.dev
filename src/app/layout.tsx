@@ -1,18 +1,18 @@
-import { Metadata } from 'next';
-import { Comfortaa } from 'next/font/google';
-import { PropsWithChildren } from 'react';
-import { ExternalScripts } from '~/features/external_scripts';
-import { Footer } from '~/features/footer';
-import { Header } from '~/features/header';
-import '~/styles/globals.css';
+import { Metadata } from 'next'
+import { Comfortaa } from 'next/font/google'
+import { PropsWithChildren } from 'react'
+import { ExternalScripts } from '~/features/external_scripts'
+import { Footer } from '~/features/footer'
+import { Header } from '~/features/header'
+import '~/styles/globals.css'
 
-type Props = PropsWithChildren;
+type Props = PropsWithChildren
 
 const comfortaa = Comfortaa({
   display: 'swap',
   subsets: ['latin'],
   variable: '--font-comfortaa',
-});
+})
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -35,7 +35,7 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: 'Tepbyte',
       description: "Cano's portfolio site.",
     },
-  };
+  }
 }
 
 export default async function ({ children }: Props) {
@@ -49,5 +49,5 @@ export default async function ({ children }: Props) {
         <Footer />
       </body>
     </html>
-  );
+  )
 }
