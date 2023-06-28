@@ -24,7 +24,7 @@ export const Heading: MdFC = ({ node, children }) => {
         node.depth === 3 && styles.d3,
         node.depth === 4 && styles.d4,
         node.depth === 5 && styles.d5,
-        node.depth === 6 && styles.d6
+        node.depth === 6 && styles.d6,
       )}
     >
       {children}

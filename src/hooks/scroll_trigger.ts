@@ -14,7 +14,7 @@ export type UseScrollTriggerOptions = Partial<{
 
 const trigger = (
   cur: MutableRefObject<number>,
-  options: UseScrollTriggerOptions
+  options: UseScrollTriggerOptions,
 ): boolean => {
   const { target, threshold = 100, disableHysteresis = false } = options
 
@@ -35,11 +35,11 @@ const trigger = (
 const defaultTarget = typeof window !== 'undefined' ? window : undefined
 
 export const useScrollTrigger = (
-  options: UseScrollTriggerOptions = {}
+  options: UseScrollTriggerOptions = {},
 ): boolean => {
   const opt = useMemo<UseScrollTriggerOptions>(
     () => ({ target: defaultTarget, ...options }),
-    [options]
+    [options],
   )
 
   const cur = useRef<number>(0)

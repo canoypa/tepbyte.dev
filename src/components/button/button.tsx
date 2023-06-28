@@ -41,7 +41,7 @@ export const Button = <T extends ElementType = 'button'>({
     <Component
       className={twMerge(
         styles.root,
-        Boolean(leading || trailing) && styles.withIcon
+        Boolean(leading || trailing) && styles.withIcon,
       )}
       {...props}
       {...otherProps}

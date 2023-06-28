@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function (
   request: NextApiRequest,
-  response: NextApiResponse
+  response: NextApiResponse,
 ) {
   if (request.method !== 'POST') {
     return response.status(405).end()

@@ -62,7 +62,7 @@ export const Card = <T extends ElementType = 'div'>({
         styles.root,
         direction === 'row' && styles.row,
         direction === 'column' && styles.column,
-        onClick !== undefined && styles.clickable
+        onClick !== undefined && styles.clickable,
       )}
       onClick={onClick}
       data-direction={direction}
