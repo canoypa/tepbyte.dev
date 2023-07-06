@@ -28,7 +28,12 @@ export type ImageProps = ImgHTMLAttributes<HTMLImageElement> & {
   lightbox?: boolean;
 };
 
-export const Image: FC<ImageProps> = ({ lightbox, ...otherProps }) => {
+export const Image: FC<ImageProps> = ({
+  lightbox,
+  width,
+  height,
+  ...otherProps
+}) => {
   const viewTransitionName = useId().replace(/:/g, '');
 
   const [isLightboxOpen, setLightboxOpen] = useState(false);
@@ -56,6 +61,8 @@ export const Image: FC<ImageProps> = ({ lightbox, ...otherProps }) => {
       {lightbox ? (
         <img
           {...otherProps}
+          width={width}
+          height={height}
           className={twMerge(otherProps.className, styles.img)}
           style={{
             viewTransitionName:
