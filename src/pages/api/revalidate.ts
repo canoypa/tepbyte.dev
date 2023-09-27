@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function (
+export default async function revalidate(
   request: NextApiRequest,
   response: NextApiResponse
 ) {

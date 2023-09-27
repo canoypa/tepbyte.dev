@@ -16,6 +16,7 @@ type Props = {
 
 export const generateStaticParams = async (): Promise<Params[]> => {
   const products = await api.products.list();
+  if (!products) return [];
 
   return products.map(({ slug }) => ({ slug }));
 };
@@ -51,7 +52,7 @@ export async function generateMetadata(
   };
 }
 
-export default async function ({ params: { slug } }: Props) {
+export default async function Page({ params: { slug } }: Props) {
   const product = await api.products.get({ slug });
 
   if (product === null) {

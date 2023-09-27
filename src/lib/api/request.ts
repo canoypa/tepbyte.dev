@@ -13,11 +13,17 @@ export const request = async <T = unknown>(path: string, params?: any) => {
 
   const token = await client.fetchIdToken(path);
 
-  const res = await axios.post<T>(url, params, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const res = await axios
+    .post<T>(url, params, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .catch(() => null);
+
+  if (res === null) {
+    return null;
+  }
 
   return res.data;
 };

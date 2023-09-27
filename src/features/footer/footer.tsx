@@ -9,12 +9,12 @@ const styles = {
 export const Footer: FC = () => {
   return (
     <footer className={styles.root}>
-      このサイトは Google Analytics を使用しています。詳しくは{' '}
+      <span>このサイトは Google Analytics を使用しています。詳しくは </span>
       <StyledLink href="https://policies.google.com/technologies/partner-sites">
         Google のサービスを使用するサイトやアプリから収集した情報の Google
         による使用
-      </StyledLink>{' '}
-      をご覧ください。
+      </StyledLink>
+      <span> をご覧ください。</span>
     </footer>
   );
 };

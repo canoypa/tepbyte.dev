@@ -76,7 +76,11 @@ export const Card = <T extends ElementType = 'div'>({
 export const CardMedia: FC<ImageProps> = (props) => {
   return (
     <div className={styles.media}>
-      <Image className={twMerge(props.className, styles.img)} {...props} />
+      <Image
+        className={twMerge(props.className, styles.img)}
+        alt=""
+        {...props}
+      />
     </div>
   );
 };
