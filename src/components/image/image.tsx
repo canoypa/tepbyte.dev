@@ -30,6 +30,7 @@ export type ImageProps = ImgHTMLAttributes<HTMLImageElement> & {
 
 export const Image: FC<ImageProps> = ({
   lightbox,
+  alt,
   width,
   height,
   ...otherProps
@@ -61,6 +62,7 @@ export const Image: FC<ImageProps> = ({
       {lightbox ? (
         <img
           {...otherProps}
+          alt={alt}
           width={width}
           height={height}
           className={twMerge(otherProps.className, styles.img)}
@@ -74,13 +76,14 @@ export const Image: FC<ImageProps> = ({
           onClick={openModal}
         />
       ) : (
-        <img {...otherProps} />
+        <img {...otherProps} alt={alt} />
       )}
 
       {lightbox ? (
         <Modal open={isLightboxOpen} onClose={closeModal} closeWithBackdrop>
           <img
             {...otherProps}
+            alt={alt}
             className={twMerge(styles.lightbox)}
             style={{
               viewTransitionName: isLightboxAnimating

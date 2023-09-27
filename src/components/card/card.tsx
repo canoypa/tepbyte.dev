@@ -73,7 +73,7 @@ export const Card = <T extends ElementType = 'div'>({
           direction === 'column' && styles.mediaColumn
         )}
       >
-        <img className={styles.img} src={media} />
+        <img className={styles.img} src={media} alt="" />
       </div>
       <div className={styles.content}>
         <div className={styles.title}>{title}</div>
