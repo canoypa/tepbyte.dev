@@ -18,7 +18,7 @@ export type ThumbnailProps = {
 
 export const Thumbnail: FC<ThumbnailProps> = ({ image }) => {
   return (
-    <div className={styles.root}>
+    <figure className={styles.root}>
       <Image
         src={image.url}
         alt=""
@@ -30,17 +30,19 @@ export const Thumbnail: FC<ThumbnailProps> = ({ image }) => {
       />
 
       {image.attribution && (
-        <small className={styles.attribution}>
-          <span>Photo by </span>
-          <StyledLink href={image.attribution.authorUrl}>
-            {image.attribution.authorName}
-          </StyledLink>
-          <span> on </span>
-          <StyledLink href={image.attribution.siteUrl}>
-            {image.attribution.siteName}
-          </StyledLink>
-        </small>
+        <figcaption>
+          <small className={styles.attribution}>
+            <span>Photo by </span>
+            <StyledLink href={image.attribution.authorUrl}>
+              {image.attribution.authorName}
+            </StyledLink>
+            <span> on </span>
+            <StyledLink href={image.attribution.siteUrl}>
+              {image.attribution.siteName}
+            </StyledLink>
+          </small>
+        </figcaption>
       )}
-    </div>
+    </figure>
   )
 }

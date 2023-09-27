@@ -27,8 +27,12 @@ export async function generateMetadata(
   }
 }
 
-export default async function () {
+export default async function Page() {
   const posts = await api.posts.list()
+
+  if (!posts) {
+    throw new Error('API Error')
+  }
 
   return (
     <MainContents>

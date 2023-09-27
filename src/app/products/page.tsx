@@ -27,8 +27,12 @@ export async function generateMetadata(
   }
 }
 
-export default async function () {
+export default async function Page() {
   const products = await api.products.list()
+
+  if (!products) {
+    throw new Error('API Error')
+  }
 
   return (
     <MainContents>

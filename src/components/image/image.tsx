@@ -24,15 +24,18 @@ const styles = {
 }
 
 export type ImageProps = ImgHTMLAttributes<HTMLImageElement> & {
+  lightbox?: boolean
   priority?: boolean
   blurDataUrl?: string
-  lightbox?: boolean
 }
 
 export const Image: FC<ImageProps> = ({
+  lightbox,
+  alt,
+  width,
+  height,
   priority,
   blurDataUrl,
-  lightbox,
   ...otherProps
 }) => {
   const [showBlur, setShowBlur] = useState(true)
@@ -84,6 +87,7 @@ export const Image: FC<ImageProps> = ({
     <>
       <img
         {...otherProps}
+        alt={alt}
         style={{ ...lightboxStyles, ...blurStyles }}
         onClick={lightbox ? openModal : undefined}
         ref={(v) => {
@@ -96,6 +100,7 @@ export const Image: FC<ImageProps> = ({
         <Modal open={isLightboxOpen} onClose={closeModal} closeWithBackdrop>
           <img
             {...otherProps}
+            alt={alt}
             className={styles.lightbox}
             style={{
               viewTransitionName: isLightboxAnimating
