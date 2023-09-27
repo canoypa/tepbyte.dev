@@ -1,24 +1,24 @@
-import Link from 'next/link';
-import { FC } from 'react';
+import Link from 'next/link'
+import { FC } from 'react'
 import {
   Card,
   CardContent,
   CardMedia,
   CardSummery,
   CardTitle,
-} from '~/components/card';
-import { tw } from '~/lib/tw';
-import { ArticleMeta } from '~/types/parsed';
+} from '~/components/card'
+import { tw } from '~/lib/tw'
+import { ArticleMeta } from '~/types/parsed'
 
 const styles = {
   root: /* Tailwind */ tw`
     flex flex-col gap-4
     sm:gap-6`,
-};
+}
 
 export type BlogListProps = {
-  items: Array<ArticleMeta & { slug: string }>;
-};
+  items: Array<ArticleMeta & { slug: string }>
+}
 
 export const BlogList: FC<BlogListProps> = ({ items }) => {
   return (
@@ -40,5 +40,5 @@ export const BlogList: FC<BlogListProps> = ({ items }) => {
         </Card>
       ))}
     </div>
-  );
-};
+  )
+}

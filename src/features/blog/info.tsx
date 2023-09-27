@@ -1,23 +1,23 @@
-import { FC } from 'react';
-import { tw } from '~/lib/tw';
-import { ArticleMeta } from '~/types/parsed';
-import { PageHeadline } from '../page_headline';
+import { FC } from 'react'
+import { tw } from '~/lib/tw'
+import { ArticleMeta } from '~/types/parsed'
+import { PageHeadline } from '../page_headline'
 
 const styles = {
   root: /* Tailwind */ tw`flex flex-col gap-6`,
   dateTime: /* Tailwind */ tw`text-body-medium font-comfortaa`,
-};
+}
 
 export type PostInfoProps = {
-  post: ArticleMeta;
-};
+  post: ArticleMeta
+}
 
 export const PostInfo: FC<PostInfoProps> = ({ post }) => {
-  const dateFormatter = Intl.DateTimeFormat('en-us', { dateStyle: 'long' });
+  const dateFormatter = Intl.DateTimeFormat('en-us', { dateStyle: 'long' })
 
-  const publishedAt = dateFormatter.format(Date.parse(post.publishedAt));
+  const publishedAt = dateFormatter.format(Date.parse(post.publishedAt))
   const updatedAt =
-    post.updatedAt && dateFormatter.format(Date.parse(post.updatedAt));
+    post.updatedAt && dateFormatter.format(Date.parse(post.updatedAt))
 
   return (
     <div className={styles.root}>
@@ -32,5 +32,5 @@ export const PostInfo: FC<PostInfoProps> = ({ post }) => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}

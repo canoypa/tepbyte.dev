@@ -1,15 +1,15 @@
-import { FC } from 'react';
-import { tw } from '~/lib/tw';
-import { LabelData } from '~/types/parsed';
-import { Tag } from './tag';
+import { FC } from 'react'
+import { tw } from '~/lib/tw'
+import { LabelData } from '~/types/parsed'
+import { Tag } from './tag'
 
 const styles = {
   root: /* Tailwind */ tw`flex gap-2 flex-wrap`,
-};
+}
 
 type Props = {
-  tags: LabelData[];
-};
+  tags: LabelData[]
+}
 
 export const Tags: FC<Props> = ({ tags }) => {
   return (
@@ -18,5 +18,5 @@ export const Tags: FC<Props> = ({ tags }) => {
         <Tag key={label} label={label} />
       ))}
     </div>
-  );
-};
+  )
+}

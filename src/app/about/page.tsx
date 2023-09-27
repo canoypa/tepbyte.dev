@@ -1,17 +1,17 @@
-import { Metadata, ResolvingMetadata } from 'next';
-import { MainContents } from '~/features/main_contents';
-import { MarkdownRenderer } from '~/features/markdown';
-import { PageHeadline } from '~/features/page_headline';
-import { Profile } from '~/features/profile/profile';
-import { api } from '~/lib/api';
+import { Metadata, ResolvingMetadata } from 'next'
+import { MainContents } from '~/features/main_contents'
+import { MarkdownRenderer } from '~/features/markdown'
+import { PageHeadline } from '~/features/page_headline'
+import { Profile } from '~/features/profile/profile'
+import { api } from '~/lib/api'
 
-type Props = {};
+type Props = {}
 
 export async function generateMetadata(
   _: Props,
-  resolvingParent: ResolvingMetadata
+  resolvingParent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const parent = await resolvingParent;
+  const parent = await resolvingParent
 
   return {
     title: 'About',
@@ -25,14 +25,14 @@ export async function generateMetadata(
     alternates: {
       canonical: '/about',
     },
-  };
+  }
 }
 
 export default async function Page() {
-  const profile = await api.profile.get();
+  const profile = await api.profile.get()
 
   if (!profile) {
-    throw new Error('API Error');
+    throw new Error('API Error')
   }
 
   return (
@@ -41,5 +41,5 @@ export default async function Page() {
       <Profile profile={profile.meta} />
       <MarkdownRenderer tree={profile.body} />
     </MainContents>
-  );
+  )
 }

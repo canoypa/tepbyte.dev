@@ -1,33 +1,33 @@
-'use client';
+'use client'
 
-import Head from 'next/head';
-import { CSSProperties, FC, ImgHTMLAttributes, useId, useState } from 'react';
-import { flushSync } from 'react-dom';
-import { tw } from '~/lib/tw';
-import { Modal } from '../modal';
+import Head from 'next/head'
+import { CSSProperties, FC, ImgHTMLAttributes, useId, useState } from 'react'
+import { flushSync } from 'react-dom'
+import { tw } from '~/lib/tw'
+import { Modal } from '../modal'
 
 declare global {
   interface ViewTransition {
-    finished: Promise<void>;
-    ready: Promise<void>;
-    updateCallbackDone: Promise<void>;
-    skipTransition: () => void;
+    finished: Promise<void>
+    ready: Promise<void>
+    updateCallbackDone: Promise<void>
+    skipTransition: () => void
   }
 
   interface Document {
-    startViewTransition?(updateCallback: () => void): ViewTransition;
+    startViewTransition?(updateCallback: () => void): ViewTransition
   }
 }
 
 const styles = {
   lightbox: /* Tailwind */ tw`max-w-full max-h-full rounded-extra-small cursor-zoom-out`,
-};
+}
 
 export type ImageProps = ImgHTMLAttributes<HTMLImageElement> & {
-  lightbox?: boolean;
-  priority?: boolean;
-  blurDataUrl?: string;
-};
+  lightbox?: boolean
+  priority?: boolean
+  blurDataUrl?: string
+}
 
 export const Image: FC<ImageProps> = ({
   lightbox,
@@ -38,29 +38,29 @@ export const Image: FC<ImageProps> = ({
   blurDataUrl,
   ...otherProps
 }) => {
-  const [showBlur, setShowBlur] = useState(true);
+  const [showBlur, setShowBlur] = useState(true)
 
-  const viewTransitionName = useId().replace(/:/g, '');
+  const viewTransitionName = useId().replace(/:/g, '')
 
-  const [isLightboxOpen, setLightboxOpen] = useState(false);
-  const [isLightboxAnimating, setIsLightboxAnimating] = useState(false);
+  const [isLightboxOpen, setLightboxOpen] = useState(false)
+  const [isLightboxAnimating, setIsLightboxAnimating] = useState(false)
 
   const animate = (open: boolean) => {
     if (document.startViewTransition) {
-      setIsLightboxAnimating(true);
+      setIsLightboxAnimating(true)
 
       const transition = document.startViewTransition(() => {
-        flushSync(() => setLightboxOpen(open));
-      });
+        flushSync(() => setLightboxOpen(open))
+      })
 
-      transition.finished.then(() => setIsLightboxAnimating(false));
+      transition.finished.then(() => setIsLightboxAnimating(false))
     } else {
-      setLightboxOpen(open);
+      setLightboxOpen(open)
     }
-  };
+  }
 
-  const openModal = () => animate(true);
-  const closeModal = () => animate(false);
+  const openModal = () => animate(true)
+  const closeModal = () => animate(false)
 
   const lightboxStyles: CSSProperties = lightbox
     ? {
@@ -71,7 +71,7 @@ export const Image: FC<ImageProps> = ({
             : undefined,
         visibility: isLightboxOpen ? 'hidden' : undefined,
       }
-    : {};
+    : {}
 
   const blurStyles: CSSProperties =
     blurDataUrl && showBlur
@@ -81,7 +81,7 @@ export const Image: FC<ImageProps> = ({
           backgroundRepeat: 'no-repeat',
           backgroundImage: `url(${blurDataUrl})`,
         }
-      : {};
+      : {}
 
   return (
     <>
@@ -91,7 +91,7 @@ export const Image: FC<ImageProps> = ({
         style={{ ...lightboxStyles, ...blurStyles }}
         onClick={lightbox ? openModal : undefined}
         ref={(v) => {
-          v?.decode().finally(() => setShowBlur(false));
+          v?.decode().finally(() => setShowBlur(false))
         }}
         loading={priority ? undefined : 'lazy'}
       />
@@ -123,5 +123,5 @@ export const Image: FC<ImageProps> = ({
         </Head>
       ) : null}
     </>
-  );
-};
+  )
+}

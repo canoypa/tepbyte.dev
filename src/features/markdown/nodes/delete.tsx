@@ -1,5 +1,5 @@
-import { MdFC } from '../types';
+import { MdFC } from '../types'
 
 export const Delete: MdFC = ({ children }) => {
-  return <del>{children}</del>;
-};
+  return <del>{children}</del>
+}

@@ -1,38 +1,38 @@
-import { Metadata, ResolvingMetadata } from 'next';
-import { notFound } from 'next/navigation';
-import { MainContents } from '~/features/main_contents';
-import { MarkdownRenderer } from '~/features/markdown';
-import { Info, Screenshot } from '~/features/product';
-import { Tags } from '~/features/tags';
-import { api } from '~/lib/api';
+import { Metadata, ResolvingMetadata } from 'next'
+import { notFound } from 'next/navigation'
+import { MainContents } from '~/features/main_contents'
+import { MarkdownRenderer } from '~/features/markdown'
+import { Info, Screenshot } from '~/features/product'
+import { Tags } from '~/features/tags'
+import { api } from '~/lib/api'
 
 type Params = {
-  slug: string;
-};
+  slug: string
+}
 
 type Props = {
-  params: Params;
-};
+  params: Params
+}
 
 export const generateStaticParams = async (): Promise<Params[]> => {
-  const products = await api.products.list();
-  if (!products) return [];
+  const products = await api.products.list()
+  if (!products) return []
 
-  return products.map(({ slug }) => ({ slug }));
-};
+  return products.map(({ slug }) => ({ slug }))
+}
 
 export async function generateMetadata(
   { params: { slug } }: Props,
-  resolvingParent: ResolvingMetadata
+  resolvingParent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const parent = await resolvingParent;
+  const parent = await resolvingParent
 
-  const product = await api.products.get({ slug });
+  const product = await api.products.get({ slug })
 
   if (product === null) {
     return {
       title: '404 Not Found',
-    };
+    }
   }
 
   return {
@@ -49,14 +49,14 @@ export async function generateMetadata(
     alternates: {
       canonical: `/products/${slug}`,
     },
-  };
+  }
 }
 
 export default async function Page({ params: { slug } }: Props) {
-  const product = await api.products.get({ slug });
+  const product = await api.products.get({ slug })
 
   if (product === null) {
-    notFound();
+    notFound()
   }
 
   return (
@@ -66,5 +66,5 @@ export default async function Page({ params: { slug } }: Props) {
       <MarkdownRenderer tree={product.body} />
       {product.meta.tags.length > 0 && <Tags tags={product.meta.tags} />}
     </MainContents>
-  );
+  )
 }

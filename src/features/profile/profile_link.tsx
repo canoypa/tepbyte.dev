@@ -1,16 +1,16 @@
-import Link from 'next/link';
-import { FC } from 'react';
-import { Chip } from '~/components/chip';
-import { tw } from '~/lib/tw';
-import { LinkData } from '~/types/parsed';
+import Link from 'next/link'
+import { FC } from 'react'
+import { Chip } from '~/components/chip'
+import { tw } from '~/lib/tw'
+import { LinkData } from '~/types/parsed'
 
 const styles = {
   root: /* Tailwind */ tw`flex gap-2`,
-};
+}
 
 export type ProfileLinkProps = {
-  links: LinkData[];
-};
+  links: LinkData[]
+}
 
 export const ProfileLink: FC<ProfileLinkProps> = ({ links }) => {
   return (
@@ -19,5 +19,5 @@ export const ProfileLink: FC<ProfileLinkProps> = ({ links }) => {
         <Chip key={url} as={Link} href={url} label={label} />
       ))}
     </div>
-  );
-};
+  )
+}

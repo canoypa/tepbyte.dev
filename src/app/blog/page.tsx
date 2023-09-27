@@ -1,16 +1,16 @@
-import { Metadata, ResolvingMetadata } from 'next';
-import { BlogList } from '~/features/blog';
-import { MainContents } from '~/features/main_contents';
-import { PageHeadline } from '~/features/page_headline';
-import { api } from '~/lib/api';
+import { Metadata, ResolvingMetadata } from 'next'
+import { BlogList } from '~/features/blog'
+import { MainContents } from '~/features/main_contents'
+import { PageHeadline } from '~/features/page_headline'
+import { api } from '~/lib/api'
 
-type Props = {};
+type Props = {}
 
 export async function generateMetadata(
   _: Props,
-  resolvingParent: ResolvingMetadata
+  resolvingParent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const parent = await resolvingParent;
+  const parent = await resolvingParent
 
   return {
     title: 'Blog',
@@ -24,14 +24,14 @@ export async function generateMetadata(
     alternates: {
       canonical: '/blog',
     },
-  };
+  }
 }
 
 export default async function Page() {
-  const posts = await api.posts.list();
+  const posts = await api.posts.list()
 
   if (!posts) {
-    throw new Error('API Error');
+    throw new Error('API Error')
   }
 
   return (
@@ -39,5 +39,5 @@ export default async function Page() {
       <PageHeadline title="Blog" />
       <BlogList items={posts} />
     </MainContents>
-  );
+  )
 }

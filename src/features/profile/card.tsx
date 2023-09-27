@@ -1,8 +1,8 @@
-import { FC } from 'react';
-import { Image } from '~/components/image';
-import { tw } from '~/lib/tw';
-import { ImageMeta } from '~/types/parsed';
-import { Avatar } from './avatar';
+import { FC } from 'react'
+import { Image } from '~/components/image'
+import { tw } from '~/lib/tw'
+import { ImageMeta } from '~/types/parsed'
+import { Avatar } from './avatar'
 
 const styles = {
   root: /* Tailwind */ tw`
@@ -14,13 +14,13 @@ const styles = {
   name: /* Tailwind */ tw`
     text-display-small font-comfortaa
     md:text-display-medium`,
-};
+}
 
 export type ProfileCardProps = {
-  name: string;
-  photo: ImageMeta;
-  image: ImageMeta;
-};
+  name: string
+  photo: ImageMeta
+  image: ImageMeta
+}
 
 export const ProfileCard: FC<ProfileCardProps> = ({ name, photo, image }) => {
   return (
@@ -41,5 +41,5 @@ export const ProfileCard: FC<ProfileCardProps> = ({ name, photo, image }) => {
         <span className={styles.name}>{name}</span>
       </div>
     </div>
-  );
-};
+  )
+}

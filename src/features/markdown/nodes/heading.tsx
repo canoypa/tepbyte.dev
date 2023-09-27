@@ -1,6 +1,6 @@
-import { twMerge } from '~/lib/tailwind-merge';
-import { tw } from '~/lib/tw';
-import { MdFC } from '../types';
+import { twMerge } from '~/lib/tailwind-merge'
+import { tw } from '~/lib/tw'
+import { MdFC } from '../types'
 
 const styles = {
   d1: /* Tailwind */ tw`text-headline-large`,
@@ -9,12 +9,12 @@ const styles = {
   d4: /* Tailwind */ tw`text-title-large`,
   d5: /* Tailwind */ tw`text-title-medium`,
   d6: /* Tailwind */ tw`text-title-small`,
-};
+}
 
 export const Heading: MdFC = ({ node, children }) => {
   const H = (
     node.depth <= 3 ? `h${node.depth}` : 'p'
-  ) as keyof JSX.IntrinsicElements;
+  ) as keyof JSX.IntrinsicElements
 
   return (
     <H
@@ -24,10 +24,10 @@ export const Heading: MdFC = ({ node, children }) => {
         node.depth === 3 && styles.d3,
         node.depth === 4 && styles.d4,
         node.depth === 5 && styles.d5,
-        node.depth === 6 && styles.d6
+        node.depth === 6 && styles.d6,
       )}
     >
       {children}
     </H>
-  );
-};
+  )
+}

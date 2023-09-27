@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "pnpm run lint:next & pnpm run lint:ts",
     "lint:next": "next lint",
-    "lint:ts": "tsc --noEmit"
+    "lint:ts": "tsc --noEmit",
+    "format": "prettier --write \"src/**/*.{ts,tsx,css}\""
   },
   "browserslist": [
     "last 3 chrome major versions",
@@ -39,6 +40,7 @@
     "eslint": "^8.28.0",
     "eslint-config-next": "^13.4.2",
     "postcss": "^8.4.19",
+    "prettier": "^2.8.8",
     "typescript": "^4.9.3"
   }
 }
