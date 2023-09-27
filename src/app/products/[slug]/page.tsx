@@ -52,7 +52,7 @@ export async function generateMetadata(
   };
 }
 
-export default async function ({ params: { slug } }: Props) {
+export default async function Page({ params: { slug } }: Props) {
   const product = await api.products.get({ slug });
 
   if (product === null) {

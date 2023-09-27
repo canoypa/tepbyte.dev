@@ -38,7 +38,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function ({ children }: Props) {
+export default async function Layout({ children }: Props) {
   return (
     <html lang="ja" className={comfortaa.variable}>
       <body className="grid grid-rows-[auto,1fr,auto]">
