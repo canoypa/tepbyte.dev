@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Image } from '~/components/image';
 import { StyledLink } from '~/components/styled_link';
 import { tw } from '~/lib/tw';
 import { ImageMeta } from '~/types/parsed';
@@ -18,18 +19,26 @@ export type ThumbnailProps = {
 export const Thumbnail: FC<ThumbnailProps> = ({ image }) => {
   return (
     <figure className={styles.root}>
-      <img src={image.url} alt="" className={styles.img} />
+      <Image
+        src={image.url}
+        alt=""
+        width={image.width}
+        height={image.height}
+        className={styles.img}
+        blurDataUrl={image.blurDataUrl}
+        priority
+      />
 
       {image.attribution && (
         <figcaption>
           <small className={styles.attribution}>
             <span>Photo by </span>
-            <StyledLink href={image.attribution.user_url}>
-              {image.attribution.user_name}
+            <StyledLink href={image.attribution.authorUrl}>
+              {image.attribution.authorName}
             </StyledLink>
             <span> on </span>
-            <StyledLink href={image.attribution.site_url}>
-              {image.attribution.site_name}
+            <StyledLink href={image.attribution.siteUrl}>
+              {image.attribution.siteName}
             </StyledLink>
           </small>
         </figcaption>
