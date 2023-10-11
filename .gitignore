@@ -1,6 +1,9 @@
 # private
 .private/
 
+# generated
+/generated/
+
 # env
 *.env
 
