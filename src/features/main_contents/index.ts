@@ -1,1 +1,1 @@
-export { MainContents } from './main_contents';
+export { MainContents } from './main_contents'

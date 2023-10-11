@@ -1,6 +1,5 @@
 const { fontFamily } = require("tailwindcss/defaultTheme");
 
-const lineClampPlugin = require("@tailwindcss/line-clamp");
 const plugin = require("tailwindcss/plugin");
 
 const m3Plugin = require("tailwindcss-material3-plugin").Material3Plugin({
@@ -51,5 +50,5 @@ module.exports = {
       },
     },
   },
-  plugins: [lineClampPlugin, utilPlugin, m3Plugin],
+  plugins: [utilPlugin, m3Plugin],
 };

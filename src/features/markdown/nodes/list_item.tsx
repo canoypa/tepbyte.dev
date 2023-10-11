@@ -1,16 +1,16 @@
-import { twMerge } from '~/lib/tailwind-merge';
-import { tw } from '~/lib/tw';
-import { MdFC } from '../types';
+import { twMerge } from '~/lib/tailwind-merge'
+import { tw } from '~/lib/tw'
+import { MdFC } from '../types'
 
 const styles = {
   task: /* Tailwind */ tw`
     list-none
     [&>p]:inline`,
   checkbox: /* Tailwind */ tw`-mis-4 mie-1`,
-};
+}
 
 export const ListItem: MdFC = ({ node, children }) => {
-  const isTaskListItem = node.checked !== null;
+  const isTaskListItem = node.checked !== null
 
   return (
     <li className={twMerge(isTaskListItem && styles.task)}>
@@ -24,5 +24,5 @@ export const ListItem: MdFC = ({ node, children }) => {
       )}
       {children}
     </li>
-  );
-};
+  )
+}

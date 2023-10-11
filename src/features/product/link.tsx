@@ -1,16 +1,16 @@
-import { default as NextLink } from 'next/link';
-import { FC } from 'react';
-import { Chip } from '~/components/chip';
-import { tw } from '~/lib/tw';
-import { LinkData } from '~/types/parsed';
+import { default as NextLink } from 'next/link'
+import { FC } from 'react'
+import { Chip } from '~/components/chip'
+import { tw } from '~/lib/tw'
+import { LinkData } from '~/types/parsed'
 
 const styles = {
   root: /* Tailwind */ tw`flex gap-2`,
-};
+}
 
 export type LinkProps = {
-  links: LinkData[];
-};
+  links: LinkData[]
+}
 
 export const Link: FC<LinkProps> = ({ links }) => {
   return (
@@ -19,5 +19,5 @@ export const Link: FC<LinkProps> = ({ links }) => {
         <Chip key={url} as={NextLink} href={url} label={label} />
       ))}
     </div>
-  );
-};
+  )
+}
