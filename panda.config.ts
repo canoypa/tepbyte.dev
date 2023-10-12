@@ -17,6 +17,20 @@ export default defineConfig({
   // Useful for theme customization
   theme: {},
 
+  globalCss: {
+    body: {
+      backgroundColor: 'dark.surface',
+      color: 'dark.on-surface',
+      fill: 'dark.on-surface',
+    },
+    ':focus-visible': {
+      outlineWidth: 2,
+      outlineStyle: 'solid',
+      outlineColor: 'dark.primary',
+      outlineOffset: 2,
+    },
+  },
+
   utilities: {
     extend: {
       backgroundWithAlpha_EXPERIMENTAL: {
