@@ -35,10 +35,12 @@
   },
   "devDependencies": {
     "@pandacss/dev": "^0.15.2",
+    "@types/color": "^3.0.4",
     "@types/node": "^18.18.4",
     "@types/react": "^18.2.28",
     "@types/react-dom": "^18.2.13",
     "autoprefixer": "^10.4.16",
+    "color": "^4.2.3",
     "eslint": "^8.51.0",
     "eslint-config-next": "^13.5.4",
     "pandacss-preset-material-tokens": "link:lib\\pandacss-preset-material-tokens",

@@ -1,4 +1,5 @@
 import { defineConfig } from '@pandacss/dev'
+import Color from 'color'
 import { presetMaterialTokens } from 'pandacss-preset-material-tokens'
 
 export default defineConfig({
@@ -15,6 +16,36 @@ export default defineConfig({
 
   // Useful for theme customization
   theme: {},
+
+  utilities: {
+    extend: {
+      backgroundWithAlpha_EXPERIMENTAL: {
+        property: 'backgroundColor',
+        className: 'background-with-alpha-experimental',
+        values: { type: 'string' },
+        transform: (value, { token }) => {
+          if (!/.+\/.+/.test(value)) return {}
+
+          const [color, opacity] = value.split('/')
+
+          const colorToken = token.raw(`colors.${color}`)?.value ?? color
+          const opacityToken = token.raw(`opacity.${opacity}`)?.value ?? opacity
+
+          const colorValue = colorToken
+          const opacityValue = !isNaN(Number(opacityToken))
+            ? Number(opacityToken)
+            : 1
+
+          return {
+            backgroundColor: Color(colorValue)
+              .alpha(opacityValue)
+              .rgb()
+              .toString(),
+          }
+        },
+      },
+    },
+  },
 
   presets: [
     presetMaterialTokens({
