@@ -1,11 +1,12 @@
 import { FC } from 'react'
-import { tw } from '~/lib/tw'
 import { ArticleMeta } from '~/types/parsed'
+import { css } from '~pandacss/css'
+import { flex } from '~pandacss/patterns'
 import { PageHeadline } from '../page_headline'
 
 const styles = {
-  root: /* Tailwind */ tw`flex flex-col gap-6`,
-  dateTime: /* Tailwind */ tw`text-body-medium font-comfortaa`,
+  root: flex({ direction: 'column', gap: 24 }),
+  dateTime: css({ textStyle: 'body-medium', fontFamily: 'comfortaa' }),
 }
 
 export type PostInfoProps = {

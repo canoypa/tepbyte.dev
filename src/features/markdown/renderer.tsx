@@ -1,9 +1,9 @@
 import { FC } from 'react'
-import { tw } from '~/lib/tw'
+import { flex } from '~pandacss/patterns'
 import { components } from './nodes'
 
 const styles = {
-  root: /* Tailwind */ tw`flex flex-col gap-y-4`,
+  root: flex({ direction: 'column', rowGap: 16 }),
 }
 
 export type MarkdownRendererProps = {

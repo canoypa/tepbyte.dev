@@ -1,9 +1,22 @@
 import { FC } from 'react'
 import { Tag as IconTag } from '~/components/icons/tag'
-import { tw } from '~/lib/tw'
+import { css } from '~pandacss/css'
 
 const styles = {
-  root: /* Tailwind */ tw`flex gap-x-[2px] h-6 pl-[6px] pr-[8px] items-center rounded-full bg-dark-secondary-container text-dark-on-secondary-container fill-dark-on-secondary-container text-label-medium font-comfortaa`,
+  root: css({
+    display: 'flex',
+    columnGap: 2,
+    h: 24,
+    pl: 6,
+    pr: 8,
+    alignItems: 'center',
+    rounded: 'full',
+    backgroundColor: 'dark.secondary-container',
+    color: 'dark.on-secondary-container',
+    fill: 'dark.on-secondary-container',
+    textStyle: 'label-medium',
+    fontFamily: 'comfortaa',
+  }),
 }
 
 type Props = {

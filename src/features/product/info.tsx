@@ -1,11 +1,11 @@
 import { FC } from 'react'
-import { tw } from '~/lib/tw'
 import { ProductMeta } from '~/types/parsed'
+import { flex } from '~pandacss/patterns'
 import { PageHeadline } from '../page_headline'
 import { Link } from './link'
 
 const styles = {
-  root: /* Tailwind */ tw`flex flex-col gap-6`,
+  root: flex({ direction: 'column', gap: 24 }),
 }
 
 export type InfoProps = {

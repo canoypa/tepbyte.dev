@@ -1,14 +1,15 @@
 import { FC } from 'react'
-import { tw } from '~/lib/tw'
 import { ProfileMeta } from '~/types/parsed'
+import { css } from '~pandacss/css'
+import { flex } from '~pandacss/patterns'
 import { Avatar } from './avatar'
 import { ProfileLink } from './profile_link'
 
 const styles = {
-  root: /* Tailwind */ tw`flex flex-col gap-6`,
-  primary: /* Tailwind */ tw`flex gap-6 items-center`,
-  name: /* Tailwind */ tw`text-headline-large font-comfortaa`,
-  subhead: /* Tailwind */ tw`text-title-medium font-comfortaa`,
+  root: flex({ direction: 'column', gap: 24 }),
+  primary: flex({ gap: 24, alignItems: 'center' }),
+  name: css({ textStyle: 'headline-large', fontFamily: 'comfortaa' }),
+  subhead: css({ textStyle: 'title-medium', fontFamily: 'comfortaa' }),
 }
 
 export type ProfileProps = {

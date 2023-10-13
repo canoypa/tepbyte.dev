@@ -1,8 +1,15 @@
-import { tw } from '~/lib/tw'
+import { css } from '~pandacss/css'
 import { MdFC } from '../types'
 
 const styles = {
-  root: /* Tailwind */ tw`px-1 py-0.5 rounded-extra-small bg-dark-surface-variant text-dark-on-surface-variant text-label-large`,
+  root: css({
+    px: 4,
+    py: 2,
+    rounded: 'extra-small',
+    backgroundColor: 'dark.surface-variant',
+    color: 'dark.on-surface-variant',
+    textStyle: 'label-large',
+  }),
 }
 
 export const InlineCode: MdFC = ({ node }) => {

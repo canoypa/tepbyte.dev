@@ -7,34 +7,78 @@ import {
   PropsWithChildren,
   ReactNode,
 } from 'react'
-import { twMerge } from '~/lib/tailwind-merge'
-import { tw } from '~/lib/tw'
+import { css } from '~pandacss/css'
+import { flex } from '~pandacss/patterns'
 import { Image, ImageProps } from '../image'
 
 const styles = {
-  root: /* Tailwind */ tw`
-    group/card p-4 rounded-medium bg-dark-primary/1 duration-medium-1 transition
-    hover:bg-dark-primary/2
-    focus-visible:bg-dark-primary/2`,
-  clickable: /* Tailwind */ tw`cursor-pointer`,
-  row: /* Tailwind */ tw`flex flex-row gap-6 items-center`,
-  column: /* Tailwind */ tw`inline-flex gap-4 flex-col max-w-[600px]`,
-  media: /* Tailwind */ tw`rounded-medium overflow-hidden
-    group-data-[direction=row]/card:h-[80px] group-data-[direction=row]/card:aspect-square
-    group-data-[direction=row]/card:sm:h-[80px] group-data-[direction=row]/card:sm:aspect-video
-    group-data-[direction=row]/card:md:h-[120px]
-    group-data-[direction=column]/card:min-h-[80px] group-data-[direction=column]/card:max-h-[200px] group-data-[direction=column]/card:aspect-video`,
-  img: /* Tailwind */ tw`
-    w-full h-full object-cover transition-transform duration-long-1
-    group-hover/card:scale-105
-    group-focus-visible/card:scale-105`,
-  content: /* Tailwind */ tw`flex flex-col gap-2`,
-  title: /* Tailwind */ tw`
-    text-title-medium line-clamp-2 font-comfortaa
-    sm:text-title-large`,
-  summery: /* Tailwind */ tw`
-    text-body-small line-clamp-2
-    sm:text-body-medium`,
+  root: css({
+    p: 16,
+    rounded: 'medium',
+    backgroundWithAlpha_EXPERIMENTAL: 'dark.primary/1',
+    transitionDuration: 'medium-1',
+    transitionProperty: 'background-color',
+    _hover: { backgroundWithAlpha_EXPERIMENTAL: 'dark.primary/2' },
+    _focusVisible: { backgroundWithAlpha_EXPERIMENTAL: 'dark.primary/2' },
+
+    _horizontal: {
+      display: 'flex',
+      flexDirection: 'row',
+      gap: 24,
+      alignItems: 'center',
+    },
+    _vertical: {
+      display: 'inline-flex',
+      flexDirection: 'column',
+      gap: 16,
+      maxW: 600,
+    },
+    '&[data-clickable=true]': { cursor: 'pointer' },
+  }),
+  media: css({
+    rounded: 'medium',
+    overflow: 'hidden',
+    _groupHorizontal: {
+      h: 80,
+      aspectRatio: 'square',
+      sm: { h: 80, aspectRatio: '16/9' },
+      md: { h: 120 },
+    },
+    _groupVertical: {
+      minH: 80,
+      maxH: 200,
+      aspectRatio: '16/9',
+    },
+  }),
+  img: css({
+    w: '100%',
+    h: '100%',
+    objectFit: 'cover',
+    transitionProperty: 'transform',
+    transitionDuration: 'long-1',
+    _groupHover: { transform: 'scale(1.05)' },
+    _groupFocusVisible: { transform: 'scale(1.05)' },
+  }),
+  content: flex({ direction: 'column', gap: 8 }),
+  title: css({
+    textStyle: 'title-medium',
+    fontFamily: 'comfortaa',
+    overflow: 'hidden',
+    display: '-webkit-box',
+    //@ts-expect-error ある
+    '-webkit-box-orient': 'vertical',
+    '-webkit-line-clamp': 2,
+    sm: { textStyle: 'title-large' },
+  }),
+  summery: css({
+    textStyle: 'body-small',
+    overflow: 'hidden',
+    display: '-webkit-box',
+    //@ts-expect-error ある
+    '-webkit-box-orient': 'vertical',
+    '-webkit-line-clamp': 2,
+    sm: { textStyle: 'body-medium' },
+  }),
 }
 
 type InternalCardProps<T extends ElementType> = {
@@ -58,14 +102,11 @@ export const Card = <T extends ElementType = 'div'>({
 
   return (
     <Component
-      className={twMerge(
-        styles.root,
-        direction === 'row' && styles.row,
-        direction === 'column' && styles.column,
-        onClick !== undefined && styles.clickable,
-      )}
+      className={['group', styles.root].join(' ')}
       onClick={onClick}
       data-direction={direction}
+      data-orientation={direction === 'row' ? 'horizontal' : 'vertical'}
+      data-clickable={onClick !== undefined}
       {...otherProps}
     >
       {children}
@@ -77,7 +118,7 @@ export const CardMedia: FC<ImageProps> = (props) => {
   return (
     <div className={styles.media}>
       <Image
-        className={twMerge(props.className, styles.img)}
+        className={[props.className, styles.img].join(' ')}
         alt=""
         {...props}
       />

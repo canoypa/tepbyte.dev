@@ -1,10 +1,10 @@
 import { FC } from 'react'
-import { tw } from '~/lib/tw'
 import { LabelData } from '~/types/parsed'
+import { flex } from '~pandacss/patterns'
 import { Tag } from './tag'
 
 const styles = {
-  root: /* Tailwind */ tw`flex gap-2 flex-wrap`,
+  root: flex({ gap: 8, wrap: 'wrap' }),
 }
 
 type Props = {

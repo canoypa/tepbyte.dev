@@ -1,12 +1,15 @@
 import { FC } from 'react'
 import { Image } from '~/components/image'
-import { tw } from '~/lib/tw'
 import { ImageMeta } from '~/types/parsed'
+import { css } from '~pandacss/css'
 
 const styles = {
-  root: /* Tailwind */ tw`
-    w-[96px] h-[96px] rounded-full
-    md:w-[128px] md:h-[128px]`,
+  root: css({
+    w: 96,
+    h: 96,
+    rounded: 'full',
+    md: { w: 128, h: 128 },
+  }),
 }
 
 export type AvatarProps = {

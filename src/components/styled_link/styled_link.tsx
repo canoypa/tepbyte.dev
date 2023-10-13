@@ -1,11 +1,13 @@
 import Link, { LinkProps } from 'next/link'
 import { forwardRef, ForwardRefRenderFunction } from 'react'
-import { tw } from '~/lib/tw'
+import { css } from '~pandacss/css'
 
 const styles = {
-  root: /* Tailwind */ tw`
-    text-dark-info hover:underline
-    focus-visible:underline`,
+  root: css({
+    color: 'dark.info',
+    _hover: { textDecoration: 'underline' },
+    _focusVisible: { textDecoration: 'underline' },
+  }),
 }
 
 export type StyledLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> &

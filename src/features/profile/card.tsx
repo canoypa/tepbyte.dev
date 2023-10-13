@@ -1,19 +1,40 @@
 import { FC } from 'react'
 import { Image } from '~/components/image'
-import { tw } from '~/lib/tw'
 import { ImageMeta } from '~/types/parsed'
+import { css } from '~pandacss/css'
 import { Avatar } from './avatar'
 
 const styles = {
-  root: /* Tailwind */ tw`
-    inline-grid grid-cols-1 grid-rows-1 h-[300px] aspect-square rounded-extra-large overflow-hidden
-    md:h-[400px] md:aspect-[3/4]`,
-  image: /* Tailwind */ tw`row-span-full col-span-full brightness-[0.4]`,
-  img: /* Tailwind */ tw`w-full h-full object-cover`,
-  content: /* Tailwind */ tw`flex flex-col gap-8 items-center justify-center row-span-full col-span-full backdrop-blur-lg`,
-  name: /* Tailwind */ tw`
-    text-display-small font-comfortaa
-    md:text-display-medium`,
+  root: css({
+    display: 'inline-grid',
+    gridTemplateColumns: 'repeat(1,minmax(0,1fr))',
+    h: 300,
+    aspectRatio: 'square',
+    rounded: 'extra-large',
+    overflow: 'hidden',
+    md: { h: 400, aspectRatio: '3/4' },
+  }),
+  image: css({
+    gridRow: '1/-1',
+    gridColumn: '1/-1',
+    filter: 'brightness(0.4)',
+  }),
+  img: css({ w: '100%', h: '100%', objectFit: 'cover' }),
+  content: css({
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+    gridRow: '1/-1',
+    gridColumn: '1/-1',
+    backdropFilter: 'blur(16px)',
+  }),
+  name: css({
+    textStyle: 'display-small',
+    fontFamily: 'comfortaa',
+    md: { textStyle: 'display-medium' },
+  }),
 }
 
 export type ProfileCardProps = {
