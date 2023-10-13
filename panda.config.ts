@@ -17,6 +17,13 @@ export default defineConfig({
   // Useful for theme customization
   theme: {},
 
+  conditions: {
+    extend: {
+      groupHorizontal: '.group:is([data-orientation=horizontal]) &',
+      groupVertical: '.group:is([data-orientation=vertical]) &',
+    },
+  },
+
   globalCss: {
     body: {
       backgroundColor: 'dark.surface',
