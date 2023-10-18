@@ -4,7 +4,8 @@ import { MdFC } from '../types'
 const styles = {
   root: css({
     listStyle: 'disc',
-    pl: 24,
+    paddingLeft: 24,
+
     '&[data-ordered=true]': {
       listStyle: 'decimal',
     },

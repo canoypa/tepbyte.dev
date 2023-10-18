@@ -5,13 +5,14 @@ const styles = {
   root: css({
     display: 'flex',
     flexDirection: 'column',
-    py: 32,
     gap: 32,
-    smDown: { mx: 16 },
-    smToMd: { mx: 32 },
-    mdToLg: { mx: 'auto', maxW: 840 },
-    lgToXl: { mx: 200 },
-    xl: { mr: 'auto', ml: 'auto', maxW: 1040 },
+    paddingY: 32,
+
+    smDown: { marginX: 16 },
+    smToMd: { marginX: 32 },
+    mdToLg: { marginX: 'auto', maxWidth: 840 },
+    lgToXl: { marginX: 200 },
+    xl: { marginX: 'auto', maxWidth: 1040 },
   }),
 }
 

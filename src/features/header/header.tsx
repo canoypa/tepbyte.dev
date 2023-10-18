@@ -11,16 +11,16 @@ const styles = {
     top: 0,
     backgroundWithAlpha_EXPERIMENTAL: 'dark.surface/0.7',
     backdropFilter: 'blur(16px)',
-    '&[data-floating=true]': {
-      zIndex: 3,
-    },
+
+    '&[data-floating=true]': { zIndex: 3 },
   }),
   container: css({
     display: 'flex',
     justifyContent: 'center',
-    transitionDuration: 'short-2',
+    transitionProperty: 'transform',
     transitionTimingFunction: 'standard',
-    transition: 'transform',
+    transitionDuration: 'short-2',
+
     '[data-floating=true] &': {
       backgroundWithAlpha_EXPERIMENTAL: 'dark.primary/2',
     },

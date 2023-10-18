@@ -3,8 +3,8 @@ import { MdFC } from '../types'
 
 const styles = {
   root: css({
-    px: 4,
-    py: 2,
+    paddingX: 4,
+    paddingY: 2,
     rounded: 'extra-small',
     backgroundColor: 'dark.surface-variant',
     color: 'dark.on-surface-variant',

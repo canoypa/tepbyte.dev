@@ -15,7 +15,15 @@ export default defineConfig({
   preflight: true,
 
   // Useful for theme customization
-  theme: {},
+  theme: {
+    extend: {
+      tokens: {
+        fonts: {
+          comfortaa: { value: 'var(--font-comfortaa)' },
+        },
+      },
+    },
+  },
 
   conditions: {
     extend: {

@@ -4,9 +4,9 @@ import { css } from '~pandacss/css'
 
 const styles = {
   root: css({
-    mx: 16,
-    px: 8,
-    py: 24,
+    marginX: 16,
+    paddingX: 8,
+    paddingY: 24,
     borderTopWidth: 1,
     borderTopStyle: 'solid',
     borderTopColor: 'dark.outline-variant',

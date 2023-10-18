@@ -5,11 +5,11 @@ import { css } from '~pandacss/css'
 const styles = {
   root: css({
     display: 'flex',
-    columnGap: 2,
-    h: 24,
-    pl: 6,
-    pr: 8,
     alignItems: 'center',
+    columnGap: 2,
+    height: 24,
+    paddingLeft: 6,
+    paddingRight: 8,
     rounded: 'full',
     backgroundColor: 'dark.secondary-container',
     color: 'dark.on-secondary-container',

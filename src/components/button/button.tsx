@@ -8,29 +8,36 @@ const styles = {
       alignItems: 'center',
       justifyContent: 'center',
       columnGap: 8,
-      px: 12,
-      h: 40,
-      minW: 48,
+      paddingX: 12,
+      minWidth: 48,
+      height: 40,
       rounded: 'full',
       textStyle: 'label-large',
       fontFamily: 'comfortaa',
       color: 'dark.primary',
       fill: 'dark.primary',
-      _hover: {
-        backgroundWithAlpha_EXPERIMENTAL: 'dark.primary/hover',
-      },
-      _focusVisible: {
-        backgroundWithAlpha_EXPERIMENTAL: 'dark.primary/focus',
+
+      backgroundWithAlpha_EXPERIMENTAL: {
+        _hover: 'dark.primary/hover',
+        _focusVisible: 'dark.primary/hover',
       },
     },
     variants: {
       withIcon: {
-        true: { px: 16 },
+        true: { paddingX: 16 },
       },
     },
   }),
-  leading: css({ w: 18, h: 18, ml: -1 }),
-  trailing: css({ w: 18, h: 18, mr: -1 }),
+  leading: css({
+    width: 18,
+    height: 18,
+    marginLeft: -1,
+  }),
+  trailing: css({
+    width: 18,
+    height: 18,
+    marginRight: -1,
+  }),
 }
 
 type InternalButtonProps<T extends ElementType> = {

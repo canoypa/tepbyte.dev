@@ -8,32 +8,34 @@ const styles = {
   root: css({
     display: 'inline-grid',
     gridTemplateColumns: 'repeat(1,minmax(0,1fr))',
-    h: 300,
-    aspectRatio: 'square',
+    height: { base: 300, md: 400 },
     rounded: 'extra-large',
+    aspectRatio: { base: 'square', md: '3/4' },
     overflow: 'hidden',
-    md: { h: 400, aspectRatio: '3/4' },
   }),
   image: css({
-    gridRow: '1/-1',
-    gridColumn: '1/-1',
+    gridArea: '1/-1/1/-1',
+
     filter: 'brightness(0.4)',
   }),
-  img: css({ w: '100%', h: '100%', objectFit: 'cover' }),
+  img: css({
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+  }),
   content: css({
+    gridArea: '1/-1/1/-1',
+
     display: 'flex',
     flexDirection: 'column',
-    gap: 32,
     alignItems: 'center',
     justifyContent: 'center',
-    gridRow: '1/-1',
-    gridColumn: '1/-1',
+    gap: 32,
     backdropFilter: 'blur(16px)',
   }),
   name: css({
-    textStyle: 'display-small',
+    textStyle: { base: 'display-small', md: 'display-medium' },
     fontFamily: 'comfortaa',
-    md: { textStyle: 'display-medium' },
   }),
 }
 

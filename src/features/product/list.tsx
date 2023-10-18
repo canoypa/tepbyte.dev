@@ -13,10 +13,12 @@ import { css } from '~pandacss/css'
 const styles = {
   root: css({
     display: 'grid',
-    gridTemplateColumns: 'repeat(1,minmax(0,1fr))',
-    gap: 8,
-    sm: { gridTemplateColumns: 'repeat(2,minmax(0,1fr))', gap: 24 },
-    lg: { gridTemplateColumns: 'repeat(3,minmax(0,1fr))' },
+    gridTemplateColumns: {
+      base: 'repeat(1,minmax(0,1fr))',
+      sm: 'repeat(2,minmax(0,1fr))',
+      lg: 'repeat(3,minmax(0,1fr))',
+    },
+    gap: { base: 8, sm: 24 },
   }),
 }
 

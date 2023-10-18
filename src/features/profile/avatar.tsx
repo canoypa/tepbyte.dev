@@ -5,10 +5,14 @@ import { css } from '~pandacss/css'
 
 const styles = {
   root: css({
-    w: 96,
-    h: 96,
+    width: 96,
+    height: 96,
     rounded: 'full',
-    md: { w: 128, h: 128 },
+
+    md: {
+      width: 128,
+      height: 128,
+    },
   }),
 }
 

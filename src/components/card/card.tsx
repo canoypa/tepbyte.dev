@@ -16,8 +16,11 @@ const styles = {
     p: 16,
     rounded: 'medium',
     backgroundWithAlpha_EXPERIMENTAL: 'dark.primary/1',
-    transitionDuration: 'medium-1',
     transitionProperty: 'background-color',
+    transitionDuration: 'medium-1',
+
+    '&[data-clickable=true]': { cursor: 'pointer' },
+
     _hover: { backgroundWithAlpha_EXPERIMENTAL: 'dark.primary/2' },
     _focusVisible: { backgroundWithAlpha_EXPERIMENTAL: 'dark.primary/2' },
 
@@ -31,18 +34,16 @@ const styles = {
       display: 'inline-flex',
       flexDirection: 'column',
       gap: 16,
-      maxW: 600,
+      maxWidth: 600,
     },
-    '&[data-clickable=true]': { cursor: 'pointer' },
   }),
   media: css({
     rounded: 'medium',
     overflow: 'hidden',
+
     _groupHorizontal: {
-      h: 80,
-      aspectRatio: 'square',
-      sm: { h: 80, aspectRatio: '16/9' },
-      md: { h: 120 },
+      h: { base: 80, md: 120 },
+      aspectRatio: { base: 'square', sm: '16/9' },
     },
     _groupVertical: {
       minH: 80,
@@ -56,28 +57,27 @@ const styles = {
     objectFit: 'cover',
     transitionProperty: 'transform',
     transitionDuration: 'long-1',
+
     _groupHover: { transform: 'scale(1.05)' },
     _groupFocusVisible: { transform: 'scale(1.05)' },
   }),
   content: flex({ direction: 'column', gap: 8 }),
   title: css({
-    textStyle: 'title-medium',
-    fontFamily: 'comfortaa',
-    overflow: 'hidden',
     display: '-webkit-box',
     //@ts-expect-error ある
     '-webkit-box-orient': 'vertical',
     '-webkit-line-clamp': 2,
-    sm: { textStyle: 'title-large' },
+    overflow: 'hidden',
+    textStyle: { base: 'title-medium', sm: 'title-large' },
+    fontFamily: 'comfortaa',
   }),
   summery: css({
-    textStyle: 'body-small',
-    overflow: 'hidden',
     display: '-webkit-box',
     //@ts-expect-error ある
     '-webkit-box-orient': 'vertical',
     '-webkit-line-clamp': 2,
-    sm: { textStyle: 'body-medium' },
+    overflow: 'hidden',
+    textStyle: { base: 'body-small', sm: 'body-medium' },
   }),
 }
 
@@ -104,7 +104,6 @@ export const Card = <T extends ElementType = 'div'>({
     <Component
       className={['group', styles.root].join(' ')}
       onClick={onClick}
-      data-direction={direction}
       data-orientation={direction === 'row' ? 'horizontal' : 'vertical'}
       data-clickable={onClick !== undefined}
       {...otherProps}

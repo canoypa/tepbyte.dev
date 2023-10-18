@@ -5,12 +5,13 @@ const styles = {
   root: css({
     '&[data-task-list=true]': {
       listStyle: 'none',
+
       '& > p': { display: 'inline' },
     },
   }),
   checkbox: css({
-    ml: -4,
-    mr: 1,
+    marginLeft: -4,
+    marginRight: 1,
   }),
 }
 

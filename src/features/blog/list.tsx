@@ -13,8 +13,7 @@ import { flex } from '~pandacss/patterns'
 const styles = {
   root: flex({
     direction: 'column',
-    gap: 16,
-    sm: { gap: 24 },
+    gap: { base: 16, sm: 24 },
   }),
 }
 

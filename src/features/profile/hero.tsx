@@ -11,19 +11,17 @@ import { ProfileLink } from './profile_link'
 const styles = {
   root: css({
     display: 'flex',
-    flexDirection: 'column',
-    px: 32,
-    py: 64,
-    gap: 64,
+    flexDirection: { base: 'column', md: 'row' },
     alignItems: 'center',
-    md: { flexDirection: 'row' },
+    gap: 64,
+    paddingX: 32,
+    paddingY: 64,
   }),
   card: flex({ justifyContent: 'center' }),
   info: flex({ direction: 'column', gap: 32 }),
   subhead: css({
-    textStyle: 'headline-small',
+    textStyle: { base: 'headline-small', md: 'headline-medium' },
     fontFamily: 'comfortaa',
-    md: { textStyle: 'headline-medium' },
   }),
 }
 

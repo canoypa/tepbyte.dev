@@ -15,6 +15,10 @@ const comfortaa = Comfortaa({
   variable: '--font-comfortaa',
 })
 
+const styles = {
+  body: css({ display: 'grid', gridTemplateRows: 'auto 1fr auto' }),
+}
+
 export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL('https://www.tepbyte.dev'),
@@ -42,9 +46,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Layout({ children }: Props) {
   return (
     <html lang="ja" className={comfortaa.variable}>
-      <body
-        className={css({ display: 'grid', gridTemplateRows: 'auto 1fr auto' })}
-      >
+      <body className={styles.body}>
         <ExternalScripts />
 
         <Header />

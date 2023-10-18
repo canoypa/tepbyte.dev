@@ -5,8 +5,8 @@ const styles = {
   root: css({
     display: 'inline-flex',
     alignItems: 'center',
-    h: 32,
-    px: 16,
+    paddingX: 16,
+    height: 32,
     borderWidth: 1,
     borderStyle: 'solid',
     borderColor: 'dark.outline',
@@ -16,8 +16,11 @@ const styles = {
     cursor: 'pointer',
     transitionProperty: 'background-color',
     transitionDuration: 'medium-1',
-    _hover: { backgroundWithAlpha_EXPERIMENTAL: 'dark.primary/hover' },
-    _focusVisible: { backgroundWithAlpha_EXPERIMENTAL: 'dark.primary/focus' },
+
+    backgroundWithAlpha_EXPERIMENTAL: {
+      _hover: 'dark.primary/hover',
+      _focusVisible: 'dark.primary/hover',
+    },
   }),
 }
 

@@ -5,8 +5,11 @@ import { css } from '~pandacss/css'
 const styles = {
   root: css({
     color: 'dark.info',
-    _hover: { textDecoration: 'underline' },
-    _focusVisible: { textDecoration: 'underline' },
+
+    textDecoration: {
+      _hover: 'underline',
+      _focusVisible: 'underline',
+    },
   }),
 }
 

@@ -7,7 +7,7 @@ import { ProfileLink } from './profile_link'
 
 const styles = {
   root: flex({ direction: 'column', gap: 24 }),
-  primary: flex({ gap: 24, alignItems: 'center' }),
+  primary: flex({ alignItems: 'center', gap: 24 }),
   name: css({ textStyle: 'headline-large', fontFamily: 'comfortaa' }),
   subhead: css({ textStyle: 'title-medium', fontFamily: 'comfortaa' }),
 }

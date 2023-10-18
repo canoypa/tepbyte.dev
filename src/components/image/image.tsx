@@ -21,8 +21,8 @@ declare global {
 
 const styles = {
   lightbox: css({
-    maxW: '100%',
-    maxH: '100%',
+    maxWidth: '100%',
+    maxHeight: '100%',
     rounded: 'extra-small',
     cursor: 'zoom-out',
   }),

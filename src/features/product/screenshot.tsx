@@ -8,15 +8,15 @@ const styles = {
     display: 'flex',
     gap: 16,
     overflowX: 'auto',
+
     scrollbarWidth: 'none',
     _scrollbar: { display: 'none' },
   }),
   image: css({
-    maxW: 'fit-content',
-    h: 216,
+    maxWidth: 'fit-content',
+    height: { base: 216, md: 288 },
     rounded: 'extra-large',
     objectFit: 'cover',
-    md: { h: 288 },
   }),
 }
 

@@ -9,32 +9,37 @@ const styles = {
     display: 'inline-flex',
     flexDirection: 'column',
     alignItems: 'center',
-    h: 48,
-    minW: 64,
-    px: 16,
+    minWidth: 64,
+    height: 48,
+    paddingX: 16,
     cursor: 'pointer',
     textStyle: 'label-large',
     fontFamily: 'comfortaa',
-    _hover: {
-      backgroundWithAlpha_EXPERIMENTAL: 'dark.primary/hover',
-    },
-    _focusVisible: {
-      backgroundWithAlpha_EXPERIMENTAL: 'dark.primary/focus',
+
+    backgroundWithAlpha_EXPERIMENTAL: {
+      _hover: 'dark.primary/hover',
+      _focusVisible: 'dark.primary/hover',
     },
   }),
-  label: flex({ grow: 1, alignItems: 'center' }),
+  label: flex({
+    grow: 1,
+
+    alignItems: 'center',
+  }),
   indicator: css({
-    h: 3,
-    w: '50%',
-    roundedTopRight: 'full',
-    roundedTopLeft: 'full',
+    width: '50%',
+    height: 3,
+    roundedTop: 'full',
     backgroundColor: 'dark.primary',
     transitionProperty: 'transform',
-    transitionDuration: 'short-4',
     transitionTimingFunction: 'standard',
-    transformOrigin: 'bottom',
+    transitionDuration: 'short-4',
     transform: 'scaleY(0)',
-    _active: { transform: 'scaleY(1)' },
+    transformOrigin: 'bottom',
+
+    '&[data-selected=true]': {
+      transform: 'scaleY(1)',
+    },
   }),
 }
 
@@ -73,7 +78,7 @@ export const Tab = <T extends ElementType = 'span'>({
       {...otherProps}
     >
       <span className={styles.label}>{label}</span>
-      <span className={styles.indicator} data-active={active} />
+      <span className={styles.indicator} data-selected={active} />
     </Component>
   )
 }

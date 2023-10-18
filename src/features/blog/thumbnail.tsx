@@ -8,11 +8,10 @@ import { flex } from '~pandacss/patterns'
 const styles = {
   root: flex({ direction: 'column', rowGap: 8 }),
   img: css({
-    w: '100%',
-    h: 216,
+    width: '100%',
+    height: { base: 216, md: 288 },
     rounded: 'extra-large',
     objectFit: 'cover',
-    md: { h: 288 },
   }),
   attribution: css({
     textStyle: 'label-medium',
