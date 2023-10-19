@@ -4,7 +4,7 @@ import { presetMaterialTokens } from 'pandacss-preset-material-tokens'
 
 export default defineConfig({
   // The output directory for your css system
-  outdir: 'generated/pandacss',
+  outdir: 'lib/generated/pandacss',
 
   // Where to look for your css declarations
   include: ['./src/**/*.{ts,tsx}'],

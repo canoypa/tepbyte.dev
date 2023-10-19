@@ -2,7 +2,7 @@
 .private/
 
 # generated
-/generated/
+/lib/generated/
 
 # env
 *.env

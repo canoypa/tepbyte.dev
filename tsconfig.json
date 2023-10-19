@@ -24,7 +24,7 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "~pandacss/*":["generated/pandacss/*"],
+      "~pandacss/*":["lib/generated/pandacss/*"],
       "~/*": ["src/*"]
     }
   },
