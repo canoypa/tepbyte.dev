@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "pnpm run prepare && next build",
     "start": "next start",
     "lint": "pnpm run lint:next & pnpm run lint:ts",
     "lint:next": "next lint",
