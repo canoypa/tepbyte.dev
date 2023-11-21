@@ -1,17 +1,46 @@
 'use client'
 
 import { ComponentPropsWithoutRef, ElementType, useCallback } from 'react'
-import { twMerge } from '~/lib/tailwind-merge'
-import { tw } from '~/lib/tw'
+import { css } from '~pandacss/css'
+import { flex } from '~pandacss/patterns'
 
 const styles = {
-  root: /* Tailwind */ tw`
-    inline-flex flex-col items-center h-[48px] min-w-[64px] px-[16px] cursor-pointer text-label-large font-comfortaa
-    hover:bg-dark-primary/hover
-    focus-visible:bg-dark-primary/focus`,
-  label: /* Tailwind */ tw`flex-grow flex items-center`,
-  indicator: /* Tailwind */ tw`h-[3px] w-1/2 rounded-tr-full rounded-tl-full bg-dark-primary transition-transform duration-short-4 ease-standard origin-bottom scale-y-0`,
-  active: /* Tailwind */ tw`scale-y-100`,
+  root: css({
+    display: 'inline-flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    minWidth: 64,
+    height: 48,
+    paddingX: 16,
+    cursor: 'pointer',
+    textStyle: 'label-large',
+    fontFamily: 'comfortaa',
+
+    backgroundWithAlpha_EXPERIMENTAL: {
+      _hover: 'dark.primary/hover',
+      _focusVisible: 'dark.primary/hover',
+    },
+  }),
+  label: flex({
+    grow: 1,
+
+    alignItems: 'center',
+  }),
+  indicator: css({
+    width: '50%',
+    height: 3,
+    roundedTop: 'full',
+    backgroundColor: 'dark.primary',
+    transitionProperty: 'transform',
+    transitionTimingFunction: 'standard',
+    transitionDuration: 'short-4',
+    transform: 'scaleY(0)',
+    transformOrigin: 'bottom',
+
+    '&[data-selected=true]': {
+      transform: 'scaleY(1)',
+    },
+  }),
 }
 
 type InternalTabProps<T extends ElementType> = {
@@ -49,7 +78,7 @@ export const Tab = <T extends ElementType = 'span'>({
       {...otherProps}
     >
       <span className={styles.label}>{label}</span>
-      <span className={twMerge(styles.indicator, active && styles.active)} />
+      <span className={styles.indicator} data-selected={active} />
     </Component>
   )
 }

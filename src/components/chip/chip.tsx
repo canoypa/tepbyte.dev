@@ -1,11 +1,27 @@
 import { ComponentPropsWithoutRef, ElementType } from 'react'
-import { tw } from '~/lib/tw'
+import { css } from '~pandacss/css'
 
 const styles = {
-  root: /* Tailwind */ tw`
-    inline-flex items-center h-8 px-4 border rounded-small text-label-large font-comfortaa cursor-pointer transition-colors duration-medium-1
-    hover:bg-dark-primary/hover
-    focus-visible:bg-dark-primary/focus`,
+  root: css({
+    display: 'inline-flex',
+    alignItems: 'center',
+    paddingX: 16,
+    height: 32,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: 'dark.outline',
+    rounded: 'small',
+    textStyle: 'label-large',
+    fontFamily: 'comfortaa',
+    cursor: 'pointer',
+    transitionProperty: 'background-color',
+    transitionDuration: 'medium-1',
+
+    backgroundWithAlpha_EXPERIMENTAL: {
+      _hover: 'dark.primary/hover',
+      _focusVisible: 'dark.primary/hover',
+    },
+  }),
 }
 
 type InternalChipProps<T extends ElementType> = {

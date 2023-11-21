@@ -1,13 +1,23 @@
 import { FC } from 'react'
 import { Image } from '~/components/image'
-import { tw } from '~/lib/tw'
 import { ImageMeta } from '~/types/parsed'
+import { css } from '~pandacss/css'
 
 const styles = {
-  root: /* Tailwind */ tw`flex gap-4 overflow-x-auto scrollbar-none`,
-  image: /* Tailwind */ tw`
-    max-w-fit h-[216px] rounded-extra-large object-cover
-    md:h-[288px]`,
+  root: css({
+    display: 'flex',
+    gap: 16,
+    overflowX: 'auto',
+
+    scrollbarWidth: 'none',
+    _scrollbar: { display: 'none' },
+  }),
+  image: css({
+    maxWidth: 'fit-content',
+    height: { base: 216, md: 288 },
+    rounded: 'extra-large',
+    objectFit: 'cover',
+  }),
 }
 
 export type ScreenshotProps = {

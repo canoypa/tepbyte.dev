@@ -5,6 +5,7 @@ import { ExternalScripts } from '~/features/external_scripts'
 import { Footer } from '~/features/footer'
 import { Header } from '~/features/header'
 import '~/styles/globals.css'
+import { css } from '~pandacss/css'
 
 type Props = PropsWithChildren
 
@@ -13,6 +14,10 @@ const comfortaa = Comfortaa({
   subsets: ['latin'],
   variable: '--font-comfortaa',
 })
+
+const styles = {
+  body: css({ display: 'grid', gridTemplateRows: 'auto 1fr auto' }),
+}
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -41,7 +46,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Layout({ children }: Props) {
   return (
     <html lang="ja" className={comfortaa.variable}>
-      <body className="grid grid-rows-[auto,1fr,auto]">
+      <body className={styles.body}>
         <ExternalScripts />
 
         <Header />

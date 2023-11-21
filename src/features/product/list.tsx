@@ -7,14 +7,19 @@ import {
   CardSummery,
   CardTitle,
 } from '~/components/card'
-import { tw } from '~/lib/tw'
 import { ProductMeta } from '~/types/parsed'
+import { css } from '~pandacss/css'
 
 const styles = {
-  root: /* Tailwind */ tw`
-    grid grid-cols-1 gap-4
-    sm:grid-cols-2 sm:gap-6
-    lg:grid-cols-3`,
+  root: css({
+    display: 'grid',
+    gridTemplateColumns: {
+      base: 'repeat(1,minmax(0,1fr))',
+      sm: 'repeat(2,minmax(0,1fr))',
+      lg: 'repeat(3,minmax(0,1fr))',
+    },
+    gap: { base: 8, sm: 24 },
+  }),
 }
 
 export type ProductListProps = {

@@ -3,7 +3,7 @@
 import Head from 'next/head'
 import { CSSProperties, FC, ImgHTMLAttributes, useId, useState } from 'react'
 import { flushSync } from 'react-dom'
-import { tw } from '~/lib/tw'
+import { css } from '~pandacss/css'
 import { Modal } from '../modal'
 
 declare global {
@@ -20,7 +20,12 @@ declare global {
 }
 
 const styles = {
-  lightbox: /* Tailwind */ tw`max-w-full max-h-full rounded-extra-small cursor-zoom-out`,
+  lightbox: css({
+    maxWidth: '100%',
+    maxHeight: '100%',
+    rounded: 'extra-small',
+    cursor: 'zoom-out',
+  }),
 }
 
 export type ImageProps = ImgHTMLAttributes<HTMLImageElement> & {

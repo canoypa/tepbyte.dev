@@ -1,13 +1,19 @@
 import { FC, PropsWithChildren } from 'react'
-import { tw } from '~/lib/tw'
+import { css } from '~pandacss/css'
 
 const styles = {
-  root: /* Tailwind */ tw`
-    flex flex-col py-8 gap-8
-    max-sm:mx-[16px] sm:max-md:mx-[32px]
-    md:max-lg:mx-auto md:max-lg:max-w-[840px]
-    lg:max-xl:mx-[200px] xl:mx-auto
-    xl:max-w-[1040px]`,
+  root: css({
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 32,
+    paddingY: 32,
+
+    smDown: { marginX: 16 },
+    smToMd: { marginX: 32 },
+    mdToLg: { marginX: 'auto', maxWidth: 840 },
+    lgToXl: { marginX: 200 },
+    xl: { marginX: 'auto', maxWidth: 1040 },
+  }),
 }
 
 export const MainContents: FC<PropsWithChildren> = ({ children }) => {

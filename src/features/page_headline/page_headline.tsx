@@ -1,10 +1,11 @@
 import { FC } from 'react'
-import { tw } from '~/lib/tw'
+import { css } from '~pandacss/css'
+import { flex } from '~pandacss/patterns'
 
 const styles = {
-  root: /* Tailwind */ tw`flex flex-col gap-y-2`,
-  title: /* Tailwind */ tw`text-display-medium font-comfortaa`,
-  subhead: /* Tailwind */ tw`text-title-medium`,
+  root: flex({ direction: 'column', rowGap: 8 }),
+  title: css({ textStyle: 'display-medium', fontFamily: 'comfortaa' }),
+  subhead: css({ textStyle: 'title-medium' }),
 }
 
 type Props = {

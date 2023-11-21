@@ -1,6 +1,9 @@
 # private
 .private/
 
+# generated
+/lib/generated/
+
 # env
 *.env
 

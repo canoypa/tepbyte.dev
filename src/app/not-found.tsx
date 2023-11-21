@@ -1,15 +1,21 @@
 import Link from 'next/link'
 import { Button } from '~/components/button'
 import { MainContents } from '~/features/main_contents'
+import { css } from '~pandacss/css'
+import { flex } from '~pandacss/patterns'
+
+const styles = {
+  root: flex({ direction: 'column', gap: 16 }),
+  title: css({ textStyle: 'display-medium' }),
+  subhead: css({ textStyle: 'body-large', color: 'dark.on-surface-variant' }),
+}
 
 export default async function NotFound() {
   return (
     <MainContents>
-      <div className="flex flex-col gap-4">
-        <h1 className="text-display-medium">404 Not Found</h1>
-        <p className="text-body-large text-on-surface-variant">
-          There seems to be nothing here.
-        </p>
+      <div className={styles.root}>
+        <h1 className={styles.title}>404 Not Found</h1>
+        <p className={styles.subhead}>There seems to be nothing here.</p>
       </div>
 
       <span>

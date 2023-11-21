@@ -1,15 +1,23 @@
 import { FC } from 'react'
 import { Image } from '~/components/image'
 import { StyledLink } from '~/components/styled_link'
-import { tw } from '~/lib/tw'
 import { ImageMeta } from '~/types/parsed'
+import { css } from '~pandacss/css'
+import { flex } from '~pandacss/patterns'
 
 const styles = {
-  root: /* Tailwind */ tw`flex flex-col gap-y-2`,
-  img: /* Tailwind */ tw`
-    w-full h-[216px] rounded-extra-large object-cover
-    md:h-[288px]`,
-  attribution: /* Tailwind */ tw`text-label-medium font-comfortaa italic`,
+  root: flex({ direction: 'column', rowGap: 8 }),
+  img: css({
+    width: '100%',
+    height: { base: 216, md: 288 },
+    rounded: 'extra-large',
+    objectFit: 'cover',
+  }),
+  attribution: css({
+    textStyle: 'label-medium',
+    fontFamily: 'comfortaa',
+    fontStyle: 'italic',
+  }),
 }
 
 export type ThumbnailProps = {

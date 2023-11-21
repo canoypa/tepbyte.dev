@@ -1,19 +1,25 @@
-import { twMerge } from '~/lib/tailwind-merge'
-import { tw } from '~/lib/tw'
+import { css } from '~pandacss/css'
 import { MdFC } from '../types'
 
 const styles = {
-  task: /* Tailwind */ tw`
-    list-none
-    [&>p]:inline`,
-  checkbox: /* Tailwind */ tw`-mis-4 mie-1`,
+  root: css({
+    '&[data-task-list=true]': {
+      listStyle: 'none',
+
+      '& > p': { display: 'inline' },
+    },
+  }),
+  checkbox: css({
+    marginLeft: -4,
+    marginRight: 1,
+  }),
 }
 
 export const ListItem: MdFC = ({ node, children }) => {
   const isTaskListItem = node.checked !== null
 
   return (
-    <li className={twMerge(isTaskListItem && styles.task)}>
+    <li className={styles.root} data-task-list={isTaskListItem}>
       {isTaskListItem && (
         <input
           type="checkbox"

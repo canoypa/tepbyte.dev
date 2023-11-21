@@ -2,20 +2,27 @@ import Link from 'next/link'
 import { FC } from 'react'
 import { Button } from '~/components/button'
 import { NavigateNext } from '~/components/icons/navigate_next'
-import { tw } from '~/lib/tw'
 import { ProfileMeta } from '~/types/parsed'
+import { css } from '~pandacss/css'
+import { flex } from '~pandacss/patterns'
 import { ProfileCard } from './card'
 import { ProfileLink } from './profile_link'
 
 const styles = {
-  root: /* Tailwind */ tw`
-    flex flex-col px-8 py-16 gap-16 items-center
-    md:flex-row`,
-  card: /* Tailwind */ tw`flex justify-center`,
-  info: /* Tailwind */ tw`flex flex-col gap-8`,
-  subhead: /* Tailwind */ tw`
-    text-headline-small font-comfortaa
-    md:text-headline-medium`,
+  root: css({
+    display: 'flex',
+    flexDirection: { base: 'column', md: 'row' },
+    alignItems: 'center',
+    gap: 64,
+    paddingX: 32,
+    paddingY: 64,
+  }),
+  card: flex({ justifyContent: 'center' }),
+  info: flex({ direction: 'column', gap: 32 }),
+  subhead: css({
+    textStyle: { base: 'headline-small', md: 'headline-medium' },
+    fontFamily: 'comfortaa',
+  }),
 }
 
 export type HeroProps = {

@@ -7,13 +7,14 @@ import {
   CardSummery,
   CardTitle,
 } from '~/components/card'
-import { tw } from '~/lib/tw'
 import { ArticleMeta } from '~/types/parsed'
+import { flex } from '~pandacss/patterns'
 
 const styles = {
-  root: /* Tailwind */ tw`
-    flex flex-col gap-4
-    sm:gap-6`,
+  root: flex({
+    direction: 'column',
+    gap: { base: 16, sm: 24 },
+  }),
 }
 
 export type BlogListProps = {

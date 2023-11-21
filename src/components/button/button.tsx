@@ -1,15 +1,43 @@
 import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
-import { twMerge } from '~/lib/tailwind-merge'
-import { tw } from '~/lib/tw'
+import { css, cva } from '~pandacss/css'
 
 const styles = {
-  root: /* Tailwind */ tw`
-    inline-flex items-center justify-center gap-x-2 px-3 h-[40px] min-w-[48px] rounded-full text-label-large font-comfortaa text-dark-primary fill-dark-primary
-    hover:bg-dark-primary/hover
-    focus-visible:bg-dark-primary/focus`,
-  withIcon: /* Tailwind */ tw`px-4`,
-  leading: /* Tailwind */ tw`w-[18px] h-[18px] -ml-1`,
-  trailing: /* Tailwind */ tw`w-[18px] h-[18px] -mr-1`,
+  root: cva({
+    base: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      columnGap: 8,
+      paddingX: 12,
+      minWidth: 48,
+      height: 40,
+      rounded: 'full',
+      textStyle: 'label-large',
+      fontFamily: 'comfortaa',
+      color: 'dark.primary',
+      fill: 'dark.primary',
+
+      backgroundWithAlpha_EXPERIMENTAL: {
+        _hover: 'dark.primary/hover',
+        _focusVisible: 'dark.primary/hover',
+      },
+    },
+    variants: {
+      withIcon: {
+        true: { paddingX: 16 },
+      },
+    },
+  }),
+  leading: css({
+    width: 18,
+    height: 18,
+    marginLeft: -1,
+  }),
+  trailing: css({
+    width: 18,
+    height: 18,
+    marginRight: -1,
+  }),
 }
 
 type InternalButtonProps<T extends ElementType> = {
@@ -39,10 +67,7 @@ export const Button = <T extends ElementType = 'button'>({
 
   return (
     <Component
-      className={twMerge(
-        styles.root,
-        Boolean(leading || trailing) && styles.withIcon,
-      )}
+      className={styles.root({ withIcon: Boolean(leading || trailing) })}
       {...props}
       {...otherProps}
     >

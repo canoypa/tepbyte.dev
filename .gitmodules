@@ -1,0 +1,3 @@
+[submodule "packages/pandacss-preset-material-tokens"]
+	path = packages/pandacss-preset-material-tokens
+	url = https://github.com/canoypa/pandacss-preset-material-tokens

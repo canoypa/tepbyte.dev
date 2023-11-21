@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import { FC } from 'react'
 import { Chip } from '~/components/chip'
-import { tw } from '~/lib/tw'
 import { LinkData } from '~/types/parsed'
+import { flex } from '~pandacss/patterns'
 
 const styles = {
-  root: /* Tailwind */ tw`flex gap-2`,
+  root: flex({ gap: 8 }),
 }
 
 export type ProfileLinkProps = {

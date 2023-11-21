@@ -1,9 +1,5 @@
 import { ComponentPropsWithoutRef, ElementType, ReactElement } from 'react'
-import { tw } from '~/lib/tw'
-
-const styles = {
-  root: /* Tailwind */ tw`flex`,
-}
+import { flex } from '~pandacss/patterns'
 
 export type TabItemType = {
   label: string
@@ -28,7 +24,7 @@ export const Tabs = <T extends ElementType = 'div'>({
   const Component = as ?? 'div'
 
   return (
-    <Component role="tablist" className={styles.root} {...otherProps}>
+    <Component role="tablist" className={flex()} {...otherProps}>
       {items.map((item) => renderItem(item))}
     </Component>
   )
