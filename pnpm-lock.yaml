@@ -53,8 +53,8 @@ devDependencies:
     specifier: ^13.5.4
     version: 13.5.4(eslint@8.51.0)(typescript@5.2.2)
   pandacss-preset-material-tokens:
-    specifier: ^0.1.0
-    version: 0.1.0(@pandacss/dev@0.15.5)
+    specifier: ^0.1.1
+    version: 0.1.1(@pandacss/dev@0.15.5)
   postcss:
     specifier: ^8.4.31
     version: 8.4.31
@@ -5359,8 +5359,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /pandacss-preset-material-tokens@0.1.0(@pandacss/dev@0.15.5):
-    resolution: {integrity: sha512-wFftAN3JQcv6yBFhThHRd2lS8hLH2MoCKtRLAxz4IZPIwqViVjbp6++KICCrn5PFFbyMSNViamcA7lj5FCklAQ==}
+  /pandacss-preset-material-tokens@0.1.1(@pandacss/dev@0.15.5):
+    resolution: {integrity: sha512-g6VFI6aPW2gIQjfcAz7boi76b4uHYJyS6UMjQAutvCztwfPujyqhD6axAbEImxXgNHNk0IX3s0bKzwzU1wQ0+w==}
     peerDependencies:
       '@pandacss/dev': ^0.15.5
     dependencies:
