@@ -4,9 +4,10 @@ import { css } from '~pandacss/css'
 
 const styles = {
   root: css({
-    marginX: 16,
-    paddingX: 8,
-    paddingY: 24,
+    marginX: { smDown: 16, sm: 24 },
+    marginTop: { smDown: 32, sm: 48 },
+    paddingX: { sm: 24 },
+    paddingY: { smDown: 32, sm: 48 },
     borderTopWidth: 1,
     borderTopStyle: 'solid',
     borderTopColor: 'dark.outline-variant',
