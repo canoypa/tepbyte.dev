@@ -16,7 +16,7 @@ const comfortaa = Comfortaa({
 })
 
 const styles = {
-  body: css({ display: 'grid', gridTemplateRows: 'auto 1fr auto' }),
+  body: css({ display: 'flex', flexDirection: 'column', minHeight: '100vh' }),
 }
 
 export async function generateMetadata(): Promise<Metadata> {

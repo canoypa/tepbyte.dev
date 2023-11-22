@@ -3,6 +3,8 @@ import { css } from '~pandacss/css'
 
 const styles = {
   root: css({
+    flex: 1,
+
     display: 'flex',
     flexDirection: 'column',
     gap: 32,

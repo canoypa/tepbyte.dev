@@ -14,7 +14,7 @@ const styles = {
     overflow: 'hidden',
   }),
   image: css({
-    gridArea: '1/-1/1/-1',
+    gridArea: '1/1/-1/-1',
 
     filter: 'brightness(0.4)',
   }),
@@ -24,7 +24,7 @@ const styles = {
     objectFit: 'cover',
   }),
   content: css({
-    gridArea: '1/-1/1/-1',
+    gridArea: '1/1/-1/-1',
 
     display: 'flex',
     flexDirection: 'column',
