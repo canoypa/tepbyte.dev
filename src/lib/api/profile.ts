@@ -1,10 +1,10 @@
 import { cache } from 'react'
 import { ProfileMeta } from '~/types/parsed'
-import { request } from './request'
+import { requestAPI } from './request'
 
 type Profile = { meta: ProfileMeta; body: any }
 export const get = cache(async () => {
   const path = 'profile/get'
-  const data = await request<Profile>(path)
+  const data = await requestAPI<Profile>(path)
   return data
 })

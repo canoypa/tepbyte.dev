@@ -8,7 +8,7 @@ const client = new JWT({
 
 const API_ORIGIN = 'https://tepbyte-qy5wbcvsoq-an.a.run.app'
 
-export const request = async <T = unknown>(path: string, params?: any) => {
+export const requestAPI = async <T = unknown>(path: string, params?: any) => {
   const url = new URL(path, API_ORIGIN).toString()
 
   const token = await client.fetchIdToken(path)

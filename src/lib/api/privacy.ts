@@ -1,9 +1,9 @@
 import { cache } from 'react'
-import { request } from './request'
+import { requestAPI } from './request'
 
 type Privacy = { body: any }
 export const get = cache(async () => {
   const path = 'privacy/get'
-  const data = await request<Privacy>(path)
+  const data = await requestAPI<Privacy>(path)
   return data
 })
