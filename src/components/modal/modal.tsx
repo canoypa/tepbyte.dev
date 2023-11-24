@@ -8,7 +8,6 @@ import {
   useEffect,
   useRef,
 } from 'react'
-import { useLockBodyScroll } from 'react-use'
 import { css } from '~pandacss/css'
 
 const styles = {
@@ -47,7 +46,19 @@ export const Modal: FC<ModalProps> = ({
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null)
 
-  useLockBodyScroll(open)
+  const initialOverflow = useRef<string>('')
+  useEffect(() => {
+    const lock = () => {
+      initialOverflow.current = document.body.style.overflow
+      document.body.style.overflow = 'hidden'
+    }
+    const unlock = () => {
+      document.body.style.overflow = initialOverflow.current
+    }
+
+    open ? lock() : unlock()
+    return () => unlock()
+  }, [open])
 
   useEffect(() => {
     const d = dialogRef.current
