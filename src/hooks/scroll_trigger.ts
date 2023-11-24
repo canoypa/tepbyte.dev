@@ -3,8 +3,14 @@ Copyright (c) 2014 Call-Em-All
 https://github.com/mui/material-ui/blob/master/LICENSE
  */
 
-import { MutableRefObject, useCallback, useMemo, useRef, useState } from 'react'
-import { useEffectOnce, useEvent } from 'react-use'
+import {
+  MutableRefObject,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 
 export type UseScrollTriggerOptions = Partial<{
   target: Window | Element
@@ -49,8 +55,14 @@ export const useScrollTrigger = (
     setState(trigger(cur, opt))
   }, [opt])
 
-  useEffectOnce(handler)
-  useEvent('scroll', handler, options.target, { passive: true })
+  useEffect(() => handler(), [handler])
+  useEffect(() => {
+    const target = opt.target
+    if (!target) return
+
+    target.addEventListener('scroll', handler, { passive: true })
+    return () => target.removeEventListener('scroll', handler)
+  }, [handler, opt.target])
 
   return state
 }
