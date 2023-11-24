@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+import { Metadata, Viewport } from 'next'
 import { Comfortaa } from 'next/font/google'
 import { PropsWithChildren } from 'react'
 import { ExternalScripts } from '~/features/external_scripts'
@@ -19,11 +19,13 @@ const styles = {
   body: css({ display: 'flex', flexDirection: 'column', minHeight: '100vh' }),
 }
 
+export const viewport: Viewport = {
+  colorScheme: 'dark',
+}
+
 export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL('https://www.tepbyte.dev'),
-
-    colorScheme: 'dark',
 
     title: {
       template: '%s - Tepbyte',
