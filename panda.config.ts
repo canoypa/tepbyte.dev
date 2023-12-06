@@ -1,5 +1,5 @@
 import { defineConfig } from '@pandacss/dev'
-import Color from 'color'
+import { colord } from 'colord'
 import { presetMaterialTokens } from 'pandacss-preset-material-tokens'
 
 export default defineConfig({
@@ -66,10 +66,9 @@ export default defineConfig({
             : 1
 
           return {
-            backgroundColor: Color(colorValue)
+            backgroundColor: colord(colorValue)
               .alpha(opacityValue)
-              .rgb()
-              .toString(),
+              .toRgbString(),
           }
         },
       },
