@@ -4,8 +4,8 @@ import { PropsWithChildren } from 'react'
 import { ExternalScripts } from '~/features/external_scripts'
 import { Footer } from '~/features/footer'
 import { Header } from '~/features/header'
-import '~/styles/globals.css'
 import { css } from '~pandacss/css'
+import './globals.css'
 
 type Props = PropsWithChildren
 
