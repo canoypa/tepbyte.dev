@@ -33,6 +33,11 @@ export default defineConfig({
   },
 
   globalCss: {
+    '@supports (word-break: auto-phrase)': {
+      '*': {
+        wordBreak: 'auto-phrase',
+      },
+    },
     body: {
       backgroundColor: 'dark.surface',
       color: 'dark.on-surface',
