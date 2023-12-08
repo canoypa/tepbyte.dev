@@ -1,13 +1,1 @@
 @layer reset, base, tokens, recipes, utilities;
-
-@layer base {
-  :root {
-    scrollbar-gutter: stable;
-    scroll-behavior: smooth;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  body {
-    min-height: 100vh;
-  }
-}

@@ -38,7 +38,13 @@ export default defineConfig({
         wordBreak: 'auto-phrase',
       },
     },
+    ':root': {
+      scrollbarGutter: 'stable',
+      scrollBehavior: 'smooth',
+      WebkitTapHighlightColor: 'transparent',
+    },
     body: {
+      minHeight: '100vh',
       backgroundColor: 'dark.surface',
       color: 'dark.on-surface',
       fill: 'dark.on-surface',
