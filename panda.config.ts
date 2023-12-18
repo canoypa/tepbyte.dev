@@ -1,5 +1,4 @@
 import { defineConfig } from '@pandacss/dev'
-import { colord } from 'colord'
 import { presetMaterialTokens } from 'pandacss-preset-material-tokens'
 
 export default defineConfig({
@@ -72,14 +71,12 @@ export default defineConfig({
           const opacityToken = token.raw(`opacity.${opacity}`)?.value ?? opacity
 
           const colorValue = colorToken
-          const opacityValue = !isNaN(Number(opacityToken))
-            ? Number(opacityToken)
-            : 1
+          const opacityValue =
+            (!isNaN(Number(opacityToken)) ? Number(opacityToken) : 1) * 100
 
           return {
-            backgroundColor: colord(colorValue)
-              .alpha(opacityValue)
-              .toRgbString(),
+            // srgb がなにかわかってない
+            backgroundColor: `color-mix(in srgb, ${colorValue} ${opacityValue}%, transparent)`,
           }
         },
       },
