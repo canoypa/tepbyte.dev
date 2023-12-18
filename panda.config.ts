@@ -67,7 +67,7 @@ export default defineConfig({
 
           const [color, opacity] = value.split('/')
 
-          const colorToken = token.raw(`colors.${color}`)?.value ?? color
+          const colorToken = token(`colors.${color}`) ?? color
           const opacityToken = token.raw(`opacity.${opacity}`)?.value ?? opacity
 
           const colorValue = colorToken
