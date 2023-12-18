@@ -1,3 +1,7 @@
+import {
+  argbFromHex,
+  themeFromSourceColor,
+} from '@material/material-color-utilities'
 import Link from 'next/link'
 import { FC } from 'react'
 import {
@@ -7,8 +11,15 @@ import {
   CardSummery,
   CardTitle,
 } from '~/components/card'
+import { createContentBasedColorStyles } from '~/core/theme'
 import { ProductMeta } from '~/types/parsed'
 import { css } from '~pandacss/css'
+
+declare module 'react' {
+  interface CSSProperties {
+    [key: `--${string}`]: string | number
+  }
+}
 
 const styles = {
   root: css({
@@ -26,7 +37,13 @@ export type ProductListProps = {
   items: Array<ProductMeta & { slug: string }>
 }
 
-export const ProductList: FC<ProductListProps> = ({ items }) => {
+export const ProductList: FC<ProductListProps> = async ({ items }) => {
+  const contentBasedColorStyles = items.map((v) => {
+    const theme = themeFromSourceColor(argbFromHex(v.images[0].color))
+    const styles = createContentBasedColorStyles(theme)
+    return styles
+  })
+
   return (
     <div className={styles.root}>
       {items.map((v, i) => (
@@ -35,6 +52,7 @@ export const ProductList: FC<ProductListProps> = ({ items }) => {
           as={Link}
           href={`/products/${v.slug}`}
           direction="column"
+          style={contentBasedColorStyles[i]}
         >
           <CardMedia
             src={v.images[0].url}
