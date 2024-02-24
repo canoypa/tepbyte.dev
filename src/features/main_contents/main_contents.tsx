@@ -9,6 +9,7 @@ const styles = {
     flexDirection: 'column',
     gap: 32,
     paddingY: 32,
+    width: '100%',
 
     smDown: { marginX: 16 },
     smToMd: { marginX: 32 },
