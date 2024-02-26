@@ -10,7 +10,7 @@
     "lint": "pnpm run lint:next & pnpm run lint:ts",
     "lint:next": "next lint",
     "lint:ts": "tsc --noEmit",
-    "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
+    "format": "biome format src --write",
     "prepare": "panda codegen"
   },
   "browserslist": [
@@ -29,6 +29,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.5.3",
     "@pandacss/dev": "^0.18.3",
     "@types/node": "^20.9.5",
     "@types/react": "^18.2.38",
@@ -37,7 +38,6 @@
     "eslint-config-next": "^14.0.3",
     "pandacss-preset-material-tokens": "^0.1.1",
     "postcss": "^8.4.31",
-    "prettier": "^3.1.0",
     "typescript": "^5.3.2"
   }
 }
