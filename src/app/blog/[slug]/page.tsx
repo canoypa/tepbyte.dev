@@ -60,11 +60,11 @@ export default async function Page({ params: { slug } }: Props) {
   }
 
   return (
-    <MainContents>
+    <>
       <Thumbnail image={post.meta.image} />
       <PostInfo post={post.meta} />
       <MarkdownRenderer tree={post.body} />
       {post.meta.tags.length > 0 && <Tags tags={post.meta.tags} />}
-    </MainContents>
+    </>
   )
 }

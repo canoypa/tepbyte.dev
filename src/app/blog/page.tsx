@@ -35,9 +35,9 @@ export default async function Page() {
   }
 
   return (
-    <MainContents>
+    <>
       <PageHeadline title="Blog" />
       <BlogList items={posts} />
-    </MainContents>
+    </>
   )
 }

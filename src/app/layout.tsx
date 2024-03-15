@@ -6,6 +6,7 @@ import { Footer } from '~/features/footer'
 import { Header } from '~/features/header'
 import { css } from '~pandacss/css'
 import './globals.css'
+import { MainContents } from '~/features/main_contents'
 
 type Props = PropsWithChildren
 
@@ -16,7 +17,11 @@ const comfortaa = Comfortaa({
 })
 
 const styles = {
-  body: css({ display: 'flex', flexDirection: 'column', minHeight: '100vh' }),
+  body: css({
+    display: 'grid',
+    gridTemplateRows: 'auto 1fr auto',
+    minHeight: '100vh',
+  }),
 }
 
 export const viewport: Viewport = {
@@ -52,7 +57,7 @@ export default async function Layout({ children }: Props) {
         <ExternalScripts />
 
         <Header />
-        {children}
+        <MainContents>{children}</MainContents>
         <Footer />
       </body>
     </html>

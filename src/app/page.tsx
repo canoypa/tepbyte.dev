@@ -31,8 +31,8 @@ export default async function Page() {
   }
 
   return (
-    <MainContents>
+    <>
       <Hero profile={profile.meta} />
-    </MainContents>
+    </>
   )
 }

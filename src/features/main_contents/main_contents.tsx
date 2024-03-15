@@ -3,13 +3,10 @@ import { css } from '~pandacss/css'
 
 const styles = {
   root: css({
-    flex: 1,
-
     display: 'flex',
     flexDirection: 'column',
     gap: 32,
     paddingY: 32,
-    width: '100%',
 
     smDown: { marginX: 16 },
     smToMd: { marginX: 32 },
@@ -20,5 +17,9 @@ const styles = {
 }
 
 export const MainContents: FC<PropsWithChildren> = ({ children }) => {
-  return <main className={styles.root}>{children}</main>
+  return (
+    <main>
+      <div className={styles.root}>{children}</div>
+    </main>
+  )
 }

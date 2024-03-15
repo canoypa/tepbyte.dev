@@ -36,10 +36,10 @@ export default async function Page() {
   }
 
   return (
-    <MainContents>
+    <>
       <PageHeadline title="About" />
       <Profile profile={profile.meta} />
       <MarkdownRenderer tree={profile.body} />
-    </MainContents>
+    </>
   )
 }

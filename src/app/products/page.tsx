@@ -35,9 +35,9 @@ export default async function Page() {
   }
 
   return (
-    <MainContents>
+    <>
       <PageHeadline title="Products" />
       <ProductList items={products} />
-    </MainContents>
+    </>
   )
 }
