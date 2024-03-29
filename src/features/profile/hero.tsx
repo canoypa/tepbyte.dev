@@ -1,7 +1,4 @@
-import Link from 'next/link'
 import { FC } from 'react'
-import { Button } from '~/components/button'
-import { NavigateNext } from '~/components/icons/navigate_next'
 import { ProfileMeta } from '~/types/parsed'
 import { css } from '~pandacss/css'
 import { flex } from '~pandacss/patterns'
@@ -42,14 +39,6 @@ export const Hero: FC<HeroProps> = ({ profile }) => {
       <div className={styles.info}>
         <span className={styles.subhead}>{profile.subhead}</span>
         <ProfileLink links={profile.links} />
-        <span>
-          <Button
-            as={Link}
-            href="/about"
-            label="See full profile"
-            trailing={<NavigateNext />}
-          />
-        </span>
       </div>
     </div>
   )

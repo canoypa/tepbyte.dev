@@ -3,10 +3,9 @@ import { Comfortaa } from 'next/font/google'
 import { PropsWithChildren } from 'react'
 import { ExternalScripts } from '~/features/external_scripts'
 import { Footer } from '~/features/footer'
-import { Header } from '~/features/header'
+import { MainContents } from '~/features/main_contents'
 import { css } from '~pandacss/css'
 import './globals.css'
-import { MainContents } from '~/features/main_contents'
 
 type Props = PropsWithChildren
 
@@ -56,7 +55,6 @@ export default async function Layout({ children }: Props) {
       <body className={styles.body}>
         <ExternalScripts />
 
-        <Header />
         <MainContents>{children}</MainContents>
         <Footer />
       </body>
