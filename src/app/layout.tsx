@@ -18,7 +18,7 @@ const comfortaa = Comfortaa({
 const styles = {
   body: css({
     display: 'grid',
-    gridTemplateRows: 'auto 1fr auto',
+    gridTemplateRows: '1fr auto',
     minHeight: '100vh',
   }),
 }
