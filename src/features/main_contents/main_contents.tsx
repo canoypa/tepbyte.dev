@@ -6,7 +6,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     gap: 32,
-    paddingY: 32,
+    paddingY: 64,
 
     smDown: { marginX: 16 },
     smToMd: { marginX: 32 },

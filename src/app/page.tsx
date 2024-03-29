@@ -5,6 +5,7 @@ import { ProductList } from '~/features/product'
 import { Hero } from '~/features/profile'
 import { api } from '~/lib/api'
 import { css } from '~pandacss/css'
+import { flex } from '~pandacss/patterns'
 
 type Props = {}
 
@@ -41,25 +42,29 @@ export default async function Page() {
 
       <MarkdownRenderer tree={profile.body} />
 
-      <h2
-        className={css({
-          textStyle: 'display-small',
-          fontFamily: 'comfortaa',
-        })}
-      >
-        Products
-      </h2>
-      <ProductList items={products} />
+      <div className={flex({ direction: 'column', rowGap: 16 })}>
+        <h2
+          className={css({
+            textStyle: 'display-small',
+            fontFamily: 'comfortaa',
+          })}
+        >
+          Products
+        </h2>
+        <ProductList items={products} />
+      </div>
 
-      <h2
-        className={css({
-          textStyle: 'display-small',
-          fontFamily: 'comfortaa',
-        })}
-      >
-        Blog
-      </h2>
-      <BlogList items={posts} />
+      <div className={flex({ direction: 'column', rowGap: 16 })}>
+        <h2
+          className={css({
+            textStyle: 'display-small',
+            fontFamily: 'comfortaa',
+          })}
+        >
+          Blog
+        </h2>
+        <BlogList items={posts} />
+      </div>
     </>
   )
 }
