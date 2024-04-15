@@ -16,7 +16,7 @@ const styles = {
     textStyle: 'label-large',
     fontFamily: 'comfortaa',
 
-    backgroundWithAlpha_EXPERIMENTAL: {
+    backgroundColor: {
       _hover: 'dark.primary/hover',
       _focusVisible: 'dark.primary/hover',
     },

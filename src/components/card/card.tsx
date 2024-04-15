@@ -15,14 +15,14 @@ const styles = {
   root: css({
     p: 16,
     rounded: 'medium',
-    backgroundWithAlpha_EXPERIMENTAL: 'dark.primary/1',
+    backgroundColor: 'dark.primary/1',
     transitionProperty: 'background-color',
     transitionDuration: 'medium-1',
 
     '&[data-clickable=true]': { cursor: 'pointer' },
 
-    _hover: { backgroundWithAlpha_EXPERIMENTAL: 'dark.primary/2' },
-    _focusVisible: { backgroundWithAlpha_EXPERIMENTAL: 'dark.primary/2' },
+    _hover: { backgroundColor: 'dark.primary/2' },
+    _focusVisible: { backgroundColor: 'dark.primary/2' },
 
     _horizontal: {
       display: 'flex',

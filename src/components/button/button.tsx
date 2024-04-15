@@ -17,7 +17,7 @@ const styles = {
       color: 'dark.primary',
       fill: 'dark.primary',
 
-      backgroundWithAlpha_EXPERIMENTAL: {
+      backgroundColor: {
         _hover: 'dark.primary/hover',
         _focusVisible: 'dark.primary/hover',
       },

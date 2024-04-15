@@ -17,7 +17,7 @@ const styles = {
     transitionProperty: 'background-color',
     transitionDuration: 'medium-1',
 
-    backgroundWithAlpha_EXPERIMENTAL: {
+    backgroundColor: {
       _hover: 'dark.primary/hover',
       _focusVisible: 'dark.primary/hover',
     },
