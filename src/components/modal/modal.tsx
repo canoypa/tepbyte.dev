@@ -25,7 +25,7 @@ const styles = {
       outline: 'none',
 
       _backdrop: {
-        backgroundWithAlpha_EXPERIMENTAL: 'dark.surface/0.32',
+        backgroundColor: 'dark.surface/0.32',
         backdropFilter: 'blur(4px)',
       },
     },

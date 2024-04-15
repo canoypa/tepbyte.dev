@@ -56,33 +56,6 @@ export default defineConfig({
     },
   },
 
-  utilities: {
-    extend: {
-      backgroundWithAlpha_EXPERIMENTAL: {
-        property: 'backgroundColor',
-        className: 'background-with-alpha-experimental',
-        values: { type: 'string' },
-        transform: (value, { token }) => {
-          if (!/.+\/.+/.test(value)) return {}
-
-          const [color, opacity] = value.split('/')
-
-          const colorToken = token(`colors.${color}`) ?? color
-          const opacityToken = token.raw(`opacity.${opacity}`)?.value ?? opacity
-
-          const colorValue = colorToken
-          const opacityValue =
-            (!isNaN(Number(opacityToken)) ? Number(opacityToken) : 1) * 100
-
-          return {
-            // srgb がなにかわかってない
-            backgroundColor: `color-mix(in srgb, ${colorValue} ${opacityValue}%, transparent)`,
-          }
-        },
-      },
-    },
-  },
-
   presets: [
     presetMaterialTokens({
       sourceColor: 0x8282f4,
