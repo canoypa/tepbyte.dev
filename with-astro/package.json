@@ -7,11 +7,16 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "prepare": "panda codegen"
   },
   "dependencies": {
-    "astro": "^4.8.6",
     "@astrojs/check": "^0.7.0",
+    "astro": "^4.8.6",
     "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@pandacss/dev": "^0.39.1",
+    "pandacss-preset-material-tokens": "^0.1.2"
   }
 }

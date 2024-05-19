@@ -1,0 +1,89 @@
+import { defineConfig } from '@pandacss/dev'
+import { presetMaterialTokens } from 'pandacss-preset-material-tokens'
+
+export default defineConfig({
+  outdir: 'lib/generated/pandacss',
+  preflight: true,
+  include: ['./src/**/*.{ts,tsx,js,jsx,astro}'],
+  exclude: [],
+
+  theme: {
+    extend: {
+      tokens: {
+        fonts: {
+          comfortaa: { value: 'var(--font-comfortaa)' },
+        },
+      },
+    },
+  },
+
+  conditions: {
+    extend: {
+      groupHorizontal: '.group:is([data-orientation=horizontal]) &',
+      groupVertical: '.group:is([data-orientation=vertical]) &',
+    },
+  },
+
+  globalCss: {
+    '@supports (word-break: auto-phrase)': {
+      '*': {
+        wordBreak: 'auto-phrase',
+      },
+    },
+    ':root': {
+      scrollbarGutter: 'stable',
+      scrollBehavior: 'smooth',
+      WebkitTapHighlightColor: 'transparent',
+    },
+    body: {
+      minHeight: '100vh',
+      backgroundColor: 'dark.surface',
+      color: 'dark.on-surface',
+      fill: 'dark.on-surface',
+    },
+    ':focus-visible': {
+      outlineWidth: 2,
+      outlineStyle: 'solid',
+      outlineColor: 'dark.primary',
+      outlineOffset: 2,
+    },
+  },
+
+  utilities: {
+    extend: {
+      backgroundWithAlpha_EXPERIMENTAL: {
+        property: 'backgroundColor',
+        className: 'background-with-alpha-experimental',
+        values: { type: 'string' },
+        transform: (value, { token }) => {
+          if (!/.+\/.+/.test(value)) return {}
+
+          const [color, opacity] = value.split('/')
+
+          const colorToken = token(`colors.${color}`) ?? color
+          const opacityToken = token.raw(`opacity.${opacity}`)?.value ?? opacity
+
+          const colorValue = colorToken
+          const opacityValue =
+            (!isNaN(Number(opacityToken)) ? Number(opacityToken) : 1) * 100
+
+          return {
+            // srgb がなにかわかってない
+            backgroundColor: `color-mix(in srgb, ${colorValue} ${opacityValue}%, transparent)`,
+          }
+        },
+      },
+    },
+  },
+
+  presets: [
+    presetMaterialTokens({
+      sourceColor: 0x8282f4,
+      customColors: [
+        { name: 'info', value: 0x42a5f5, blend: true },
+        { name: 'warning', value: 0xffee58, blend: true },
+        { name: 'success', value: 0x66bb6a, blend: true },
+      ],
+    }),
+  ],
+})
