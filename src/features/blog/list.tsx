@@ -1,45 +1,28 @@
-import Link from 'next/link'
 import { FC } from 'react'
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  CardSummery,
-  CardTitle,
-} from '~/components/card'
+import { StyledLink } from '~/components/styled_link'
 import { ArticleMeta } from '~/types/parsed'
 import { flex } from '~pandacss/patterns'
 
 const styles = {
   root: flex({
     direction: 'column',
-    gap: { base: 16, sm: 24 },
+    gap: { base: 8, md: 16 },
   }),
 }
 
 export type BlogListProps = {
-  items: Array<ArticleMeta & { slug: string }>
+  items: Array<ArticleMeta>
 }
 
 export const BlogList: FC<BlogListProps> = ({ items }) => {
   return (
-    <div className={styles.root}>
-      {items.map((v, i) => (
-        <Card key={v.slug} as={Link} href={`/blog/${v.slug}`}>
-          <CardMedia
-            src={v.image.url}
-            alt=""
-            width={v.image.width}
-            height={v.image.height}
-            blurDataUrl={v.image.blurDataUrl}
-            priority={i <= 2}
-          />
-          <CardContent>
-            <CardTitle>{v.title}</CardTitle>
-            <CardSummery>{v.subhead}</CardSummery>
-          </CardContent>
-        </Card>
+    <ul className={styles.root}>
+      {items.map((v) => (
+        <li key={v.slug}>
+          <StyledLink href={`/blog/${v.slug}`}>{v.title}</StyledLink>
+          <p>{v.subhead}</p>
+        </li>
       ))}
-    </div>
+    </ul>
   )
 }
