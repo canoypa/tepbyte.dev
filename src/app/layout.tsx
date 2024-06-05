@@ -4,7 +4,7 @@ import { PropsWithChildren } from 'react'
 import { ExternalScripts } from '~/features/external_scripts'
 import { Footer } from '~/features/footer'
 import { MainContents } from '~/features/main_contents'
-import { css } from '~pandacss/css'
+import { grid } from '~pandacss/patterns'
 import './globals.css'
 
 type Props = PropsWithChildren
@@ -16,9 +16,9 @@ const comfortaa = Comfortaa({
 })
 
 const styles = {
-  body: css({
-    display: 'grid',
+  body: grid({
     gridTemplateRows: '1fr auto',
+    gridTemplateColumns: 'minmax(0, 1fr)',
     minHeight: '100vh',
   }),
 }
