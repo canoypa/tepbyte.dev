@@ -1,7 +1,6 @@
 import { Metadata, Viewport } from 'next'
 import { Comfortaa } from 'next/font/google'
 import { PropsWithChildren } from 'react'
-import { ExternalScripts } from '~/features/external_scripts'
 import { Footer } from '~/features/footer'
 import { MainContents } from '~/features/main_contents'
 import { grid } from '~pandacss/patterns'
@@ -53,8 +52,6 @@ export default async function Layout({ children }: Props) {
   return (
     <html lang="ja" className={comfortaa.variable}>
       <body className={styles.body}>
-        <ExternalScripts />
-
         <MainContents>{children}</MainContents>
         <Footer />
       </body>
