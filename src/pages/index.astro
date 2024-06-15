@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry } from "astro:content";
 import { BlogList } from "~/features/blog";
+import MarkdownContainer from "~/features/markdown/markdown_container.astro";
 import { ProductList } from "~/features/product";
 import { Hero } from "~/features/profile";
 import Application from "~/layouts/application.astro";
@@ -16,7 +17,9 @@ const posts = await getCollection("post");
 
 <Application>
   <Hero profile={entry.data} />
-  <Content />
+  <MarkdownContainer>
+    <Content />
+  </MarkdownContainer>
 
   <div class:list={flex({ direction: "column", rowGap: 16 })}>
     <h2

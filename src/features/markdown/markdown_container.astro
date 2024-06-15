@@ -1,0 +1,142 @@
+---
+import { css } from "~pandacss/css";
+
+const style = {
+  root: css({
+    lineHeight: "1.8",
+
+    "& :where(p,h1,h2,h3,h4,h5,h6,ul,ol,blockquote,table)": {
+      marginBlock: "1rem",
+
+      "&:first-child": {
+        marginTop: "0",
+      },
+      "&:last-child": {
+        marginBottom: "0",
+      },
+    },
+
+    "& a": {
+      color: "dark.info",
+
+      "&:hover": {
+        textDecoration: "underline",
+      },
+    },
+
+    "& h1": {
+      textStyle: "headline-large",
+    },
+    "& h2": {
+      textStyle: "headline-medium",
+    },
+    "& h3": {
+      textStyle: "headline-small",
+    },
+    "& h4": {
+      textStyle: "title-large",
+    },
+    "& h5": {
+      textStyle: "title-medium",
+    },
+    "& h6": {
+      textStyle: "title-small",
+    },
+
+    "& img": {
+      borderRadius: "extra-small",
+    },
+
+    "& blockquote": {
+      borderLeft: "4px solid",
+      borderColor: "dark.outline",
+      padding: "0.5rem 1rem",
+    },
+
+    "& sup>a": {
+      "&::before": {
+        content: '"["',
+      },
+      "&::after": {
+        content: '"]"',
+      },
+    },
+
+    "& table": {
+      width: "100%",
+
+      "& :where(th,td)": {
+        padding: "0.5rem 1rem",
+        border: "1px solid",
+        borderColor: "dark.outline",
+      },
+    },
+
+    "& :where(ul,ol)": {
+      paddingLeft: "1.5rem",
+
+      "& :where(ul,ol)": {
+        marginTop: "0",
+      },
+    },
+    "& ul": {
+      listStyleType: "disc",
+      "& ul": {
+        listStyleType: "circle",
+        "& ul": {
+          listStyleType: "square",
+        },
+      },
+    },
+    "& ol": {
+      listStyleType: "decimal",
+      "& ol": {
+        listStyleType: "lower-alpha",
+        "& ol": {
+          listStyleType: "lower-roman",
+        },
+      },
+    },
+
+    "& :not(pre) code": {
+      paddingInline: "0.2rem",
+      borderRadius: "extra-small",
+      backgroundColor: "dark.surface-variant",
+      textStyle: "body-medium",
+    },
+
+    "& kbd": {
+      padding: "0.1rem 0.2rem",
+      border: "1px solid",
+      borderBottom: "2px solid",
+      borderColor: "dark.outline",
+      borderRadius: "extra-small",
+      textStyle: "body-medium",
+    },
+
+    "& .astro-code": {
+      padding: "1rem",
+      borderRadius: "small",
+    },
+
+    "& mark": {
+      backgroundColor: "dark.warning-container/80",
+    },
+
+    "& .footnotes": {
+      border: "1px solid",
+      borderColor: "dark.outline",
+      borderRadius: "small",
+      padding: "1rem",
+
+      "& ol": {
+        marginBlock: 0,
+      },
+    },
+  }),
+};
+---
+
+<div class:list={style.root}>
+  <slot />
+</div>

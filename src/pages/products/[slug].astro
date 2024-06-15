@@ -2,6 +2,7 @@
 import type { GetStaticPaths } from "astro";
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
+import MarkdownContainer from "~/features/markdown/markdown_container.astro";
 import { Info } from "~/features/product";
 import ScreenshotAstro from "~/features/product/screenshot_astro.astro";
 import Seo from "~/features/seo/seo.astro";
@@ -37,6 +38,8 @@ const { Content } = await entry.render();
 
   <ScreenshotAstro images={entry.data.images} />
   <Info product={entry.data} />
-  <Content />
+  <MarkdownContainer>
+    <Content />
+  </MarkdownContainer>
   {entry.data.tags.length > 0 && <Tags tags={entry.data.tags} />}
 </Application>
