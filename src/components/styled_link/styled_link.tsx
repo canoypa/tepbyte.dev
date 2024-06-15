@@ -1,5 +1,8 @@
-import Link, { LinkProps } from 'next/link'
-import { forwardRef, ForwardRefRenderFunction } from 'react'
+import {
+  forwardRef,
+  type AnchorHTMLAttributes,
+  type ForwardRefRenderFunction,
+} from 'react'
 import { css } from '~pandacss/css'
 
 const styles = {
@@ -13,17 +16,16 @@ const styles = {
   }),
 }
 
-export type StyledLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> &
-  LinkProps
+export type StyledLinkProps = AnchorHTMLAttributes<HTMLAnchorElement>
 
 export const StyledLinkView: ForwardRefRenderFunction<
   HTMLAnchorElement,
   StyledLinkProps
 > = ({ children, ...otherProps }, ref) => {
   return (
-    <Link ref={ref} className={styles.root} {...otherProps}>
+    <a ref={ref} className={styles.root} {...otherProps}>
       {children}
-    </Link>
+    </a>
   )
 }
 

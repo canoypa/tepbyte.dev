@@ -1,5 +1,5 @@
-import { FC } from 'react'
-import { ProductMeta } from '~/types/parsed'
+import type { FC } from 'react'
+import type { ProductMeta } from '~/types/parsed'
 import { flex } from '~pandacss/patterns'
 import { PageHeadline } from '../page_headline'
 import { Link } from './link'

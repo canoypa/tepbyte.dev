@@ -1,7 +1,7 @@
 import { default as NextLink } from 'next/link'
-import { FC } from 'react'
+import type { FC } from 'react'
 import { Chip } from '~/components/chip'
-import { LinkData } from '~/types/parsed'
+import type { LinkData } from '~/types/parsed'
 import { flex } from '~pandacss/patterns'
 
 const styles = {

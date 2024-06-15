@@ -1,6 +1,6 @@
-import { FC } from 'react'
+import type { CollectionEntry } from 'astro:content'
+import type { FC } from 'react'
 import { StyledLink } from '~/components/styled_link'
-import { ProductMeta } from '~/types/parsed'
 import { flex } from '~pandacss/patterns'
 
 const styles = {
@@ -11,7 +11,7 @@ const styles = {
 }
 
 export type ProductListProps = {
-  items: Array<ProductMeta>
+  items: CollectionEntry<'product'>[]
 }
 
 export const ProductList: FC<ProductListProps> = ({ items }) => {
@@ -19,8 +19,8 @@ export const ProductList: FC<ProductListProps> = ({ items }) => {
     <ul className={styles.root}>
       {items.map((v) => (
         <li key={v.slug}>
-          <StyledLink href={`/products/${v.slug}`}>{v.title}</StyledLink>
-          <p>{v.subhead}</p>
+          <StyledLink href={`/products/${v.slug}`}>{v.data.title}</StyledLink>
+          <p>{v.data.subhead}</p>
         </li>
       ))}
     </ul>

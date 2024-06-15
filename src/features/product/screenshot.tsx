@@ -1,6 +1,6 @@
-import { FC } from 'react'
+import type { FC } from 'react'
 import { Image } from '~/components/image'
-import { ImageMeta } from '~/types/parsed'
+import type { ImageMeta } from '~/types/parsed'
 import { css } from '~pandacss/css'
 
 const styles = {

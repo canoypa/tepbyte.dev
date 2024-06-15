@@ -1,7 +1,10 @@
 ---
 import { getCollection, getEntry } from "astro:content";
+import { ProductList } from "~/features/product";
 import { Hero } from "~/features/profile";
 import Application from "~/layouts/application.astro";
+import { css } from "~pandacss/css";
+import { flex } from "~pandacss/patterns";
 
 const entry = await getEntry("profile", "canoypa");
 const { Content } = await entry.render();
@@ -14,15 +17,17 @@ const posts = await getCollection("post");
   <Hero profile={entry.data} />
   <Content />
 
-  {
-    products.map((product) => (
-      <ul>
-        <li>
-          <a href={`/products/${product.slug}`}>{product.slug}</a>
-        </li>
-      </ul>
-    ))
-  }
+  <div class:list={flex({ direction: "column", rowGap: 16 })}>
+    <h2
+      class:list={css({
+        textStyle: "display-small",
+        fontFamily: "comfortaa",
+      })}
+    >
+      Products
+    </h2>
+    <ProductList items={products} />
+  </div>
 
   {
     posts.map((post) => (
