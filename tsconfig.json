@@ -5,6 +5,8 @@
     "paths": {
       "~pandacss/*": ["lib/generated/pandacss/*"],
       "~/*": ["src/*"]
-    }
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
   }
 }
