@@ -1,6 +1,6 @@
-import { FC } from 'react'
+import type { CollectionEntry } from 'astro:content'
+import type { FC } from 'react'
 import { Image } from '~/components/image'
-import { ProfileMeta } from '~/types/parsed'
 import { css } from '~pandacss/css'
 import { flex } from '~pandacss/patterns'
 import { ProfileLink } from './profile_link'
@@ -19,7 +19,7 @@ const styles = {
 
     fontFamily: 'comfortaa',
   }),
-  photo: css({
+  avatar: css({
     gridArea: 'photo',
 
     width: { base: 96, md: 128 },
@@ -41,19 +41,19 @@ const styles = {
 }
 
 export type HeroProps = {
-  profile: ProfileMeta
+  profile: CollectionEntry<'profile'>['data']
 }
 
 export const Hero: FC<HeroProps> = ({ profile }) => {
   return (
     <div className={styles.root}>
       <Image
-        src={profile.photo.url}
+        src={profile.avatar.src}
         alt=""
-        width={profile.photo.width}
-        height={profile.photo.height}
-        className={styles.photo}
-        blurDataUrl={profile.photo.blurDataUrl}
+        width={profile.avatar.width}
+        height={profile.avatar.height}
+        className={styles.avatar}
+        // blurDataUrl={profile.avatar.blurDataUrl}
         priority
       />
       <span className={styles.name}>{profile.name}</span>

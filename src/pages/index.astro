@@ -1,5 +1,6 @@
 ---
 import { getCollection, getEntry } from "astro:content";
+import { Hero } from "~/features/profile";
 import Application from "~/layouts/application.astro";
 
 const entry = await getEntry("profile", "canoypa");
@@ -10,6 +11,7 @@ const posts = await getCollection("post");
 ---
 
 <Application>
+  <Hero profile={entry.data} />
   <Content />
 
   {
