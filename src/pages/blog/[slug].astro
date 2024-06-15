@@ -3,6 +3,7 @@ import type { GetStaticPaths } from "astro";
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
 import { PostInfo, Thumbnail } from "~/features/blog";
+import Seo from "~/features/seo/seo.astro";
 import { Tags } from "~/features/tags";
 import Application from "~/layouts/application.astro";
 
@@ -22,6 +23,17 @@ const { Content } = await entry.render();
 ---
 
 <Application>
+  <Seo
+    slot="head"
+    title={entry.data.title}
+    description={entry.data.subhead}
+    openGraph={{
+      basic: {
+        image: entry.data.image.src,
+      },
+    }}
+  />
+
   <Thumbnail image={entry.data.image} />
   <PostInfo post={entry.data} />
   <Content />

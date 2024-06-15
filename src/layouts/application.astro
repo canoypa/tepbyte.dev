@@ -1,11 +1,10 @@
 ---
-import { SEO } from "astro-seo";
-
 import "~/styles/globals.css";
 ---
 
 <html lang="ja">
   <head>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <meta name="color-scheme" content="dark" />
 
@@ -18,23 +17,7 @@ import "~/styles/globals.css";
       sizes="180x180"
     />
 
-    <SEO
-      charset="utf-8"
-      titleTemplate="%s - Tepbyte"
-      titleDefault="Tepbyte"
-      description="Cano's portfolio site."
-      openGraph={{
-        basic: {
-          type: "website",
-          title: "Tepbyte",
-          image: "/opengraph-image.png",
-        },
-        optional: {
-          siteName: "Tepbyte",
-          description: "Cano's portfolio site.",
-        },
-      }}
-    />
+    <slot name="head" />
   </head>
   <body>
     <slot />
