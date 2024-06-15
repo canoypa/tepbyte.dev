@@ -1,4 +1,6 @@
 ---
+import { Footer } from "~/features/footer";
+import { MainContents } from "~/features/main_contents";
 import "~/styles/globals.css";
 ---
 
@@ -20,6 +22,9 @@ import "~/styles/globals.css";
     <slot name="head" />
   </head>
   <body>
-    <slot />
+    <MainContents>
+      <slot />
+    </MainContents>
+    <Footer />
   </body>
 </html>
