@@ -1,6 +1,7 @@
 ---
 import type { GetStaticPaths } from "astro";
-import { getCollection, getEntry } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
 import Application from "~/layouts/application.astro";
 
 export const getStaticPaths = (async () => {
@@ -8,14 +9,13 @@ export const getStaticPaths = (async () => {
 
   return collection.map((entry) => ({
     params: { slug: entry.slug },
+    props: entry,
   }));
 }) satisfies GetStaticPaths;
 
-const { slug } = Astro.params;
+type Props = CollectionEntry<"post">;
 
-const entry = await getEntry("post", slug);
-if (!entry) return Astro.redirect("/404");
-
+const entry = Astro.props;
 const { Content } = await entry.render();
 ---
 
