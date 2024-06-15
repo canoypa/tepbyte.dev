@@ -18,7 +18,7 @@ export default defineConfig({
     extend: {
       tokens: {
         fonts: {
-          comfortaa: { value: 'var(--font-comfortaa)' },
+          comfortaa: { value: 'Comfortaa' },
         },
       },
     },
