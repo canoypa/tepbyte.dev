@@ -1,15 +1,14 @@
 {
   "name": "tepbyte.dev",
+  "type": "module",
   "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@8.15.1",
   "scripts": {
-    "dev": "next dev",
-    "build": "pnpm run prepare && next build",
-    "start": "next start",
-    "lint": "pnpm run lint:next & pnpm run lint:ts",
-    "lint:next": "next lint",
-    "lint:ts": "tsc --noEmit",
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "lint": "astro check",
     "format": "biome format src --write",
     "prepare": "panda codegen"
   },
@@ -23,6 +22,8 @@
     "last 3 ios major versions"
   ],
   "dependencies": {
+    "astro": "^4.10.2",
+    "@astrojs/check": "^0.7.0",
     "google-auth-library": "^9.10.0",
     "next": "^14.2.3",
     "react": "^18.3.1",
