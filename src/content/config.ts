@@ -7,8 +7,10 @@ const postCollection = defineCollection({
       title: z.string(),
       subhead: z.string(),
       image: image(),
+      tags: z.string().array().optional(),
 
       publishedAt: z.date(),
+      updatedAt: z.date().optional(),
     }),
 })
 
