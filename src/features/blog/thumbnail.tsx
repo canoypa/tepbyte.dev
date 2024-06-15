@@ -1,7 +1,6 @@
+import type { CollectionEntry } from 'astro:content'
 import type { FC } from 'react'
 import { Image } from '~/components/image'
-import { StyledLink } from '~/components/styled_link'
-import type { ImageMeta } from '~/types/parsed'
 import { css } from '~pandacss/css'
 import { flex } from '~pandacss/patterns'
 
@@ -21,23 +20,23 @@ const styles = {
 }
 
 export type ThumbnailProps = {
-  image: ImageMeta
+  image: CollectionEntry<'post'>['data']['image']
 }
 
 export const Thumbnail: FC<ThumbnailProps> = ({ image }) => {
   return (
     <figure className={styles.root}>
       <Image
-        src={image.url}
+        src={image.src}
         alt=""
         width={image.width}
         height={image.height}
         className={styles.img}
-        blurDataUrl={image.blurDataUrl}
+        blurDataUrl={undefined /* image.blurDataUrl */}
         priority
       />
 
-      {image.attribution && (
+      {/* {image.attribution && (
         <figcaption>
           <small className={styles.attribution}>
             <span>Photo by </span>
@@ -50,7 +49,7 @@ export const Thumbnail: FC<ThumbnailProps> = ({ image }) => {
             </StyledLink>
           </small>
         </figcaption>
-      )}
+      )} */}
     </figure>
   )
 }

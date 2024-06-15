@@ -1,5 +1,5 @@
+import type { CollectionEntry } from 'astro:content'
 import type { FC } from 'react'
-import type { ArticleMeta } from '~/types/parsed'
 import { css } from '~pandacss/css'
 import { flex } from '~pandacss/patterns'
 import { PageHeadline } from '../page_headline'
@@ -10,25 +10,26 @@ const styles = {
 }
 
 export type PostInfoProps = {
-  post: ArticleMeta
+  post: CollectionEntry<'post'>['data']
 }
 
 export const PostInfo: FC<PostInfoProps> = ({ post }) => {
   const dateFormatter = Intl.DateTimeFormat('en-us', { dateStyle: 'long' })
 
-  const publishedAt = dateFormatter.format(Date.parse(post.publishedAt))
-  const updatedAt =
-    post.updatedAt && dateFormatter.format(Date.parse(post.updatedAt))
+  const publishedAt = dateFormatter.format(post.publishedAt)
+  const updatedAt = post.updatedAt && dateFormatter.format(post.updatedAt)
 
   return (
     <div className={styles.root}>
       <PageHeadline title={post.title} subhead={post.subhead} />
       <div className={styles.dateTime}>
-        <time dateTime={post.publishedAt}>{publishedAt}</time>
+        <time dateTime={post.publishedAt.toISOString()}>{publishedAt}</time>
         {updatedAt && (
           <>
             <span> - </span>
-            <time dateTime={post.updatedAt}>Updated {updatedAt}</time>
+            <time dateTime={post.updatedAt?.toISOString()}>
+              Updated {updatedAt}
+            </time>
           </>
         )}
       </div>
