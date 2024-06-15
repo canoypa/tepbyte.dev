@@ -1,7 +1,7 @@
-import { FC } from 'react'
+import type { FC } from 'react'
 import { Image } from '~/components/image'
 import { StyledLink } from '~/components/styled_link'
-import { ImageMeta } from '~/types/parsed'
+import type { ImageMeta } from '~/types/parsed'
 import { css } from '~pandacss/css'
 import { flex } from '~pandacss/patterns'
 

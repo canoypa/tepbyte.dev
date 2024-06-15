@@ -1,5 +1,6 @@
 ---
 import { getCollection, getEntry } from "astro:content";
+import { BlogList } from "~/features/blog";
 import { ProductList } from "~/features/product";
 import { Hero } from "~/features/profile";
 import Application from "~/layouts/application.astro";
@@ -29,13 +30,15 @@ const posts = await getCollection("post");
     <ProductList items={products} />
   </div>
 
-  {
-    posts.map((post) => (
-      <ul>
-        <li>
-          <a href={`/blog/${post.slug}`}>{post.slug}</a>
-        </li>
-      </ul>
-    ))
-  }
+  <div class:list={flex({ direction: "column", rowGap: 16 })}>
+    <h2
+      class:list={css({
+        textStyle: "display-small",
+        fontFamily: "comfortaa",
+      })}
+    >
+      Blog
+    </h2>
+    <BlogList items={posts} />
+  </div>
 </Application>
