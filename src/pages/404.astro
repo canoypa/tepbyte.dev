@@ -1,0 +1,16 @@
+---
+import { Button } from "~/components/button";
+import { PageHeadline } from "~/features/page_headline";
+import Application from "~/layouts/application.astro";
+---
+
+<Application>
+  <PageHeadline
+    title="404 Not Found"
+    subhead="There seems to be nothing here."
+  />
+
+  <span>
+    <Button as="a" href="/" label="Back to Top Page" />
+  </span>
+</Application>
