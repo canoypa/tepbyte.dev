@@ -1,14 +1,39 @@
 ---
+import { SEO } from "astro-seo";
 import "~/styles/globals.css";
 ---
 
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
+    <meta name="color-scheme" content="dark" />
+
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="32x32" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" sizes="any" />
+    <link
+      rel="apple-touch-icon"
+      href="/apple-icon.png"
+      type="image/png"
+      sizes="180x180"
+    />
+
+    <SEO
+      charset="utf-8"
+      titleTemplate="%s - Tepbyte"
+      titleDefault="Tepbyte"
+      description="Cano's portfolio site."
+      openGraph={{
+        basic: {
+          type: "website",
+          title: "Tepbyte",
+          image: "/opengraph-image.png",
+        },
+        optional: {
+          siteName: "Tepbyte",
+          description: "Cano's portfolio site.",
+        },
+      }}
+    />
   </head>
   <body>
     <h1>Astro</h1>
