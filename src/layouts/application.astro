@@ -1,7 +1,16 @@
 ---
 import { Footer } from "~/features/footer";
 import { MainContents } from "~/features/main_contents";
+
 import "~/styles/globals.css";
+import { grid } from "~pandacss/patterns";
+
+const styles = {
+  body: grid({
+    gridTemplateRows: "1fr auto",
+    gridTemplateColumns: "minmax(0, 1fr)",
+  }),
+};
 ---
 
 <html lang="ja">
@@ -21,7 +30,7 @@ import "~/styles/globals.css";
 
     <slot name="head" />
   </head>
-  <body>
+  <body class:list={styles.body}>
     <MainContents>
       <slot />
     </MainContents>
