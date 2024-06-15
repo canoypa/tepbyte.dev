@@ -1,6 +1,6 @@
 ---
-import { SEO } from "astro-seo";
 import { getCollection, getEntry } from "astro:content";
+import Application from "~/layouts/application.astro";
 
 const entry = await getEntry("profile", "canoypa");
 const { Content } = await entry.render();
@@ -9,59 +9,26 @@ const products = await getCollection("product");
 const posts = await getCollection("post");
 ---
 
-<html lang="en">
-  <head>
-    <meta name="viewport" content="width=device-width" />
-    <meta name="color-scheme" content="dark" />
+<Application>
+  <Content />
 
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="32x32" />
-    <link rel="icon" href="/icon.svg" type="image/svg+xml" sizes="any" />
-    <link
-      rel="apple-touch-icon"
-      href="/apple-icon.png"
-      type="image/png"
-      sizes="180x180"
-    />
+  {
+    products.map((product) => (
+      <ul>
+        <li>
+          <a href={`/products/${product.slug}`}>{product.slug}</a>
+        </li>
+      </ul>
+    ))
+  }
 
-    <SEO
-      charset="utf-8"
-      titleTemplate="%s - Tepbyte"
-      titleDefault="Tepbyte"
-      description="Cano's portfolio site."
-      openGraph={{
-        basic: {
-          type: "website",
-          title: "Tepbyte",
-          image: "/opengraph-image.png",
-        },
-        optional: {
-          siteName: "Tepbyte",
-          description: "Cano's portfolio site.",
-        },
-      }}
-    />
-  </head>
-  <body>
-    <Content />
-
-    {
-      products.map((product) => (
-        <ul>
-          <li>
-            <a href={`/products/${product.slug}`}>{product.slug}</a>
-          </li>
-        </ul>
-      ))
-    }
-
-    {
-      posts.map((post) => (
-        <ul>
-          <li>
-            <a href={`/blog/${post.slug}`}>{post.slug}</a>
-          </li>
-        </ul>
-      ))
-    }
-  </body>
-</html>
+  {
+    posts.map((post) => (
+      <ul>
+        <li>
+          <a href={`/blog/${post.slug}`}>{post.slug}</a>
+        </li>
+      </ul>
+    ))
+  }
+</Application>

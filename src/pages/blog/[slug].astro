@@ -1,6 +1,7 @@
 ---
 import type { GetStaticPaths } from "astro";
 import { getCollection, getEntry } from "astro:content";
+import Application from "~/layouts/application.astro";
 
 export const getStaticPaths = (async () => {
   const collection = await getCollection("post");
@@ -18,4 +19,6 @@ if (!entry) return Astro.redirect("/404");
 const { Content } = await entry.render();
 ---
 
-<Content />
+<Application>
+  <Content />
+</Application>
