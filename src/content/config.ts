@@ -1,4 +1,5 @@
 import { defineCollection, z } from 'astro:content'
+import { UNSPLASH_URL_PATTERN, resolveUnsplash } from '~/core/resolve_unsplash'
 
 const postCollection = defineCollection({
   type: 'content',
@@ -6,7 +7,10 @@ const postCollection = defineCollection({
     z.object({
       title: z.string(),
       subhead: z.string(),
-      image: image(),
+      image: z.union([
+        image(),
+        z.string().url().regex(UNSPLASH_URL_PATTERN).transform(resolveUnsplash),
+      ]),
       tags: z.string().array().optional(),
 
       publishedAt: z.date(),
