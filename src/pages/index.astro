@@ -11,8 +11,12 @@ import { flex } from "~pandacss/patterns";
 const entry = await getEntry("profile", "canoypa");
 const { Content } = await entry.render();
 
-const products = await getCollection("product");
-const posts = await getCollection("post");
+const products = (await getCollection("product")).sort(
+  (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
+);
+const posts = (await getCollection("post")).sort(
+  (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
+);
 ---
 
 <Application>
