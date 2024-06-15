@@ -4,6 +4,7 @@ import { BlogList } from "~/features/blog";
 import MarkdownContainer from "~/features/markdown/markdown_container.astro";
 import { ProductList } from "~/features/product";
 import { Hero } from "~/features/profile";
+import Seo from "~/features/seo/seo.astro";
 import Application from "~/layouts/application.astro";
 import { css } from "~pandacss/css";
 import { flex } from "~pandacss/patterns";
@@ -20,6 +21,8 @@ const posts = (await getCollection("post")).sort(
 ---
 
 <Application>
+  <Seo slot="head" />
+
   <Hero profile={entry.data} />
   <MarkdownContainer>
     <Content />
