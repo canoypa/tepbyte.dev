@@ -1,1 +1,0 @@
-export { LogoLabel } from './label'
