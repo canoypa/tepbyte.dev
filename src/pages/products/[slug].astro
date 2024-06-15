@@ -23,7 +23,7 @@ const { Content } = await entry.render();
 ---
 
 <Application>
-  <ScreenshotAstro images={entry.data.images} client:idle />
+  <ScreenshotAstro images={entry.data.images} />
   <Info product={entry.data} />
   <Content />
   {entry.data.tags.length > 0 && <Tags tags={entry.data.tags} />}
