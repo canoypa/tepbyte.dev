@@ -1,0 +1,21 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection, getEntry } from "astro:content";
+
+export const getStaticPaths = (async () => {
+  const collection = await getCollection("product");
+
+  return collection.map((entry) => ({
+    params: { slug: entry.slug },
+  }));
+}) satisfies GetStaticPaths;
+
+const { slug } = Astro.params;
+
+const entry = await getEntry("product", slug);
+if (!entry) return Astro.redirect("/404");
+
+const { Content } = await entry.render();
+---
+
+<Content />

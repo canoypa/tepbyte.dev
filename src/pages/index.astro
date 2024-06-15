@@ -1,6 +1,12 @@
 ---
 import { SEO } from "astro-seo";
-import "~/styles/globals.css";
+import { getCollection, getEntry } from "astro:content";
+
+const entry = await getEntry("profile", "canoypa");
+const { Content } = await entry.render();
+
+const products = await getCollection("product");
+const posts = await getCollection("post");
 ---
 
 <html lang="en">
@@ -36,6 +42,26 @@ import "~/styles/globals.css";
     />
   </head>
   <body>
-    <h1>Astro</h1>
+    <Content />
+
+    {
+      products.map((product) => (
+        <ul>
+          <li>
+            <a href={`/products/${product.slug}`}>{product.slug}</a>
+          </li>
+        </ul>
+      ))
+    }
+
+    {
+      posts.map((post) => (
+        <ul>
+          <li>
+            <a href={`/blog/${post.slug}`}>{post.slug}</a>
+          </li>
+        </ul>
+      ))
+    }
   </body>
 </html>
