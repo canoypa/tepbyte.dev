@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import type { FC } from 'react'
 import { Tag as IconTag } from '~/components/icons/tag'
 import { css } from '~pandacss/css'
 
