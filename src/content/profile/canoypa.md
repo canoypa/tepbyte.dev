@@ -9,4 +9,17 @@ links:
   Qiita: https://qiita.com/canoypa
 ---
 
-Hello World
+# Hello World 👋
+
+猫派で紅茶派なソフトウェアエンジニアです。
+
+## Loves
+
+- Next.js / React / TypeScript / Flutter
+- VSCode / Neovim / Figma
+- GitHub / Google Cloud / Firebase
+
+# Contacts
+
+- GitHub ([@canoypa](https://github.com/canoypa))
+- Twitter ([@canoypa](https://twitter.com/canoypa))
