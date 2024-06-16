@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import type { FC } from 'react'
 import { css } from '~pandacss/css'
 import { flex } from '~pandacss/patterns'
 

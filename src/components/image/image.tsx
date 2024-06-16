@@ -1,7 +1,12 @@
 'use client'
 
-import Head from 'next/head'
-import { CSSProperties, FC, ImgHTMLAttributes, useId, useState } from 'react'
+import {
+  useId,
+  useState,
+  type CSSProperties,
+  type FC,
+  type ImgHTMLAttributes,
+} from 'react'
 import { flushSync } from 'react-dom'
 import { css } from '~pandacss/css'
 import { Modal } from '../modal'
@@ -115,17 +120,6 @@ export const Image: FC<ImageProps> = ({
             onClick={closeModal}
           />
         </Modal>
-      ) : null}
-
-      {priority ? (
-        <Head>
-          <link
-            key={otherProps.src}
-            rel="preload"
-            as="image"
-            href={otherProps.src}
-          />
-        </Head>
       ) : null}
     </>
   )

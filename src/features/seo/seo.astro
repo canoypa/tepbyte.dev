@@ -1,0 +1,47 @@
+---
+import { SEO } from "astro-seo";
+
+type Props = {
+  title?: string;
+  description?: string;
+
+  openGraph?: {
+    basic?: {
+      title?: string;
+      type?: string;
+      image?: string;
+      url?: URL | string;
+    };
+    optional?: {
+      description?: string;
+    };
+  };
+};
+
+const props = Astro.props;
+
+const siteName = "Tepbyte";
+
+const title = props.title;
+const description = props.description || "Cano's portfolio site.";
+---
+
+<SEO
+  title={title}
+  titleTemplate={`%s - ${siteName}`}
+  titleDefault={siteName}
+  description={description}
+  openGraph={{
+    basic: {
+      type: "website",
+      title: title || siteName,
+      image: "/opengraph-image.png",
+      ...props.openGraph?.basic,
+    },
+    optional: {
+      siteName: siteName,
+      description: description,
+      ...props.openGraph?.optional,
+    },
+  }}
+/>

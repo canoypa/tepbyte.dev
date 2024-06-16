@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import type { FC } from 'react'
 import { StyledLink } from '~/components/styled_link'
 import { css } from '~pandacss/css'
 
