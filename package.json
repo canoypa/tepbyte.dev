@@ -26,8 +26,6 @@
     "@astrojs/react": "^3.5.0",
     "astro": "^4.10.2",
     "astro-seo": "^0.8.4",
-    "google-auth-library": "^9.10.0",
-    "next": "^14.2.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "remark-breaks": "^4.0.0",
@@ -39,10 +37,7 @@
     "@types/node": "^20.14.1",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "eslint": "^8.57.0",
-    "eslint-config-next": "^14.2.3",
     "pandacss-preset-material-tokens": "^0.1.2",
-    "postcss": "^8.4.38",
     "typescript": "^5.4.5"
   }
 }

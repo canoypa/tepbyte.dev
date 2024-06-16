@@ -1,4 +1,3 @@
-import { default as NextLink } from 'next/link'
 import type { FC } from 'react'
 import { Chip } from '~/components/chip'
 import type { LinkData } from '~/types/parsed'
@@ -16,7 +15,7 @@ export const Link: FC<LinkProps> = ({ links }) => {
   return (
     <div className={styles.root}>
       {links.map(({ label, url }) => (
-        <Chip key={url} as={NextLink} href={url} label={label} />
+        <Chip key={url} as="a" href={url} label={label} />
       ))}
     </div>
   )

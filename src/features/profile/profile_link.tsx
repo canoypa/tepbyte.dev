@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import type { FC } from 'react'
 import { Chip } from '~/components/chip'
 import { flex } from '~pandacss/patterns'
@@ -15,7 +14,7 @@ export const ProfileLink: FC<ProfileLinkProps> = ({ links }) => {
   return (
     <div className={styles.root}>
       {links.map(({ label, url }) => (
-        <Chip key={url} as={Link} href={url} label={label} />
+        <Chip key={url} as="a" href={url} label={label} />
       ))}
     </div>
   )
