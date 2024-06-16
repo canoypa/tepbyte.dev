@@ -22,6 +22,7 @@ const posts = (await getCollection("post")).sort(
 
 <Application>
   <Seo slot="head" />
+  <link slot="head" rel="preload" as="image" href={entry.data.avatar.src} />
 
   <Hero profile={entry.data} />
   <MarkdownContainer>

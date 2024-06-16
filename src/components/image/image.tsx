@@ -1,6 +1,5 @@
 'use client'
 
-import Head from 'next/head'
 import {
   useId,
   useState,
@@ -121,17 +120,6 @@ export const Image: FC<ImageProps> = ({
             onClick={closeModal}
           />
         </Modal>
-      ) : null}
-
-      {priority ? (
-        <Head>
-          <link
-            key={otherProps.src}
-            rel="preload"
-            as="image"
-            href={otherProps.src}
-          />
-        </Head>
       ) : null}
     </>
   )
