@@ -1,0 +1,25 @@
+---
+import {
+  getImage,
+  type LocalImageProps,
+  type RemoteImageProps,
+} from "astro:assets";
+import { Image as ImageReact } from "./image";
+
+type Props = (LocalImageProps | RemoteImageProps) & {
+  lightbox?: boolean;
+  priority?: boolean;
+  blurDataUrl?: string;
+};
+
+const props = Astro.props;
+
+const image = await getImage(props);
+---
+
+<ImageReact
+  src={image.src}
+  className={props.class ?? undefined}
+  {...image.attributes}
+  client:idle={props.lightbox}
+/>

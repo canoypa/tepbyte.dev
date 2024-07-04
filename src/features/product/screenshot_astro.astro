@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { Image } from "~/components/image";
+import ImageAstro from "~/components/image/image_astro.astro";
 import { css } from "~pandacss/css";
 
 type Props = {
@@ -30,16 +30,15 @@ const styles = {
 <div class:list={styles.root}>
   {
     images.map((v, i) => (
-      <Image
-        src={v.src}
+      <ImageAstro
+        src={v}
         alt=""
         width={v.width}
         height={v.height}
-        className={styles.image}
+        class:list={styles.image}
         blurDataUrl={undefined /* v.blurDataUrl */}
         priority={i === 0}
         lightbox
-        client:idle
       />
     ))
   }

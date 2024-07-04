@@ -1,0 +1,57 @@
+---
+import type { CollectionEntry } from "astro:content";
+import ImageAstro from "~/components/image/image_astro.astro";
+import { StyledLink } from "~/components/styled_link";
+import { css } from "~pandacss/css";
+import { flex } from "~pandacss/patterns";
+
+type Props = {
+  image: CollectionEntry<"post">["data"]["image"];
+};
+
+const { image } = Astro.props;
+
+const styles = {
+  root: flex({ direction: "column", rowGap: 8 }),
+  img: css({
+    width: "100%",
+    height: { base: 216, md: 288 },
+    rounded: "extra-large",
+    objectFit: "cover",
+  }),
+  attribution: css({
+    textStyle: "label-medium",
+    fontFamily: "comfortaa",
+    fontStyle: "italic",
+  }),
+};
+---
+
+<figure class:list={styles.root}>
+  <ImageAstro
+    src={image}
+    alt=""
+    width={image.width}
+    height={image.height}
+    class:list={styles.img}
+    blurDataUrl={undefined /* image.blurDataUrl */}
+    priority
+  />
+
+  {
+    "attribution" in image && (
+      <figcaption>
+        <small class:list={styles.attribution}>
+          <span>Photo by </span>
+          <StyledLink href={image.attribution.authorUrl}>
+            {image.attribution.authorName}
+          </StyledLink>
+          <span> on </span>
+          <StyledLink href={image.attribution.siteUrl}>
+            {image.attribution.siteName}
+          </StyledLink>
+        </small>
+      </figcaption>
+    )
+  }
+</figure>

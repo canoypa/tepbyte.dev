@@ -2,7 +2,8 @@
 import type { GetStaticPaths } from "astro";
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
-import { PostInfo, Thumbnail } from "~/features/blog";
+import { PostInfo } from "~/features/blog";
+import Thumbnail from "~/features/blog/thumbnail.astro";
 import MarkdownContainer from "~/features/markdown/markdown_container.astro";
 import Seo from "~/features/seo/seo.astro";
 import { Tags } from "~/features/tags";
