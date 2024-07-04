@@ -36,8 +36,6 @@ const { Content } = await entry.render();
     }}
   />
 
-  <link slot="head" rel="preload" as="image" href={entry.data.image.src} />
-
   <Thumbnail image={entry.data.image} />
   <PostInfo post={entry.data} />
   <MarkdownContainer>
