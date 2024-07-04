@@ -48,12 +48,7 @@ const styles = {
 ---
 
 <div class:list={styles.root}>
-  <ImageAstro
-    src={profile.avatar}
-    alt=""
-    class:list={styles.avatar}
-    blurDataUrl={undefined /* profile.avatar.blurDataUrl */}
-  />
+  <ImageAstro src={profile.avatar} alt="" class:list={styles.avatar} />
   <span class:list={styles.name}>{profile.name}</span>
   <div class:list={styles.info}>
     <span>{profile.subhead}</span>
