@@ -23,14 +23,11 @@
   ],
   "dependencies": {
     "@astrojs/check": "^0.7.0",
-    "@astrojs/react": "^3.5.0",
     "@astrojs/solid-js": "^4.4.0",
     "@playform/compress": "^0.0.13",
     "astro": "^4.10.2",
     "astro-seo": "^0.8.4",
     "blurhash": "^2.0.5",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
     "remark-breaks": "^4.0.0",
     "sharp": "^0.33.4",
     "solid-js": "^1.8.18",
@@ -40,8 +37,6 @@
     "@biomejs/biome": "^1.8.0",
     "@pandacss/dev": "^0.40.1",
     "@types/node": "^20.14.1",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
     "pandacss-preset-material-tokens": "^0.1.2",
     "typescript": "^5.4.5"
   }
