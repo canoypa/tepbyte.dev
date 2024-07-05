@@ -1,14 +1,27 @@
-'use client'
-
 import {
-  useEffect,
-  useRef,
-  type FC,
-  type MouseEventHandler,
-  type PropsWithChildren,
-  type ReactEventHandler,
-} from 'react'
+  type Accessor,
+  type Component,
+  type ParentProps,
+  createEffect,
+  createSignal,
+  onCleanup,
+} from 'solid-js'
 import { css } from '~pandacss/css'
+
+const createScrollLock = () => {
+  const [initialOverflow, setInitialOverflow] = createSignal('')
+
+  const lockScroll = () => {
+    setInitialOverflow(document.body.style.overflow)
+    document.body.style.overflow = 'hidden'
+  }
+
+  const unlockScroll = () => {
+    document.body.style.overflow = initialOverflow()
+  }
+
+  return { lockScroll, unlockScroll }
+}
 
 const styles = {
   dialog: css({
@@ -33,49 +46,38 @@ const styles = {
 }
 
 export type ModalProps = {
-  open: boolean
+  open: Accessor<boolean>
   closeWithBackdrop?: boolean
   onClose?: () => void
-} & PropsWithChildren
+} & ParentProps
 
-export const Modal: FC<ModalProps> = ({
+export const Modal: Component<ModalProps> = ({
   open,
   closeWithBackdrop,
   onClose,
   children,
 }) => {
-  const dialogRef = useRef<HTMLDialogElement>(null)
+  let dialogRef!: HTMLDialogElement
 
-  const initialOverflow = useRef<string>('')
-  useEffect(() => {
-    const lock = () => {
-      initialOverflow.current = document.body.style.overflow
-      document.body.style.overflow = 'hidden'
-    }
-    const unlock = () => {
-      document.body.style.overflow = initialOverflow.current
-    }
+  const { lockScroll, unlockScroll } = createScrollLock()
 
-    open ? lock() : unlock()
-    return () => unlock()
-  }, [open])
+  createEffect(() => {
+    open() ? lockScroll() : unlockScroll()
+    onCleanup(unlockScroll)
+  })
 
-  useEffect(() => {
-    const d = dialogRef.current
+  createEffect(() => {
+    if (open() && !dialogRef.open) dialogRef.showModal()
+    else if (!open() && dialogRef.open) dialogRef.close()
+  })
 
-    if (!d) return
-
-    if (open && !d.open) d.showModal()
-    else if (!open && d.open) d.close()
-  }, [onClose, open])
-
-  const handleCancel: ReactEventHandler = (e) => {
+  const handleCancel = (e: Event) => {
     e.preventDefault()
     onClose?.()
   }
 
-  const handleClick: MouseEventHandler = (e) => {
-    if (closeWithBackdrop && e.target === dialogRef.current) {
+  const handleClick = (e: Event) => {
+    if (closeWithBackdrop && e.target === dialogRef) {
       onClose?.()
     }
   }
@@ -83,7 +85,7 @@ export const Modal: FC<ModalProps> = ({
   return (
     <dialog
       ref={dialogRef}
-      className={styles.dialog}
+      class={styles.dialog}
       onCancel={handleCancel}
       onClick={handleClick}
     >

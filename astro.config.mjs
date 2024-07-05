@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config'
 
-import react from '@astrojs/react'
+import solidJs from '@astrojs/solid-js'
 import compress from '@playform/compress'
 
 import remarkBreaks from 'remark-breaks'
@@ -9,7 +9,7 @@ import remarkBreaks from 'remark-breaks'
 export default defineConfig({
   site: 'https://www.tepbyte.dev',
 
-  integrations: [react(), compress()],
+  integrations: [solidJs(), compress()],
 
   markdown: {
     remarkPlugins: [remarkBreaks],

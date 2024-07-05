@@ -1,13 +1,9 @@
-'use client'
-
 import {
-  useId,
-  useState,
-  type CSSProperties,
-  type FC,
-  type ImgHTMLAttributes,
-} from 'react'
-import { flushSync } from 'react-dom'
+  type Component,
+  type JSX,
+  createSignal,
+  createUniqueId,
+} from 'solid-js'
 import { css } from '~pandacss/css'
 import { Modal } from '../modal'
 
@@ -33,69 +29,74 @@ const styles = {
   }),
 }
 
-export type ImageProps = ImgHTMLAttributes<HTMLImageElement> & {
+export type ImageProps = JSX.ImgHTMLAttributes<HTMLImageElement> & {
   lightbox?: boolean
   blurDataUrl?: string
 }
 
-export const Image: FC<ImageProps> = ({
+export const Image: Component<ImageProps> = ({
   lightbox,
   blurDataUrl,
   ...otherProps
 }) => {
-  const [showBlur, setShowBlur] = useState(true)
+  const viewTransitionName = createUniqueId()
 
-  const viewTransitionName = useId().replace(/:/g, '')
+  const [showBlur, setShowBlur] = createSignal(true)
 
-  const [isLightboxOpen, setLightboxOpen] = useState(false)
-  const [isLightboxAnimating, setIsLightboxAnimating] = useState(false)
+  const [isLightboxOpen, setLightboxOpen] = createSignal(false)
+  const [isLightboxAnimating, setIsLightboxAnimating] = createSignal(false)
 
-  const animate = (open: boolean) => {
-    if (document.startViewTransition) {
-      setIsLightboxAnimating(true)
-
-      const transition = document.startViewTransition(() => {
-        flushSync(() => setLightboxOpen(open))
-      })
-
-      transition.finished.then(() => setIsLightboxAnimating(false))
-    } else {
+  const animate = async (open: boolean) => {
+    if (!document.startViewTransition) {
       setLightboxOpen(open)
+      return
     }
+
+    setIsLightboxAnimating(true)
+
+    const transition = document.startViewTransition(() => {
+      setLightboxOpen(open)
+    })
+
+    await transition.finished
+    setIsLightboxAnimating(false)
   }
 
   const openModal = () => animate(true)
   const closeModal = () => animate(false)
 
-  const lightboxStyles: CSSProperties = lightbox
-    ? {
-        cursor: 'zoom-in',
-        viewTransitionName:
-          !isLightboxOpen && isLightboxAnimating
-            ? viewTransitionName
-            : undefined,
-        visibility: isLightboxOpen ? 'hidden' : undefined,
-      }
-    : {}
+  const lightboxStyles = (): JSX.CSSProperties => {
+    if (!lightbox) return {}
 
-  const blurStyles: CSSProperties =
-    blurDataUrl && showBlur
-      ? {
-          backgroundSize: 'cover',
-          backgroundPosition: '50% 50%',
-          backgroundRepeat: 'no-repeat',
-          backgroundImage: `url(${blurDataUrl})`,
-        }
-      : {}
+    return {
+      cursor: 'zoom-in',
+      'view-transition-name':
+        !isLightboxOpen() && isLightboxAnimating()
+          ? viewTransitionName
+          : undefined,
+      visibility: isLightboxOpen() ? 'hidden' : undefined,
+    }
+  }
+
+  const blurStyles = (): JSX.CSSProperties => {
+    if (!blurDataUrl || !showBlur()) return {}
+
+    return {
+      'background-size': 'cover',
+      'background-position': '50% 50%',
+      'background-repeat': 'no-repeat',
+      'background-image': `url(${blurDataUrl})`,
+    }
+  }
 
   return (
     <>
       <img
         {...otherProps}
-        style={{ ...lightboxStyles, ...blurStyles }}
+        style={{ ...lightboxStyles(), ...blurStyles() }}
         onClick={lightbox ? openModal : undefined}
-        ref={(v) => {
-          v?.decode().finally(() => setShowBlur(false))
+        ref={(el) => {
+          el.decode().finally(() => setShowBlur(false))
         }}
       />
 
@@ -103,11 +104,12 @@ export const Image: FC<ImageProps> = ({
         <Modal open={isLightboxOpen} onClose={closeModal} closeWithBackdrop>
           <img
             {...otherProps}
-            className={styles.lightbox}
+            class={styles.lightbox}
             style={{
-              viewTransitionName: isLightboxAnimating
-                ? viewTransitionName
-                : undefined,
+              'view-transition-name':
+                isLightboxOpen() && isLightboxAnimating()
+                  ? viewTransitionName
+                  : undefined,
             }}
             onClick={closeModal}
           />
