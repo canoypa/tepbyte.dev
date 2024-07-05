@@ -1,0 +1,22 @@
+---
+import { css } from "~pandacss/css";
+import { flex } from "~pandacss/patterns";
+
+const styles = {
+  root: flex({ direction: "column", rowGap: 8 }),
+  title: css({ textStyle: "display-medium", fontFamily: "comfortaa" }),
+  subhead: css({ textStyle: "title-medium" }),
+};
+
+type Props = {
+  title: string;
+  subhead?: string;
+};
+
+const { title, subhead } = Astro.props;
+---
+
+<div class:list={styles.root}>
+  <h1 class:list={styles.title}>{title}</h1>
+  {subhead && <p class:list={styles.subhead}>{subhead}</p>}
+</div>
