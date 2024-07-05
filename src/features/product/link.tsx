@@ -1,6 +1,5 @@
 import type { FC } from 'react'
 import { Chip } from '~/components/chip'
-import type { LinkData } from '~/types/parsed'
 import { flex } from '~pandacss/patterns'
 
 const styles = {
@@ -8,7 +7,7 @@ const styles = {
 }
 
 export type LinkProps = {
-  links: LinkData[]
+  links: { url: string; label: string }[]
 }
 
 export const Link: FC<LinkProps> = ({ links }) => {
