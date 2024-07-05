@@ -1,0 +1,83 @@
+---
+import type { HTMLTag, Polymorphic } from "astro/types";
+import { css, cva } from "~pandacss/css";
+
+const styles = {
+  root: cva({
+    base: {
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      columnGap: 8,
+      paddingX: 12,
+      minWidth: 48,
+      height: 40,
+      rounded: "full",
+      textStyle: "label-large",
+      fontFamily: "comfortaa",
+      color: "dark.primary",
+      fill: "dark.primary",
+
+      backgroundColor: {
+        _hover: "dark.primary/hover",
+        _focusVisible: "dark.primary/hover",
+      },
+    },
+    variants: {
+      withIcon: {
+        true: { paddingX: 16 },
+      },
+    },
+  }),
+  leading: css({
+    width: 18,
+    height: 18,
+    marginLeft: -1,
+  }),
+  trailing: css({
+    width: 18,
+    height: 18,
+    marginRight: -1,
+  }),
+};
+
+type Props<T extends HTMLTag> = Polymorphic<{
+  as: T;
+}>;
+
+const { as: Tag = "button", ...attrs } = Astro.props;
+
+const hasLeading = Astro.slots.has("leading");
+const hasTrailing = Astro.slots.has("trailing");
+
+const defaultAttrs =
+  Tag === "button"
+    ? {
+        type: "button",
+      }
+    : {};
+---
+
+<Tag
+  {...defaultAttrs}
+  {...attrs}
+  class:list={styles.root({ withIcon: Boolean(hasLeading || hasTrailing) })}
+>
+  {
+    hasLeading && (
+      <span class:list={styles.leading}>
+        <slot name="leading" />
+      </span>
+    )
+  }
+  <span>
+    <slot />
+  </span>
+  {
+    hasTrailing && (
+      <span class:list={styles.trailing}>
+        <slot name="trailing" />
+      </span>
+    )
+  }
+</Tag>

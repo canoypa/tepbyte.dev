@@ -1,5 +1,5 @@
 ---
-import { Button } from "~/components/button";
+import Button from "~/components/button/button.astro";
 import { PageHeadline } from "~/features/page_headline";
 import Application from "~/layouts/application.astro";
 ---
@@ -11,6 +11,6 @@ import Application from "~/layouts/application.astro";
   />
 
   <span>
-    <Button as="a" href="/" label="Back to Top Page" />
+    <Button as="a" href="/"> Back to Top Page </Button>
   </span>
 </Application>
