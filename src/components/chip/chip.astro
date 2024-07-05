@@ -29,7 +29,7 @@ type Props<T extends HTMLTag> = Polymorphic<{
   as: T;
 }>;
 
-const { as: Tag = "span", attrs } = Astro.props;
+const { as: Tag = "span", ...attrs } = Astro.props;
 ---
 
 <Tag {...attrs} class:list={styles.root}>
