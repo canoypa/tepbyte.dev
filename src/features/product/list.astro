@@ -1,0 +1,29 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { StyledLink } from "~/components/styled_link";
+import { flex } from "~pandacss/patterns";
+
+const styles = {
+  root: flex({
+    direction: "column",
+    gap: { base: 8, md: 16 },
+  }),
+};
+
+type Props = {
+  items: CollectionEntry<"product">[];
+};
+
+const { items } = Astro.props;
+---
+
+<ul class:list={styles.root}>
+  {
+    items.map((v) => (
+      <li>
+        <StyledLink href={`/products/${v.slug}`}>{v.data.title}</StyledLink>
+        <p>{v.data.subhead}</p>
+      </li>
+    ))
+  }
+</ul>
