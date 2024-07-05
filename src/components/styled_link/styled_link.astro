@@ -1,0 +1,23 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { css } from "~pandacss/css";
+
+const styles = {
+  root: css({
+    color: "dark.info",
+
+    textDecoration: {
+      _hover: "underline",
+      _focusVisible: "underline",
+    },
+  }),
+};
+
+type Props = HTMLAttributes<"a">;
+
+const attrs = Astro.props;
+---
+
+<a {...attrs} class:list={styles.root}>
+  <slot />
+</a>
