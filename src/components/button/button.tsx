@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
+import type { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
 import { css, cva } from '~pandacss/css'
 
 const styles = {

@@ -1,5 +1,5 @@
-import { FC } from 'react'
-import { ProductMeta } from '~/types/parsed'
+import type { CollectionEntry } from 'astro:content'
+import type { FC } from 'react'
 import { flex } from '~pandacss/patterns'
 import { PageHeadline } from '../page_headline'
 import { Link } from './link'
@@ -9,7 +9,7 @@ const styles = {
 }
 
 export type InfoProps = {
-  product: ProductMeta
+  product: CollectionEntry<'product'>['data']
 }
 
 export const Info: FC<InfoProps> = ({ product }) => {

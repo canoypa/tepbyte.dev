@@ -6,7 +6,7 @@ export default defineConfig({
   outdir: 'lib/generated/pandacss',
 
   // Where to look for your css declarations
-  include: ['./src/**/*.{ts,tsx}'],
+  include: ['./src/**/*.{ts,tsx,astro}'],
   // Files to exclude
   exclude: [],
 
@@ -18,7 +18,7 @@ export default defineConfig({
     extend: {
       tokens: {
         fonts: {
-          comfortaa: { value: 'var(--font-comfortaa)' },
+          comfortaa: { value: 'Comfortaa' },
         },
       },
     },

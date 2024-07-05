@@ -1,0 +1,57 @@
+---
+import type { CollectionEntry } from "astro:content";
+import ImageAstro from "~/components/image/image_astro.astro";
+import { css } from "~pandacss/css";
+import { flex } from "~pandacss/patterns";
+import { ProfileLink } from "./profile_link";
+
+type Props = {
+  profile: CollectionEntry<"profile">["data"];
+};
+
+const { profile } = Astro.props;
+
+const styles = {
+  root: css({
+    display: "grid",
+    gridTemplate: "auto / auto 1fr",
+    gridTemplateAreas: {
+      base: '"photo name" "info info"',
+      md: '"photo name" "photo info"',
+    },
+    alignItems: "center",
+    columnGap: { base: 24, md: 32 },
+    rowGap: 16,
+
+    fontFamily: "comfortaa",
+  }),
+  avatar: css({
+    gridArea: "photo",
+
+    width: { base: 96, md: 128 },
+    height: { base: 96, md: 128 },
+    rounded: "full",
+  }),
+  name: css({
+    gridArea: "name",
+
+    textStyle: "display-small",
+  }),
+  info: flex({
+    gridArea: "info",
+
+    direction: "column",
+    rowGap: 16,
+    textStyle: "body-large",
+  }),
+};
+---
+
+<div class:list={styles.root}>
+  <ImageAstro src={profile.avatar} alt="" class:list={styles.avatar} />
+  <span class:list={styles.name}>{profile.name}</span>
+  <div class:list={styles.info}>
+    <span>{profile.subhead}</span>
+    <ProfileLink links={profile.links} />
+  </div>
+</div>

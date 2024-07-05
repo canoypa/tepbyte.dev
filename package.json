@@ -1,15 +1,14 @@
 {
   "name": "tepbyte.dev",
+  "type": "module",
   "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@8.15.1",
   "scripts": {
-    "dev": "next dev",
-    "build": "pnpm run prepare && next build",
-    "start": "next start",
-    "lint": "pnpm run lint:next & pnpm run lint:ts",
-    "lint:next": "next lint",
-    "lint:ts": "tsc --noEmit",
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "lint": "astro check",
     "format": "biome format src --write",
     "prepare": "panda codegen"
   },
@@ -23,10 +22,17 @@
     "last 3 ios major versions"
   ],
   "dependencies": {
-    "google-auth-library": "^9.10.0",
-    "next": "^14.2.3",
+    "@astrojs/check": "^0.7.0",
+    "@astrojs/react": "^3.5.0",
+    "@playform/compress": "^0.0.13",
+    "astro": "^4.10.2",
+    "astro-seo": "^0.8.4",
+    "blurhash": "^2.0.5",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "remark-breaks": "^4.0.0",
+    "sharp": "^0.33.4",
+    "unsplash-js": "^7.0.19"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.0",
@@ -34,10 +40,7 @@
     "@types/node": "^20.14.1",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "eslint": "^8.57.0",
-    "eslint-config-next": "^14.2.3",
     "pandacss-preset-material-tokens": "^0.1.2",
-    "postcss": "^8.4.38",
     "typescript": "^5.4.5"
   }
 }

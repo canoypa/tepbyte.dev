@@ -1,0 +1,29 @@
+---
+import {
+  getImage,
+  type LocalImageProps,
+  type RemoteImageProps,
+} from "astro:assets";
+import { getBlurhashDataUrlFromImage } from "~/core/blurhash";
+import { Image as ImageReact } from "./image";
+
+type Props = (LocalImageProps | RemoteImageProps) & {
+  lightbox?: boolean;
+};
+
+const props = Astro.props;
+
+const image = await getImage(props);
+
+const blurDataUrl = await getBlurhashDataUrlFromImage(image);
+---
+
+<ImageReact
+  src={image.src}
+  className={props.class ?? undefined}
+  blurDataUrl={blurDataUrl}
+  width={image.attributes.width}
+  height={image.attributes.height}
+  {...image.attributes}
+  client:idle
+/>

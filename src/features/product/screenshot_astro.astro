@@ -1,0 +1,43 @@
+---
+import type { CollectionEntry } from "astro:content";
+import ImageAstro from "~/components/image/image_astro.astro";
+import { css } from "~pandacss/css";
+
+type Props = {
+  images: CollectionEntry<"product">["data"]["images"];
+};
+
+const { images } = Astro.props;
+
+const styles = {
+  root: css({
+    display: "flex",
+    gap: 16,
+    overflowX: "auto",
+
+    scrollbarWidth: "none",
+    _scrollbar: { display: "none" },
+  }),
+  image: css({
+    maxWidth: "fit-content",
+    height: { base: 216, md: 288 },
+    rounded: "extra-large",
+    objectFit: "cover",
+  }),
+};
+---
+
+<div class:list={styles.root}>
+  {
+    images.map((v) => (
+      <ImageAstro
+        src={v}
+        alt=""
+        width={v.width}
+        height={v.height}
+        class:list={styles.image}
+        lightbox
+      />
+    ))
+  }
+</div>

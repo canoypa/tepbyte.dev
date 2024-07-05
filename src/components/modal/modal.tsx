@@ -1,12 +1,12 @@
 'use client'
 
 import {
-  FC,
-  MouseEventHandler,
-  PropsWithChildren,
-  ReactEventHandler,
   useEffect,
   useRef,
+  type FC,
+  type MouseEventHandler,
+  type PropsWithChildren,
+  type ReactEventHandler,
 } from 'react'
 import { css } from '~pandacss/css'
 

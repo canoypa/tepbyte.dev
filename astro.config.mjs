@@ -1,0 +1,28 @@
+import { defineConfig } from 'astro/config'
+
+import react from '@astrojs/react'
+import compress from '@playform/compress'
+
+import remarkBreaks from 'remark-breaks'
+
+// https://astro.build/config
+export default defineConfig({
+  site: 'https://www.tepbyte.dev',
+
+  integrations: [react(), compress()],
+
+  markdown: {
+    remarkPlugins: [remarkBreaks],
+
+    remarkRehype: {
+      footnoteLabelProperties: {
+        ariaHidden: true,
+        hidden: true,
+      },
+    },
+
+    shikiConfig: {
+      theme: 'github-dark-default',
+    },
+  },
+})

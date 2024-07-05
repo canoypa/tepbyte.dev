@@ -1,7 +1,12 @@
 'use client'
 
-import Head from 'next/head'
-import { CSSProperties, FC, ImgHTMLAttributes, useId, useState } from 'react'
+import {
+  useId,
+  useState,
+  type CSSProperties,
+  type FC,
+  type ImgHTMLAttributes,
+} from 'react'
 import { flushSync } from 'react-dom'
 import { css } from '~pandacss/css'
 import { Modal } from '../modal'
@@ -30,16 +35,11 @@ const styles = {
 
 export type ImageProps = ImgHTMLAttributes<HTMLImageElement> & {
   lightbox?: boolean
-  priority?: boolean
   blurDataUrl?: string
 }
 
 export const Image: FC<ImageProps> = ({
   lightbox,
-  alt,
-  width,
-  height,
-  priority,
   blurDataUrl,
   ...otherProps
 }) => {
@@ -92,20 +92,17 @@ export const Image: FC<ImageProps> = ({
     <>
       <img
         {...otherProps}
-        alt={alt}
         style={{ ...lightboxStyles, ...blurStyles }}
         onClick={lightbox ? openModal : undefined}
         ref={(v) => {
           v?.decode().finally(() => setShowBlur(false))
         }}
-        loading={priority ? undefined : 'lazy'}
       />
 
       {lightbox ? (
         <Modal open={isLightboxOpen} onClose={closeModal} closeWithBackdrop>
           <img
             {...otherProps}
-            alt={alt}
             className={styles.lightbox}
             style={{
               viewTransitionName: isLightboxAnimating
@@ -115,17 +112,6 @@ export const Image: FC<ImageProps> = ({
             onClick={closeModal}
           />
         </Modal>
-      ) : null}
-
-      {priority ? (
-        <Head>
-          <link
-            key={otherProps.src}
-            rel="preload"
-            as="image"
-            href={otherProps.src}
-          />
-        </Head>
       ) : null}
     </>
   )

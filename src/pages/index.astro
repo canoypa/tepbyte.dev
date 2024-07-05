@@ -1,0 +1,54 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import { BlogList } from "~/features/blog";
+import MarkdownContainer from "~/features/markdown/markdown_container.astro";
+import { ProductList } from "~/features/product";
+import Hero from "~/features/profile/hero.astro";
+import Seo from "~/features/seo/seo.astro";
+import Application from "~/layouts/application.astro";
+import { css } from "~pandacss/css";
+import { flex } from "~pandacss/patterns";
+
+const entry = await getEntry("profile", "canoypa");
+const { Content } = await entry.render();
+
+const products = (await getCollection("product")).sort(
+  (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
+);
+const posts = (await getCollection("post")).sort(
+  (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
+);
+---
+
+<Application>
+  <Seo slot="head" />
+
+  <Hero profile={entry.data} />
+  <MarkdownContainer>
+    <Content />
+  </MarkdownContainer>
+
+  <div class:list={flex({ direction: "column", rowGap: 16 })}>
+    <h2
+      class:list={css({
+        textStyle: "display-small",
+        fontFamily: "comfortaa",
+      })}
+    >
+      Products
+    </h2>
+    <ProductList items={products} />
+  </div>
+
+  <div class:list={flex({ direction: "column", rowGap: 16 })}>
+    <h2
+      class:list={css({
+        textStyle: "display-small",
+        fontFamily: "comfortaa",
+      })}
+    >
+      Blog
+    </h2>
+    <BlogList items={posts} />
+  </div>
+</Application>
