@@ -6,8 +6,8 @@
       "~pandacss/*": ["lib/generated/pandacss/*"],
       "~/*": ["src/*"]
     },
-    "jsx": "react-jsx",
-    "jsxImportSource": "react"
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js"
   },
   "exclude": ["dist"]
 }

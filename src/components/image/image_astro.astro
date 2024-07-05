@@ -20,7 +20,7 @@ const blurDataUrl = await getBlurhashDataUrlFromImage(image);
 
 <ImageReact
   src={image.src}
-  className={props.class ?? undefined}
+  class={props.class ?? undefined}
   blurDataUrl={blurDataUrl}
   width={image.attributes.width}
   height={image.attributes.height}
