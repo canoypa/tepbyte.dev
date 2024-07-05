@@ -1,0 +1,21 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { flex } from "~pandacss/patterns";
+import { PageHeadline } from "../page_headline";
+import { Link } from "./link";
+
+const styles = {
+  root: flex({ direction: "column", gap: 24 }),
+};
+
+type Props = {
+  product: CollectionEntry<"product">["data"];
+};
+
+const { product } = Astro.props;
+---
+
+<div class:list={styles.root}>
+  <PageHeadline title={product.title} subhead={product.subhead} />
+  <Link links={product.links} />
+</div>
