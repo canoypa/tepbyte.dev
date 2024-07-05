@@ -1,0 +1,18 @@
+---
+import { flex } from "~pandacss/patterns";
+import Tag from "./tag.astro";
+
+const styles = {
+  root: flex({ gap: 8, wrap: "wrap" }),
+};
+
+type Props = {
+  tags: string[];
+};
+
+const { tags } = Astro.props;
+---
+
+<div class:list={styles.root}>
+  {tags.map((label) => <Tag>{label}</Tag>)}
+</div>
