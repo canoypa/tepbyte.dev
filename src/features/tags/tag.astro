@@ -1,0 +1,26 @@
+---
+import IconTag from "~/components/icons/tag.astro";
+import { css } from "~pandacss/css";
+
+const styles = {
+  root: css({
+    display: "flex",
+    alignItems: "center",
+    columnGap: 2,
+    height: 24,
+    paddingLeft: 6,
+    paddingRight: 8,
+    rounded: "full",
+    backgroundColor: "dark.secondary-container",
+    color: "dark.on-secondary-container",
+    fill: "dark.on-secondary-container",
+    textStyle: "label-medium",
+    fontFamily: "comfortaa",
+  }),
+};
+---
+
+<span class:list={styles.root}>
+  <IconTag width={16} height={16} />
+  <slot />
+</span>

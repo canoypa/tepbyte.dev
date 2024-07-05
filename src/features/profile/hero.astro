@@ -3,7 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import ImageAstro from "~/components/image/image_astro.astro";
 import { css } from "~pandacss/css";
 import { flex } from "~pandacss/patterns";
-import { ProfileLink } from "./profile_link";
+import ProfileLink from "./profile_link.astro";
 
 type Props = {
   profile: CollectionEntry<"profile">["data"];

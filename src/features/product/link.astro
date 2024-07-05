@@ -1,0 +1,24 @@
+---
+import Chip from "~/components/chip/chip.astro";
+import { flex } from "~pandacss/patterns";
+
+const styles = {
+  root: flex({ gap: 8 }),
+};
+
+type Props = {
+  links: { url: string; label: string }[];
+};
+
+const { links } = Astro.props;
+---
+
+<div class:list={styles.root}>
+  {
+    links.map(({ label, url }) => (
+      <Chip as="a" href={url}>
+        {label}
+      </Chip>
+    ))
+  }
+</div>
