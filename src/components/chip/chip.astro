@@ -1,0 +1,37 @@
+---
+import type { HTMLTag, Polymorphic } from "astro/types";
+import { css } from "~pandacss/css";
+
+const styles = {
+  root: css({
+    display: "inline-flex",
+    alignItems: "center",
+    paddingX: 16,
+    height: 32,
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: "dark.outline",
+    rounded: "small",
+    textStyle: "label-large",
+    fontFamily: "comfortaa",
+    cursor: "pointer",
+    transitionProperty: "background-color",
+    transitionDuration: "medium-1",
+
+    backgroundColor: {
+      _hover: "dark.primary/hover",
+      _focusVisible: "dark.primary/hover",
+    },
+  }),
+};
+
+type Props<T extends HTMLTag> = Polymorphic<{
+  as: T;
+}>;
+
+const { as: Tag = "span", attrs } = Astro.props;
+---
+
+<Tag {...attrs} class:list={styles.root}>
+  <slot />
+</Tag>
