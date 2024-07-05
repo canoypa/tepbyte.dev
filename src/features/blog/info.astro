@@ -1,0 +1,39 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { css } from "~pandacss/css";
+import { flex } from "~pandacss/patterns";
+import { PageHeadline } from "../page_headline";
+
+const styles = {
+  root: flex({ direction: "column", gap: 24 }),
+  dateTime: css({ textStyle: "body-medium", fontFamily: "comfortaa" }),
+};
+
+type Props = {
+  post: CollectionEntry<"post">["data"];
+};
+
+const { post } = Astro.props;
+
+const dateFormatter = Intl.DateTimeFormat("en-us", { dateStyle: "long" });
+
+const publishedAt = dateFormatter.format(post.publishedAt);
+const updatedAt = post.updatedAt && dateFormatter.format(post.updatedAt);
+---
+
+<div class:list={styles.root}>
+  <PageHeadline title={post.title} subhead={post.subhead} />
+  <div class:list={styles.dateTime}>
+    <time datetime={post.publishedAt.toISOString()}>{publishedAt}</time>
+    {
+      updatedAt && (
+        <>
+          <span> - </span>
+          <time datetime={post.updatedAt?.toISOString()}>
+            Updated {updatedAt}
+          </time>
+        </>
+      )
+    }
+  </div>
+</div>
