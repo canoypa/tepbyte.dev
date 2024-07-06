@@ -10,7 +10,7 @@ const styles = {
     height: 32,
     borderWidth: 1,
     borderStyle: "solid",
-    borderColor: "dark.outline",
+    borderColor: { base: "dark.outline", _osLight: "light.outline" },
     rounded: "small",
     textStyle: "label-large",
     fontFamily: "comfortaa",
@@ -19,8 +19,14 @@ const styles = {
     transitionDuration: "medium-1",
 
     backgroundColor: {
-      _hover: "dark.primary/hover",
-      _focusVisible: "dark.primary/hover",
+      _hover: {
+        base: "dark.primary/hover",
+        _osLight: "light.primary/hover",
+      },
+      _focusVisible: {
+        base: "dark.primary/hover",
+        _osLight: "light.primary/hover",
+      },
     },
   }),
 };

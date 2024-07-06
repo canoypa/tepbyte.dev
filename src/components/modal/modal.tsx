@@ -38,7 +38,10 @@ const styles = {
       outline: 'none',
 
       _backdrop: {
-        backgroundColor: 'dark.surface/0.32',
+        backgroundColor: {
+          base: 'dark.surface/0.32',
+          _osLight: 'light.surface/0.32',
+        },
         backdropFilter: 'blur(4px)',
       },
     },

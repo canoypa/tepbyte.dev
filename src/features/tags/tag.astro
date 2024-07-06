@@ -11,9 +11,18 @@ const styles = {
     paddingLeft: 6,
     paddingRight: 8,
     rounded: "full",
-    backgroundColor: "dark.secondary-container",
-    color: "dark.on-secondary-container",
-    fill: "dark.on-secondary-container",
+    backgroundColor: {
+      base: "dark.secondary-container",
+      _osLight: "light.secondary-container",
+    },
+    color: {
+      base: "dark.on-secondary-container",
+      _osLight: "light.on-secondary-container",
+    },
+    fill: {
+      base: "dark.on-secondary-container",
+      _osLight: "light.on-secondary-container",
+    },
     textStyle: "label-medium",
     fontFamily: "comfortaa",
   }),

@@ -17,7 +17,7 @@ const style = {
     },
 
     "& a": {
-      color: "dark.info",
+      color: { base: "dark.info", _osLight: "light.info" },
 
       "&:hover": {
         textDecoration: "underline",
@@ -49,7 +49,7 @@ const style = {
 
     "& blockquote": {
       borderLeft: "4px solid",
-      borderColor: "dark.outline",
+      borderColor: { base: "dark.outline", _osLight: "light.outline" },
       padding: "0.5rem 1rem",
     },
 
@@ -68,7 +68,7 @@ const style = {
       "& :where(th,td)": {
         padding: "0.5rem 1rem",
         border: "1px solid",
-        borderColor: "dark.outline",
+        borderColor: { base: "dark.outline", _osLight: "light.outline" },
       },
     },
 
@@ -101,7 +101,10 @@ const style = {
     "& :not(pre) code": {
       paddingInline: "0.2rem",
       borderRadius: "extra-small",
-      backgroundColor: "dark.surface-variant",
+      backgroundColor: {
+        base: "dark.surface-variant",
+        _osLight: "light.surface-variant",
+      },
       textStyle: "body-medium",
     },
 
@@ -109,7 +112,7 @@ const style = {
       padding: "0.1rem 0.2rem",
       border: "1px solid",
       borderBottom: "2px solid",
-      borderColor: "dark.outline",
+      borderColor: { base: "dark.outline", _osLight: "light.outline" },
       borderRadius: "extra-small",
       textStyle: "body-medium",
     },
@@ -120,12 +123,15 @@ const style = {
     },
 
     "& mark": {
-      backgroundColor: "dark.warning-container/80",
+      backgroundColor: {
+        base: "dark.warning-container/80",
+        _osLight: "light.warning-container/80",
+      },
     },
 
     "& .footnotes": {
       border: "1px solid",
-      borderColor: "dark.outline",
+      borderColor: { base: "dark.outline", _osLight: "light.outline" },
       borderRadius: "small",
       padding: "1rem",
 
