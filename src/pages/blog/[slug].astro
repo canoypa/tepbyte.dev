@@ -4,6 +4,7 @@ import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
 import PostInfo from "~/features/blog/info.astro";
 import Thumbnail from "~/features/blog/thumbnail.astro";
+import Breadcrumb from "~/features/breadcrumb.astro";
 import MarkdownContainer from "~/features/markdown/markdown_container.astro";
 import Seo from "~/features/seo/seo.astro";
 import Tags from "~/features/tags/tags.astro";
@@ -36,6 +37,9 @@ const { Content } = await entry.render();
     }}
   />
 
+  <Breadcrumb
+    list={[{ label: "Home", href: "/" }, { label: entry.data.title }]}
+  />
   <Thumbnail image={entry.data.image} />
   <PostInfo post={entry.data} />
   <MarkdownContainer>

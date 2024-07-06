@@ -1,0 +1,25 @@
+---
+import StyledLink from "~/components/styled_link/styled_link.astro";
+import { flex } from "~pandacss/patterns";
+
+type Props = {
+  list: Array<{ label: string } | { label: string; href: string }>;
+};
+
+const { list } = Astro.props;
+---
+
+<div class={flex({ gap: 8, textStyle: "label-large" })}>
+  {
+    list.map((item, index) => (
+      <Fragment>
+        {index > 0 && <span>/</span>}
+        {"href" in item ? (
+          <StyledLink href={item.href}>{item.label}</StyledLink>
+        ) : (
+          <span>{item.label}</span>
+        )}
+      </Fragment>
+    ))
+  }
+</div>

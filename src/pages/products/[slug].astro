@@ -2,6 +2,7 @@
 import type { GetStaticPaths } from "astro";
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
+import Breadcrumb from "~/features/breadcrumb.astro";
 import MarkdownContainer from "~/features/markdown/markdown_container.astro";
 import Info from "~/features/product/info.astro";
 import ScreenshotAstro from "~/features/product/screenshot_astro.astro";
@@ -36,6 +37,9 @@ const { Content } = await entry.render();
     }}
   />
 
+  <Breadcrumb
+    list={[{ label: "Home", href: "/" }, { label: entry.data.title }]}
+  />
   <ScreenshotAstro images={entry.data.images} />
   <Info product={entry.data} />
   <MarkdownContainer>
