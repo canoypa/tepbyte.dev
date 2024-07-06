@@ -15,12 +15,18 @@ const styles = {
       rounded: "full",
       textStyle: "label-large",
       fontFamily: "comfortaa",
-      color: "dark.primary",
-      fill: "dark.primary",
+      color: { base: "dark.primary", _osLight: "light.primary" },
+      fill: { base: "dark.primary", _osLight: "light.primary" },
 
       backgroundColor: {
-        _hover: "dark.primary/hover",
-        _focusVisible: "dark.primary/hover",
+        _hover: {
+          base: "dark.primary/hover",
+          _osLight: "light.primary/hover",
+        },
+        _focusVisible: {
+          base: "dark.primary/hover",
+          _osLight: "light.primary/hover",
+        },
       },
     },
     variants: {

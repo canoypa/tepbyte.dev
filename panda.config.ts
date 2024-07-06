@@ -47,11 +47,17 @@ export default defineConfig({
       backgroundColor: 'dark.surface',
       color: 'dark.on-surface',
       fill: 'dark.on-surface',
+
+      _osLight: {
+        backgroundColor: 'light.surface',
+        color: 'light.on-surface',
+        fill: 'light.on-surface',
+      },
     },
     ':focus-visible': {
       outlineWidth: 2,
       outlineStyle: 'solid',
-      outlineColor: 'dark.primary',
+      outlineColor: { base: 'dark.primary', _osLight: 'light.primary' },
       outlineOffset: 2,
     },
   },

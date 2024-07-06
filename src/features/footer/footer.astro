@@ -10,8 +10,14 @@ const styles = {
     paddingY: { smDown: 32, sm: 48 },
     borderTopWidth: 1,
     borderTopStyle: "solid",
-    borderTopColor: "dark.outline-variant",
-    color: "dark.on-surface-variant",
+    borderTopColor: {
+      base: "dark.outline-variant",
+      _osLight: "light.outline-variant",
+    },
+    color: {
+      base: "dark.on-surface-variant",
+      _osLight: "light.on-surface-variant",
+    },
     textStyle: "body-small",
   }),
 };
