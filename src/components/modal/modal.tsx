@@ -39,8 +39,8 @@ const styles = {
 
       _backdrop: {
         backgroundColor: {
-          base: 'dark.surface/0.32',
-          _osLight: 'light.surface/0.32',
+          base: 'dark.scrim/32',
+          _osLight: 'light.scrim/32',
         },
         backdropFilter: 'blur(4px)',
       },
