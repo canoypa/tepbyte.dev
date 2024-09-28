@@ -6,7 +6,7 @@ image: https://unsplash.com/photos/rTZW4f02zY8
 publishedAt: 2024-07-07
 ---
 
-以前「[Tepbyte.dev の技術構成](/blog/tepbyte-dev-tech-stack)」とか題して工夫してますぜという話をしてましたが、Astro に移行しちゃいました。
+以前「[Tepbyte.dev の技術構成](/posts/tepbyte-dev-tech-stack)」とか題して工夫してますぜという話をしてましたが、Astro に移行しちゃいました。
 
 すべてを自作するのは楽しいんですが大変です、みなさんはやめましょう。
 

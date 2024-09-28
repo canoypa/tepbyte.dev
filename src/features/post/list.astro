@@ -21,7 +21,7 @@ const { items } = Astro.props;
   {
     items.map((v) => (
       <li>
-        <StyledLink href={`/blog/${v.slug}`}>{v.data.title}</StyledLink>
+        <StyledLink href={`/posts/${v.slug}`}>{v.data.title}</StyledLink>
         <p>{v.data.subhead}</p>
       </li>
     ))

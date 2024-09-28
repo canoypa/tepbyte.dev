@@ -1,6 +1,6 @@
 ---
 import { getCollection, getEntry } from "astro:content";
-import BlogList from "~/features/blog/list.astro";
+import PostList from "~/features/post/list.astro";
 import MarkdownContainer from "~/features/markdown/markdown_container.astro";
 import ProductList from "~/features/product/list.astro";
 import Hero from "~/features/profile/hero.astro";
@@ -47,8 +47,8 @@ const posts = (await getCollection("post")).sort(
         fontFamily: "comfortaa",
       })}
     >
-      Blog
+      Posts
     </h2>
-    <BlogList items={posts} />
+    <PostList items={posts} />
   </div>
 </Application>
