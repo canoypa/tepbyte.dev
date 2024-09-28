@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import ImageAstro from "~/components/image/image_astro.astro";
+import Image from "~/components/image/image.astro";
 import StyledLink from "~/components/styled_link/styled_link.astro";
 import { css } from "~pandacss/css";
 import { flex } from "~pandacss/patterns";
@@ -28,7 +28,7 @@ const styles = {
 ---
 
 <figure class:list={styles.root}>
-  <ImageAstro
+  <Image
     src={image.src}
     alt=""
     width={image.width}

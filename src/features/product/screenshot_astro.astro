@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import ImageAstro from "~/components/image/image_astro.astro";
+import Image from "~/components/image/image.astro";
 import { css } from "~pandacss/css";
 
 type Props = {
@@ -30,7 +30,7 @@ const styles = {
 <div class:list={styles.root}>
   {
     images.map((v) => (
-      <ImageAstro
+      <Image
         src={v}
         alt=""
         width={v.width}
