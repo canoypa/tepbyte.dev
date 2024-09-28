@@ -30,7 +30,7 @@ export const Image: Component<ImageProps> = ({
 }) => {
   const viewTransitionName = createUniqueId()
 
-  const [showBlur, setShowBlur] = createSignal(true)
+  const [showBlur, setShowBlur] = createSignal(!!blurDataUrl)
 
   const [isLightboxOpen, setLightboxOpen] = createSignal(false)
   const [isLightboxAnimating, setIsLightboxAnimating] = createSignal(false)
