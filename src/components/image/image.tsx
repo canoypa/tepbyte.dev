@@ -8,6 +8,12 @@ import { css } from '~pandacss/css'
 import { Modal } from '../modal'
 
 const styles = {
+  cursorZoomIn: css({
+    cursor: 'zoom-in',
+  }),
+  visibilityHidden: css({
+    visibility: 'hidden',
+  }),
   lightbox: css({
     width: 'auto',
     height: 'auto',
@@ -15,6 +21,12 @@ const styles = {
     maxHeight: '100%',
     rounded: 'extra-small',
     cursor: 'zoom-out',
+  }),
+
+  blur: css({
+    backgroundSize: 'cover',
+    backgroundPosition: '50% 50%',
+    backgroundRepeat: 'no-repeat',
   }),
 }
 
@@ -26,6 +38,7 @@ export type ImageProps = JSX.ImgHTMLAttributes<HTMLImageElement> & {
 export const Image: Component<ImageProps> = ({
   lightbox,
   blurDataUrl,
+  classList,
   ...otherProps
 }) => {
   const viewTransitionName = createUniqueId()
@@ -58,22 +71,17 @@ export const Image: Component<ImageProps> = ({
     if (!lightbox) return {}
 
     return {
-      cursor: 'zoom-in',
       'view-transition-name':
         !isLightboxOpen() && isLightboxAnimating()
           ? viewTransitionName
           : undefined,
-      visibility: isLightboxOpen() ? 'hidden' : undefined,
     }
   }
 
   const blurStyles = (): JSX.CSSProperties => {
-    if (!blurDataUrl || !showBlur()) return {}
+    if (!showBlur()) return {}
 
     return {
-      'background-size': 'cover',
-      'background-position': '50% 50%',
-      'background-repeat': 'no-repeat',
       'background-image': `url(${blurDataUrl})`,
     }
   }
@@ -82,6 +90,12 @@ export const Image: Component<ImageProps> = ({
     <>
       <img
         {...otherProps}
+        classList={{
+          [styles.cursorZoomIn]: lightbox,
+          [styles.visibilityHidden]: isLightboxOpen(),
+          [styles.blur]: showBlur(),
+          ...classList,
+        }}
         style={{ ...lightboxStyles(), ...blurStyles() }}
         onClick={lightbox ? openModal : undefined}
         ref={(el) => {
