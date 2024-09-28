@@ -7,19 +7,6 @@ import {
 import { css } from '~pandacss/css'
 import { Modal } from '../modal'
 
-declare global {
-  interface ViewTransition {
-    finished: Promise<void>
-    ready: Promise<void>
-    updateCallbackDone: Promise<void>
-    skipTransition: () => void
-  }
-
-  interface Document {
-    startViewTransition?(updateCallback: () => void): ViewTransition
-  }
-}
-
 const styles = {
   lightbox: css({
     width: 'auto',
