@@ -1,0 +1,20 @@
+---
+import { getCollection } from "astro:content";
+import Breadcrumb from "~/features/breadcrumb.astro";
+import PageHeadline from "~/features/page_headline/page_headline.astro";
+import ProductList from "~/features/product/list.astro";
+import Seo from "~/features/seo/seo.astro";
+import Application from "~/layouts/application.astro";
+
+const products = (await getCollection("product")).sort(
+  (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
+);
+---
+
+<Application>
+  <Seo slot="head" title="Products" description="作ったもの" />
+
+  <Breadcrumb list={[{ label: "Home", href: "/" }, { label: "Products" }]} />
+  <PageHeadline title="Products" subhead="作ったもの" />
+  <ProductList items={products} />
+</Application>

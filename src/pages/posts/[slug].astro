@@ -38,7 +38,11 @@ const { Content } = await entry.render();
   />
 
   <Breadcrumb
-    list={[{ label: "Home", href: "/" }, { label: entry.data.title }]}
+    list={[
+      { label: "Home", href: "/" },
+      { label: "Posts", href: "/posts" },
+      { label: entry.data.title },
+    ]}
   />
   <Thumbnail image={entry.data.image} />
   <PostInfo post={entry.data} />
