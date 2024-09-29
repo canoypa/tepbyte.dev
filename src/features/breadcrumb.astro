@@ -1,5 +1,6 @@
 ---
 import StyledLink from "~/components/styled_link/styled_link.astro";
+import { css } from "~pandacss/css";
 import { flex } from "~pandacss/patterns";
 
 type BreadcrumbItem = { label: string; href: string };
@@ -10,23 +11,39 @@ type Props = {
 };
 
 const { list } = Astro.props;
+
+const styles = {
+  list: flex({
+    gap: 8,
+    textStyle: "label-large",
+  }),
+  item: css({
+    "& + &::before": {
+      content: '"/" / ""',
+      marginInlineEnd: "0.5rem",
+    },
+  }),
+};
 ---
 
-<nav class={flex({ gap: 8, textStyle: "label-large" })} aria-label="Breadcrumb">
-  {
-    list.map((item, index) => {
-      const isCurrent = !("href" in item);
+<nav aria-label="Breadcrumb">
+  <ol class:list={styles.list}>
+    {
+      list.map((item) => {
+        const isCurrent = !("href" in item);
 
-      return (
-        <>
-          {index > 0 && <span>/</span>}
-          {isCurrent ? (
-            <span aria-current="page">{item.label}</span>
-          ) : (
-            <StyledLink href={item.href}>{item.label}</StyledLink>
-          )}
-        </>
-      );
-    })
-  }
+        return (
+          <li class:list={styles.item}>
+            {isCurrent ? (
+              <a href="" aria-current="page">
+                {item.label}
+              </a>
+            ) : (
+              <StyledLink href={item.href}>{item.label}</StyledLink>
+            )}
+          </li>
+        );
+      })
+    }
+  </ol>
 </nav>
