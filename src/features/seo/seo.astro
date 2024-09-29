@@ -16,6 +16,9 @@ type Props = {
       description?: string;
     };
   };
+
+  noindex?: boolean;
+  nofollow?: boolean;
 };
 
 const props = Astro.props;
@@ -27,7 +30,6 @@ const description = props.description || "Cano's portfolio site.";
 ---
 
 <SEO
-  title={title}
   titleTemplate={`%s - ${siteName}`}
   titleDefault={siteName}
   description={description}
@@ -44,4 +46,6 @@ const description = props.description || "Cano's portfolio site.";
       ...props.openGraph?.optional,
     },
   }}
+  noindex={props.noindex}
+  nofollow={props.nofollow}
 />
