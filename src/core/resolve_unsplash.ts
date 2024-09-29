@@ -59,11 +59,14 @@ export const resolveUnsplash = async (
   const siteUrl = new URL('https://unsplash.com')
   siteUrl.search = attributionParams.toString()
 
+  const srcUrl = new URL(data.urls.regular)
+  srcUrl.searchParams.set('fm', 'webp')
+
   const metadata: UnsplashImageMetadata = {
-    src: data.urls.regular,
+    src: srcUrl.toString(),
     width: data.width,
     height: data.height,
-    format: 'jpeg',
+    format: 'webp',
 
     attribution: {
       authorName: data.user.name,
