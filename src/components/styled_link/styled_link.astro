@@ -15,9 +15,9 @@ const styles = {
 
 type Props = HTMLAttributes<"a">;
 
-const attrs = Astro.props;
+const { class: className, ...attrs } = Astro.props;
 ---
 
-<a {...attrs} class:list={styles.root}>
+<a {...attrs} class:list={[className, styles.root]}>
   <slot />
 </a>
