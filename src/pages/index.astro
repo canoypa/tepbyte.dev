@@ -8,16 +8,17 @@ import Seo from "~/features/seo/seo.astro";
 import Application from "~/layouts/application.astro";
 import { css } from "~pandacss/css";
 import { flex } from "~pandacss/patterns";
+import Button from "~/components/button/button.astro";
 
 const entry = await getEntry("profile", "canoypa");
 const { Content } = await entry.render();
 
-const products = (await getCollection("product")).sort(
-  (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
-);
-const posts = (await getCollection("post")).sort(
-  (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
-);
+const products = (await getCollection("product"))
+  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
+  .slice(0, 5);
+const posts = (await getCollection("post"))
+  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
+  .slice(0, 5);
 ---
 
 <Application>
@@ -38,6 +39,9 @@ const posts = (await getCollection("post")).sort(
       Products
     </h2>
     <ProductList items={products} />
+    <div>
+      <Button as="a" href="/products">すべて見る</Button>
+    </div>
   </div>
 
   <div class:list={flex({ direction: "column", rowGap: 16 })}>
@@ -50,5 +54,8 @@ const posts = (await getCollection("post")).sort(
       Posts
     </h2>
     <PostList items={posts} />
+    <div>
+      <Button as="a" href="/posts">すべて見る</Button>
+    </div>
   </div>
 </Application>
