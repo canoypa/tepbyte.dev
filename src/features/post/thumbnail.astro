@@ -28,28 +28,31 @@ const styles = {
 ---
 
 <figure class:list={styles.root}>
-  <Image
-    src={image.src}
-    alt=""
-    width={image.width}
-    height={image.height}
-    class:list={styles.img}
-  />
-
   {
-    "attribution" in image && (
-      <figcaption>
-        <small class:list={styles.attribution}>
-          <span>Photo by </span>
-          <StyledLink href={image.attribution.authorUrl}>
-            {image.attribution.authorName}
-          </StyledLink>
-          <span> on </span>
-          <StyledLink href={image.attribution.siteUrl}>
-            {image.attribution.siteName}
-          </StyledLink>
-        </small>
-      </figcaption>
+    "attribution" in image ? (
+      <>
+        <Image
+          src={image.src}
+          alt=""
+          width={image.width}
+          height={image.height}
+          class:list={styles.img}
+        />
+        <figcaption>
+          <small class:list={styles.attribution}>
+            <span>Photo by </span>
+            <StyledLink href={image.attribution.authorUrl}>
+              {image.attribution.authorName}
+            </StyledLink>
+            <span> on </span>
+            <StyledLink href={image.attribution.siteUrl}>
+              {image.attribution.siteName}
+            </StyledLink>
+          </small>
+        </figcaption>
+      </>
+    ) : (
+      <Image src={image} alt="" class:list={styles.img} />
     )
   }
 </figure>
