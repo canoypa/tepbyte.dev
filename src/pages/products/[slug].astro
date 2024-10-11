@@ -44,10 +44,13 @@ const { Content } = await entry.render();
       { label: entry.data.title },
     ]}
   />
-  <ScreenshotAstro images={entry.data.images} />
-  <Info product={entry.data} />
-  <MarkdownContainer>
-    <Content />
-  </MarkdownContainer>
-  {entry.data.tags.length > 0 && <Tags tags={entry.data.tags} />}
+
+  <article>
+    <ScreenshotAstro images={entry.data.images} />
+    <Info product={entry.data} />
+    <MarkdownContainer>
+      <Content />
+    </MarkdownContainer>
+    {entry.data.tags.length > 0 && <Tags tags={entry.data.tags} />}
+  </article>
 </Application>

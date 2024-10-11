@@ -44,14 +44,17 @@ const { Content } = await entry.render();
       { label: entry.data.title },
     ]}
   />
-  <Thumbnail image={entry.data.image} />
-  <PostInfo post={entry.data} />
-  <MarkdownContainer>
-    <Content />
-  </MarkdownContainer>
-  {
-    entry.data.tags && entry.data.tags.length > 0 && (
-      <Tags tags={entry.data.tags} />
-    )
-  }
+
+  <article>
+    <Thumbnail image={entry.data.image} />
+    <PostInfo post={entry.data} />
+    <MarkdownContainer>
+      <Content />
+    </MarkdownContainer>
+    {
+      entry.data.tags && entry.data.tags.length > 0 && (
+        <Tags tags={entry.data.tags} />
+      )
+    }
+  </article>
 </Application>

@@ -1,19 +1,12 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import StyledLink from "~/components/styled_link/styled_link.astro";
-import { css } from "~pandacss/css";
+import ArticleCard from "~/components/article_card.astro";
 import { flex } from "~pandacss/patterns";
 
 const styles = {
   root: flex({
     direction: "column",
     gap: { base: 8, md: 16 },
-  }),
-  time: css({
-    textStyle: "label-medium",
-  }),
-  title: css({
-    textStyle: "title-medium",
   }),
 };
 
@@ -22,23 +15,18 @@ type Props = {
 };
 
 const { items } = Astro.props;
-
-const dateFormatter = Intl.DateTimeFormat("en-us", { dateStyle: "long" });
 ---
 
 <ul class:list={styles.root}>
   {
-    items.map((v) => (
+    items.map((item) => (
       <li>
-        <p class:list={styles.time}>
-          <time datetime={v.data.publishedAt.toISOString()}>
-            {dateFormatter.format(v.data.publishedAt)}
-          </time>
-        </p>
-        <StyledLink href={`/products/${v.slug}`} class:list={styles.title}>
-          {v.data.title}
-        </StyledLink>
-        <p>{v.data.subhead}</p>
+        <ArticleCard
+          date={item.data.publishedAt}
+          link={`/products/${item.slug}`}
+          title={item.data.title}
+          subhead={item.data.subhead}
+        />
       </li>
     ))
   }

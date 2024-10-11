@@ -1,0 +1,38 @@
+---
+import { css } from "~pandacss/css";
+import StyledLink from "./styled_link/styled_link.astro";
+
+const styles = {
+  time: css({
+    textStyle: "label-medium",
+  }),
+  title: css({
+    textStyle: "title-medium",
+  }),
+};
+
+const dateFormatter = Intl.DateTimeFormat("en-us", { dateStyle: "long" });
+
+type Props = {
+  date: Date;
+  link: URL | string;
+  title: string;
+  subhead: string;
+};
+
+const { date, link, title, subhead } = Astro.props;
+---
+
+<article>
+  <p class:list={styles.time}>
+    <time datetime={date.toISOString()}>
+      {dateFormatter.format(date)}
+    </time>
+  </p>
+  <h3>
+    <StyledLink href={link} class:list={styles.title}>
+      {title}
+    </StyledLink>
+  </h3>
+  <p>{subhead}</p>
+</article>
