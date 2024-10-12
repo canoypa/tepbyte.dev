@@ -2,28 +2,32 @@
 import type { GetStaticPaths } from "astro";
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
+import PostInfo from "~/features/post/info.astro";
+import Thumbnail from "~/features/post/thumbnail.astro";
 import Breadcrumb from "~/features/breadcrumb.astro";
 import MarkdownContainer from "~/features/markdown/markdown_container.astro";
-import Info from "~/features/product/info.astro";
-import ScreenshotAstro from "~/features/product/screenshot_astro.astro";
 import Seo from "~/features/seo/seo.astro";
 import Tags from "~/features/tags/tags.astro";
 import Application from "~/layouts/application.astro";
 import { flex } from "~pandacss/patterns";
+import { render } from "astro:content";
+import { imageProcessor } from "~/core/image/processor";
 
 export const getStaticPaths = (async () => {
-  const collection = await getCollection("product");
+  const collection = await getCollection("post");
 
   return collection.map((entry) => ({
-    params: { slug: entry.slug },
+    params: { id: entry.id },
     props: entry,
   }));
 }) satisfies GetStaticPaths;
 
-type Props = CollectionEntry<"product">;
+type Props = CollectionEntry<"post">;
 
 const entry = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
+
+const image = await imageProcessor(entry.data.image);
 ---
 
 <Application>
@@ -33,7 +37,7 @@ const { Content } = await entry.render();
     description={entry.data.subhead}
     openGraph={{
       basic: {
-        image: entry.data.images[0].src,
+        image: image.src,
       },
     }}
   />
@@ -41,17 +45,21 @@ const { Content } = await entry.render();
   <Breadcrumb
     list={[
       { label: "Home", href: "/" },
-      { label: "Products", href: "/products" },
+      { label: "Posts", href: "/posts" },
       { label: entry.data.title },
     ]}
   />
 
   <article class:list={flex({ direction: "column", gap: 32 })}>
-    <ScreenshotAstro images={entry.data.images} />
-    <Info product={entry.data} />
+    <Thumbnail image={image} />
+    <PostInfo post={entry.data} />
     <MarkdownContainer>
       <Content />
     </MarkdownContainer>
-    {entry.data.tags.length > 0 && <Tags tags={entry.data.tags} />}
+    {
+      entry.data.tags && entry.data.tags.length > 0 && (
+        <Tags tags={entry.data.tags} />
+      )
+    }
   </article>
 </Application>

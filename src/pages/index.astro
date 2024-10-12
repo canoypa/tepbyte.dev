@@ -9,9 +9,10 @@ import Application from "~/layouts/application.astro";
 import { css } from "~pandacss/css";
 import { flex } from "~pandacss/patterns";
 import Button from "~/components/button/button.astro";
+import { render } from "astro:content";
 
 const entry = await getEntry("profile", "canoypa");
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 
 const products = (await getCollection("product"))
   .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())

@@ -1,29 +1,30 @@
 ---
 import type { GetStaticPaths } from "astro";
 import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
 import { getCollection } from "astro:content";
-import PostInfo from "~/features/post/info.astro";
-import Thumbnail from "~/features/post/thumbnail.astro";
 import Breadcrumb from "~/features/breadcrumb.astro";
 import MarkdownContainer from "~/features/markdown/markdown_container.astro";
+import Info from "~/features/product/info.astro";
+import ScreenshotAstro from "~/features/product/screenshot_astro.astro";
 import Seo from "~/features/seo/seo.astro";
 import Tags from "~/features/tags/tags.astro";
 import Application from "~/layouts/application.astro";
 import { flex } from "~pandacss/patterns";
 
 export const getStaticPaths = (async () => {
-  const collection = await getCollection("post");
+  const collection = await getCollection("product");
 
   return collection.map((entry) => ({
-    params: { slug: entry.slug },
+    params: { id: entry.id },
     props: entry,
   }));
 }) satisfies GetStaticPaths;
 
-type Props = CollectionEntry<"post">;
+type Props = CollectionEntry<"product">;
 
 const entry = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 ---
 
 <Application>
@@ -33,7 +34,7 @@ const { Content } = await entry.render();
     description={entry.data.subhead}
     openGraph={{
       basic: {
-        image: entry.data.image.src,
+        image: entry.data.images[0].src,
       },
     }}
   />
@@ -41,21 +42,17 @@ const { Content } = await entry.render();
   <Breadcrumb
     list={[
       { label: "Home", href: "/" },
-      { label: "Posts", href: "/posts" },
+      { label: "Products", href: "/products" },
       { label: entry.data.title },
     ]}
   />
 
   <article class:list={flex({ direction: "column", gap: 32 })}>
-    <Thumbnail image={entry.data.image} />
-    <PostInfo post={entry.data} />
+    <ScreenshotAstro images={entry.data.images} />
+    <Info product={entry.data} />
     <MarkdownContainer>
       <Content />
     </MarkdownContainer>
-    {
-      entry.data.tags && entry.data.tags.length > 0 && (
-        <Tags tags={entry.data.tags} />
-      )
-    }
+    {entry.data.tags.length > 0 && <Tags tags={entry.data.tags} />}
   </article>
 </Application>

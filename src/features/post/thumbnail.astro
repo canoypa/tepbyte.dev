@@ -1,12 +1,12 @@
 ---
-import type { CollectionEntry } from "astro:content";
 import Image from "~/components/image/image.astro";
 import StyledLink from "~/components/styled_link/styled_link.astro";
+import type { ImageMetadata } from "~/core/image/types";
 import { css } from "~pandacss/css";
 import { flex } from "~pandacss/patterns";
 
 type Props = {
-  image: CollectionEntry<"post">["data"]["image"];
+  image: ImageMetadata;
 };
 
 const { image } = Astro.props;

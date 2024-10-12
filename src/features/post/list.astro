@@ -23,7 +23,7 @@ const { items } = Astro.props;
       <li>
         <ArticleCard
           date={item.data.publishedAt}
-          link={`/posts/${item.slug}`}
+          link={`/posts/${item.id}`}
           title={item.data.title}
           subhead={item.data.subhead}
         />
