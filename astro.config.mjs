@@ -10,6 +10,10 @@ export default defineConfig({
   site: 'https://www.tepbyte.dev',
   trailingSlash: 'never',
 
+  build: {
+    assets: '_',
+  },
+
   integrations: [solidJs(), compress()],
 
   markdown: {
