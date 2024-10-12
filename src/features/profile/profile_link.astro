@@ -13,12 +13,14 @@ type Props = {
 const { links } = Astro.props;
 ---
 
-<div class:list={styles.root}>
+<ul class:list={styles.root}>
   {
     links.map(({ label, url }) => (
-      <Chip as="a" href={url}>
-        {label}
-      </Chip>
+      <li>
+        <Chip as="a" href={url}>
+          {label}
+        </Chip>
+      </li>
     ))
   }
-</div>
+</ul>
