@@ -57,8 +57,17 @@ export async function getBlurhashDataUrlFromImage(
     return await blurDataUrlFromImage(data)
   }
 
-  if ('fsPath' in image.options.src) {
-    const buffer = await readFile(image.options.src.fsPath as string)
+  if ('src' in image.options.src) {
+    const filename = image.options.src.src
+      .replace(/^\/@fs/, '/')
+      .replace(/\?.+$/, '')
+
+    const imageFsPath = import.meta.env.PROD
+      ? ['./dist', filename].join('')
+      : filename
+
+    const buffer = await readFile(imageFsPath)
+
     return await blurDataUrlFromImage(buffer)
   }
 
