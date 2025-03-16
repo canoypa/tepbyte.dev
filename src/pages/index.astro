@@ -12,6 +12,10 @@ import Button from "~/components/button/button.astro";
 import { render } from "astro:content";
 
 const entry = await getEntry("profile", "canoypa");
+if (!entry) {
+  throw new Error("Profile not found");
+}
+
 const { Content } = await render(entry);
 
 const products = (await getCollection("product"))

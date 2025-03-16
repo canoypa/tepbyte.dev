@@ -1,13 +1,10 @@
 ---
-import {
-  getImage,
-  type LocalImageProps,
-  type RemoteImageProps,
-} from "astro:assets";
+import type { UnresolvedImageTransform } from "astro";
+import { getImage } from "astro:assets";
 import { getBlurhashDataUrlFromImage } from "~/core/blurhash";
 import { Image as ImageReact } from "./image";
 
-type Props = (LocalImageProps | RemoteImageProps) & {
+type Props = UnresolvedImageTransform & {
   lightbox?: boolean;
 };
 
