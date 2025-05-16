@@ -22,13 +22,13 @@
   ],
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/solid-js": "5.0.5",
+    "@astrojs/solid-js": "5.0.10",
     "@playform/compress": "^0.1.7",
-    "astro": "5.5.2",
+    "astro": "5.7.13",
     "astro-seo": "^0.8.4",
     "blurhash": "^2.0.5",
     "remark-breaks": "^4.0.0",
-    "sharp": "^0.33.5",
+    "sharp": "^0.34.1",
     "solid-js": "^1.9.5",
     "unsplash-js": "^7.0.19"
   },
