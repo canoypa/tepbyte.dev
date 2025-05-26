@@ -1,4 +1,4 @@
-import { defineConfig } from 'astro/config'
+import { defineConfig, fontProviders } from 'astro/config'
 
 import solidJs from '@astrojs/solid-js'
 import compress from '@playform/compress'
@@ -29,5 +29,15 @@ export default defineConfig({
     shikiConfig: {
       theme: 'github-dark-default',
     },
+  },
+
+  experimental: {
+    fonts: [
+      {
+        provider: fontProviders.google(),
+        name: 'Comfortaa',
+        cssVariable: '--font-comfortaa',
+      },
+    ],
   },
 })

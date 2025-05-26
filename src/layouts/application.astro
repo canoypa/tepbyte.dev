@@ -1,4 +1,5 @@
 ---
+import { Font } from "astro:assets";
 import Footer from "~/features/footer/footer.astro";
 import MainContents from "~/features/main_contents/main_contents.astro";
 
@@ -28,12 +29,7 @@ const styles = {
       sizes="180x180"
     />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap"
-      rel="stylesheet"
-    />
+    <Font cssVariable="--font-comfortaa" preload />
 
     <slot name="head" />
 
