@@ -5,11 +5,14 @@ import { flex } from "~pandacss/patterns";
 const styles = {
   root: flex({ direction: "column", rowGap: 24 }),
   title: css({
-    textStyle: "display-large",
+    textStyle: { mdDown: "display-medium", md: "display-large" },
     fontFamily: "comfortaa",
     fontWeight: "bold",
   }),
-  subhead: css({ textStyle: "title-large", fontFamily: "comfortaa" }),
+  subhead: css({
+    textStyle: { mdDown: "title-medium", md: "title-large" },
+    fontFamily: "comfortaa",
+  }),
 };
 
 type Props = {

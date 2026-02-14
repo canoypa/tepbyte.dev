@@ -14,14 +14,18 @@ const { list } = Astro.props;
 const styles = {
   list: flex({
     gap: 4,
+    overflowX: "auto",
     textStyle: "label-large",
     fontFamily: "comfortaa",
     fontWeight: "bold",
   }),
   item: flex({
+    flexShrink: 0,
+
     "& + &::before": {
       content: '"/" / ""',
       marginInlineEnd: 4,
+      color: "dark.on-surface-variant",
     },
   }),
 };
