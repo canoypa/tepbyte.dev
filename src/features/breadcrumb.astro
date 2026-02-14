@@ -13,13 +13,15 @@ const { list } = Astro.props;
 
 const styles = {
   list: flex({
-    gap: 8,
+    gap: 4,
     textStyle: "label-large",
+    fontFamily: "comfortaa",
+    fontWeight: "bold",
   }),
   item: flex({
     "& + &::before": {
       content: '"/" / ""',
-      marginInlineEnd: 8,
+      marginInlineEnd: 4,
     },
   }),
 };

@@ -3,9 +3,13 @@ import { css } from "~pandacss/css";
 import { flex } from "~pandacss/patterns";
 
 const styles = {
-  root: flex({ direction: "column", rowGap: 8 }),
-  title: css({ textStyle: "display-medium", fontFamily: "comfortaa" }),
-  subhead: css({ textStyle: "title-medium" }),
+  root: flex({ direction: "column", rowGap: 24 }),
+  title: css({
+    textStyle: "display-large",
+    fontFamily: "comfortaa",
+    fontWeight: "bold",
+  }),
+  subhead: css({ textStyle: "title-large", fontFamily: "comfortaa" }),
 };
 
 type Props = {

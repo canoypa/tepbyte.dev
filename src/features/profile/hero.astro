@@ -20,29 +20,30 @@ const styles = {
       md: '"photo name" "photo info"',
     },
     alignItems: "center",
-    columnGap: { base: 24, md: 32 },
-    rowGap: 16,
+    columnGap: { base: 24, md: 24 },
+    rowGap: 8,
 
     fontFamily: "comfortaa",
   }),
   avatar: css({
     gridArea: "photo",
 
-    width: { base: 96, md: 128 },
-    height: { base: 96, md: 128 },
+    width: { base: 96, md: 192 },
+    height: { base: 96, md: 192 },
     rounded: "full",
   }),
   name: css({
     gridArea: "name",
 
-    textStyle: "display-small",
+    textStyle: "display-large",
+    fontWeight: "bold",
   }),
   info: flex({
     gridArea: "info",
 
     direction: "column",
-    rowGap: 16,
-    textStyle: "body-large",
+    rowGap: 24,
+    textStyle: "headline-small",
   }),
 };
 ---
