@@ -37,6 +37,13 @@ export default defineConfig({
         provider: fontProviders.google(),
         name: 'Comfortaa',
         cssVariable: '--font-comfortaa',
+        fallbacks: [],
+      },
+      {
+        provider: fontProviders.google(),
+        name: 'Kosugi Maru',
+        cssVariable: '--font-kosugi-maru',
+        fallbacks: [],
       },
     ],
   },

@@ -18,7 +18,9 @@ export default defineConfig({
     extend: {
       tokens: {
         fonts: {
-          comfortaa: { value: 'var(--font-comfortaa)' },
+          comfortaa: {
+            value: 'var(--font-comfortaa), var(--font-kosugi-maru), sans-serif',
+          },
         },
       },
     },
