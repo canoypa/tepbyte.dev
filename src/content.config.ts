@@ -1,4 +1,5 @@
-import { defineCollection, z } from 'astro:content'
+import { defineCollection } from 'astro:content'
+import { z } from 'astro/zod'
 import { glob } from 'astro/loaders'
 import { UNSPLASH_URL_PATTERN } from '~/core/image/resolve_unsplash'
 
@@ -8,7 +9,7 @@ const postCollection = defineCollection({
     z.object({
       title: z.string(),
       subhead: z.string(),
-      image: z.union([image(), z.string().url().regex(UNSPLASH_URL_PATTERN)]),
+      image: z.union([image(), z.url({ pattern: UNSPLASH_URL_PATTERN })]),
       tags: z.string().array().optional(),
 
       publishedAt: z.date(),
@@ -23,7 +24,7 @@ const productCollection = defineCollection({
       title: z.string(),
       subhead: z.string(),
       images: image().array(),
-      links: z.record(z.string(), z.string().url()).transform((v) => {
+      links: z.record(z.string(), z.url()).transform((v) => {
         return Object.entries(v).map(([label, url]) => ({ label, url }))
       }),
       tags: z.string().array(),
@@ -39,7 +40,7 @@ const profileCollection = defineCollection({
       name: z.string(),
       subhead: z.string(),
       avatar: image(),
-      links: z.record(z.string(), z.string().url()).transform((v) => {
+      links: z.record(z.string(), z.url()).transform((v) => {
         return Object.entries(v).map(([label, url]) => ({ label, url }))
       }),
     }),
