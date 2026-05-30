@@ -1,13 +1,13 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "baseUrl": ".",
     "paths": {
-      "~pandacss/*": ["lib/generated/pandacss/*"],
-      "~/*": ["src/*"]
+      "~pandacss/*": ["./lib/generated/pandacss/*"],
+      "~/*": ["./src/*"]
     },
     "jsx": "preserve",
-    "jsxImportSource": "solid-js"
+    "jsxImportSource": "solid-js",
+    "types": ["node"]
   },
   "exclude": ["dist"]
 }
