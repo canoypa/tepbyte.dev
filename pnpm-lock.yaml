@@ -12,7 +12,7 @@ importers:
         specifier: ^0.9.9
         version: 0.9.9(prettier@3.8.3)(typescript@6.0.3)
       '@astrojs/markdown-remark':
-        specifier: ^7.2.1
+        specifier: 7.2.1
         version: 7.2.1
       '@astrojs/solid-js':
         specifier: 7.0.1
