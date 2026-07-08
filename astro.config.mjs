@@ -15,7 +15,12 @@ export default defineConfig({
     assets: '_',
   },
 
-  integrations: [solidJs(), compress()],
+  integrations: [
+    solidJs(),
+    compress({
+      CSS: { csso: false },
+    }),
+  ],
 
   markdown: {
     processor: unified({
