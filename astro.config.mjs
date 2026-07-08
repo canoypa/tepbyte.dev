@@ -2,6 +2,7 @@ import { defineConfig, fontProviders } from 'astro/config'
 
 import solidJs from '@astrojs/solid-js'
 import compress from '@playform/compress'
+import { unified } from '@astrojs/markdown-remark'
 
 import remarkBreaks from 'remark-breaks'
 
@@ -17,14 +18,16 @@ export default defineConfig({
   integrations: [solidJs(), compress()],
 
   markdown: {
-    remarkPlugins: [remarkBreaks],
+    processor: unified({
+      remarkPlugins: [remarkBreaks],
 
-    remarkRehype: {
-      footnoteLabelProperties: {
-        ariaHidden: true,
-        hidden: true,
+      remarkRehype: {
+        footnoteLabelProperties: {
+          ariaHidden: true,
+          hidden: true,
+        },
       },
-    },
+    }),
 
     shikiConfig: {
       theme: 'github-dark-default',
