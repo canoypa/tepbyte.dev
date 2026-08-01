@@ -1,8 +1,9 @@
 import { readFile } from 'node:fs/promises'
-import type { GetImageResult } from 'astro'
+import type { GetImageResult, ImageMetadata } from 'astro'
 import { isRemoteImage } from 'astro/assets/utils'
 import { decode, encode } from 'blurhash'
 import sharp from 'sharp'
+import type { SourcedImageMetadata } from './image/types'
 
 type SharpInput =
   | Buffer
@@ -16,6 +17,9 @@ type SharpInput =
   | Float32Array
   | Float64Array
   | string
+
+/** 元画像 1 つにつき 1 回だけ計算する。キーはリモートなら URL、ローカルなら絶対パス */
+const cache = new Map<string, Promise<string>>()
 
 export async function blurhashToDataUrl(blurhash: string) {
   const size = 8
@@ -46,30 +50,29 @@ export async function blurDataUrlFromImage(data: SharpInput) {
   return await blurhashToDataUrl(blurhash)
 }
 
+/** リモートはネットワーク、ローカルはディスク。得られるバイト列は同じなので以降は 1 本になる */
+async function readImageBytes(src: string | ImageMetadata): Promise<SharpInput> {
+  if (isRemoteImage(src)) {
+    const buffer = await fetch(src).then((res) => res.arrayBuffer())
+    return new Uint8Array(buffer)
+  }
+
+  return await readFile((src as SourcedImageMetadata).fsPath)
+}
+
 export async function getBlurhashDataUrlFromImage(
   image: GetImageResult,
 ): Promise<string | undefined> {
-  if (isRemoteImage(image.options.src)) {
-    const buffer = await fetch(image.options.src).then((res) =>
-      res.arrayBuffer(),
-    )
-    const data = new Uint8Array(buffer)
-    return await blurDataUrlFromImage(data)
-  }
+  const { src } = image.options
 
-  if ('src' in image.options.src) {
-    const filename = image.options.src.src
-      .replace(/^\/@fs/, '/')
-      .replace(/\?.+$/, '')
+  const key = isRemoteImage(src) ? src : (src as SourcedImageMetadata).fsPath
+  if (!key) return undefined
 
-    const imageFsPath = import.meta.env.PROD
-      ? ['./dist', filename].join('')
-      : filename
+  const cached = cache.get(key)
+  if (cached) return await cached
 
-    const buffer = await readFile(imageFsPath)
+  const dataUrl = readImageBytes(src).then(blurDataUrlFromImage)
+  cache.set(key, dataUrl)
 
-    return await blurDataUrlFromImage(buffer)
-  }
-
-  return undefined
+  return await dataUrl
 }

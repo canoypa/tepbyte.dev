@@ -6,6 +6,8 @@ import { unified } from '@astrojs/markdown-remark'
 
 import remarkBreaks from 'remark-breaks'
 
+import { preserveImageSourcePath } from './src/core/image/preserve_source_path'
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.tepbyte.dev',
@@ -13,6 +15,10 @@ export default defineConfig({
 
   build: {
     assets: '_',
+  },
+
+  vite: {
+    plugins: [preserveImageSourcePath()],
   },
 
   integrations: [
