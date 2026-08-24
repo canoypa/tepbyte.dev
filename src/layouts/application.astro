@@ -23,7 +23,8 @@ const styles = {
       xl: "[full-start] minmax(0, 1fr) [content-start] minmax(0, 1040px) [content-end] minmax(0, 1fr) [full-end]",
     },
     gridTemplateRows: "1fr auto",
-    rowGap: { smDown: 32, sm: 48 },
+    // main と footer の間隔。main 内の gap (64) の 2 倍を取って情報の段差を作る
+    rowGap: 128,
 
     "& > *": { gridColumn: "content" },
   }),
@@ -31,7 +32,8 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     gap: 64,
-    paddingY: 64,
+    // ページ上端との距離。下端は rowGap が持つ
+    marginTop: 64,
   }),
 };
 ---
