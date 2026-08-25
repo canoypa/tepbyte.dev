@@ -1,32 +1,32 @@
 ---
-import { SEO } from "astro-seo";
+import { SEO } from 'astro-seo'
 
 type Props = {
-  title?: string;
-  description?: string;
+  title?: string
+  description?: string
 
   openGraph?: {
     basic?: {
-      title?: string;
-      type?: string;
-      image?: string;
-      url?: URL | string;
-    };
+      title?: string
+      type?: string
+      image?: string
+      url?: URL | string
+    }
     optional?: {
-      description?: string;
-    };
-  };
+      description?: string
+    }
+  }
 
-  noindex?: boolean;
-  nofollow?: boolean;
-};
+  noindex?: boolean
+  nofollow?: boolean
+}
 
-const props = Astro.props;
+const props = Astro.props
 
-const siteName = "Tepbyte";
+const siteName = 'Tepbyte'
 
-const title = props.title;
-const description = props.description || "Cano's portfolio site.";
+const title = props.title
+const description = props.description || "Cano's portfolio site."
 ---
 
 <SEO

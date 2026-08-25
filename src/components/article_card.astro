@@ -1,26 +1,26 @@
 ---
-import { css } from "~pandacss/css";
-import StyledLink from "./styled_link/styled_link.astro";
+import { css } from '~pandacss/css'
+import StyledLink from './styled_link/styled_link.astro'
 
 const styles = {
   time: css({
-    textStyle: "label-medium",
+    textStyle: 'label-medium',
   }),
   title: css({
-    textStyle: "title-medium",
+    textStyle: 'title-medium',
   }),
-};
+}
 
-const dateFormatter = Intl.DateTimeFormat("en-us", { dateStyle: "long" });
+const dateFormatter = Intl.DateTimeFormat('en-us', { dateStyle: 'long' })
 
 type Props = {
-  date: Date;
-  link: URL | string;
-  title: string;
-  subhead: string;
-};
+  date: Date
+  link: URL | string
+  title: string
+  subhead: string
+}
 
-const { date, link, title, subhead } = Astro.props;
+const { date, link, title, subhead } = Astro.props
 ---
 
 <article>

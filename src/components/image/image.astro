@@ -1,18 +1,18 @@
 ---
-import type { UnresolvedImageTransform } from "astro";
-import { getImage } from "astro:assets";
-import { getBlurhashDataUrlFromImage } from "~/core/blurhash";
-import { Image as ImageReact } from "./image";
+import type { UnresolvedImageTransform } from 'astro'
+import { getImage } from 'astro:assets'
+import { getBlurhashDataUrlFromImage } from '~/core/blurhash'
+import { Image as ImageReact } from './image'
 
 type Props = UnresolvedImageTransform & {
-  lightbox?: boolean;
-};
+  lightbox?: boolean
+}
 
-const props = Astro.props;
+const props = Astro.props
 
-const image = await getImage(props);
+const image = await getImage(props)
 
-const blurDataUrl = await getBlurhashDataUrlFromImage(image);
+const blurDataUrl = await getBlurhashDataUrlFromImage(image)
 ---
 
 <ImageReact

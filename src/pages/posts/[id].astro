@@ -1,33 +1,33 @@
 ---
-import type { GetStaticPaths } from "astro";
-import type { CollectionEntry } from "astro:content";
-import { getCollection } from "astro:content";
-import PostInfo from "~/features/post/info.astro";
-import Thumbnail from "~/features/post/thumbnail.astro";
-import Breadcrumb from "~/features/breadcrumb.astro";
-import MarkdownContainer from "~/features/markdown/markdown_container.astro";
-import Seo from "~/features/seo/seo.astro";
-import Tags from "~/features/tags/tags.astro";
-import Application from "~/layouts/application.astro";
-import { flex } from "~pandacss/patterns";
-import { render } from "astro:content";
-import { imageProcessor } from "~/core/image/processor";
+import type { GetStaticPaths } from 'astro'
+import type { CollectionEntry } from 'astro:content'
+import { getCollection } from 'astro:content'
+import PostInfo from '~/features/post/info.astro'
+import Thumbnail from '~/features/post/thumbnail.astro'
+import Breadcrumb from '~/features/breadcrumb.astro'
+import MarkdownContainer from '~/features/markdown/markdown_container.astro'
+import Seo from '~/features/seo/seo.astro'
+import Tags from '~/features/tags/tags.astro'
+import Application from '~/layouts/application.astro'
+import { flex } from '~pandacss/patterns'
+import { render } from 'astro:content'
+import { imageProcessor } from '~/core/image/processor'
 
 export const getStaticPaths = (async () => {
-  const collection = await getCollection("post");
+  const collection = await getCollection('post')
 
   return collection.map((entry) => ({
     params: { id: entry.id },
     props: entry,
-  }));
-}) satisfies GetStaticPaths;
+  }))
+}) satisfies GetStaticPaths
 
-type Props = CollectionEntry<"post">;
+type Props = CollectionEntry<'post'>
 
-const entry = Astro.props;
-const { Content } = await render(entry);
+const entry = Astro.props
+const { Content } = await render(entry)
 
-const image = await imageProcessor(entry.data.image);
+const image = await imageProcessor(entry.data.image)
 ---
 
 <Application>

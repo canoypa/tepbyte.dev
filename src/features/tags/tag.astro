@@ -1,32 +1,32 @@
 ---
-import IconTag from "~/components/icons/tag.astro";
-import { css } from "~pandacss/css";
+import IconTag from '~/components/icons/tag.astro'
+import { css } from '~pandacss/css'
 
 const styles = {
   root: css({
-    display: "flex",
-    alignItems: "center",
+    display: 'flex',
+    alignItems: 'center',
     columnGap: 2,
     height: 24,
     paddingLeft: 6,
     paddingRight: 8,
-    rounded: "full",
+    rounded: 'full',
     backgroundColor: {
-      base: "dark.secondary-container",
-      _osLight: "light.secondary-container",
+      base: 'dark.secondary-container',
+      _osLight: 'light.secondary-container',
     },
     color: {
-      base: "dark.on-secondary-container",
-      _osLight: "light.on-secondary-container",
+      base: 'dark.on-secondary-container',
+      _osLight: 'light.on-secondary-container',
     },
     fill: {
-      base: "dark.on-secondary-container",
-      _osLight: "light.on-secondary-container",
+      base: 'dark.on-secondary-container',
+      _osLight: 'light.on-secondary-container',
     },
-    textStyle: "label-medium",
-    fontFamily: "comfortaa",
+    textStyle: 'label-medium',
+    fontFamily: 'comfortaa',
   }),
-};
+}
 ---
 
 <span class:list={styles.root}>

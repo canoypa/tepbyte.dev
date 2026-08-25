@@ -1,41 +1,41 @@
 ---
-import { Font } from "astro:assets";
-import Footer from "~/features/footer/footer.astro";
+import { Font } from 'astro:assets'
+import Footer from '~/features/footer/footer.astro'
 
-import "~/styles/globals.css";
-import { css } from "~pandacss/css";
+import '~/styles/globals.css'
+import { css } from '~pandacss/css'
 
 const styles = {
   // ページ全体のレイアウト。
   // 列: [full] が画面幅いっぱい、[content] が本文カラム（余白はガター列が持つ）
   // 行: 1fr = 本文 / auto = フッター（内容が短いページでもフッターは最下部）
   body: css({
-    display: "grid",
+    display: 'grid',
     gridTemplateColumns: {
       smDown:
-        "[full-start] 16px [content-start] minmax(0, 1fr) [content-end] 16px [full-end]",
+        '[full-start] 16px [content-start] minmax(0, 1fr) [content-end] 16px [full-end]',
       smToMd:
-        "[full-start] 32px [content-start] minmax(0, 1fr) [content-end] 32px [full-end]",
+        '[full-start] 32px [content-start] minmax(0, 1fr) [content-end] 32px [full-end]',
       mdToLg:
-        "[full-start] minmax(0, 1fr) [content-start] minmax(0, 840px) [content-end] minmax(0, 1fr) [full-end]",
+        '[full-start] minmax(0, 1fr) [content-start] minmax(0, 840px) [content-end] minmax(0, 1fr) [full-end]',
       lgToXl:
-        "[full-start] 200px [content-start] minmax(0, 1fr) [content-end] 200px [full-end]",
-      xl: "[full-start] minmax(0, 1fr) [content-start] minmax(0, 1040px) [content-end] minmax(0, 1fr) [full-end]",
+        '[full-start] 200px [content-start] minmax(0, 1fr) [content-end] 200px [full-end]',
+      xl: '[full-start] minmax(0, 1fr) [content-start] minmax(0, 1040px) [content-end] minmax(0, 1fr) [full-end]',
     },
-    gridTemplateRows: "1fr auto",
+    gridTemplateRows: '1fr auto',
     // main と footer の間隔。main 内の gap (64) の 2 倍を取って情報の段差を作る
     rowGap: 128,
 
-    "& > *": { gridColumn: "content" },
+    '& > *': { gridColumn: 'content' },
   }),
   main: css({
-    display: "flex",
-    flexDirection: "column",
+    display: 'flex',
+    flexDirection: 'column',
     gap: 64,
     // ページ上端との距離。下端は rowGap が持つ
     marginTop: 64,
   }),
-};
+}
 ---
 
 <html lang="ja">

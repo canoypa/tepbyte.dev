@@ -1,24 +1,24 @@
 ---
-import StyledLink from "~/components/styled_link/styled_link.astro";
-import { css } from "~pandacss/css";
+import StyledLink from '~/components/styled_link/styled_link.astro'
+import { css } from '~pandacss/css'
 
 const styles = {
   root: css({
     paddingX: { sm: 24 },
     paddingY: { smDown: 32, sm: 48 },
     borderTopWidth: 1,
-    borderTopStyle: "solid",
+    borderTopStyle: 'solid',
     borderTopColor: {
-      base: "dark.outline-variant",
-      _osLight: "light.outline-variant",
+      base: 'dark.outline-variant',
+      _osLight: 'light.outline-variant',
     },
     color: {
-      base: "dark.on-surface-variant",
-      _osLight: "light.on-surface-variant",
+      base: 'dark.on-surface-variant',
+      _osLight: 'light.on-surface-variant',
     },
-    textStyle: "body-small",
+    textStyle: 'body-small',
   }),
-};
+}
 ---
 
 <footer class:list={styles.root}>

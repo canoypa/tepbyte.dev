@@ -1,34 +1,34 @@
 ---
-import type { HTMLTag, Polymorphic } from "astro/types";
-import { css, cva } from "~pandacss/css";
+import type { HTMLTag, Polymorphic } from 'astro/types'
+import { css, cva } from '~pandacss/css'
 
 const styles = {
   root: cva({
     base: {
-      display: "inline-flex",
-      alignItems: "center",
-      justifyContent: "center",
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
       columnGap: 8,
       paddingX: 16,
       minWidth: 48,
       height: 40,
-      rounded: "full",
-      textStyle: "label-large",
-      fontFamily: "comfortaa",
-      color: { base: "dark.primary", _osLight: "light.primary" },
-      fill: { base: "dark.primary", _osLight: "light.primary" },
+      rounded: 'full',
+      textStyle: 'label-large',
+      fontFamily: 'comfortaa',
+      color: { base: 'dark.primary', _osLight: 'light.primary' },
+      fill: { base: 'dark.primary', _osLight: 'light.primary' },
 
       backgroundColor: {
-        base: "dark.primary/1",
-        _osLight: "light.primary-container",
+        base: 'dark.primary/1',
+        _osLight: 'light.primary-container',
 
         _hover: {
-          base: "dark.primary/hover",
-          _osLight: "light.primary/hover",
+          base: 'dark.primary/hover',
+          _osLight: 'light.primary/hover',
         },
         _focusVisible: {
-          base: "dark.primary/hover",
-          _osLight: "light.primary/hover",
+          base: 'dark.primary/hover',
+          _osLight: 'light.primary/hover',
         },
       },
     },
@@ -48,23 +48,23 @@ const styles = {
     height: 18,
     marginRight: -1,
   }),
-};
+}
 
 type Props<T extends HTMLTag> = Polymorphic<{
-  as: T;
-}>;
+  as: T
+}>
 
-const { as: Tag = "button", ...attrs } = Astro.props;
+const { as: Tag = 'button', ...attrs } = Astro.props
 
-const hasLeading = Astro.slots.has("leading");
-const hasTrailing = Astro.slots.has("trailing");
+const hasLeading = Astro.slots.has('leading')
+const hasTrailing = Astro.slots.has('trailing')
 
 const defaultAttrs =
-  Tag === "button"
+  Tag === 'button'
     ? {
-        type: "button",
+        type: 'button',
       }
-    : {};
+    : {}
 ---
 
 <Tag
