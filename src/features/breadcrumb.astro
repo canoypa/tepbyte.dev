@@ -1,39 +1,39 @@
 ---
-import StyledLink from "~/components/styled_link/styled_link.astro";
-import { flex } from "~pandacss/patterns";
+import StyledLink from '~/components/styled_link/styled_link.astro'
+import { flex } from '~pandacss/patterns'
 
-type BreadcrumbItem = { label: string; href: string };
-type BreadcrumbItemCurrent = { label: string };
+type BreadcrumbItem = { label: string; href: string }
+type BreadcrumbItemCurrent = { label: string }
 
 type Props = {
-  list: [...BreadcrumbItem[], BreadcrumbItemCurrent];
-};
+  list: [...BreadcrumbItem[], BreadcrumbItemCurrent]
+}
 
-const { list } = Astro.props;
+const { list } = Astro.props
 
 const styles = {
   list: flex({
     gap: 4,
-    overflowX: "auto",
+    overflowX: 'auto',
 
     // フォーカスリング（outline 2px + offset 2px）がスクロールコンテナに
     // 見切られないよう、その分の余白を確保してレイアウトを負のマージンで戻す
     padding: 4,
     margin: -4,
-    textStyle: "label-large",
-    fontFamily: "comfortaa",
-    fontWeight: "bold",
+    textStyle: 'label-large',
+    fontFamily: 'comfortaa',
+    fontWeight: 'bold',
   }),
   item: flex({
     flexShrink: 0,
 
-    "& + &::before": {
+    '& + &::before': {
       content: '"/" / ""',
       marginInlineEnd: 4,
-      color: "dark.on-surface-variant",
+      color: 'dark.on-surface-variant',
     },
   }),
-};
+}
 ---
 
 <nav aria-label="Breadcrumb">

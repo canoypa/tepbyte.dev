@@ -1,51 +1,51 @@
 ---
-import type { CollectionEntry } from "astro:content";
-import Image from "~/components/image/image.astro";
-import { css } from "~pandacss/css";
-import { flex } from "~pandacss/patterns";
-import ProfileLink from "./profile_link.astro";
+import type { CollectionEntry } from 'astro:content'
+import Image from '~/components/image/image.astro'
+import { css } from '~pandacss/css'
+import { flex } from '~pandacss/patterns'
+import ProfileLink from './profile_link.astro'
 
 type Props = {
-  profile: CollectionEntry<"profile">["data"];
-};
+  profile: CollectionEntry<'profile'>['data']
+}
 
-const { profile } = Astro.props;
+const { profile } = Astro.props
 
 const styles = {
   root: css({
-    display: "grid",
-    gridTemplate: "auto / auto 1fr",
+    display: 'grid',
+    gridTemplate: 'auto / auto 1fr',
     gridTemplateAreas: {
       base: '"photo name" "info info"',
       md: '"photo name" "photo info"',
     },
-    alignItems: "center",
+    alignItems: 'center',
     columnGap: { base: 24, md: 24 },
     rowGap: 8,
 
-    fontFamily: "comfortaa",
+    fontFamily: 'comfortaa',
   }),
   avatar: css({
-    gridArea: "photo",
+    gridArea: 'photo',
 
     width: { base: 96, md: 192 },
     height: { base: 96, md: 192 },
-    rounded: "full",
+    rounded: 'full',
   }),
   name: css({
-    gridArea: "name",
+    gridArea: 'name',
 
-    textStyle: "display-large",
-    fontWeight: "bold",
+    textStyle: 'display-large',
+    fontWeight: 'bold',
   }),
   info: flex({
-    gridArea: "info",
+    gridArea: 'info',
 
-    direction: "column",
+    direction: 'column',
     rowGap: 24,
-    textStyle: "headline-small",
+    textStyle: 'headline-small',
   }),
-};
+}
 ---
 
 <div class:list={styles.root}>

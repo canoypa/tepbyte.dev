@@ -1,29 +1,29 @@
 ---
-import { getCollection, getEntry } from "astro:content";
-import PostList from "~/features/post/list.astro";
-import MarkdownContainer from "~/features/markdown/markdown_container.astro";
-import ProductList from "~/features/product/list.astro";
-import Hero from "~/features/profile/hero.astro";
-import Seo from "~/features/seo/seo.astro";
-import Application from "~/layouts/application.astro";
-import { css } from "~pandacss/css";
-import { flex } from "~pandacss/patterns";
-import Button from "~/components/button/button.astro";
-import { render } from "astro:content";
+import { getCollection, getEntry } from 'astro:content'
+import PostList from '~/features/post/list.astro'
+import MarkdownContainer from '~/features/markdown/markdown_container.astro'
+import ProductList from '~/features/product/list.astro'
+import Hero from '~/features/profile/hero.astro'
+import Seo from '~/features/seo/seo.astro'
+import Application from '~/layouts/application.astro'
+import { css } from '~pandacss/css'
+import { flex } from '~pandacss/patterns'
+import Button from '~/components/button/button.astro'
+import { render } from 'astro:content'
 
-const entry = await getEntry("profile", "canoypa");
+const entry = await getEntry('profile', 'canoypa')
 if (!entry) {
-  throw new Error("Profile not found");
+  throw new Error('Profile not found')
 }
 
-const { Content } = await render(entry);
+const { Content } = await render(entry)
 
-const products = (await getCollection("product"))
+const products = (await getCollection('product'))
   .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
-  .slice(0, 5);
-const posts = (await getCollection("post"))
+  .slice(0, 5)
+const posts = (await getCollection('post'))
   .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
-  .slice(0, 5);
+  .slice(0, 5)
 ---
 
 <Application>

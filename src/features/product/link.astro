@@ -1,16 +1,16 @@
 ---
-import Chip from "~/components/chip/chip.astro";
-import { flex } from "~pandacss/patterns";
+import Chip from '~/components/chip/chip.astro'
+import { flex } from '~pandacss/patterns'
 
 const styles = {
   root: flex({ gap: 8 }),
-};
+}
 
 type Props = {
-  links: { url: string; label: string }[];
-};
+  links: { url: string; label: string }[]
+}
 
-const { links } = Astro.props;
+const { links } = Astro.props
 ---
 
 <ul class:list={styles.root}>

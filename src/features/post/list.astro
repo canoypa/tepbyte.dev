@@ -1,20 +1,20 @@
 ---
-import type { CollectionEntry } from "astro:content";
-import ArticleCard from "~/components/article_card.astro";
-import { flex } from "~pandacss/patterns";
+import type { CollectionEntry } from 'astro:content'
+import ArticleCard from '~/components/article_card.astro'
+import { flex } from '~pandacss/patterns'
 
 const styles = {
   root: flex({
-    direction: "column",
+    direction: 'column',
     gap: { base: 8, md: 16 },
   }),
-};
+}
 
 type Props = {
-  items: CollectionEntry<"post">[];
-};
+  items: CollectionEntry<'post'>[]
+}
 
-const { items } = Astro.props;
+const { items } = Astro.props
 ---
 
 <ul class:list={styles.root}>

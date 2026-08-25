@@ -1,30 +1,30 @@
 ---
-import Image from "~/components/image/image.astro";
-import StyledLink from "~/components/styled_link/styled_link.astro";
-import type { ImageMetadata } from "~/core/image/types";
-import { css } from "~pandacss/css";
-import { flex } from "~pandacss/patterns";
+import Image from '~/components/image/image.astro'
+import StyledLink from '~/components/styled_link/styled_link.astro'
+import type { ImageMetadata } from '~/core/image/types'
+import { css } from '~pandacss/css'
+import { flex } from '~pandacss/patterns'
 
 type Props = {
-  image: ImageMetadata;
-};
+  image: ImageMetadata
+}
 
-const { image } = Astro.props;
+const { image } = Astro.props
 
 const styles = {
-  root: flex({ direction: "column", rowGap: 8 }),
+  root: flex({ direction: 'column', rowGap: 8 }),
   img: css({
-    width: "100%",
+    width: '100%',
     height: { base: 216, md: 288 },
-    rounded: "extra-large",
-    objectFit: "cover",
+    rounded: 'extra-large',
+    objectFit: 'cover',
   }),
   attribution: css({
-    textStyle: "label-medium",
-    fontFamily: "comfortaa",
-    fontStyle: "italic",
+    textStyle: 'label-medium',
+    fontFamily: 'comfortaa',
+    fontStyle: 'italic',
   }),
-};
+}
 ---
 
 <figure class:list={styles.root}>

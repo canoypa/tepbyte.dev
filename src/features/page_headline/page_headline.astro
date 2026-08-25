@@ -1,26 +1,26 @@
 ---
-import { css } from "~pandacss/css";
-import { flex } from "~pandacss/patterns";
+import { css } from '~pandacss/css'
+import { flex } from '~pandacss/patterns'
 
 const styles = {
-  root: flex({ direction: "column", rowGap: 24 }),
+  root: flex({ direction: 'column', rowGap: 24 }),
   title: css({
-    textStyle: { mdDown: "display-medium", md: "display-large" },
-    fontFamily: "comfortaa",
-    fontWeight: "bold",
+    textStyle: { mdDown: 'display-medium', md: 'display-large' },
+    fontFamily: 'comfortaa',
+    fontWeight: 'bold',
   }),
   subhead: css({
-    textStyle: { mdDown: "title-medium", md: "title-large" },
-    fontFamily: "comfortaa",
+    textStyle: { mdDown: 'title-medium', md: 'title-large' },
+    fontFamily: 'comfortaa',
   }),
-};
+}
 
 type Props = {
-  title: string;
-  subhead?: string;
-};
+  title: string
+  subhead?: string
+}
 
-const { title, subhead } = Astro.props;
+const { title, subhead } = Astro.props
 ---
 
 <div class:list={styles.root}>
