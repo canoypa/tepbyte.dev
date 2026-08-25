@@ -1,15 +1,14 @@
 ---
-import { getCollection, getEntry } from 'astro:content'
-import PostList from '~/features/post/list.astro'
+import { getCollection, getEntry, render } from 'astro:content'
+import Button from '~/components/button/button.astro'
 import MarkdownContainer from '~/features/markdown/markdown_container.astro'
+import PostList from '~/features/post/list.astro'
 import ProductList from '~/features/product/list.astro'
 import Hero from '~/features/profile/hero.astro'
 import Seo from '~/features/seo/seo.astro'
 import Application from '~/layouts/application.astro'
 import { css } from '~pandacss/css'
 import { flex } from '~pandacss/patterns'
-import Button from '~/components/button/button.astro'
-import { render } from 'astro:content'
 
 const entry = await getEntry('profile', 'canoypa')
 if (!entry) {

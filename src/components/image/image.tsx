@@ -1,8 +1,8 @@
 import {
   type Component,
-  type JSX,
   createSignal,
   createUniqueId,
+  type JSX,
 } from 'solid-js'
 import { css } from '~pandacss/css'
 import { Modal } from '../modal'
