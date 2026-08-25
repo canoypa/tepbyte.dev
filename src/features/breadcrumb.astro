@@ -15,6 +15,11 @@ const styles = {
   list: flex({
     gap: 4,
     overflowX: "auto",
+
+    // フォーカスリング（outline 2px + offset 2px）がスクロールコンテナに
+    // 見切られないよう、その分の余白を確保してレイアウトを負のマージンで戻す
+    padding: 4,
+    margin: -4,
     textStyle: "label-large",
     fontFamily: "comfortaa",
     fontWeight: "bold",
