@@ -40,13 +40,22 @@ export const resolveUnsplash = async (
   if (import.meta.env.PROD) {
     // Triggering a Download
     // see: https://help.unsplash.com/en/articles/2511258-guideline-triggering-a-download
-    await unsplash
-      .GET('/photos/{id}/download', {
-        params: { path: { id: data.id } },
-      })
-      .catch(() => {
-        console.warn(`Failed to track download for unsplash photo: ${photoId}`)
-      })
+    // openapi-fetch は非 2xx でも reject しないため、例外と error の両方を見る
+    try {
+      const { error: trackError } = await unsplash.GET(
+        '/photos/{id}/download',
+        { params: { path: { id: data.id } } },
+      )
+
+      if (trackError) {
+        throw new Error(trackError.errors.join(', '))
+      }
+    } catch (cause) {
+      console.warn(
+        `Failed to track download for unsplash photo: ${photoId}`,
+        cause,
+      )
+    }
   }
 
   // Attribution
