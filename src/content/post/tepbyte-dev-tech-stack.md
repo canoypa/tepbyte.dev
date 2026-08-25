@@ -1,7 +1,10 @@
 ---
 title: Tepbyte.dev の技術構成
 subhead: 技術構成の話でお茶を濁します
-image: https://unsplash.com/photos/t3HVjP4xNsg
+image: ./tepbyte-dev-tech-stack.jpg
+attribution:
+  authorName: SpaceX
+  authorUsername: spacex
 
 publishedAt: 2023-12-07
 ---

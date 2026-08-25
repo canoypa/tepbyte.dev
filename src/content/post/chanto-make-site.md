@@ -1,7 +1,10 @@
 ---
 title: ちゃんとサイトを作った
 subhead: 新鮮なサイトです
-image: https://unsplash.com/photos/CKlHKtCJZKk
+image: ./chanto-make-site.jpg
+attribution:
+  authorName: Aaron Burden
+  authorUsername: aaronburden
 
 publishedAt: 2022-12-07
 ---

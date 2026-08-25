@@ -1,15 +1,16 @@
 ---
 import Image from '~/components/image/image.astro'
 import StyledLink from '~/components/styled_link/styled_link.astro'
-import type { ImageMetadata } from '~/core/image/types'
+import type { UnsplashAttribution } from '~/core/image/unsplash'
 import { css } from '~pandacss/css'
 import { flex } from '~pandacss/patterns'
 
 type Props = {
   image: ImageMetadata
+  attribution?: UnsplashAttribution
 }
 
-const { image } = Astro.props
+const { image, attribution } = Astro.props
 
 const styles = {
   root: flex({ direction: 'column', rowGap: 8 }),
@@ -28,31 +29,21 @@ const styles = {
 ---
 
 <figure class:list={styles.root}>
+  <Image src={image} alt="" width={1680} class:list={styles.img} />
   {
-    "attribution" in image ? (
-      <>
-        <Image
-          src={image.src}
-          alt=""
-          width={image.width}
-          height={image.height}
-          class:list={styles.img}
-        />
-        <figcaption>
-          <small class:list={styles.attribution}>
-            <span>Photo by </span>
-            <StyledLink href={image.attribution.authorUrl}>
-              {image.attribution.authorName}
-            </StyledLink>
-            <span> on </span>
-            <StyledLink href={image.attribution.siteUrl}>
-              {image.attribution.siteName}
-            </StyledLink>
-          </small>
-        </figcaption>
-      </>
-    ) : (
-      <Image src={image} alt="" class:list={styles.img} />
+    attribution && (
+      <figcaption>
+        <small class:list={styles.attribution}>
+          <span>Photo by </span>
+          <StyledLink href={attribution.authorUrl}>
+            {attribution.authorName}
+          </StyledLink>
+          <span> on </span>
+          <StyledLink href={attribution.siteUrl}>
+            {attribution.siteName}
+          </StyledLink>
+        </small>
+      </figcaption>
     )
   }
 </figure>

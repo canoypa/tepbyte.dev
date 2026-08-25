@@ -1,7 +1,7 @@
 import { defineCollection } from 'astro:content'
 import { z } from 'astro/zod'
 import { glob } from 'astro/loaders'
-import { UNSPLASH_URL_PATTERN } from '~/core/image/resolve_unsplash'
+import { unsplashAttributionSchema } from '~/core/image/unsplash'
 
 const postCollection = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/post' }),
@@ -9,7 +9,8 @@ const postCollection = defineCollection({
     z.object({
       title: z.string(),
       subhead: z.string(),
-      image: z.union([image(), z.url({ pattern: UNSPLASH_URL_PATTERN })]),
+      image: image(),
+      attribution: unsplashAttributionSchema.optional(),
       tags: z.string().array().optional(),
 
       publishedAt: z.date(),
