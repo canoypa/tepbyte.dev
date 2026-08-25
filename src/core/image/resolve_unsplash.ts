@@ -27,20 +27,22 @@ export const resolveUnsplash = async (
     throw new Error(`Invalid Unsplash URL: ${url}`)
   }
 
-  const res = await unsplash.photos.get({ photoId })
+  const { data, error } = await unsplash.GET('/photos/{assetSlug}', {
+    params: { path: { assetSlug: photoId } },
+  })
 
-  if (res.type === 'error') {
-    throw res.errors
+  if (error) {
+    throw new Error(
+      `Failed to fetch unsplash photo ${photoId}: ${error.errors.join(', ')}`,
+    )
   }
-
-  const data = res.response
 
   if (import.meta.env.PROD) {
     // Triggering a Download
     // see: https://help.unsplash.com/en/articles/2511258-guideline-triggering-a-download
-    await unsplash.photos
-      .trackDownload({
-        downloadLocation: data.links.download_location,
+    await unsplash
+      .GET('/photos/{id}/download', {
+        params: { path: { id: data.id } },
       })
       .catch(() => {
         console.warn(`Failed to track download for unsplash photo: ${photoId}`)

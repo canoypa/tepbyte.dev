@@ -34,7 +34,7 @@
     "remark-breaks": "^4.0.0",
     "sharp": "^0.35.3",
     "solid-js": "^1.9.15",
-    "unsplash-js": "^7.0.20"
+    "unsplash-js": "^8.0.1"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.10",

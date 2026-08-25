@@ -39,8 +39,8 @@ importers:
         specifier: ^1.9.15
         version: 1.9.15
       unsplash-js:
-        specifier: ^7.0.20
-        version: 7.0.20
+        specifier: ^8.0.1
+        version: 8.0.1
     devDependencies:
       '@biomejs/biome':
         specifier: ^2.5.10
@@ -2477,6 +2477,12 @@ packages:
   oniguruma-to-es@4.3.6:
     resolution: {integrity: sha512-csuQ9x3Yr0cEIs/Zgx/OEt9iBw9vqIunAPQkx19R/fiMq2oGVTgcMqO/V3Ybqefr1TBvosI6jU539ksaBULJyA==}
 
+  openapi-fetch@0.17.0:
+    resolution: {integrity: sha512-PsbZR1wAPcG91eEthKhN+Zn92FMHxv+/faECIwjXdxfTODGSGegYv0sc1Olz+HYPvKOuoXfp+0pA2XVt2cI0Ig==}
+
+  openapi-typescript-helpers@0.1.0:
+    resolution: {integrity: sha512-OKTGPthhivLw/fHz6c3OPtg72vi86qaMlqbJuVJ23qOvQ+53uw1n7HdmkJFibloF7QEjDrDkzJiOJuockM/ljw==}
+
   outdent@0.8.0:
     resolution: {integrity: sha512-KiOAIsdpUTcAXuykya5fnVVT+/5uS0Q1mrkRHcF89tpieSmY33O/tmc54CqwA+bfhbtEfZUNLHaPUiB9X3jt1A==}
 
@@ -2941,9 +2947,9 @@ packages:
     resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
     engines: {node: '>= 10.0.0'}
 
-  unsplash-js@7.0.20:
-    resolution: {integrity: sha512-0IzJGKbD6qHm0wg5sNndcCjhNDrtAr08/mySr9TGJ6biD7N03ZldidqXopkOvhAABaeFtRGYBrX1YkgMhKrFOQ==}
-    engines: {node: '>=10'}
+  unsplash-js@8.0.1:
+    resolution: {integrity: sha512-v/l8v/cF+EKv7jjDl7WF+BQ0Z6EixGOSid2TTkhq5Yn0YYL091N7Fb9r+RVCoP7yoEAHluQASsr6EdYNyqAfOQ==}
+    engines: {node: '>=20'}
 
   unstorage@1.17.5:
     resolution: {integrity: sha512-0i3iqvRfx29hkNntHyQvJTpf5W9dQ9ZadSoRU8+xVlhVtT7jAX57fazYO9EHvcRCfBCyi5YRya7XCDOsbTgkPg==}
@@ -5828,6 +5834,12 @@ snapshots:
       regex: 6.1.0
       regex-recursion: 6.0.2
 
+  openapi-fetch@0.17.0:
+    dependencies:
+      openapi-typescript-helpers: 0.1.0
+
+  openapi-typescript-helpers@0.1.0: {}
+
   outdent@0.8.0: {}
 
   p-limit@5.0.0:
@@ -6415,7 +6427,9 @@ snapshots:
 
   universalify@2.0.1: {}
 
-  unsplash-js@7.0.20: {}
+  unsplash-js@8.0.1:
+    dependencies:
+      openapi-fetch: 0.17.0
 
   unstorage@1.17.5:
     dependencies:
