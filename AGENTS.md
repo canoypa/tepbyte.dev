@@ -8,7 +8,7 @@ Personal portfolio/blog site built with Astro 5, PandaCSS, and Solid.js.
 pnpm dev          # start dev server
 pnpm build        # astro check + production build
 pnpm lint         # type-check only (astro check)
-pnpm format       # biome format src --write
+pnpm format       # biome check --write src (format + organize imports)
 pnpm prepare      # regenerate PandaCSS output (lib/generated/pandacss/)
 ```
 
