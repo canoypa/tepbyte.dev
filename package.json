@@ -11,7 +11,7 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "lint": "astro check",
-    "format": "biome format src --write",
+    "format": "biome check --write src",
     "prepare": "panda codegen"
   },
   "browserslist": [

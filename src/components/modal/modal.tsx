@@ -1,10 +1,10 @@
 import {
   type Accessor,
   type Component,
-  type ParentProps,
   createEffect,
   createSignal,
   onCleanup,
+  type ParentProps,
 } from 'solid-js'
 import { css } from '~pandacss/css'
 

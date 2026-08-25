@@ -1,16 +1,15 @@
 ---
-import type { GetStaticPaths } from 'astro'
 import type { CollectionEntry } from 'astro:content'
-import { getCollection } from 'astro:content'
-import PostInfo from '~/features/post/info.astro'
-import Thumbnail from '~/features/post/thumbnail.astro'
+import { getCollection, render } from 'astro:content'
+import type { GetStaticPaths } from 'astro'
 import Breadcrumb from '~/features/breadcrumb.astro'
 import MarkdownContainer from '~/features/markdown/markdown_container.astro'
+import PostInfo from '~/features/post/info.astro'
+import Thumbnail from '~/features/post/thumbnail.astro'
 import Seo from '~/features/seo/seo.astro'
 import Tags from '~/features/tags/tags.astro'
 import Application from '~/layouts/application.astro'
 import { flex } from '~pandacss/patterns'
-import { render } from 'astro:content'
 
 export const getStaticPaths = (async () => {
   const collection = await getCollection('post')
