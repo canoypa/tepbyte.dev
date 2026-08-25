@@ -1,5 +1,6 @@
 ---
 import { SEO } from 'astro-seo'
+import { getImage } from 'astro:assets'
 
 type Props = {
   title?: string
@@ -9,7 +10,7 @@ type Props = {
     basic?: {
       title?: string
       type?: string
-      image?: string
+      image?: ImageMetadata
       url?: URL | string
     }
     optional?: {
@@ -27,6 +28,21 @@ const siteName = 'Tepbyte'
 
 const title = props.title
 const description = props.description || "Cano's portfolio site."
+
+// og:image は原寸のアセットを指さないよう縮小したうえで、クローラが
+// 解決できるよう絶対 URL にする
+const ogImageSrc = props.openGraph?.basic?.image
+  ? (
+      await getImage({
+        src: props.openGraph.basic.image,
+        width: 1200,
+        // webp はクローラ側の対応にばらつきがあるため jpeg で固定する
+        format: 'jpeg',
+      })
+    ).src
+  : '/opengraph-image.png'
+
+const ogImage = new URL(ogImageSrc, Astro.site).toString()
 ---
 
 <SEO
@@ -38,8 +54,8 @@ const description = props.description || "Cano's portfolio site."
     basic: {
       type: "website",
       title: title || siteName,
-      image: "/opengraph-image.png",
       ...props.openGraph?.basic,
+      image: ogImage,
     },
     optional: {
       siteName: siteName,
