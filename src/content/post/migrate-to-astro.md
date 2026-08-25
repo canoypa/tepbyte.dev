@@ -1,7 +1,10 @@
 ---
 title: Astro に移行するなどした
 subhead: まるきり構成変更！めちゃ薄く、純粋に
-image: https://unsplash.com/photos/rTZW4f02zY8
+image: ./migrate-to-astro.jpg
+attribution:
+  authorName: NASA
+  authorUsername: nasa
 
 publishedAt: 2024-07-07
 ---

@@ -33,8 +33,7 @@
     "blurhash": "^2.0.5",
     "remark-breaks": "^4.0.0",
     "sharp": "^0.35.3",
-    "solid-js": "^1.9.15",
-    "unsplash-js": "^8.0.1"
+    "solid-js": "^1.9.15"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.10",
