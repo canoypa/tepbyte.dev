@@ -44,6 +44,13 @@ const style = {
     "& img": {
       borderRadius: "medium",
     },
+    // blur プレースホルダ。--blur-image は rehypeBlurDataUrl が img に載せる
+    "& img[data-blur]": {
+      backgroundImage: "var(--blur-image)",
+      backgroundSize: "cover",
+      backgroundPosition: "50% 50%",
+      backgroundRepeat: "no-repeat",
+    },
 
     "& blockquote": {
       borderLeft: "4px solid",
@@ -147,3 +154,15 @@ const style = {
 <div class:list={style.root}>
   <slot />
 </div>
+
+<script>
+  // blur は読み込み中のプレースホルダなので、画像が描画できたら外す
+  const images = document.querySelectorAll<HTMLImageElement>("img[data-blur]");
+
+  for (const image of images) {
+    image
+      .decode()
+      .catch(() => {})
+      .then(() => image.removeAttribute("data-blur"));
+  }
+</script>

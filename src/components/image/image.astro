@@ -1,18 +1,20 @@
 ---
 import type { UnresolvedImageTransform } from "astro";
 import { getImage } from "astro:assets";
-import { getBlurhashDataUrlFromImage } from "~/core/blurhash";
+import { blurDataUrlOf } from "~/core/image/types";
 import { Image as ImageReact } from "./image";
 
 type Props = UnresolvedImageTransform & {
   lightbox?: boolean;
+  /** リモート画像など、src に blurDataUrl が載らない場合に外から渡す */
+  blurDataUrl?: string;
 };
 
-const props = Astro.props;
+const { blurDataUrl: givenBlurDataUrl, ...props } = Astro.props;
 
 const image = await getImage(props);
 
-const blurDataUrl = await getBlurhashDataUrlFromImage(image);
+const blurDataUrl = givenBlurDataUrl ?? blurDataUrlOf(image.options.src);
 ---
 
 <ImageReact

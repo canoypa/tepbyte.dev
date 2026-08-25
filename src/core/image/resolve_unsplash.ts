@@ -1,10 +1,12 @@
 import type { ImageMetadata } from 'astro'
 import { createApi } from 'unsplash-js'
+import { blurhashToDataUrl } from './blur'
 
 export const UNSPLASH_URL_PATTERN =
   /^https?:\/\/unsplash\.com\/photos\/(?<id>[a-zA-Z0-9-_]{11})/
 
 export type UnsplashImageMetadata = ImageMetadata & {
+  blurDataUrl?: string
   attribution: {
     authorName: string
     authorUrl: string
@@ -62,11 +64,18 @@ export const resolveUnsplash = async (
   const srcUrl = new URL(data.urls.regular)
   srcUrl.searchParams.set('fm', 'webp')
 
+  // Unsplash は blurhash を返すので、画像を取りに行かずにプレースホルダを作れる
+  const blurDataUrl = data.blur_hash
+    ? await blurhashToDataUrl(data.blur_hash)
+    : undefined
+
   const metadata: UnsplashImageMetadata = {
     src: srcUrl.toString(),
     width: data.width,
     height: data.height,
     format: 'webp',
+
+    blurDataUrl,
 
     attribution: {
       authorName: data.user.name,
