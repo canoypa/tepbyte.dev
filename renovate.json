@@ -29,12 +29,6 @@
       "matchPackageNames": ["node", "@types/node"],
       "matchUpdateTypes": ["major"],
       "groupName": "node"
-    },
-    {
-      "description": "typescript 7 に @astrojs/check が未対応のため、major はダッシュボードの承認を経て作成する",
-      "matchPackageNames": ["typescript"],
-      "matchUpdateTypes": ["major"],
-      "dependencyDashboardApproval": true
     }
   ]
 }
