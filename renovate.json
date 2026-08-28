@@ -1,0 +1,42 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":dependencyDashboard",
+    "group:allNonMajor"
+  ],
+  "timezone": "Asia/Tokyo",
+  "schedule": ["before 6am on monday"],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 6am on the first day of the month"]
+  },
+  "packageRules": [
+    {
+      "description": "astro は @astrojs/markdown-remark に範囲でなく固定版の peer dependency を持つため、major を含め必ず同一 PR で上げる",
+      "matchPackageNames": ["astro", "@astrojs/markdown-remark"],
+      "groupName": "astro"
+    },
+    {
+      "description": "@types/node はランタイムに追従させるもので、最新を追う対象ではない。mise.toml の Node 24（Active LTS）に合わせる。Node の LTS を上げるときにこの上限も一緒に広げること",
+      "matchPackageNames": ["@types/node"],
+      "allowedVersions": "<25"
+    },
+    {
+      "description": "Node は Active LTS の 24 系に留める。mise.toml と package.json の engines.node の両方が対象",
+      "matchPackageNames": ["node"],
+      "groupName": "node",
+      "allowedVersions": "<25"
+    },
+    {
+      "description": "pnpm は mise.toml と package.json の packageManager が一致している必要があるため同一 PR で上げる",
+      "matchPackageNames": ["pnpm"],
+      "groupName": "pnpm"
+    },
+    {
+      "description": "TypeScript 7 は @astrojs/language-server が未対応で astro check が落ちる。対応が入ったらこの制限を外す",
+      "matchPackageNames": ["typescript"],
+      "allowedVersions": "<7"
+    }
+  ]
+}
