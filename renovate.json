@@ -13,7 +13,7 @@
   },
   "packageRules": [
     {
-      "description": "astro は @astrojs/markdown-remark に範囲でなく固定版の peer dependency を持つため、major を含め必ず同一 PR で上げる",
+      "description": "astro は @astrojs/markdown-remark に範囲でなく固定版の peer dependency を持つため、更新種別によらず必ず同一 PR で上げる。group:allNonMajor の束からは意図的に外している——片方だけ先に版が出た場合に不整合で CI が落ちるが、束の中だと週次の更新全体が巻き添えで止まるため",
       "matchPackageNames": ["astro", "@astrojs/markdown-remark"],
       "groupName": "astro"
     },
@@ -23,13 +23,13 @@
       "allowedVersions": "<25"
     },
     {
-      "description": "Node は Active LTS の 24 系に留める。mise.toml と package.json の engines.node の両方が対象",
+      "description": "Node は Active LTS の 24 系に留める。mise.toml と package.json の engines.node の両方が対象。ツールチェーンの変更は CI と Vercel の実行環境に及ぶため、group:allNonMajor の束から外して単独 PR で見る",
       "matchPackageNames": ["node"],
       "groupName": "node",
       "allowedVersions": "<25"
     },
     {
-      "description": "pnpm は mise.toml と package.json の packageManager が一致している必要があるため同一 PR で上げる",
+      "description": "pnpm は mise.toml と package.json の packageManager が一致している必要があるため同一 PR で上げる。node と同じ理由で group:allNonMajor の束から外す",
       "matchPackageNames": ["pnpm"],
       "groupName": "pnpm"
     },
