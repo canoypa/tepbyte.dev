@@ -13,19 +13,11 @@
   },
   "packageRules": [
     {
-      "description": "別々に上げると astro が要求する markdown-remark の版とずれる",
       "matchPackageNames": ["astro", "@astrojs/markdown-remark"],
       "matchUpdateTypes": ["major"],
       "groupName": "astro"
     },
     {
-      "description": "別々に上げると mise.toml と packageManager の版がずれる",
-      "matchPackageNames": ["pnpm"],
-      "matchUpdateTypes": ["major"],
-      "groupName": "pnpm"
-    },
-    {
-      "description": "別々に上げるとランタイムと型定義の版がずれる",
       "matchPackageNames": ["node", "@types/node"],
       "matchUpdateTypes": ["major"],
       "groupName": "node"
