@@ -25,14 +25,13 @@
       "groupName": "pnpm"
     },
     {
-      "description": "型定義はランタイムに揃える。上げるならセットで、判断はダッシュボードから",
+      "description": "Node の LTS 追従は config:recommended の workarounds:typesNodeVersioning が既にやっている。ここは次の LTS に移る時に mise.toml・engines・型定義を 1 本の PR で見るためだけ",
       "matchPackageNames": ["node", "@types/node"],
       "matchUpdateTypes": ["major"],
-      "groupName": "node",
-      "dependencyDashboardApproval": true
+      "groupName": "node"
     },
     {
-      "description": "TypeScript 7 は @astrojs/language-server が未対応。ダッシュボードから作って CI に判定させる",
+      "description": "TypeScript 7 は @astrojs/language-server が未対応。毎週赤い PR を立てないようダッシュボード経由にする",
       "matchPackageNames": ["typescript"],
       "matchUpdateTypes": ["major"],
       "dependencyDashboardApproval": true
