@@ -13,25 +13,25 @@
   },
   "packageRules": [
     {
-      "description": "peer が固定版指定なので astro と markdown-remark は必ず同時に上げる",
+      "description": "astro が @astrojs/markdown-remark に固定版の peer を持つため、major を同じ PR にまとめる",
       "matchPackageNames": ["astro", "@astrojs/markdown-remark"],
       "matchUpdateTypes": ["major"],
       "groupName": "astro"
     },
     {
-      "description": "pnpm は mise.toml と packageManager の両方に出るので必ず同時に上げる",
+      "description": "pnpm が mise.toml と packageManager の二箇所にあるため、major を同じ PR にまとめる",
       "matchPackageNames": ["pnpm"],
       "matchUpdateTypes": ["major"],
       "groupName": "pnpm"
     },
     {
-      "description": "Node の LTS 追従は config:recommended の workarounds:typesNodeVersioning が既にやっている。ここは次の LTS に移る時に mise.toml・engines・型定義を 1 本の PR で見るためだけ",
+      "description": "node と @types/node が mise.toml・engines・devDependencies に分かれているため、major を同じ PR にまとめる",
       "matchPackageNames": ["node", "@types/node"],
       "matchUpdateTypes": ["major"],
       "groupName": "node"
     },
     {
-      "description": "TypeScript 7 は @astrojs/language-server が未対応。毎週赤い PR を立てないようダッシュボード経由にする",
+      "description": "typescript 7 に @astrojs/check が未対応のため、major はダッシュボードの承認を経て作成する",
       "matchPackageNames": ["typescript"],
       "matchUpdateTypes": ["major"],
       "dependencyDashboardApproval": true
