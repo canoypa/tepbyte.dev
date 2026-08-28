@@ -6,37 +6,36 @@
     "group:allNonMajor"
   ],
   "timezone": "Asia/Tokyo",
-  "schedule": ["before 6am on monday"],
+  "schedule": ["before 6am on friday"],
   "lockFileMaintenance": {
     "enabled": true,
     "schedule": ["before 6am on the first day of the month"]
   },
   "packageRules": [
     {
-      "description": "astro は @astrojs/markdown-remark に範囲でなく固定版の peer dependency を持つため、更新種別によらず必ず同一 PR で上げる。group:allNonMajor の束からは意図的に外している——片方だけ先に版が出た場合に不整合で CI が落ちるが、束の中だと週次の更新全体が巻き添えで止まるため",
+      "description": "peer が固定版指定なので astro と markdown-remark は必ず同時に上げる",
       "matchPackageNames": ["astro", "@astrojs/markdown-remark"],
+      "matchUpdateTypes": ["major"],
       "groupName": "astro"
     },
     {
-      "description": "@types/node はランタイムに追従させるもので、最新を追う対象ではない。mise.toml の Node 24（Active LTS）に合わせる。Node の LTS を上げるときにこの上限も一緒に広げること",
-      "matchPackageNames": ["@types/node"],
-      "allowedVersions": "<25"
-    },
-    {
-      "description": "Node は Active LTS の 24 系に留める。mise.toml と package.json の engines.node の両方が対象。ツールチェーンの変更は CI と Vercel の実行環境に及ぶため、group:allNonMajor の束から外して単独 PR で見る",
-      "matchPackageNames": ["node"],
-      "groupName": "node",
-      "allowedVersions": "<25"
-    },
-    {
-      "description": "pnpm は mise.toml と package.json の packageManager が一致している必要があるため同一 PR で上げる。node と同じ理由で group:allNonMajor の束から外す",
+      "description": "pnpm は mise.toml と packageManager の両方に出るので必ず同時に上げる",
       "matchPackageNames": ["pnpm"],
+      "matchUpdateTypes": ["major"],
       "groupName": "pnpm"
     },
     {
-      "description": "TypeScript 7 は @astrojs/language-server が未対応で astro check が落ちる。対応が入ったらこの制限を外す",
+      "description": "型定義はランタイムに揃える。上げるならセットで、判断はダッシュボードから",
+      "matchPackageNames": ["node", "@types/node"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "node",
+      "dependencyDashboardApproval": true
+    },
+    {
+      "description": "TypeScript 7 は @astrojs/language-server が未対応。ダッシュボードから作って CI に判定させる",
       "matchPackageNames": ["typescript"],
-      "allowedVersions": "<7"
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true
     }
   ]
 }
