@@ -13,19 +13,19 @@
   },
   "packageRules": [
     {
-      "description": "astro が @astrojs/markdown-remark に固定版の peer を持つため、major を同じ PR にまとめる",
+      "description": "固定版の peer で結ばれている",
       "matchPackageNames": ["astro", "@astrojs/markdown-remark"],
       "matchUpdateTypes": ["major"],
       "groupName": "astro"
     },
     {
-      "description": "pnpm が mise.toml と packageManager の二箇所にあるため、major を同じ PR にまとめる",
+      "description": "mise.toml と packageManager にある",
       "matchPackageNames": ["pnpm"],
       "matchUpdateTypes": ["major"],
       "groupName": "pnpm"
     },
     {
-      "description": "node と @types/node が mise.toml・engines・devDependencies に分かれているため、major を同じ PR にまとめる",
+      "description": "mise.toml と engines と devDependencies にある",
       "matchPackageNames": ["node", "@types/node"],
       "matchUpdateTypes": ["major"],
       "groupName": "node"
