@@ -23,13 +23,6 @@ export default defineConfig({
           },
         },
       },
-      textStyles: {
-        'body-medium': {
-          value: {
-            lineHeight: '1.8',
-          },
-        },
-      },
     },
   },
 
