@@ -12,7 +12,7 @@
   },
   "packageRules": [
     {
-      "matchPackageNames": ["astro", "@astrojs/markdown-remark"],
+      "matchPackageNames": ["astro", "@astrojs/markdown-remark", "@astrojs/solid-js"],
       "matchUpdateTypes": ["major"],
       "groupName": "astro"
     },
