@@ -13,7 +13,7 @@
   },
   "packageRules": [
     {
-      "description": "3 つはメジャーが揃って動く。別々に上げるとずれるが、pnpm は unmet peer を警告するだけで止めない",
+      "description": "3 つはメジャーが揃って動く。ずれても install は成功するので、別々に上げると気づけない",
       "matchPackageNames": ["astro", "@astrojs/markdown-remark", "@astrojs/solid-js"],
       "matchUpdateTypes": ["major"],
       "groupName": "astro"
