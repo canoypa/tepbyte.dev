@@ -13,6 +13,7 @@
   },
   "packageRules": [
     {
+      "description": "@astrojs/solid-js は peer で縛られていないが astro とメジャーが一致する",
       "matchPackageNames": ["astro", "@astrojs/markdown-remark", "@astrojs/solid-js"],
       "matchUpdateTypes": ["major"],
       "groupName": "astro"
