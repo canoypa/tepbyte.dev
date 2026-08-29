@@ -13,11 +13,6 @@
   },
   "packageRules": [
     {
-      "matchUpdateTypes": ["digest"],
-      "groupName": "all non-major dependencies",
-      "groupSlug": "all-minor-patch"
-    },
-    {
       "matchPackageNames": ["astro", "@astrojs/markdown-remark", "@astrojs/solid-js"],
       "matchUpdateTypes": ["major"],
       "groupName": "astro"
