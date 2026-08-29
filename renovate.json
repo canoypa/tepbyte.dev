@@ -19,7 +19,7 @@
       "groupName": "astro"
     },
     {
-      "description": "版を縛るのは config:recommended の workarounds:typesNodeVersioning。ここは同じ PR に入れるだけ",
+      "description": "@types/node の版を縛るのは workarounds:typesNodeVersioning。ここは同じ PR に入れるだけ",
       "matchPackageNames": ["node", "@types/node"],
       "matchUpdateTypes": ["major"],
       "groupName": "node"
