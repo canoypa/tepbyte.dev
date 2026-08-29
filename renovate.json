@@ -13,7 +13,7 @@
   },
   "packageRules": [
     {
-      "description": "@astrojs/solid-js は peer で縛られていないが astro とメジャーが一致する",
+      "description": "@astrojs/solid-js は astro への peer を持たないため、別々に上げると astro だけ進んだ状態を機械が止められない",
       "matchPackageNames": ["astro", "@astrojs/markdown-remark", "@astrojs/solid-js"],
       "matchUpdateTypes": ["major"],
       "groupName": "astro"
