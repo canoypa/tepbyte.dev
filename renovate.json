@@ -5,6 +5,7 @@
     "group:allNonMajor",
     ":semanticCommitTypeAll(chore)"
   ],
+  "semanticCommits": "enabled",
   "timezone": "Asia/Tokyo",
   "schedule": ["before 6am on friday"],
   "lockFileMaintenance": {
