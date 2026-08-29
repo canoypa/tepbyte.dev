@@ -13,7 +13,7 @@
   },
   "packageRules": [
     {
-      "description": "astro とメジャーが揃って動くため別々に上げると壊れる。markdown-remark は peer で止まるが @astrojs/solid-js は止まらない",
+      "description": "3 つはメジャーが揃って動く。別々に上げるとずれるが、pnpm は unmet peer を警告するだけで止めない",
       "matchPackageNames": ["astro", "@astrojs/markdown-remark", "@astrojs/solid-js"],
       "matchUpdateTypes": ["major"],
       "groupName": "astro"
