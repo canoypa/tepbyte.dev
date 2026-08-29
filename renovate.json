@@ -20,7 +20,7 @@
       "groupName": "astro"
     },
     {
-      "description": "どちらも versioning: node で LTS 系列しか提案されない（@types/node は workarounds:typesNodeVersioning による）。ここは同じ PR に入れるだけ",
+      "description": "ランタイムと型定義の版を揃える。版そのものを縛るのは workarounds:typesNodeVersioning で、この規則ではない",
       "matchPackageNames": ["node", "@types/node"],
       "matchUpdateTypes": ["major"],
       "groupName": "node"
