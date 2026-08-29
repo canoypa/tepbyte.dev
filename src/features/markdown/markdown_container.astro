@@ -5,7 +5,7 @@ const style = {
   root: css({
     lineHeight: '1.8',
 
-    '& :where(p,h1,h2,h3,h4,h5,h6,ul,ol,blockquote,table)': {
+    '& :where(p,ul,ol,blockquote,table,hr)': {
       marginBlock: '1rem',
 
       '&:first-child': {
@@ -14,6 +14,25 @@ const style = {
       '&:last-child': {
         marginBottom: '0',
       },
+    },
+
+    // 見出しは本文よりも上の余白を広く取り、セクションの切れ目を作る
+    // (下の余白は本文と近いまま = 見出しは直後の段落と一体に見える)
+    '& :where(h1,h2,h3,h4,h5,h6)': {
+      marginTop: '3rem',
+      marginBottom: '1rem',
+      fontFamily: 'comfortaa',
+
+      '&:first-child': {
+        marginTop: '0',
+      },
+      '&:last-child': {
+        marginBottom: '0',
+      },
+    },
+
+    '& hr': {
+      borderColor: { base: 'dark.outline', _osLight: 'light.outline' },
     },
 
     '& a': {
@@ -43,6 +62,14 @@ const style = {
 
     '& img': {
       borderRadius: 'medium',
+      // 記事幅いっぱいに広がると縦長のスクリーンショットが大きくなりすぎるため、
+      // 高さで頭打ちにする（横長の写真は幅制約(reset由来)側で収まるので影響しない）
+      maxHeight: '70vh',
+      // width が auto でないと、max-width と max-height が独立にクランプされて
+      // アスペクト比が崩れる（縦長画像が横に引き伸ばされる）ため明示する
+      width: 'auto',
+      // maxHeight で縮んだ画像は記事幅に満たなくなるため、中央寄せする
+      marginInline: 'auto',
     },
 
     '& blockquote': {
@@ -130,14 +157,29 @@ const style = {
       },
     },
 
+    // 独立した箱で囲むのではなく、上の罫線 1 本だけで本文と区切る
+    // (blockquote や table と同じく、罫線ベースの控えめな装飾に揃える)
     '& .footnotes': {
-      border: '1px solid',
-      borderColor: { base: 'dark.outline', _osLight: 'light.outline' },
-      borderRadius: 'small',
-      padding: '1rem',
+      marginTop: '3rem',
+      paddingTop: '1rem',
+      borderTop: '1px solid',
+      borderColor: { base: 'dark.outline-variant', _osLight: 'light.outline-variant' },
+      textStyle: 'body-medium',
+      // textStyle の line-height(20px 固定)は記事本文の行間(1.8)を崩すため、
+      // フォントサイズ等は body-medium のまま、行間だけ本文に揃え直す
+      lineHeight: '1.8',
+      color: { base: 'dark.on-surface-variant', _osLight: 'light.on-surface-variant' },
 
       '& ol': {
         marginBlock: 0,
+      },
+
+      // 戻るリンクの "↩"(U+21A9) はサイトの Web フォントに字形が無く、
+      // システムのカラー絵文字フォントへフォールバックして丸背景の絵文字風に描画される。
+      // 絵文字対応フォントを含まないスタックを明示し、モノクロの記号として描画させる
+      '& [data-footnote-backref]': {
+        fontFamily:
+          'ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif',
       },
     },
   }),
