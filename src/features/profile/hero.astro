@@ -49,7 +49,14 @@ const styles = {
 ---
 
 <div class:list={styles.root}>
-  <Image src={profile.avatar} alt="" class:list={styles.avatar} />
+  <Image
+    src={profile.avatar}
+    alt=""
+    width={192}
+    height={192}
+    layout="fixed"
+    class:list={styles.avatar}
+  />
   <h1 class:list={styles.name}>{profile.name}</h1>
   <div class:list={styles.info}>
     <span>{profile.subhead}</span>

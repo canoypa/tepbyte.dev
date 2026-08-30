@@ -1,5 +1,5 @@
 ---
-import { getImage } from 'astro:assets'
+import { getImage, imageConfig } from 'astro:assets'
 import type { UnresolvedImageTransform } from 'astro'
 import { getBlurhashDataUrlFromImage } from '~/core/blurhash'
 import { Image as ImageReact } from './image'
@@ -10,9 +10,18 @@ type Props = UnresolvedImageTransform & {
 
 const props = Astro.props
 
+const layout = props.layout ?? imageConfig.layout ?? 'none'
+if (layout !== 'none') {
+  props.fit ??= imageConfig.objectFit ?? 'cover'
+  props.position ??= imageConfig.objectPosition ?? 'center'
+}
+
 const image = await getImage(props)
 
 const blurDataUrl = await getBlurhashDataUrlFromImage(image)
+
+const srcset =
+  image.srcSet.values.length > 0 ? image.srcSet.attribute : undefined
 ---
 
 <ImageReact
@@ -22,5 +31,6 @@ const blurDataUrl = await getBlurhashDataUrlFromImage(image)
   width={image.attributes.width}
   height={image.attributes.height}
   {...image.attributes}
+  srcset={srcset}
   client:idle
 />
