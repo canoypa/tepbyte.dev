@@ -154,15 +154,22 @@ const style = {
       marginTop: '3rem',
       paddingTop: '1rem',
       borderTop: '1px solid',
-      borderColor: { base: 'dark.outline-variant', _osLight: 'light.outline-variant' },
+      borderColor: {
+        base: 'dark.outline-variant',
+        _osLight: 'light.outline-variant',
+      },
       textStyle: 'body-medium',
-      color: { base: 'dark.on-surface-variant', _osLight: 'light.on-surface-variant' },
+      color: {
+        base: 'dark.on-surface-variant',
+        _osLight: 'light.on-surface-variant',
+      },
 
       '& ol': {
         marginBlock: 0,
       },
 
-      '& [data-footnote-backref]': { // ↩ が絵文字フォントにフォールバックするのを防ぐ
+      '& [data-footnote-backref]': {
+        // ↩ が絵文字フォントにフォールバックするのを防ぐ
         fontFamily:
           'ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif',
       },
