@@ -66,12 +66,7 @@ const style = {
     '& img': {
       borderRadius: 'medium',
       marginInline: 'auto',
-
-      // 縦長画像を 80vh で頭打ちにする。height 軸で clamp すると幅が属性値の
-      // まま残って歪み、width:auto で回避すると読込前に寸法が 0 に潰れて CLS
-      // が出るため、cap を width 軸へ写し width/height 属性から算出する。
-      // attr() 未対応ブラウザではこの宣言ごと無効になり、preflight の
-      // max-width:100%（cap なし・比率は保持）にフォールバックする。
+      // 高さ cap を幅側で算出。max-height だと width:auto 必須→未ロード時サイズ 0(CLS)。
       maxWidth:
         'min(100%, calc(80vh * attr(width type(<number>)) / attr(height type(<number>))))',
     },
