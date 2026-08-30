@@ -65,9 +65,10 @@ const style = {
 
     '& img': {
       borderRadius: 'medium',
-      maxHeight: '80vh',
-      width: 'auto', // ないと max-height と独立にクランプされ縦横比が崩れる
       marginInline: 'auto',
+      // 高さ cap を幅側で算出。max-height だと width:auto 必須→未ロード時サイズ 0(CLS)。
+      maxWidth:
+        'min(100%, calc(80vh * attr(width type(<number>)) / attr(height type(<number>))))',
     },
 
     '& blockquote': {
