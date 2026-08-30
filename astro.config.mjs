@@ -15,6 +15,11 @@ export default defineConfig({
     assets: '_',
   },
 
+  image: {
+    layout: 'constrained',
+    responsiveStyles: true,
+  },
+
   integrations: [
     solidJs(),
     compress({
