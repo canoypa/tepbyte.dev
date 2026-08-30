@@ -16,8 +16,6 @@ const style = {
       },
     },
 
-    // 見出しは本文よりも上の余白を広く取り、セクションの切れ目を作る
-    // (下の余白は本文と近いまま = 見出しは直後の段落と一体に見える)
     '& :where(h1,h2,h3,h4,h5,h6)': {
       marginTop: '3rem',
       marginBottom: '1rem',
@@ -62,13 +60,8 @@ const style = {
 
     '& img': {
       borderRadius: 'medium',
-      // 記事幅いっぱいに広がると縦長のスクリーンショットが大きくなりすぎるため、
-      // 高さで頭打ちにする（横長の写真は幅制約(reset由来)側で収まるので影響しない）
       maxHeight: '70vh',
-      // width が auto でないと、max-width と max-height が独立にクランプされて
-      // アスペクト比が崩れる（縦長画像が横に引き伸ばされる）ため明示する
-      width: 'auto',
-      // maxHeight で縮んだ画像は記事幅に満たなくなるため、中央寄せする
+      width: 'auto', // ないと max-height と独立にクランプされ縦横比が崩れる
       marginInline: 'auto',
     },
 
@@ -157,8 +150,6 @@ const style = {
       },
     },
 
-    // 独立した箱で囲むのではなく、上の罫線 1 本だけで本文と区切る
-    // (blockquote や table と同じく、罫線ベースの控えめな装飾に揃える)
     '& .footnotes': {
       marginTop: '3rem',
       paddingTop: '1rem',
@@ -171,10 +162,7 @@ const style = {
         marginBlock: 0,
       },
 
-      // 戻るリンクの "↩"(U+21A9) はサイトの Web フォントに字形が無く、
-      // システムのカラー絵文字フォントへフォールバックして丸背景の絵文字風に描画される。
-      // 絵文字対応フォントを含まないスタックを明示し、モノクロの記号として描画させる
-      '& [data-footnote-backref]': {
+      '& [data-footnote-backref]': { // ↩ が絵文字フォントにフォールバックするのを防ぐ
         fontFamily:
           'ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif',
       },
