@@ -1,0 +1,29 @@
+---
+import Button from '~/components/button/button.astro'
+import { css } from '~pandacss/css'
+import { flex } from '~pandacss/patterns'
+
+type Props = {
+  title: string
+  moreHref: string
+}
+
+const { title, moreHref } = Astro.props
+
+const styles = {
+  root: flex({ direction: 'column', rowGap: 32 }),
+  title: css({
+    textStyle: 'display-small',
+    fontFamily: 'comfortaa',
+    fontWeight: 'bold',
+  }),
+}
+---
+
+<section class:list={styles.root}>
+  <h2 class:list={styles.title}>{title}</h2>
+  <slot />
+  <div>
+    <Button as="a" href={moreHref}>すべて見る</Button>
+  </div>
+</section>
