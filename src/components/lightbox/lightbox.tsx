@@ -115,7 +115,11 @@ export const Lightbox: Component = () => {
     document.documentElement.dataset.lightboxTransition = direction
     try {
       if (document.startViewTransition) {
-        await document.startViewTransition(update).finished.catch(() => {})
+        const transition = document.startViewTransition(update)
+        // タブが隠れている・遷移中に次が始まった等でスキップされると
+        // ready / finished の両方が reject する。後始末は finally が担う
+        transition.ready.catch(() => {})
+        await transition.finished.catch(() => {})
       } else {
         update()
       }
