@@ -15,6 +15,13 @@ const attributionUrl = (path: string) => {
 }
 
 /**
+ * プロフィールページの URL。API 経由で `images.unsplash.com` を hotlink する
+ * 写真には、API Guidelines が Unsplash へのリンクバックを求める。
+ */
+export const unsplashProfileUrl = (username: string): string =>
+  attributionUrl(`/@${username}`)
+
+/**
  * 写真そのものは Unsplash License の下でリポジトリに取り込み、frontmatter に
  * 持つのは帰属表示に必要な値だけとする。hotlink を求める API Guidelines は
  * API 利用時の条項で、API を介さない取り込みには掛からない。
@@ -26,7 +33,7 @@ export const unsplashAttributionSchema = z
   })
   .transform(({ authorName, authorUsername }) => ({
     authorName,
-    authorUrl: attributionUrl(`/@${authorUsername}`),
+    authorUrl: unsplashProfileUrl(authorUsername),
     siteName: 'Unsplash',
     siteUrl: attributionUrl('/'),
   }))

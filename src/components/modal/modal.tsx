@@ -38,9 +38,10 @@ const styles = {
       outline: 'none',
 
       _backdrop: {
+        // 拡大表示に添えるキャプションが背景の写真に負けない濃さ
         backgroundColor: {
-          base: 'dark.scrim/32',
-          _osLight: 'light.scrim/32',
+          base: 'dark.scrim/72',
+          _osLight: 'light.scrim/72',
         },
         backdropFilter: 'blur(4px)',
       },
