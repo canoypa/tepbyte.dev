@@ -5,7 +5,6 @@ import type { GetStaticPaths } from 'astro'
 import Breadcrumb from '~/features/breadcrumb.astro'
 import MarkdownContainer from '~/features/markdown/markdown_container.astro'
 import Info from '~/features/product/info.astro'
-import ScreenshotAstro from '~/features/product/screenshot_astro.astro'
 import Seo from '~/features/seo/seo.astro'
 import Tags from '~/features/tags/tags.astro'
 import Application from '~/layouts/application.astro'
@@ -46,8 +45,7 @@ const { Content } = await render(entry)
     ]}
   />
 
-  <article class:list={flex({ direction: "column", gap: 48 })}>
-    <ScreenshotAstro images={entry.data.images} />
+  <article class:list={flex({ direction: "column", gap: 64 })}>
     <Info product={entry.data} />
     <MarkdownContainer>
       <Content />
