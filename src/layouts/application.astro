@@ -1,5 +1,6 @@
 ---
 import { Font } from 'astro:assets'
+import { Lightbox } from '~/components/lightbox'
 import Footer from '~/features/footer/footer.astro'
 
 import '~/styles/globals.css'
@@ -63,5 +64,6 @@ const styles = {
       <slot />
     </main>
     <Footer />
+    <Lightbox client:load />
   </body>
 </html>

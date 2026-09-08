@@ -2,13 +2,14 @@
 import { getImage, imageConfig } from 'astro:assets'
 import type { UnresolvedImageTransform } from 'astro'
 import { getBlurhashDataUrlFromImage } from '~/core/blurhash'
-import { Image as ImageReact } from './image'
+import { css } from '~pandacss/css'
+import { Image as ImageSolid } from './image'
 
 type Props = UnresolvedImageTransform & {
   lightbox?: boolean
 }
 
-const props = Astro.props
+const { lightbox, ...props } = Astro.props
 
 const layout = props.layout ?? imageConfig.layout ?? 'none'
 if (layout !== 'none') {
@@ -22,15 +23,55 @@ const blurDataUrl = await getBlurhashDataUrlFromImage(image)
 
 const srcset =
   image.srcSet.values.length > 0 ? image.srcSet.attribute : undefined
+
+// 拡大表示の箱は縦横比と上限幅だけで決まる。上限は元画像より大きくしない
+const width = Number(image.attributes.width)
+const height = Number(image.attributes.height)
+const candidateWidths = image.srcSet.values.map((v) =>
+  Number(String(v.descriptor ?? '').replace(/w$/, '')),
+)
+const maxWidth = Math.max(
+  width,
+  ...candidateWidths.filter((v) => Number.isFinite(v)),
+)
+
+const styles = {
+  trigger: css({
+    display: 'inline-flex',
+    rounded: 'extra-large',
+    cursor: 'zoom-in',
+  }),
+}
 ---
 
-<ImageReact
-  src={image.src}
-  class={props.class ?? undefined}
-  blurDataUrl={blurDataUrl}
-  width={image.attributes.width}
-  height={image.attributes.height}
-  {...image.attributes}
-  srcset={srcset}
-  client:idle
-/>
+{
+  lightbox ? (
+    <button
+      type="button"
+      class:list={styles.trigger}
+      data-lightbox
+      data-lightbox-src={image.src}
+      data-lightbox-srcset={srcset}
+      data-lightbox-ratio={String(width / height)}
+      data-lightbox-max-width={String(maxWidth)}
+    >
+      <ImageSolid
+        src={image.src}
+        class={props.class ?? undefined}
+        blurDataUrl={blurDataUrl}
+        {...image.attributes}
+        srcset={srcset}
+        client:idle
+      />
+    </button>
+  ) : (
+    <ImageSolid
+      src={image.src}
+      class={props.class ?? undefined}
+      blurDataUrl={blurDataUrl}
+      {...image.attributes}
+      srcset={srcset}
+      client:idle
+    />
+  )
+}
