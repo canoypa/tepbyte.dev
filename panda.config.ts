@@ -87,7 +87,7 @@ export default defineConfig({
       height: '100%',
       objectFit: 'cover',
       overflow: 'clip',
-      borderRadius: 'large',
+      borderRadius: 'var(--lightbox-radius)',
       animation: 'none',
       mixBlendMode: 'normal',
     },

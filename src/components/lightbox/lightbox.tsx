@@ -78,7 +78,8 @@ const styles = {
       'min(90vw, var(--lightbox-max-width), calc((90vh - var(--lightbox-caption-space, 0px)) * var(--lightbox-ratio)))',
     height: 'auto',
     aspectRatio: 'var(--lightbox-ratio)',
-    rounded: 'large',
+    // 角丸はトリガから引き継ぐ。両端で違うと遷移の開始と同時に角が変わる
+    borderRadius: 'var(--lightbox-radius)',
     cursor: 'zoom-out',
   }),
   caption: css({
@@ -113,6 +114,11 @@ export const Lightbox: Component = () => {
   ) => {
     transitioning = true
     document.documentElement.dataset.lightboxTransition = direction
+    // 擬似要素は :root 側にぶら下がるので、角丸もそちらに預ける
+    document.documentElement.style.setProperty(
+      '--lightbox-radius',
+      getComputedStyle(thumbnail).borderRadius,
+    )
     try {
       if (document.startViewTransition) {
         const transition = document.startViewTransition(update)
