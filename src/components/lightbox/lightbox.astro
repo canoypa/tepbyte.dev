@@ -14,12 +14,17 @@ type Props = {
   maxWidth: number
   /** 読み込み待ちの間に敷く背景 */
   placeholder?: string
+  /**
+   * caption スロットに中身があるか。Astro.slots.has() はマークアップ上の
+   * スロットの有無を返すだけで、転送された中身が空でも true になる
+   */
+  hasCaption?: boolean
 }
 
-const { src, srcSet, alt, ratio, maxWidth, placeholder } = Astro.props
+const { src, srcSet, alt, ratio, maxWidth, placeholder, hasCaption } =
+  Astro.props
 
 const id = `lightbox-${crypto.randomUUID().slice(0, 8)}`
-const hasCaption = Astro.slots.has('default')
 
 const bareButton = {
   display: 'inline-flex',
@@ -88,7 +93,13 @@ const imageStyle = [
   .join(';')
 ---
 
-<button type="button" command="show-modal" commandfor={id} class:list={styles.trigger}>
+<button
+  type="button"
+  command="show-modal"
+  commandfor={id}
+  aria-label={alt ? undefined : '画像を拡大表示'}
+  class:list={styles.trigger}
+>
   <slot name="trigger" />
 </button>
 
@@ -98,7 +109,13 @@ const imageStyle = [
   class:list={styles.dialog}
 >
   <figure class:list={styles.figure}>
-    <button type="button" command="close" commandfor={id} class:list={styles.close}>
+    <button
+      type="button"
+      command="close"
+      commandfor={id}
+      aria-label="閉じる"
+      class:list={styles.close}
+    >
       <img
         src={src}
         srcset={srcSet}
@@ -113,7 +130,7 @@ const imageStyle = [
     {
       hasCaption && (
         <figcaption class:list={styles.caption}>
-          <slot />
+          <slot name="caption" />
         </figcaption>
       )
     }

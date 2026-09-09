@@ -51,6 +51,7 @@ const blur = blurDataUrl ? blurhashPlaceholderStyle(blurDataUrl) : undefined
       ratio={width / height}
       maxWidth={maxWidth}
       placeholder={blurDataUrl}
+      hasCaption={Astro.slots.has('caption')}
     >
       <img
         slot="trigger"
@@ -60,7 +61,7 @@ const blur = blurDataUrl ? blurhashPlaceholderStyle(blurDataUrl) : undefined
         data-blurhash={blurDataUrl ? true : undefined}
         style={blur}
       />
-      <slot name="caption" />
+      <slot name="caption" slot="caption" />
     </Lightbox>
   ) : (
     <img
@@ -86,10 +87,14 @@ const blur = blurDataUrl ? blurhashPlaceholderStyle(blurDataUrl) : undefined
       clear(image);
       continue;
     }
-    // 失敗しても剥がす
-    for (const event of ["load", "error"]) {
-      image.addEventListener(event, () => clear(image), { once: true });
-    }
+    // 読み込みに失敗しても剥がす。先に起きた方で両方の listener を外す
+    const settled = new AbortController();
+    const onSettled = () => {
+      clear(image);
+      settled.abort();
+    };
+    image.addEventListener("load", onSettled, { signal: settled.signal });
+    image.addEventListener("error", onSettled, { signal: settled.signal });
   }
 </script>
 
