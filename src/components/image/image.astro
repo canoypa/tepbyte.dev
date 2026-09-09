@@ -11,8 +11,10 @@ type Props = UnresolvedImageTransform & {
   lightbox?: boolean
 }
 
-// 出力の <img> が持つ width / height 属性は CSS の width / height に効く。
-// 片方だけ CSS で決める呼び出し元は、もう片方を auto で打ち消すこと
+// getImage() が返す <img> は width / height 属性を持つ。属性値は
+// presentational hint として CSS の width / height プロパティに適用されるので、
+// 高さだけ CSS で指定しても幅は属性値のまま動かない。固有比から決めさせたい
+// 呼び出し元は width: auto を書く
 const { lightbox, ...props } = Astro.props
 
 const layout = props.layout ?? imageConfig.layout ?? 'none'
@@ -28,7 +30,7 @@ const blurDataUrl = await getBlurhashDataUrlFromImage(image)
 const srcset =
   image.srcSet.values.length > 0 ? image.srcSet.attribute : undefined
 
-// 拡大表示で元画像より大きく引き伸ばさないための上限
+// lightbox で元画像より大きく引き伸ばさないための上限
 const width = Number(image.attributes.width)
 const height = Number(image.attributes.height)
 const candidateWidths = image.srcSet.values.map((v) =>
@@ -75,7 +77,6 @@ const blur = blurDataUrl ? blurhashPlaceholderStyle(blurDataUrl) : undefined
 }
 
 <script>
-  // 同じ <script> はページに 1 つへまとまるので、画像の枚数分は走らない
   const clear = (image: HTMLImageElement) => {
     image.style.backgroundImage = "";
   };

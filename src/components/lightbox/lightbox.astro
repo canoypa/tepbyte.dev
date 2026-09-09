@@ -40,7 +40,6 @@ const styles = {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      // inset を 0 に倒すと Safari が高さを解決できず箱が潰れる
       margin: 'auto',
       padding: 0,
       width: 'auto',
@@ -51,7 +50,6 @@ const styles = {
       border: 'none',
 
       _backdrop: {
-        // キャプションが背景の写真に負けない濃さ
         backgroundColor: {
           base: 'dark.scrim/64',
           _osLight: 'light.scrim/64',
@@ -68,8 +66,9 @@ const styles = {
   }),
   close: css({ ...bareButton, cursor: 'zoom-out' }),
   image: css({
-    // width: auto にすると読み込めている解像度に箱が従い、
-    // 差し替えで遷移の着地点がずれる
+    // 表示サイズは viewport と縦横比だけで決める。width: auto にすると
+    // いま読み込めている解像度の自然サイズに従うため、srcset の差し替えで
+    // 大きさが変わり、view transition が終わった直後に画像が跳ねる
     width:
       'min(90vw, var(--lightbox-max-width), calc((90vh - var(--lightbox-caption-space, 0px)) * var(--lightbox-ratio)))',
     height: 'auto',

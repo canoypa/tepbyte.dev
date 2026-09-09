@@ -9,7 +9,6 @@
   }
 }
 
-/* showModal() は裏のスクロールを止めない */
 body:has(dialog[data-lightbox][open]) {
   overflow: hidden;
 }
@@ -18,7 +17,6 @@ dialog[data-lightbox][open] figure {
   view-transition-name: lightbox;
 }
 
-/* 値は transition.ts が :root に書く */
 :root[data-lightbox-transition]::view-transition-group(*),
 :root[data-lightbox-transition]::view-transition-old(*),
 :root[data-lightbox-transition]::view-transition-new(*) {
@@ -26,14 +24,14 @@ dialog[data-lightbox][open] figure {
   animation-timing-function: var(--lightbox-easing);
 }
 
-/* 既定の plus-lighter だと退場のフレームが白茶けて浮く */
+/* ::view-transition-old / new の既定の mix-blend-mode は plus-lighter で、
+   重なった部分の色が加算される。クロスフェードの途中で画像が白っぽくなる */
 ::view-transition-old(lightbox),
 ::view-transition-new(lightbox) {
   mix-blend-mode: normal;
 }
 
-/* 向きを見ないと、閉じるときの new にも入場が付く。
-   forwards まで含めると Safari で終端が残る */
+/* 向きを見ないと、閉じるときの new にも入場が付く */
 :root[data-lightbox-transition="opening"]::view-transition-new(lightbox) {
   animation-name: lightbox-in;
   animation-fill-mode: backwards;

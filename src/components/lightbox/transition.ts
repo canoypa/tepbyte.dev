@@ -1,7 +1,3 @@
-// 開閉は <dialog> と invoker が担う。このファイルが読まれなくても開閉は動く
-
-// 退場に accelerate は使わない。あれは戻ってこない退場の曲線で、
-// 同じトリガから開き直せる拡大表示には合わない
 const MOTION = {
   opening: ['medium-4', 'emphasized-decelerate'],
   closing: ['short-4', 'emphasized'],
