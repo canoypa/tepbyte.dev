@@ -73,3 +73,10 @@ export async function getBlurhashDataUrlFromImage(
 
   return undefined
 }
+
+/**
+ * 本体が届くまで敷いておく背景。img の style に直接書く。
+ * data URL がそのたび変わるのでクラスにはできない
+ */
+export const blurhashPlaceholderStyle = (dataUrl: string) =>
+  `background-image:url(${dataUrl});background-size:cover;background-position:50% 50%`

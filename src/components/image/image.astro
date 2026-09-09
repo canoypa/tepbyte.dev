@@ -1,14 +1,18 @@
 ---
 import { getImage, imageConfig } from 'astro:assets'
 import type { UnresolvedImageTransform } from 'astro'
-import { getBlurhashDataUrlFromImage } from '~/core/blurhash'
-import { css } from '~pandacss/css'
-import { Image as ImageSolid } from './image'
+import Lightbox from '~/components/lightbox/lightbox.astro'
+import {
+  blurhashPlaceholderStyle,
+  getBlurhashDataUrlFromImage,
+} from '~/core/blurhash'
 
 type Props = UnresolvedImageTransform & {
   lightbox?: boolean
 }
 
+// 出力の <img> が持つ width / height 属性は CSS の width / height に効く。
+// 片方だけ CSS で決める呼び出し元は、もう片方を auto で打ち消すこと
 const { lightbox, ...props } = Astro.props
 
 const layout = props.layout ?? imageConfig.layout ?? 'none'
@@ -24,7 +28,7 @@ const blurDataUrl = await getBlurhashDataUrlFromImage(image)
 const srcset =
   image.srcSet.values.length > 0 ? image.srcSet.attribute : undefined
 
-// 拡大表示の箱は縦横比と上限幅だけで決まる。上限は元画像より大きくしない
+// 拡大表示で元画像より大きく引き伸ばさないための上限
 const width = Number(image.attributes.width)
 const height = Number(image.attributes.height)
 const candidateWidths = image.srcSet.values.map((v) =>
@@ -35,43 +39,60 @@ const maxWidth = Math.max(
   ...candidateWidths.filter((v) => Number.isFinite(v)),
 )
 
-const styles = {
-  trigger: css({
-    display: 'inline-flex',
-    rounded: 'extra-large',
-    cursor: 'zoom-in',
-  }),
-}
+const blur = blurDataUrl ? blurhashPlaceholderStyle(blurDataUrl) : undefined
 ---
 
 {
   lightbox ? (
-    <button
-      type="button"
-      class:list={styles.trigger}
-      data-lightbox
-      data-lightbox-src={image.src}
-      data-lightbox-srcset={srcset}
-      data-lightbox-ratio={String(width / height)}
-      data-lightbox-max-width={String(maxWidth)}
+    <Lightbox
+      src={image.src}
+      srcSet={srcset}
+      alt={image.attributes.alt}
+      ratio={width / height}
+      maxWidth={maxWidth}
+      placeholder={blurDataUrl}
     >
-      <ImageSolid
+      <img
+        slot="trigger"
         src={image.src}
-        class={props.class ?? undefined}
-        blurDataUrl={blurDataUrl}
         {...image.attributes}
         srcset={srcset}
-        client:idle
+        data-blurhash={blurDataUrl ? true : undefined}
+        style={blur}
       />
-    </button>
+      <slot name="caption" />
+    </Lightbox>
   ) : (
-    <ImageSolid
+    <img
       src={image.src}
-      class={props.class ?? undefined}
-      blurDataUrl={blurDataUrl}
       {...image.attributes}
       srcset={srcset}
-      client:idle
+      data-blurhash={blurDataUrl ? true : undefined}
+      style={blur}
     />
   )
 }
+
+<script>
+  // 同じ <script> はページに 1 つへまとまるので、画像の枚数分は走らない
+  const clear = (image: HTMLImageElement) => {
+    image.style.backgroundImage = "";
+  };
+
+  for (const image of document.querySelectorAll<HTMLImageElement>(
+    "[data-blurhash]",
+  )) {
+    if (image.complete) {
+      clear(image);
+      continue;
+    }
+    // 失敗しても剥がす
+    for (const event of ["load", "error"]) {
+      image.addEventListener(event, () => clear(image), { once: true });
+    }
+  }
+</script>
+
+<script>
+  import "~/components/lightbox/transition";
+</script>
