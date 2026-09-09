@@ -16,10 +16,27 @@ import { Modal } from '../modal'
  */
 const VIEW_TRANSITION_NAME = 'lightbox'
 
+/** 焦点要素を使わないときに、拡大表示そのものを動かすための名前 */
+const SURFACE_TRANSITION_NAME = 'lightbox-surface'
+
 const TRIGGER_SELECTOR = '[data-lightbox]'
 
 /** キャプションのために空けておく高さ。無いときは詰める */
 const CAPTION_SPACE = '32px'
+
+/**
+ * (モード × 向き) ごとの尺と曲線。M3 の easing and duration の表に沿う。
+ * 焦点要素は画面内で始まり画面内で終わるので emphasized、fade は入るときだけ
+ * decelerate。退場に accelerate を使わないのは、あれが「取り戻せない」退場を
+ * 表す曲線で、同じトリガから開き直せる拡大表示には合わないため。
+ * 擬似要素は :root 側にぶら下がるので、値もそちらに預ける
+ */
+const MOTION = {
+  'focal-opening': ['long-2', 'emphasized'],
+  'focal-closing': ['medium-4', 'emphasized'],
+  'surface-opening': ['medium-4', 'emphasized-decelerate'],
+  'surface-closing': ['short-4', 'emphasized'],
+} as const
 
 type OpenedImage = {
   thumbnail: HTMLImageElement
@@ -32,6 +49,13 @@ type OpenedImage = {
   ratio: string
   /** 拡大しすぎないための上限 px */
   maxWidth: string
+  /**
+   * サムネイルを焦点要素として拡大するか。
+   * トリガが常に完全に見えているレイアウトだけが名乗れる
+   */
+  focal: boolean
+  /** 遷移中の角丸。clip でスナップショットの角丸が落ちるので掛け直す */
+  radius: string
   caption: string | null
 }
 
@@ -43,6 +67,7 @@ const readTrigger = (trigger: HTMLElement): OpenedImage | null => {
     lightboxRatio,
     lightboxMaxWidth,
     lightboxCaption,
+    lightboxFocal,
   } = trigger.dataset
   if (!thumbnail || !lightboxSrc || !lightboxRatio || !lightboxMaxWidth) {
     return null
@@ -59,6 +84,8 @@ const readTrigger = (trigger: HTMLElement): OpenedImage | null => {
     alt: thumbnail.alt,
     ratio: lightboxRatio,
     maxWidth: `${lightboxMaxWidth}px`,
+    focal: lightboxFocal !== undefined,
+    radius: getComputedStyle(thumbnail).borderRadius,
     caption: lightboxCaption ?? null,
   }
 }
@@ -86,7 +113,7 @@ const styles = {
     minHeight: 24,
     textAlign: 'center',
     textStyle: 'label-medium',
-    color: 'dark.on-surface',
+    color: { base: 'dark.on-surface', _osLight: 'light.on-surface' },
   }),
 }
 
@@ -99,26 +126,34 @@ export const Lightbox: Component = () => {
   const [image, setImage] = createSignal<OpenedImage | null>(null)
   const [src, setSrc] = createSignal('')
 
-  // 遷移中のクリックを弾く。固定名を 2 枚が同時に持つと遷移ごと失敗する
+  // 遷移中のクリックを弾く。固定名を 2 枚が同時に持つと遷移ごと失敗する。
+  // なお view transition が動いている間はブラウザ側が当たり判定をページに
+  // 通さないので、ここで許可しても閉じ途中のクリックは届かない
   let transitioning = false
 
   /**
-   * 遷移の実行と後始末。向きは CSS 側に伝える（尺と ::view-transition-new の
-   * 扱いが変わる。panda.config.ts の globalCss）。中断された遷移は reject するので、
-   * view-transition-name を残さないよう finally で必ず剥がす。
+   * 遷移の実行と後始末。モードと向きを CSS 側に伝え、尺と曲線を :root に書く。
+   * 中断された遷移は reject するので、view-transition-name を残さないよう
+   * finally で必ず剥がす。
    */
   const runTransition = async (
     direction: 'opening' | 'closing',
-    thumbnail: HTMLImageElement,
+    image: OpenedImage,
     update: () => void,
   ) => {
+    const root = document.documentElement
+    const mode = image.focal ? 'focal' : 'surface'
+    const [duration, easing] = MOTION[`${mode}-${direction}`]
+
     transitioning = true
-    document.documentElement.dataset.lightboxTransition = direction
-    // 擬似要素は :root 側にぶら下がるので、角丸もそちらに預ける
-    document.documentElement.style.setProperty(
-      '--lightbox-radius',
-      getComputedStyle(thumbnail).borderRadius,
+    root.dataset.lightboxTransition = direction
+    root.dataset.lightboxMode = mode
+    root.style.setProperty(
+      '--lightbox-duration',
+      `var(--durations-${duration})`,
     )
+    root.style.setProperty('--lightbox-easing', `var(--easings-${easing})`)
+    if (image.focal) root.style.setProperty('--lightbox-radius', image.radius)
     try {
       if (document.startViewTransition) {
         const transition = document.startViewTransition(update)
@@ -130,8 +165,9 @@ export const Lightbox: Component = () => {
         update()
       }
     } finally {
-      delete document.documentElement.dataset.lightboxTransition
-      thumbnail.style.viewTransitionName = ''
+      image.thumbnail.style.viewTransitionName = ''
+      delete root.dataset.lightboxTransition
+      delete root.dataset.lightboxMode
       transitioning = false
     }
   }
@@ -141,10 +177,13 @@ export const Lightbox: Component = () => {
     const next = readTrigger(trigger)
     if (!next) return
 
-    next.thumbnail.style.viewTransitionName = VIEW_TRANSITION_NAME
-    await runTransition('opening', next.thumbnail, () => {
-      next.thumbnail.style.viewTransitionName = ''
-      next.thumbnail.style.visibility = 'hidden'
+    if (next.focal)
+      next.thumbnail.style.viewTransitionName = VIEW_TRANSITION_NAME
+    await runTransition('opening', next, () => {
+      if (next.focal) {
+        next.thumbnail.style.viewTransitionName = ''
+        next.thumbnail.style.visibility = 'hidden'
+      }
       setSrc(next.initialSrc)
       setImage(next)
     })
@@ -162,10 +201,12 @@ export const Lightbox: Component = () => {
     const current = image()
     if (!current || transitioning) return
 
-    await runTransition('closing', current.thumbnail, () => {
+    await runTransition('closing', current, () => {
       setImage(null)
-      current.thumbnail.style.visibility = ''
-      current.thumbnail.style.viewTransitionName = VIEW_TRANSITION_NAME
+      if (current.focal) {
+        current.thumbnail.style.visibility = ''
+        current.thumbnail.style.viewTransitionName = VIEW_TRANSITION_NAME
+      }
     })
   }
 
@@ -185,7 +226,14 @@ export const Lightbox: Component = () => {
     <Modal open={() => image() != null} onClose={close} closeWithBackdrop>
       <Show when={image()}>
         {(current) => (
-          <figure class={styles.figure}>
+          <figure
+            class={styles.figure}
+            style={{
+              'view-transition-name': current().focal
+                ? undefined
+                : SURFACE_TRANSITION_NAME,
+            }}
+          >
             <img
               src={src()}
               srcset={
@@ -200,7 +248,9 @@ export const Lightbox: Component = () => {
                 '--lightbox-caption-space': current().caption
                   ? CAPTION_SPACE
                   : undefined,
-                'view-transition-name': VIEW_TRANSITION_NAME,
+                'view-transition-name': current().focal
+                  ? VIEW_TRANSITION_NAME
+                  : undefined,
               }}
               onClick={close}
             />

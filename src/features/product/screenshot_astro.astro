@@ -19,7 +19,11 @@ const styles = {
     _scrollbar: { display: 'none' },
   }),
   image: css({
-    maxWidth: 'fit-content',
+    // width 属性が presentational hint として効くので、明示的に打ち消して
+    // height と固有比から決めさせる。max-width: fit-content で打ち消すと、
+    // Safari では固有サイズの確定に間に合わなかったときに固有幅へ落ちる
+    width: 'auto',
+    maxWidth: 'none',
     height: { base: 216, md: 288 },
     rounded: 'extra-large',
     objectFit: 'cover',
