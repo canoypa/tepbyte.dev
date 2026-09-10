@@ -73,3 +73,6 @@ export async function getBlurhashDataUrlFromImage(
 
   return undefined
 }
+
+export const blurhashPlaceholderStyle = (dataUrl: string) =>
+  `background-image:url(${dataUrl});background-size:cover;background-position:50% 50%`

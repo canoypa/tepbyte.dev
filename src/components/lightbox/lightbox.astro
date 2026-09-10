@@ -1,0 +1,137 @@
+---
+import './lightbox.css'
+import { blurhashPlaceholderStyle } from '~/core/blurhash'
+import { css } from '~pandacss/css'
+import { flex } from '~pandacss/patterns'
+
+type Props = {
+  src: string
+  srcSet?: string
+  alt?: string
+  /** 幅 / 高さ。箱の縦横比に使う */
+  ratio: number
+  /** 拡大しすぎないための上限 px */
+  maxWidth: number
+  /** 読み込み待ちの間に敷く背景 */
+  placeholder?: string
+  /**
+   * caption スロットに中身があるか。Astro.slots.has() はマークアップ上の
+   * スロットの有無を返すだけで、転送された中身が空でも true になる
+   */
+  hasCaption?: boolean
+}
+
+const { src, srcSet, alt, ratio, maxWidth, placeholder, hasCaption } =
+  Astro.props
+
+const id = `lightbox-${crypto.randomUUID().slice(0, 8)}`
+
+const bareButton = {
+  display: 'inline-flex',
+  padding: 0,
+  background: 'none',
+  border: 'none',
+} as const
+
+const styles = {
+  trigger: css({ ...bareButton, rounded: 'extra-large', cursor: 'zoom-in' }),
+  dialog: css({
+    _open: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      margin: 'auto',
+      padding: 0,
+      width: 'auto',
+      maxWidth: '90vw',
+      height: 'auto',
+      maxHeight: '90vh',
+      backgroundColor: 'transparent',
+      border: 'none',
+
+      _backdrop: {
+        backgroundColor: {
+          base: 'dark.scrim/64',
+          _osLight: 'light.scrim/64',
+        },
+        backdropFilter: 'blur(4px)',
+      },
+    },
+  }),
+  figure: flex({
+    direction: 'column',
+    rowGap: 8,
+    maxWidth: '100%',
+    maxHeight: '100%',
+  }),
+  close: css({ ...bareButton, cursor: 'zoom-out' }),
+  image: css({
+    // 表示サイズは viewport と縦横比だけで決める。width: auto にすると
+    // いま読み込めている解像度の自然サイズに従うため、srcset の差し替えで
+    // 大きさが変わり、view transition が終わった直後に画像が跳ねる
+    width:
+      'min(90vw, var(--lightbox-max-width), calc((90vh - var(--lightbox-caption-space, 0px)) * var(--lightbox-ratio)))',
+    height: 'auto',
+    aspectRatio: 'var(--lightbox-ratio)',
+  }),
+  caption: css({
+    minHeight: 24,
+    textAlign: 'center',
+    textStyle: 'label-medium',
+    color: { base: 'dark.on-surface', _osLight: 'light.on-surface' },
+  }),
+}
+
+const imageStyle = [
+  `--lightbox-ratio:${ratio}`,
+  `--lightbox-max-width:${maxWidth}px`,
+  hasCaption ? '--lightbox-caption-space:32px' : '',
+  placeholder ? blurhashPlaceholderStyle(placeholder) : '',
+]
+  .filter(Boolean)
+  .join(';')
+---
+
+<button
+  type="button"
+  command="show-modal"
+  commandfor={id}
+  aria-label={alt ? undefined : '画像を拡大表示'}
+  class:list={styles.trigger}
+>
+  <slot name="trigger" />
+</button>
+
+<dialog
+  id={id}
+  data-lightbox
+  class:list={styles.dialog}
+>
+  <figure class:list={styles.figure}>
+    <button
+      type="button"
+      command="close"
+      commandfor={id}
+      aria-label="閉じる"
+      class:list={styles.close}
+    >
+      <img
+        src={src}
+        srcset={srcSet}
+        sizes="90vw"
+        alt={alt}
+        loading="lazy"
+        data-blurhash={placeholder ? true : undefined}
+        class:list={styles.image}
+        style={imageStyle}
+      />
+    </button>
+    {
+      hasCaption && (
+        <figcaption class:list={styles.caption}>
+          <slot name="caption" />
+        </figcaption>
+      )
+    }
+  </figure>
+</dialog>

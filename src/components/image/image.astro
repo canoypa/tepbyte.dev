@@ -1,14 +1,21 @@
 ---
 import { getImage, imageConfig } from 'astro:assets'
 import type { UnresolvedImageTransform } from 'astro'
-import { getBlurhashDataUrlFromImage } from '~/core/blurhash'
-import { Image as ImageReact } from './image'
+import Lightbox from '~/components/lightbox/lightbox.astro'
+import {
+  blurhashPlaceholderStyle,
+  getBlurhashDataUrlFromImage,
+} from '~/core/blurhash'
 
 type Props = UnresolvedImageTransform & {
   lightbox?: boolean
 }
 
-const props = Astro.props
+// getImage() が返す <img> は width / height 属性を持つ。属性値は
+// presentational hint として CSS の width / height プロパティに適用されるので、
+// 高さだけ CSS で指定しても幅は属性値のまま動かない。固有比から決めさせたい
+// 呼び出し元は width: auto を書く
+const { lightbox, ...props } = Astro.props
 
 const layout = props.layout ?? imageConfig.layout ?? 'none'
 if (layout !== 'none') {
@@ -22,15 +29,76 @@ const blurDataUrl = await getBlurhashDataUrlFromImage(image)
 
 const srcset =
   image.srcSet.values.length > 0 ? image.srcSet.attribute : undefined
+
+// lightbox で元画像より大きく引き伸ばさないための上限
+const width = Number(image.attributes.width)
+const height = Number(image.attributes.height)
+const candidateWidths = image.srcSet.values.map((v) =>
+  Number(String(v.descriptor ?? '').replace(/w$/, '')),
+)
+const maxWidth = Math.max(
+  width,
+  ...candidateWidths.filter((v) => Number.isFinite(v)),
+)
+
+const blur = blurDataUrl ? blurhashPlaceholderStyle(blurDataUrl) : undefined
 ---
 
-<ImageReact
-  src={image.src}
-  class={props.class ?? undefined}
-  blurDataUrl={blurDataUrl}
-  width={image.attributes.width}
-  height={image.attributes.height}
-  {...image.attributes}
-  srcset={srcset}
-  client:idle
-/>
+{
+  lightbox ? (
+    <Lightbox
+      src={image.src}
+      srcSet={srcset}
+      alt={image.attributes.alt}
+      ratio={width / height}
+      maxWidth={maxWidth}
+      placeholder={blurDataUrl}
+      hasCaption={Astro.slots.has('caption')}
+    >
+      <img
+        slot="trigger"
+        src={image.src}
+        {...image.attributes}
+        srcset={srcset}
+        data-blurhash={blurDataUrl ? true : undefined}
+        style={blur}
+      />
+      <slot name="caption" slot="caption" />
+    </Lightbox>
+  ) : (
+    <img
+      src={image.src}
+      {...image.attributes}
+      srcset={srcset}
+      data-blurhash={blurDataUrl ? true : undefined}
+      style={blur}
+    />
+  )
+}
+
+<script>
+  const clear = (image: HTMLImageElement) => {
+    image.style.backgroundImage = "";
+  };
+
+  for (const image of document.querySelectorAll<HTMLImageElement>(
+    "[data-blurhash]",
+  )) {
+    if (image.complete) {
+      clear(image);
+      continue;
+    }
+    // 読み込みに失敗しても剥がす。先に起きた方で両方の listener を外す
+    const settled = new AbortController();
+    const onSettled = () => {
+      clear(image);
+      settled.abort();
+    };
+    image.addEventListener("load", onSettled, { signal: settled.signal });
+    image.addEventListener("error", onSettled, { signal: settled.signal });
+  }
+</script>
+
+<script>
+  import "~/components/lightbox/transition";
+</script>

@@ -1,0 +1,38 @@
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+    scale: 0.8;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+body:has(dialog[data-lightbox][open]) {
+  overflow: hidden;
+}
+
+dialog[data-lightbox][open] figure {
+  view-transition-name: lightbox;
+}
+
+:root[data-lightbox-transition]::view-transition-group(*),
+:root[data-lightbox-transition]::view-transition-old(*),
+:root[data-lightbox-transition]::view-transition-new(*) {
+  animation-duration: var(--lightbox-duration);
+  animation-timing-function: var(--lightbox-easing);
+}
+
+/* ::view-transition-old / new の既定の mix-blend-mode は plus-lighter で、
+   重なった部分の色が加算される。クロスフェードの途中で画像が白っぽくなる */
+::view-transition-old(lightbox),
+::view-transition-new(lightbox) {
+  mix-blend-mode: normal;
+}
+
+/* 向きを見ないと、閉じるときの new にも入場が付く */
+:root[data-lightbox-transition="opening"]::view-transition-new(lightbox) {
+  animation-name: lightbox-in;
+  animation-fill-mode: backwards;
+}
