@@ -27,7 +27,7 @@
     "@astrojs/check": "^0.9.10",
     "@astrojs/markdown-remark": "7.2.4",
     "@astrojs/solid-js": "7.0.2",
-    "astro": "7.2.6",
+    "astro": "7.2.8",
     "astro-seo": "^1.1.0",
     "blurhash": "^2.0.5",
     "remark-breaks": "^4.0.0",
