@@ -2,6 +2,7 @@
   "name": "tepbyte-dev",
   "compatibility_date": "2026-09-13",
   "workers_dev": true,
+  "routes": [{ "pattern": "tepbyte.dev/*", "zone_name": "tepbyte.dev" }],
 
   "assets": {
     "directory": "./dist",

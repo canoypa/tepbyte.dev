@@ -8,7 +8,7 @@ import remarkBreaks from 'remark-breaks'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://www.tepbyte.dev',
+  site: 'https://tepbyte.dev',
   trailingSlash: 'never',
 
   image: {
