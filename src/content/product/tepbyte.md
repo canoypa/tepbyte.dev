@@ -4,7 +4,7 @@ subhead: ポートフォリオ的なサイト
 images:
   - tepbyte_image_1.jpg
 links:
-  Website: https://www.tepbyte.dev
+  Website: https://tepbyte.dev
   Repository: https://github.com/canoypa/tepbyte.dev
 tags: [Website, Next.js, React, TypeScript, Google Cloud]
 
