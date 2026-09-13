@@ -1,38 +1,55 @@
-@keyframes lightbox-in {
-  from {
-    opacity: 0;
-    scale: 0.8;
-  }
-  to {
-    opacity: 1;
-    scale: 1;
-  }
-}
-
 body:has(dialog[data-lightbox][open]) {
   overflow: hidden;
 }
 
-dialog[data-lightbox][open] figure {
-  view-transition-name: lightbox;
+/* 入場の値。退場は [data-lightbox-closing] 側が上書きする。
+   overlay / display の allow-discrete は要らない — 閉じる時機を
+   dismiss.ts が持つので、動かしているあいだ dialog はまだ開いている */
+dialog[data-lightbox],
+dialog[data-lightbox]::backdrop {
+  --lightbox-duration: var(--durations-medium-4);
+  --lightbox-easing: var(--easings-emphasized-decelerate);
+
+  opacity: 0;
+  transition:
+    opacity var(--lightbox-duration) var(--lightbox-easing),
+    scale var(--lightbox-duration) var(--lightbox-easing);
 }
 
-:root[data-lightbox-transition]::view-transition-group(*),
-:root[data-lightbox-transition]::view-transition-old(*),
-:root[data-lightbox-transition]::view-transition-new(*) {
-  animation-duration: var(--lightbox-duration);
-  animation-timing-function: var(--lightbox-easing);
+dialog[data-lightbox] {
+  scale: 0.8;
 }
 
-/* ::view-transition-old / new の既定の mix-blend-mode は plus-lighter で、
-   重なった部分の色が加算される。クロスフェードの途中で画像が白っぽくなる */
-::view-transition-old(lightbox),
-::view-transition-new(lightbox) {
-  mix-blend-mode: normal;
+dialog[data-lightbox][open],
+dialog[data-lightbox][open]::backdrop {
+  opacity: 1;
 }
 
-/* 向きを見ないと、閉じるときの new にも入場が付く */
-:root[data-lightbox-transition="opening"]::view-transition-new(lightbox) {
-  animation-name: lightbox-in;
-  animation-fill-mode: backwards;
+dialog[data-lightbox][open] {
+  scale: 1;
+}
+
+/* 退場。open は付いたままなので別の印で切り替える */
+dialog[data-lightbox][data-lightbox-closing],
+dialog[data-lightbox][data-lightbox-closing]::backdrop {
+  --lightbox-duration: var(--durations-short-4);
+  --lightbox-easing: var(--easings-emphasized);
+
+  opacity: 0;
+}
+
+dialog[data-lightbox][data-lightbox-closing] {
+  scale: 0.8;
+}
+
+/* これが無いと、開いた状態が初期値になって入場が起きない */
+@starting-style {
+  dialog[data-lightbox][open],
+  dialog[data-lightbox][open]::backdrop {
+    opacity: 0;
+  }
+
+  dialog[data-lightbox][open] {
+    scale: 0.8;
+  }
 }

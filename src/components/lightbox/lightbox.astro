@@ -8,15 +8,15 @@ type Props = {
   src: string
   srcSet?: string
   alt?: string
-  /** 幅 / 高さ。箱の縦横比に使う */
+  /** 幅 / 高さ */
   ratio: number
-  /** 拡大しすぎないための上限 px */
+  /** 元画像より大きく引き伸ばさないための上限 px */
   maxWidth: number
-  /** 読み込み待ちの間に敷く背景 */
+  /** 読み込みを待つあいだ敷いておく背景 */
   placeholder?: string
   /**
-   * caption スロットに中身があるか。Astro.slots.has() はマークアップ上の
-   * スロットの有無を返すだけで、転送された中身が空でも true になる
+   * caption スロットに中身があるか。Astro.slots.has() はマークアップ上に
+   * スロットがあるかを返すだけで、中身が undefined に潰れても true になる
    */
   hasCaption?: boolean
 }
@@ -26,15 +26,23 @@ const { src, srcSet, alt, ratio, maxWidth, placeholder, hasCaption } =
 
 const id = `lightbox-${crypto.randomUUID().slice(0, 8)}`
 
+// focus ring の丸みは中身の画像しだいなので、ボタンから画像へ付け替える
 const bareButton = {
   display: 'inline-flex',
   padding: 0,
   background: 'none',
   border: 'none',
+  _focusVisible: { outline: 'none' },
+  '&:focus-visible > *': {
+    outlineWidth: 2,
+    outlineStyle: 'solid',
+    outlineColor: { base: 'dark.primary', _osLight: 'light.primary' },
+    outlineOffset: 2,
+  },
 } as const
 
 const styles = {
-  trigger: css({ ...bareButton, rounded: 'extra-large', cursor: 'zoom-in' }),
+  trigger: css({ ...bareButton, cursor: 'zoom-in' }),
   dialog: css({
     _open: {
       display: 'flex',
@@ -60,19 +68,21 @@ const styles = {
   }),
   figure: flex({
     direction: 'column',
+    // 画像はキャプションより狭いことがある(縦長の写真)。既定の stretch だと
+    // 自分の幅を持つ画像は伸びず、広がった figure の左端に貼りつく
+    alignItems: 'center',
     rowGap: 8,
     maxWidth: '100%',
     maxHeight: '100%',
   }),
   close: css({ ...bareButton, cursor: 'zoom-out' }),
   image: css({
-    // 表示サイズは viewport と縦横比だけで決める。width: auto にすると
-    // いま読み込めている解像度の自然サイズに従うため、srcset の差し替えで
-    // 大きさが変わり、view transition が終わった直後に画像が跳ねる
+    // width: auto にしない。開いた直後は未ロードで、幅が 0 になる
     width:
       'min(90vw, var(--lightbox-max-width), calc((90vh - var(--lightbox-caption-space, 0px)) * var(--lightbox-ratio)))',
     height: 'auto',
     aspectRatio: 'var(--lightbox-ratio)',
+    rounded: 'extra-small',
   }),
   caption: css({
     minHeight: 24,
@@ -135,3 +145,8 @@ const imageStyle = [
     }
   </figure>
 </dialog>
+
+<script>
+  import "~/components/image/blurhash_placeholder";
+  import "~/components/lightbox/close_transition";
+</script>
