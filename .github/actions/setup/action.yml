@@ -1,0 +1,25 @@
+name: Setup
+description: Node と pnpm を用意し、依存をインストールする
+
+runs:
+  using: composite
+  steps:
+    # Node と pnpm のバージョンは mise.toml を単一の情報源とする
+    - uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c # v4.3.0
+      with:
+        minimum_release_age: 1d
+
+    - name: pnpm store のパスを取得
+      id: pnpm-store
+      shell: bash
+      run: echo "path=$(pnpm store path --silent)" >> "$GITHUB_OUTPUT"
+
+    - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: ${{ steps.pnpm-store.outputs.path }}
+        key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+        restore-keys: ${{ runner.os }}-pnpm-
+
+    - name: 依存をインストール
+      shell: bash
+      run: pnpm install --frozen-lockfile

@@ -1,0 +1,8 @@
+/*
+  Strict-Transport-Security: max-age=63072000
+
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+https://:version.:subdomain.workers.dev/*
+  X-Robots-Tag: noindex
