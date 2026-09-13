@@ -1,0 +1,37 @@
+name: Build
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/setup
+
+      # Astro の画像変換結果。キーは毎回変わるので常に直近のものを復元し、終了時に保存し直す
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: node_modules/.astro
+          key: ${{ runner.os }}-astro-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-astro-
+
+      # 整形と import 整列。`pnpm format` を掛け忘れた差分を検出する
+      - name: Biome
+        run: pnpm exec biome ci src
+
+      # astro check（型検査）を含む
+      - name: ビルド
+        run: pnpm build
+
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: dist
+          path: dist
+          if-no-files-found: error
+          retention-days: 1

@@ -1,0 +1,12 @@
+{
+  "name": "tepbyte-dev",
+  "compatibility_date": "2026-09-13",
+  "workers_dev": false,
+  "routes": [{ "pattern": "tepbyte.dev", "custom_domain": true }],
+
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "drop-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}

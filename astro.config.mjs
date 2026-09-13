@@ -1,31 +1,21 @@
 import { defineConfig, fontProviders } from 'astro/config'
 
 import solidJs from '@astrojs/solid-js'
-import compress from '@playform/compress'
 import { unified } from '@astrojs/markdown-remark'
 
 import remarkBreaks from 'remark-breaks'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://www.tepbyte.dev',
+  site: 'https://tepbyte.dev',
   trailingSlash: 'never',
-
-  build: {
-    assets: '_',
-  },
 
   image: {
     layout: 'constrained',
     responsiveStyles: true,
   },
 
-  integrations: [
-    solidJs(),
-    compress({
-      CSS: { csso: false },
-    }),
-  ],
+  integrations: [solidJs()],
 
   markdown: {
     processor: unified({

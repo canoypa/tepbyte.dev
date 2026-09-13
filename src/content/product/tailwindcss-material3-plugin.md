@@ -11,6 +11,6 @@ tags: [Library, Tailwind CSS, Material Design, TypeScript]
 publishedAt: 2022-11-30
 ---
 
-[Tepbyte.dev](https://www.tepbyte.dev/products/tepbyte) で使用している、Tailwind CSS で Material3 のテーマを使用できるようにするプラグインです。
+[Tepbyte.dev](https://tepbyte.dev/products/tepbyte) で使用している、Tailwind CSS で Material3 のテーマを使用できるようにするプラグインです。
 
 シードカラーからのカラースキーム生成はもちろん、カスタムカラーの追加、タイポグラフィやトランジションなどなど、Material3 の実装に必要なスタイルがだいたい入っています。

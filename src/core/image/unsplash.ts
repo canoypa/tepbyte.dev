@@ -3,7 +3,7 @@ import { z } from 'astro/zod'
 // Attribution
 // see: https://help.unsplash.com/en/articles/2511315-guideline-attribution
 const attributionParams = new URLSearchParams({
-  utm_source: 'www.tepbyte.dev',
+  utm_source: 'tepbyte.dev',
   utm_medium: 'referral',
 })
 
