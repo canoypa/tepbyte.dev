@@ -5,7 +5,8 @@
     ":semanticCommitTypeAll(chore)",
     "security:minimumReleaseAgeNpm",
     ":maintainLockFilesWeekly",
-    ":configMigration"
+    ":configMigration",
+    "group:pnpm"
   ],
   "semanticCommits": "enabled",
   "timezone": "Asia/Tokyo",
@@ -14,7 +15,7 @@
     {
       "customType": "regex",
       "description": "compatibility_date に対応する版は workerd のリリースタグ v1.YYYYMMDD.N の日付部分",
-      "managerFilePatterns": ["/(^|/)wrangler\\.jsonc$/"],
+      "managerFilePatterns": ["wrangler.jsonc"],
       "matchStrings": [
         "\"compatibility_date\"\\s*:\\s*\"(?<year>\\d{4})-(?<month>\\d{2})-(?<day>\\d{2})\""
       ],
@@ -28,18 +29,16 @@
   ],
   "packageRules": [
     {
+      "matchManagers": ["!custom.regex"],
       "matchUpdateTypes": ["patch", "digest"],
+      "groupName": "patch and digest updates",
       "automerge": true
     },
     {
       "matchManagers": ["npm"],
+      "matchPackageNames": ["!pnpm"],
       "matchUpdateTypes": ["minor"],
       "groupName": "minor dependencies"
-    },
-    {
-      "matchPackageNames": ["astro", "@astrojs/markdown-remark", "@astrojs/solid-js"],
-      "matchUpdateTypes": ["major"],
-      "groupName": "astro"
     },
     {
       "matchDepNames": ["node", "@types/node"],
@@ -47,12 +46,7 @@
       "groupName": "node major"
     },
     {
-      "matchDepNames": ["pnpm"],
-      "groupName": "pnpm"
-    },
-    {
       "matchDepNames": ["cloudflare/workerd"],
-      "automerge": false,
       "minimumReleaseAge": "1 month",
       "commitMessageTopic": "compatibility_date"
     }
