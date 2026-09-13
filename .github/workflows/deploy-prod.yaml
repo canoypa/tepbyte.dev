@@ -21,14 +21,18 @@ jobs:
     runs-on: ubuntu-latest
     environment: Production
     steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/setup
+
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
-          name: site
+          name: dist
+          path: dist
 
-      # トークンを持つジョブでは依存をインストールしない。ランナー標準の Node で足りる
       - name: Cloudflare Workers にデプロイ
         shell: bash
-        run: npx --yes wrangler@4.131.1 deploy 2>&1 | sed -E 's#[a-z0-9-]+\.workers\.dev#***.workers.dev#g'
+        run: pnpm exec wrangler deploy 2>&1 | sed -E 's#[a-z0-9-]+\.workers\.dev#***.workers.dev#g'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

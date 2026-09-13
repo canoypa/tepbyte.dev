@@ -13,24 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      # Node と pnpm のバージョンは mise.toml を単一の情報源とする
-      - uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c # v4.3.0
-        with:
-          # mise-action の latest 解決が未公開タグ (v2026.9.3) を掴んで 404 になるため固定する
-          version: 2026.9.2
-
-      - name: pnpm store のパスを取得
-        id: pnpm-store
-        run: echo "path=$(pnpm store path --silent)" >> "$GITHUB_OUTPUT"
-
-      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: ${{ steps.pnpm-store.outputs.path }}
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: ${{ runner.os }}-pnpm-
-
-      - name: 依存をインストール
-        run: pnpm install --frozen-lockfile
+      - uses: ./.github/actions/setup
 
       # Astro の画像変換結果。キーは毎回変わるので常に直近のものを復元し、終了時に保存し直す
       - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
@@ -49,9 +32,7 @@ jobs:
 
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: site
-          path: |
-            dist
-            wrangler.jsonc
+          name: dist
+          path: dist
           if-no-files-found: error
           retention-days: 1
