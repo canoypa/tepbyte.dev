@@ -11,10 +11,6 @@ export default defineConfig({
   site: 'https://www.tepbyte.dev',
   trailingSlash: 'never',
 
-  build: {
-    assets: '_',
-  },
-
   image: {
     layout: 'constrained',
     responsiveStyles: true,
