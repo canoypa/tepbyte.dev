@@ -1,0 +1,102 @@
+---
+import Lightbox from '~/components/lightbox/lightbox.astro'
+import StyledLink from '~/components/styled_link/styled_link.astro'
+import { blurhashPlaceholderStyle, blurhashToDataUrl } from '~/core/blurhash'
+import {
+  formatExif,
+  PHOTO_FULL_WIDTH,
+  PHOTO_THUMBNAIL_WIDTH,
+  type Photo,
+  photoSrc,
+  photoSrcSet,
+} from '~/core/image/photo'
+import { unsplashPhotoUrl } from '~/core/image/unsplash'
+import { css } from '~pandacss/css'
+import { flex, grid } from '~pandacss/patterns'
+
+type Props = {
+  photos: Photo[]
+}
+
+const { photos } = Astro.props
+
+const items = await Promise.all(
+  photos.map(async (photo) => ({
+    photo,
+    srcSet: photoSrcSet(photo.url),
+    exif: photo.exif ? formatExif(photo.exif) : undefined,
+    blurDataUrl: photo.blurHash
+      ? await blurhashToDataUrl(photo.blurHash)
+      : undefined,
+  })),
+)
+
+const styles = {
+  grid: grid({
+    gridTemplateColumns: { base: 'repeat(3, 1fr)', md: 'repeat(6, 1fr)' },
+    gap: { base: 8, md: 16 },
+  }),
+  // トリガの button は inline-flex で中身に縮む。grid item にするとセル幅まで伸びる
+  cell: css({ display: 'grid' }),
+  // EXIF と出典をひとかたまりとして中央へ。出典ぶんの幅を予約しないので、
+  // 狭い幅でも折り返すだけで済み、中央寄せが崩れない
+  caption: flex({
+    wrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'baseline',
+    columnGap: 24,
+    rowGap: 4,
+  }),
+  exif: css({ textWrap: 'balance' }),
+  image: css({
+    width: '100%',
+    aspectRatio: '1',
+    objectFit: 'cover',
+    rounded: 'medium',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundColor: {
+      base: 'dark.surface-container',
+      _osLight: 'light.surface-container',
+    },
+  }),
+}
+---
+
+<ul class:list={styles.grid}>
+  {
+    items.map(({ photo, srcSet, exif, blurDataUrl }) => (
+      <li class:list={styles.cell}>
+        <Lightbox
+          src={photoSrc(photo.url, PHOTO_FULL_WIDTH)}
+          srcSet={srcSet}
+          alt={photo.alt ?? undefined}
+          ratio={photo.width / photo.height}
+          maxWidth={PHOTO_FULL_WIDTH}
+          placeholder={blurDataUrl}
+          hasCaption
+        >
+          {/* decoding は既定(auto)のまま。async にすると、スクロールを止めた
+              あとデコード済みの画像が描かれず blurhash が残ることがある */}
+          <img
+            slot="trigger"
+            src={photoSrc(photo.url, PHOTO_THUMBNAIL_WIDTH)}
+            srcset={srcSet}
+            sizes="(min-width: 905px) 160px, 33vw"
+            width={PHOTO_THUMBNAIL_WIDTH}
+            height={PHOTO_THUMBNAIL_WIDTH}
+            alt={photo.alt ?? ""}
+            loading="lazy"
+            data-blurhash={blurDataUrl ? true : undefined}
+            class:list={styles.image}
+            style={blurDataUrl ? blurhashPlaceholderStyle(blurDataUrl) : undefined}
+          />
+          <div slot="caption" class:list={styles.caption}>
+            {exif && <span class:list={styles.exif}>{exif}</span>}
+            <StyledLink href={unsplashPhotoUrl(photo.id)}>Unsplash</StyledLink>
+          </div>
+        </Lightbox>
+      </li>
+    ))
+  }
+</ul>
