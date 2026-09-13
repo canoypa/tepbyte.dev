@@ -1,6 +1,5 @@
 name: Build
 
-# PR の検証と本番デプロイで同じ成果物を作る。シークレットは渡さない
 on:
   workflow_call:
 

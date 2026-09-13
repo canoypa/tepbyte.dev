@@ -7,7 +7,6 @@ runs:
     # Node と pnpm のバージョンは mise.toml を単一の情報源とする
     - uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c # v4.3.0
       with:
-        # 公開直後のリリースは配布物が揃う前に掴んで失敗することがある
         minimum_release_age: 1d
 
     - name: pnpm store のパスを取得

@@ -1,6 +1,5 @@
 name: CI
 
-# main への push は Production Deploy が同じビルドを行う
 on:
   pull_request:
 

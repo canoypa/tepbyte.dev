@@ -1,13 +1,10 @@
 {
   "name": "tepbyte-dev",
   "compatibility_date": "2026-09-13",
-
-  // 本番を切り替えるまで workers.dev で確認する。切り替え後は false にする
   "workers_dev": true,
 
   "assets": {
     "directory": "./dist",
-    // trailingSlash: 'never' に揃え、/foo/ と /foo/index.html を /foo へリダイレクトする
     "html_handling": "drop-trailing-slash",
     "not_found_handling": "404-page"
   }
