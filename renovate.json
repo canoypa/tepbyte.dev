@@ -1,0 +1,54 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":semanticCommitTypeAll(chore)",
+    "security:minimumReleaseAgeNpm",
+    ":maintainLockFilesWeekly",
+    ":configMigration",
+    "group:pnpm"
+  ],
+  "semanticCommits": "enabled",
+  "timezone": "Asia/Tokyo",
+  "labels": ["dependencies"],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "compatibility_date に対応する版は workerd のリリースタグ v1.YYYYMMDD.N の日付部分",
+      "managerFilePatterns": ["wrangler.jsonc"],
+      "matchStrings": [
+        "\"compatibility_date\"\\s*:\\s*\"(?<year>\\d{4})-(?<month>\\d{2})-(?<day>\\d{2})\""
+      ],
+      "currentValueTemplate": "{{{year}}}{{{month}}}{{{day}}}",
+      "autoReplaceStringTemplate": "\"compatibility_date\": \"{{{replace '(\\d{4})(\\d{2})(\\d{2})' '$1-$2-$3' newValue}}}\"",
+      "depNameTemplate": "cloudflare/workerd",
+      "datasourceTemplate": "github-releases",
+      "extractVersionTemplate": "^v\\d+\\.(?<version>\\d{8})\\.\\d+$",
+      "versioningTemplate": "regex:^(?<major>\\d{4})(?<minor>\\d{2})(?<patch>\\d{2})$"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchManagers": ["!custom.regex"],
+      "matchUpdateTypes": ["patch", "digest"],
+      "groupName": "patch and digest updates",
+      "automerge": true
+    },
+    {
+      "matchManagers": ["npm"],
+      "matchPackageNames": ["!pnpm"],
+      "matchUpdateTypes": ["minor"],
+      "groupName": "minor dependencies"
+    },
+    {
+      "matchDepNames": ["node", "@types/node"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "node major"
+    },
+    {
+      "matchDepNames": ["cloudflare/workerd"],
+      "minimumReleaseAge": "1 month",
+      "commitMessageTopic": "compatibility_date"
+    }
+  ]
+}
