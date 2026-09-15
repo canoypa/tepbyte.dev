@@ -53,8 +53,6 @@ const styles = {
     aspectRatio: '1',
     objectFit: 'cover',
     rounded: 'medium',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
     backgroundColor: {
       base: 'dark.surface-container',
       _osLight: 'light.surface-container',
@@ -74,7 +72,6 @@ const styles = {
           ratio={photo.width / photo.height}
           maxWidth={PHOTO_FULL_WIDTH}
           placeholder={blurDataUrl}
-          hasCaption
         >
           {/* decoding は既定(auto)のまま。async にすると、スクロールを止めた
               あとデコード済みの画像が描かれず blurhash が残ることがある */}

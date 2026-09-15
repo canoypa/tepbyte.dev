@@ -14,15 +14,11 @@ type Props = {
   maxWidth: number
   /** 読み込みを待つあいだ敷いておく背景 */
   placeholder?: string
-  /**
-   * caption スロットに中身があるか。Astro.slots.has() はマークアップ上に
-   * スロットがあるかを返すだけで、中身が undefined に潰れても true になる
-   */
-  hasCaption?: boolean
 }
 
-const { src, srcSet, alt, ratio, maxWidth, placeholder, hasCaption } =
-  Astro.props
+const { src, srcSet, alt, ratio, maxWidth, placeholder } = Astro.props
+
+const hasCaption = Astro.slots.has('caption')
 
 const id = `lightbox-${crypto.randomUUID().slice(0, 8)}`
 

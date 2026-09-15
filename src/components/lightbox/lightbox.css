@@ -3,8 +3,8 @@ body:has(dialog[data-lightbox][open]) {
 }
 
 /* 入場の値。退場は [data-lightbox-closing] 側が上書きする。
-   overlay / display の allow-discrete は要らない — 閉じる時機を
-   dismiss.ts が持つので、動かしているあいだ dialog はまだ開いている */
+   overlay / display の allow-discrete は要らない。閉じる時機は
+   close_transition.ts が持ち、動かしているあいだ dialog はまだ開いている */
 dialog[data-lightbox],
 dialog[data-lightbox]::backdrop {
   --lightbox-duration: var(--durations-medium-4);

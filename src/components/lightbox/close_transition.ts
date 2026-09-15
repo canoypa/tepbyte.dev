@@ -11,10 +11,6 @@
  * そのため閉じる経路はここを通さなければならない。light dismiss
  * (`closedby`) は beforetoggle が cancelable でなく差し込めないので使わず、
  * scrim も自分で受けている。
- *
- * Safari が `overlay` を出荷したら、このモジュールは不要になる。CSS の
- * transition に `overlay` と `display` を allow-discrete で戻し、dialog に
- * `closedby="any"` を付ければ、閉じる側の JS はゼロになる。
  */
 
 const closeAfterExit = async (dialog: HTMLDialogElement) => {
