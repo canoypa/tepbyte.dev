@@ -88,14 +88,23 @@ jobs:
             git commit -m 'chore: 外部サービスのコンテンツを同期する'
           fi
 
-          if [ "$(git rev-list --count origin/main..HEAD)" = 0 ]; then
+          open_prs=$(gh pr list --head "$BRANCH" --base main --state open --json number --jq length)
+
+          # 未マージの同期が今回の取得で打ち消されると、コミットはあっても中身は main と同じになる
+          if git diff --quiet origin/main HEAD; then
             echo "main との差分なし"
+            if [ "$open_prs" != 0 ]; then
+              gh pr close "$BRANCH" --comment '取り直した結果が main と同じになったため閉じます。'
+            fi
+            if git ls-remote --exit-code --heads origin "$BRANCH" >/dev/null; then
+              git push origin --delete "$BRANCH"
+            fi
             exit 0
           fi
 
           git push origin "$BRANCH"
 
-          if [ "$(gh pr list --head "$BRANCH" --base main --state open --json number --jq length)" = 0 ]; then
+          if [ "$open_prs" = 0 ]; then
             gh pr create --base main --head "$BRANCH" \
               --title 'chore: 外部サービスのコンテンツを同期する' \
               --body 'Sync Content ワークフローが取り直した差分です。'
