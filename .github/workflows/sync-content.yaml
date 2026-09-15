@@ -9,7 +9,7 @@ concurrency:
   group: sync-content
   cancel-in-progress: false
 
-# 書き込みは CONTENT_SYNC_TOKEN で行うので、GITHUB_TOKEN は読み取りだけでよい
+# GITHUB_TOKEN の操作では後続のワークフローが起動しないため、書き込みは CONTENT_SYNC_TOKEN で行う
 permissions:
   contents: read
 
@@ -50,7 +50,6 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          # 以降の git push を PAT で行うため
           token: ${{ secrets.CONTENT_SYNC_TOKEN }}
           fetch-depth: 0
 
