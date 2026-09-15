@@ -9,7 +9,7 @@ concurrency:
   group: sync-content
   cancel-in-progress: false
 
-# 書き込みは CONTENT_SYNC_TOKEN で行う
+# 書き込みは CONTENT_SYNC_TOKEN で行うので、GITHUB_TOKEN は読み取りだけでよい
 permissions:
   contents: read
 
@@ -54,7 +54,7 @@ jobs:
           token: ${{ secrets.CONTENT_SYNC_TOKEN }}
           fetch-depth: 0
 
-      # ブランチが残っていれば未マージの PR がある。force push は ruleset で禁じているので main を取り込む
+      # 既存のブランチは main から作り直さず、main を取り込む。ruleset が force push を禁じている
       - name: Prepare sync branch
         env:
           OWNER: ${{ github.repository_owner }}
