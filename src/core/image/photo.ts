@@ -29,7 +29,6 @@ export type PhotoExif = z.infer<typeof photoExifSchema>
 export const photoSrc = (url: string, width: number): string => {
   const src = new URL(url)
   src.searchParams.set('w', String(width))
-  src.searchParams.set('fm', 'webp')
   src.searchParams.set('q', '75')
   src.searchParams.set('auto', 'format')
   return src.toString()
