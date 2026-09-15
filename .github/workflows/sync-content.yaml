@@ -60,7 +60,6 @@ jobs:
         run: |
           git config user.name "$OWNER"
           git config user.email "$OWNER_ID+$OWNER@users.noreply.github.com"
-          # 既存のブランチは作り直さず main を取り込む。ruleset が force push を禁じている
           if git ls-remote --exit-code --heads origin "$BRANCH" >/dev/null; then
             git switch "$BRANCH"
             git merge --no-edit origin/main
