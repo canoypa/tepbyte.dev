@@ -64,8 +64,7 @@ const styles = {
   }),
   figure: flex({
     direction: 'column',
-    // 画像はキャプションより狭いことがある(縦長の写真)。既定の stretch だと
-    // 自分の幅を持つ画像は伸びず、広がった figure の左端に貼りつく
+    // 縦長の写真はキャプションより狭く、stretch のままだと左に寄る
     alignItems: 'center',
     rowGap: 8,
     maxWidth: '100%',

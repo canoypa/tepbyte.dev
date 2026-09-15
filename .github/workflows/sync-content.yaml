@@ -14,7 +14,6 @@ permissions:
   contents: read
 
 jobs:
-  # 取得元ごとに job を分け、1 つが失敗しても残りは PR に載せる
   unsplash:
     runs-on: ubuntu-latest
     # secret を main からの実行に限るための environment
@@ -40,6 +39,7 @@ jobs:
 
   pr:
     needs: [unsplash]
+    # 取得元の job が失敗しても、成功した分は PR に載せる
     if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     environment:
@@ -53,15 +53,14 @@ jobs:
           token: ${{ secrets.CONTENT_SYNC_TOKEN }}
           fetch-depth: 0
 
-      # 既存のブランチは main から作り直さず、main を取り込む。ruleset が force push を禁じている
       - name: Prepare sync branch
         env:
           OWNER: ${{ github.repository_owner }}
           OWNER_ID: ${{ github.repository_owner_id }}
         run: |
-          # runner 既定の名義はアカウントに結び付かず、ruleset の追加承認で自動マージが止まる
           git config user.name "$OWNER"
           git config user.email "$OWNER_ID+$OWNER@users.noreply.github.com"
+          # 既存のブランチは作り直さず main を取り込む。ruleset が force push を禁じている
           if git ls-remote --exit-code --heads origin "$BRANCH" >/dev/null; then
             git switch "$BRANCH"
             git merge --no-edit origin/main

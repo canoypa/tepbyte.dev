@@ -1,9 +1,8 @@
 /**
  * 閉じる経路をすべて受け、退場の transition が終わってから close() する。
  *
- * 先に close() すると dialog は top layer から出る。Safari は `overlay` の
- * transition に未対応で、top layer の外では `::backdrop` が生成されないため、
- * scrim だけ最初のフレームで消える。
+ * 先に close() すると、`overlay` の transition に未対応の Safari では
+ * `::backdrop` がすぐに消え、scrim だけ退場を待たずに消える。
  *
  * `closedby` は beforetoggle が cancelable でなく退場を挟めないので使わず、
  * scrim のクリックもここで受ける。
@@ -13,8 +12,7 @@ const closeAfterExit = async (dialog: HTMLDialogElement) => {
   if (dialog.dataset.lightboxClosing !== undefined) return
   dialog.dataset.lightboxClosing = ''
 
-  // getAnimations() はスタイルを flush するので、印を立てた直後でも退場の
-  // transition が取れる。transition が無い環境では空が返り、待たずに閉じる
+  // getAnimations() はスタイルを flush するので、印を立てた直後でも退場の transition が取れる
   await Promise.allSettled(dialog.getAnimations().map((a) => a.finished))
 
   // 待っているあいだに開き直されていれば、印が外されている
@@ -33,8 +31,7 @@ for (const dialog of document.querySelectorAll<HTMLDialogElement>(
         closeAfterExit(dialog)
         break
       case 'show-modal':
-        // 退場中に押し直された。開いている dialog への showModal() は
-        // 例外なく空振りするだけなので、印を外して開いた状態へ戻す
+        // 退場中に開き直された。dialog は開いたままなので、印を外せば戻る
         delete dialog.dataset.lightboxClosing
         break
     }
@@ -50,14 +47,12 @@ for (const dialog of document.querySelectorAll<HTMLDialogElement>(
   let pressedScrim = false
 
   dialog.addEventListener('pointerdown', (event) => {
-    // 主ボタンだけ。右クリックで閉じると、scrim でコンテキストメニューを
-    // 出そうとしただけで消える
+    // 主ボタンだけ。右クリックでコンテキストメニューを出そうとしただけで閉じないように
     pressedScrim = event.button === 0 && event.target === dialog
   })
 
   dialog.addEventListener('pointerup', (event) => {
-    // 押下と離上の両方が dialog のときだけ。画像から scrim へドラッグして
-    // 離したときに閉じてしまわないように
+    // 押下と離上の両方が scrim のときだけ。画像から scrim へドラッグしただけで閉じないように
     const dismissed = pressedScrim && event.target === dialog
     pressedScrim = false
     if (dismissed) closeAfterExit(dialog)

@@ -73,12 +73,12 @@ const unsplash = createApi({
 const ids = await fetchCollectionIds(unsplash)
 const photos = await Promise.all(ids.map((id) => fetchPhoto(unsplash, id)))
 
-// API の並びは Collection の並べ替えで変わる
+// Collection 上で並べ替えただけで差分が出ないようにする
 photos.sort(
   (a, b) => a.createdAt.localeCompare(b.createdAt) || a.id.localeCompare(b.id),
 )
 
-// ixid は取得のたびに変わるが、API Guidelines が URL に残すよう求めている
+// 比較からだけ外す。ixid は取得のたびに変わるが、API Guidelines が URL に残すよう求めている
 const withoutIxid = (photos: Photo[]) =>
   photos.map((photo) => {
     const url = new URL(photo.url)

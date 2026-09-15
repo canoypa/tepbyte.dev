@@ -9,7 +9,7 @@ const readJson = async (file: URL): Promise<unknown> => {
   }
 }
 
-/** `comparable` は、取得のたびに変わるが中身ではない値を比較から外す */
+/** `comparable` で、取得のたびに変わる値を比較から外せる */
 export const writeJsonIfChanged = async <T>(
   file: URL,
   data: T,

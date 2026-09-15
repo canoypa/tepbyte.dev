@@ -12,7 +12,7 @@ const photoExifSchema = z.object({
 
 export const photoSchema = z.object({
   id: z.string(),
-  /** `urls.raw`。そのままでは表示に使えない。`photoSrc()` を通すこと */
+  /** `urls.raw`（原寸）。表示には `photoSrc()` で幅を指定する */
   url: z.string(),
   width: z.number(),
   height: z.number(),
@@ -49,7 +49,6 @@ export const formatExif = (exif: PhotoExif): string => {
   if (exif.aperture) parts.push(`ƒ/${exif.aperture}`)
   if (exif.exposureTime) parts.push(`${exif.exposureTime}s`)
   if (exif.iso != null) parts.push(`ISO ${exif.iso}`)
-  // 中黒の前を NBSP にして直前の値に結び付ける。ふつうの空白だと
-  // 折り返しが中黒の前で起きて、次の行が「· ƒ/2.8」と区切りから始まる
+  // 中黒の前を NBSP にして、折り返した行が「·」から始まらないようにする
   return parts.join('\u00a0\u00b7 ')
 }
