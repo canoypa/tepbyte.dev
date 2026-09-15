@@ -23,7 +23,7 @@ jobs:
 
       # 整形と import 整列。`pnpm format` を掛け忘れた差分を検出する
       - name: Biome
-        run: pnpm exec biome ci src
+        run: pnpm exec biome ci src scripts
 
       # astro check（型検査）を含む
       - name: ビルド

@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content'
-import { glob } from 'astro/loaders'
+import { file, glob } from 'astro/loaders'
 import { z } from 'astro/zod'
+import { photoSchema } from '~/core/image/photo'
 import { unsplashAttributionSchema } from '~/core/image/unsplash'
 
 const postCollection = defineCollection({
@@ -47,8 +48,15 @@ const profileCollection = defineCollection({
     }),
 })
 
+// synced/ は `pnpm sync:*` が書き出す
+const photoCollection = defineCollection({
+  loader: file('src/content/synced/photo.json'),
+  schema: photoSchema,
+})
+
 export const collections = {
   post: postCollection,
   product: productCollection,
   profile: profileCollection,
+  photo: photoCollection,
 }
