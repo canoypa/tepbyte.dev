@@ -48,9 +48,10 @@ jobs:
     env:
       BRANCH: chore/sync-content
     steps:
-      # GITHUB_TOKEN で push すると、PR に CI が走らず、マージ後のデプロイも起動しない
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          # 以降の git push を PAT で行うため。GITHUB_TOKEN による push や PR からは
+          # 他のワークフローが起動せず、PR の CI もマージ後のデプロイも走らない
           token: ${{ secrets.CONTENT_SYNC_TOKEN }}
           fetch-depth: 0
 
