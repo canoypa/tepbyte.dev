@@ -1,6 +1,6 @@
 import { z } from 'astro/zod'
 
-export const photoExifSchema = z.object({
+const photoExifSchema = z.object({
   make: z.string().nullable(),
   model: z.string().nullable(),
   /** 以下 3 つは単位を含まない生の値。"35.0" / "2.8" / "1/467" */
@@ -19,7 +19,7 @@ export const photoSchema = z.object({
   blurHash: z.string().nullable(),
   alt: z.string().nullable(),
   createdAt: z.string(),
-  /** 一覧には含まれず `/photos/:id` から取る。取得に失敗した写真は null */
+  /** EXIF の無い写真は null */
   exif: photoExifSchema.nullable(),
 })
 

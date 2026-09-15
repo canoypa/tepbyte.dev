@@ -35,9 +35,6 @@ importers:
       solid-js:
         specifier: ^1.9.15
         version: 1.9.15
-      unsplash-js:
-        specifier: ^8.0.1
-        version: 8.0.1
     devDependencies:
       '@biomejs/biome':
         specifier: ^2.5.10
@@ -54,6 +51,9 @@ importers:
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
+      unsplash-js:
+        specifier: ^8.0.1
+        version: 8.0.1
       wrangler:
         specifier: ^4.131.1
         version: 4.131.1(@types/node@24.13.3)

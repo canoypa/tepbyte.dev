@@ -1,9 +1,8 @@
 import { defineCollection } from 'astro:content'
-import { glob } from 'astro/loaders'
+import { file, glob } from 'astro/loaders'
 import { z } from 'astro/zod'
 import { photoSchema } from '~/core/image/photo'
 import { unsplashAttributionSchema } from '~/core/image/unsplash'
-import { unsplashPhotoLoader } from '~/core/loader/unsplash_photo'
 
 const postCollection = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/post' }),
@@ -49,10 +48,10 @@ const profileCollection = defineCollection({
     }),
 })
 
-// Unsplash の Collection から毎ビルド取得する remote loader。
-// 画像は images.unsplash.com を hotlink するのでリポジトリには入らない。
+// synced/ は `pnpm sync:*` が書き出す。画像そのものは images.unsplash.com を
+// hotlink するのでリポジトリには入らない。
 const photoCollection = defineCollection({
-  loader: unsplashPhotoLoader,
+  loader: file('src/content/synced/photo.json'),
   schema: photoSchema,
 })
 

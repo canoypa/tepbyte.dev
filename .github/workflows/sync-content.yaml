@@ -1,0 +1,103 @@
+name: Sync Content
+
+on:
+  # 月曜 9:00 JST
+  schedule:
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+
+concurrency:
+  group: sync-content
+  cancel-in-progress: false
+
+# push と PR は CONTENT_SYNC_TOKEN で行うので、GITHUB_TOKEN には書き込み権限が要らない
+permissions:
+  contents: read
+
+jobs:
+  # 取得元ごとに job を分け、結果を artifact で pr job へ渡す。1 つが失敗しても残りは届く
+  unsplash:
+    runs-on: ubuntu-latest
+    # secret は main から動いたときだけ読める（environment の branch policy）。deployment は記録しない
+    environment:
+      name: Content Sync
+      deployment: false
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/setup
+
+      - name: 取得
+        run: pnpm sync:unsplash
+        env:
+          UNSPLASH_ACCESS_TOKEN: ${{ secrets.UNSPLASH_ACCESS_TOKEN }}
+
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: synced-unsplash
+          path: src/content/synced/photo.json
+          if-no-files-found: error
+          retention-days: 1
+
+  pr:
+    needs: [unsplash]
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    # secret は main から動いたときだけ読める（environment の branch policy）。deployment は記録しない
+    environment:
+      name: Content Sync
+      deployment: false
+    env:
+      BRANCH: chore/sync-content
+    steps:
+      # GITHUB_TOKEN で push すると、PR に CI が走らず、マージ後のデプロイも起動しない
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          token: ${{ secrets.CONTENT_SYNC_TOKEN }}
+          fetch-depth: 0
+
+      # ブランチは差分があるときだけ作られ、マージで消える。残っていれば前回の PR が
+      # 未マージなので、force push できない保護に合わせて main を取り込んで上に積む
+      - name: 同期ブランチを用意する
+        env:
+          OWNER: ${{ github.repository_owner }}
+          OWNER_ID: ${{ github.repository_owner_id }}
+        run: |
+          # runner 既定の名義はアカウントに結び付かず、ruleset が追加の承認を求めて自動マージが止まる
+          git config user.name "$OWNER"
+          git config user.email "$OWNER_ID+$OWNER@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin "$BRANCH" >/dev/null; then
+            git switch "$BRANCH"
+            git merge --no-edit origin/main
+          else
+            git switch -c "$BRANCH"
+          fi
+
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          pattern: synced-*
+          merge-multiple: true
+          path: src/content/synced
+
+      - name: PR を出して自動マージを予約
+        env:
+          GH_TOKEN: ${{ secrets.CONTENT_SYNC_TOKEN }}
+        run: |
+          git add src/content/synced
+          if ! git diff --cached --quiet; then
+            git commit -m 'chore: 外部サービスのコンテンツを同期する'
+          fi
+
+          if [ "$(git rev-list --count origin/main..HEAD)" = 0 ]; then
+            echo "main との差分なし"
+            exit 0
+          fi
+
+          git push origin "$BRANCH"
+
+          if [ "$(gh pr list --head "$BRANCH" --base main --state open --json number --jq length)" = 0 ]; then
+            gh pr create --base main --head "$BRANCH" \
+              --title 'chore: 外部サービスのコンテンツを同期する' \
+              --body 'Sync Content ワークフローが取り直した差分です。'
+          fi
+          gh pr merge "$BRANCH" --auto --merge

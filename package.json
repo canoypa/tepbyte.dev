@@ -11,8 +11,9 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "lint": "astro check",
-    "format": "biome check --write src",
-    "prepare": "panda codegen"
+    "format": "biome check --write src scripts",
+    "prepare": "panda codegen",
+    "sync:unsplash": "node --env-file-if-exists=.env scripts/sync/unsplash.ts"
   },
   "browserslist": [
     "last 3 chrome major versions",
@@ -32,8 +33,7 @@
     "blurhash": "^2.0.5",
     "remark-breaks": "^4.0.0",
     "sharp": "^0.35.3",
-    "solid-js": "^1.9.15",
-    "unsplash-js": "^8.0.1"
+    "solid-js": "^1.9.15"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.10",
@@ -41,6 +41,7 @@
     "@types/node": "^24.13.3",
     "pandacss-preset-material-tokens": "^0.2.0",
     "typescript": "^6.0.3",
+    "unsplash-js": "^8.0.1",
     "wrangler": "^4.131.1"
   },
   "packageManager": "pnpm@10.29.3+sha512.498e1fb4cca5aa06c1dcf2611e6fafc50972ffe7189998c409e90de74566444298ffe43e6cd2acdc775ba1aa7cc5e092a8b7054c811ba8c5770f84693d33d2dc"
