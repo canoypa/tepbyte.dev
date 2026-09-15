@@ -48,8 +48,7 @@ const profileCollection = defineCollection({
     }),
 })
 
-// synced/ は `pnpm sync:*` が書き出す。画像そのものは images.unsplash.com を
-// hotlink するのでリポジトリには入らない。
+// synced/ は `pnpm sync:*` が書き出す
 const photoCollection = defineCollection({
   loader: file('src/content/synced/photo.json'),
   schema: photoSchema,

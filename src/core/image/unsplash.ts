@@ -42,7 +42,7 @@ export const unsplashAttributionSchema = z
     authorName,
     authorUrl: attributionUrl(`/@${authorUsername}`),
     siteName: 'Unsplash',
-    siteUrl: attributionUrl('/'),
+    siteUrl: UNSPLASH_SITE_URL,
   }))
 
 export type UnsplashAttribution = z.infer<typeof unsplashAttributionSchema>

@@ -10,8 +10,6 @@ type Props = {
 
 const { title, moreHref } = Astro.props
 
-const hasActionsTrailing = Astro.slots.has('actions-trailing')
-
 const styles = {
   root: flex({ direction: 'column', rowGap: 32 }),
   title: css({
@@ -31,8 +29,8 @@ const styles = {
 <section class:list={styles.root}>
   <h2 class:list={styles.title}>{title}</h2>
   <slot />
-  <div class:list={hasActionsTrailing ? styles.actions : undefined}>
+  <div class:list={styles.actions}>
     <Button as="a" href={moreHref}>すべて見る</Button>
-    {hasActionsTrailing && <slot name="actions-trailing" />}
+    <slot name="actions-trailing" />
   </div>
 </section>

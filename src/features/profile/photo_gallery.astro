@@ -38,8 +38,6 @@ const styles = {
   }),
   // トリガの button は inline-flex で中身に縮む。grid item にするとセル幅まで伸びる
   cell: css({ display: 'grid' }),
-  // EXIF と出典をひとかたまりとして中央へ。出典ぶんの幅を予約しないので、
-  // 狭い幅でも折り返すだけで済み、中央寄せが崩れない
   caption: flex({
     wrap: 'wrap',
     justifyContent: 'center',

@@ -1,20 +1,15 @@
 /**
- * 閉じる経路を全部受けて、退場が終わってから閉じる。
+ * 閉じる経路をすべて受け、退場の transition が終わってから close() する。
  *
- * close() を先に呼ぶと `:modal` が外れ、dialog は top layer から出る。
- * `overlay` の transition があればブラウザが退場の終わりまで留めてくれるが、
- * Safari は未対応。位置や大きさは author 側で書き戻せるが、`::backdrop` は
- * top layer の要素にしか生成されないので、書き戻す対象がない。写真が
- * フェードしている最中に scrim だけ最初のフレームで消える。
- * だから「動かしてから閉じる」。
+ * 先に close() すると dialog は top layer から出る。Safari は `overlay` の
+ * transition に未対応で、top layer の外では `::backdrop` が生成されないため、
+ * scrim だけ最初のフレームで消える。
  *
- * そのため閉じる経路はここを通さなければならない。light dismiss
- * (`closedby`) は beforetoggle が cancelable でなく差し込めないので使わず、
- * scrim も自分で受けている。
+ * `closedby` は beforetoggle が cancelable でなく退場を挟めないので使わず、
+ * scrim のクリックもここで受ける。
  */
 
 const closeAfterExit = async (dialog: HTMLDialogElement) => {
-  // 退場中の印。CSS 側は [data-lightbox-closing] で受ける
   if (dialog.dataset.lightboxClosing !== undefined) return
   dialog.dataset.lightboxClosing = ''
 
@@ -45,7 +40,7 @@ for (const dialog of document.querySelectorAll<HTMLDialogElement>(
     }
   })
 
-  // Esc。既定のまま閉じると時機を奪われる
+  // Esc。既定の動作では退場を待たずに閉じる
   dialog.addEventListener('cancel', (event) => {
     event.preventDefault()
     closeAfterExit(dialog)

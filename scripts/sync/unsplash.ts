@@ -1,9 +1,3 @@
-/**
- * Unsplash の Collection を取り、src/content/synced/photo.json に書き出す。
- *
- * 対象の Collection は非公開のため、client_id ではなく `read_collections`
- * スコープを持つ User Access Token が要る(取得方法は .env.example 参照)。
- */
 import { type AssetExif, createApi, type UnsplashApi } from 'unsplash-js'
 import type { Photo, PhotoExif } from '../../src/core/image/photo.ts'
 import { UNSPLASH_COLLECTION_ID } from '../../src/core/image/unsplash.ts'
@@ -79,13 +73,12 @@ const unsplash = createApi({
 const ids = await fetchCollectionIds(unsplash)
 const photos = await Promise.all(ids.map((id) => fetchPhoto(unsplash, id)))
 
-// API の並びは Collection の並べ替えで変わる。写真が同じなら差分を出さない
+// API の並びは Collection の並べ替えで変わる
 photos.sort(
   (a, b) => a.createdAt.localeCompare(b.createdAt) || a.id.localeCompare(b.id),
 )
 
-// ixid は Unsplash が表示の計測に使う値で、取得のたびに変わる。API Guidelines が
-// URL に残すよう求めているので消さず、変わったかどうかの判定からだけ外す
+// ixid は取得のたびに変わるが、API Guidelines が URL に残すよう求めている
 const withoutIxid = (photos: Photo[]) =>
   photos.map((photo) => {
     const url = new URL(photo.url)

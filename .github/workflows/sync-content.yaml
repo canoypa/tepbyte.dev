@@ -1,7 +1,6 @@
 name: Sync Content
 
 on:
-  # 月曜 9:00 JST
   schedule:
     - cron: '0 0 * * 1'
   workflow_dispatch:
@@ -10,15 +9,15 @@ concurrency:
   group: sync-content
   cancel-in-progress: false
 
-# push と PR は CONTENT_SYNC_TOKEN で行うので、GITHUB_TOKEN には書き込み権限が要らない
+# 書き込みは CONTENT_SYNC_TOKEN で行う
 permissions:
   contents: read
 
 jobs:
-  # 取得元ごとに job を分け、結果を artifact で pr job へ渡す。1 つが失敗しても残りは届く
+  # 取得元ごとに job を分け、1 つが失敗しても残りは PR に載せる
   unsplash:
     runs-on: ubuntu-latest
-    # secret は main から動いたときだけ読める（environment の branch policy）。deployment は記録しない
+    # secret を main からの実行に限るための environment
     environment:
       name: Content Sync
       deployment: false
@@ -27,7 +26,7 @@ jobs:
 
       - uses: ./.github/actions/setup
 
-      - name: 取得
+      - name: Fetch from Unsplash
         run: pnpm sync:unsplash
         env:
           UNSPLASH_ACCESS_TOKEN: ${{ secrets.UNSPLASH_ACCESS_TOKEN }}
@@ -43,7 +42,6 @@ jobs:
     needs: [unsplash]
     if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
-    # secret は main から動いたときだけ読める（environment の branch policy）。deployment は記録しない
     environment:
       name: Content Sync
       deployment: false
@@ -56,14 +54,13 @@ jobs:
           token: ${{ secrets.CONTENT_SYNC_TOKEN }}
           fetch-depth: 0
 
-      # ブランチは差分があるときだけ作られ、マージで消える。残っていれば前回の PR が
-      # 未マージなので、force push できない保護に合わせて main を取り込んで上に積む
-      - name: 同期ブランチを用意する
+      # ブランチが残っていれば未マージの PR がある。force push は ruleset で禁じているので main を取り込む
+      - name: Prepare sync branch
         env:
           OWNER: ${{ github.repository_owner }}
           OWNER_ID: ${{ github.repository_owner_id }}
         run: |
-          # runner 既定の名義はアカウントに結び付かず、ruleset が追加の承認を求めて自動マージが止まる
+          # runner 既定の名義はアカウントに結び付かず、ruleset の追加承認で自動マージが止まる
           git config user.name "$OWNER"
           git config user.email "$OWNER_ID+$OWNER@users.noreply.github.com"
           if git ls-remote --exit-code --heads origin "$BRANCH" >/dev/null; then
@@ -79,7 +76,7 @@ jobs:
           merge-multiple: true
           path: src/content/synced
 
-      - name: PR を出して自動マージを予約
+      - name: Open pull request with auto-merge
         env:
           GH_TOKEN: ${{ secrets.CONTENT_SYNC_TOKEN }}
         run: |
@@ -90,7 +87,6 @@ jobs:
 
           open_prs=$(gh pr list --head "$BRANCH" --base main --state open --json number --jq length)
 
-          # 未マージの同期が今回の取得で打ち消されると、コミットはあっても中身は main と同じになる
           if git diff --quiet origin/main HEAD; then
             echo "main との差分なし"
             if [ "$open_prs" != 0 ]; then

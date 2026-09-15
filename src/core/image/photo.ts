@@ -19,7 +19,6 @@ export const photoSchema = z.object({
   blurHash: z.string().nullable(),
   alt: z.string().nullable(),
   createdAt: z.string(),
-  /** EXIF の無い写真は null */
   exif: photoExifSchema.nullable(),
 })
 
