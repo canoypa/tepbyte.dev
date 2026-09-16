@@ -1,66 +1,20 @@
 ---
-import { getImage, imageConfig } from 'astro:assets'
-import type { UnresolvedImageTransform } from 'astro'
-import Lightbox from '~/components/lightbox/lightbox.astro'
-import {
-  blurhashPlaceholderStyle,
-  getBlurhashDataUrlFromImage,
-} from '~/core/blurhash'
+import type { HTMLAttributes } from 'astro/types'
+import { blurhashPlaceholderStyle } from '~/core/blurhash'
 
-type Props = UnresolvedImageTransform & {
-  lightbox?: boolean
+type Props = Omit<HTMLAttributes<'img'>, 'style'> & {
+  /** 読み込みを待つあいだ敷いておくぼかしの data URL */
+  placeholder?: string
 }
 
-const { lightbox, ...props } = Astro.props
-
-const layout = props.layout ?? imageConfig.layout ?? 'none'
-if (layout !== 'none') {
-  props.fit ??= imageConfig.objectFit ?? 'cover'
-  props.position ??= imageConfig.objectPosition ?? 'center'
-}
-
-const image = await getImage(props)
-
-const blurDataUrl = await getBlurhashDataUrlFromImage(image)
-
-const srcset =
-  image.srcSet.values.length > 0 ? image.srcSet.attribute : undefined
-
-const width = Number(image.attributes.width)
-const height = Number(image.attributes.height)
-const candidateWidths = image.srcSet.values.map((v) =>
-  Number(String(v.descriptor ?? '').replace(/w$/, '')),
-)
-const maxWidth = Math.max(
-  width,
-  ...candidateWidths.filter((v) => Number.isFinite(v)),
-)
-
-const img = {
-  src: image.src,
-  ...image.attributes,
-  srcset,
-  'data-blurhash': blurDataUrl ? true : undefined,
-  style: blurDataUrl ? blurhashPlaceholderStyle(blurDataUrl) : undefined,
-}
+const { placeholder, ...attrs } = Astro.props
 ---
 
-{
-  lightbox ? (
-    <Lightbox
-      src={image.src}
-      srcSet={srcset}
-      alt={image.attributes.alt}
-      ratio={width / height}
-      maxWidth={maxWidth}
-      placeholder={blurDataUrl}
-    >
-      <img slot="trigger" {...img} />
-    </Lightbox>
-  ) : (
-    <img {...img} />
-  )
-}
+<img
+  {...attrs}
+  data-blurhash={placeholder ? true : undefined}
+  style={placeholder ? blurhashPlaceholderStyle(placeholder) : undefined}
+/>
 
 <script>
   import "~/components/image/blurhash_placeholder";
