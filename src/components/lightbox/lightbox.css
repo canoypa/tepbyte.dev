@@ -17,12 +17,12 @@ dialog[data-lightbox] figure {
   transition: scale var(--lightbox-duration) var(--lightbox-easing);
 }
 
-dialog[data-lightbox][open]:not([data-lightbox-closing]),
-dialog[data-lightbox][open]:not([data-lightbox-closing])::backdrop {
+dialog[data-lightbox][open],
+dialog[data-lightbox][open]::backdrop {
   opacity: 1;
 }
 
-dialog[data-lightbox][open]:not([data-lightbox-closing]) figure {
+dialog[data-lightbox][open] figure {
   scale: 1;
 }
 
@@ -31,16 +31,22 @@ dialog[data-lightbox][data-lightbox-closing],
 dialog[data-lightbox][data-lightbox-closing]::backdrop {
   --lightbox-duration: var(--durations-short-4);
   --lightbox-easing: var(--easings-emphasized);
+
+  opacity: 0;
+}
+
+dialog[data-lightbox][data-lightbox-closing] figure {
+  scale: 0.8;
 }
 
 /* これが無いと、開いた状態が初期値になって入場が起きない */
 @starting-style {
-  dialog[data-lightbox][open]:not([data-lightbox-closing]),
-  dialog[data-lightbox][open]:not([data-lightbox-closing])::backdrop {
+  dialog[data-lightbox][open],
+  dialog[data-lightbox][open]::backdrop {
     opacity: 0;
   }
 
-  dialog[data-lightbox][open]:not([data-lightbox-closing]) figure {
+  dialog[data-lightbox][open] figure {
     scale: 0.8;
   }
 }
