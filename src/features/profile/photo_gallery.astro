@@ -14,6 +14,7 @@ import {
 import { unsplashPhotoUrl } from '~/core/image/unsplash'
 import { css } from '~pandacss/css'
 import { flex, grid } from '~pandacss/patterns'
+import { token } from '~pandacss/tokens'
 
 type Props = {
   photos: Photo[]
@@ -44,9 +45,16 @@ const items = await Promise.all(
   }),
 )
 
+const columns = { base: 3, md: 6 }
+// auto を解釈しないブラウザ向けの上限。サムネイルは画面幅を列数で割った幅を超えない
+const sizes = `auto, (min-width: ${token('breakpoints.md')}) calc(100vw / ${columns.md}), calc(100vw / ${columns.base})`
+
 const styles = {
   grid: grid({
-    gridTemplateColumns: { base: 'repeat(3, 1fr)', md: 'repeat(6, 1fr)' },
+    gridTemplateColumns: {
+      base: `repeat(${columns.base}, 1fr)`,
+      md: `repeat(${columns.md}, 1fr)`,
+    },
     gap: { base: 8, md: 16 },
   }),
   // トリガの button は inline-flex で中身に縮む。grid item にするとセル幅まで伸びる
@@ -83,7 +91,7 @@ const styles = {
             <Image
               src={photoSrc(photo.url, smallest)}
               srcset={srcSet}
-              sizes="(min-width: 905px) 160px, 33vw"
+              sizes={sizes}
               width={smallest}
               height={smallest}
               alt={photo.alt ?? '写真を拡大表示'}
