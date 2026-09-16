@@ -53,11 +53,7 @@ const fetchPhoto = async (
     width: data.width,
     height: data.height,
     blurHash: data.blur_hash ?? null,
-    // unsplash-js の型に alt_description が無い。API は返す
-    alt:
-      (data as { alt_description?: string | null }).alt_description ??
-      data.description ??
-      null,
+    alt: data.description,
     createdAt: data.created_at,
     exif: toExif(data.exif),
   }
