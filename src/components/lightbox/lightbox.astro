@@ -24,23 +24,22 @@ const hasCaption = Astro.slots.has('caption')
 
 const id = `lightbox-${crypto.randomUUID().slice(0, 8)}`
 
-// focus ring の丸みは中身の画像しだいなので、ボタンではなく画像に出す
-const bareButton = {
-  display: 'inline-flex',
-  padding: 0,
-  background: 'none',
-  border: 'none',
-  _focusVisible: { outline: 'none' },
-  '&:focus-visible > *': {
-    outlineWidth: 2,
-    outlineStyle: 'solid',
-    outlineColor: { base: 'dark.primary', _osLight: 'light.primary' },
-    outlineOffset: 2,
-  },
-} as const
-
 const styles = {
-  trigger: css({ ...bareButton, cursor: 'zoom-in' }),
+  trigger: css({
+    display: 'inline-flex',
+    padding: 0,
+    background: 'none',
+    border: 'none',
+    cursor: 'zoom-in',
+    // focus ring の丸みは中身の画像しだいなので、ボタンではなく画像に出す
+    _focusVisible: { outline: 'none' },
+    '&:focus-visible > *': {
+      outlineWidth: 2,
+      outlineStyle: 'solid',
+      outlineColor: { base: 'dark.primary', _osLight: 'light.primary' },
+      outlineOffset: 2,
+    },
+  }),
   dialog: css({
     _open: {
       display: 'grid',
@@ -49,7 +48,7 @@ const styles = {
       placeItems: 'center',
 
       '@media (orientation: landscape)': {
-        gridTemplate: '"close image" minmax(0, 1fr) / 48px minmax(0, 1fr)',
+        gridTemplate: '"close image" minmax(0, 1fr) / auto minmax(0, 1fr)',
       },
       position: 'fixed',
       inset: 0,
@@ -105,7 +104,6 @@ const styles = {
 }
 
 // 属性の幅・高さが無いと、読み込み前の画像は 0 になり、レイアウトが決まらない
-const width = maxWidth
 const height = Math.round(maxWidth / ratio)
 ---
 
@@ -139,7 +137,7 @@ const height = Math.round(maxWidth / ratio)
       srcset={srcSet}
       sizes="90vw"
       alt={alt}
-      width={width}
+      width={maxWidth}
       height={height}
       loading="lazy"
       data-blurhash={placeholder ? true : undefined}
