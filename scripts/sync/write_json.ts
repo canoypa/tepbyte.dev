@@ -1,5 +1,4 @@
 import { readFile, writeFile } from 'node:fs/promises'
-import type { z } from 'astro/zod'
 
 const readJson = async (file: URL): Promise<unknown> => {
   try {
@@ -10,21 +9,18 @@ const readJson = async (file: URL): Promise<unknown> => {
   }
 }
 
-export const writeJsonIfChanged = async <S extends z.ZodType>(
+export const writeJsonIfChanged = async <T>(
   file: URL,
-  schema: S,
-  data: z.infer<S>,
-  comparable: (data: z.infer<S>) => unknown = (data) => data,
+  data: T,
+  comparable: (data: T) => unknown = (data) => data,
 ) => {
-  const next = schema.parse(data)
-  // 形が変わった前回の出力は、比べずに書き直す
-  const previous = schema.safeParse(await readJson(file))
+  const previous = await readJson(file)
   if (
-    previous.success &&
-    JSON.stringify(comparable(previous.data)) ===
-      JSON.stringify(comparable(next))
+    previous !== undefined &&
+    JSON.stringify(comparable(previous as T)) ===
+      JSON.stringify(comparable(data))
   ) {
     return
   }
-  await writeFile(file, `${JSON.stringify(next, null, 2)}\n`)
+  await writeFile(file, `${JSON.stringify(data, null, 2)}\n`)
 }

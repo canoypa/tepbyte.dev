@@ -1,10 +1,5 @@
-import { z } from 'astro/zod'
 import { type AssetExif, createApi, type UnsplashApi } from 'unsplash-js'
-import {
-  type Photo,
-  type PhotoExif,
-  photoSchema,
-} from '../../src/core/image/photo.ts'
+import type { Photo, PhotoExif } from '../../src/core/image/photo.ts'
 import { writeJsonIfChanged } from './write_json.ts'
 
 const OUTPUT = new URL('../../src/content/synced/photo.json', import.meta.url)
@@ -89,4 +84,4 @@ const withoutIxid = (photos: Photo[]) =>
     return { ...photo, url: url.toString() }
   })
 
-await writeJsonIfChanged(OUTPUT, z.array(photoSchema), photos, withoutIxid)
+await writeJsonIfChanged(OUTPUT, photos, withoutIxid)
