@@ -1,11 +1,10 @@
 ---
+import { imageConfig } from 'astro:assets'
 import Lightbox from '~/components/lightbox/lightbox.astro'
 import StyledLink from '~/components/styled_link/styled_link.astro'
 import { blurhashPlaceholderStyle, blurhashToDataUrl } from '~/core/blurhash'
 import {
   formatExif,
-  PHOTO_FULL_WIDTH,
-  PHOTO_THUMBNAIL_WIDTH,
   type Photo,
   photoSrc,
   photoSrcSet,
@@ -20,10 +19,14 @@ type Props = {
 
 const { photos } = Astro.props
 
+const { breakpoints } = imageConfig
+if (!breakpoints) throw new Error('image.breakpoints が設定されていない')
+
 const items = await Promise.all(
   photos.map(async (photo) => ({
     photo,
-    srcSet: photoSrcSet(photo.url),
+    // 元の幅より大きい候補は引き伸ばしになる
+    widths: breakpoints.filter((w) => w <= photo.width),
     exif: photo.exif ? formatExif(photo.exif) : undefined,
     blurDataUrl: photo.blurHash
       ? await blurhashToDataUrl(photo.blurHash)
@@ -61,25 +64,25 @@ const styles = {
 
 <ul class:list={styles.grid}>
   {
-    items.map(({ photo, srcSet, exif, blurDataUrl }) => (
+    items.map(({ photo, widths, exif, blurDataUrl }) => (
       <li class:list={styles.cell}>
         <Lightbox
-          src={photoSrc(photo.url, PHOTO_FULL_WIDTH)}
-          srcSet={srcSet}
+          src={photoSrc(photo.url, widths.at(-1) ?? photo.width)}
+          srcSet={photoSrcSet(photo.url, widths)}
           alt={photo.alt ?? undefined}
           ratio={photo.width / photo.height}
-          maxWidth={PHOTO_FULL_WIDTH}
+          maxWidth={widths.at(-1) ?? photo.width}
           placeholder={blurDataUrl}
         >
           {/* decoding は既定(auto)のまま。async にすると、スクロールを止めた
               あとデコード済みの画像が描かれず blurhash が残ることがある */}
           <img
             slot="trigger"
-            src={photoSrc(photo.url, PHOTO_THUMBNAIL_WIDTH)}
-            srcset={srcSet}
+            src={photoSrc(photo.url, widths[0] ?? photo.width)}
+            srcset={photoSrcSet(photo.url, widths)}
             sizes="(min-width: 905px) 160px, 33vw"
-            width={PHOTO_THUMBNAIL_WIDTH}
-            height={PHOTO_THUMBNAIL_WIDTH}
+            width={widths[0] ?? photo.width}
+            height={widths[0] ?? photo.width}
             alt={photo.alt ?? ""}
             loading="lazy"
             data-blurhash={blurDataUrl ? true : undefined}

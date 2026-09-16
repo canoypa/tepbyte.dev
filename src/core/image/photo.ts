@@ -33,13 +33,8 @@ export const photoSrc = (url: string, width: number): string => {
   return src.toString()
 }
 
-export const PHOTO_THUMBNAIL_WIDTH = 640
-export const PHOTO_FULL_WIDTH = 1600
-
-const PHOTO_WIDTHS = [PHOTO_THUMBNAIL_WIDTH, PHOTO_FULL_WIDTH] as const
-
-export const photoSrcSet = (url: string): string =>
-  PHOTO_WIDTHS.map((w) => `${photoSrc(url, w)} ${w}w`).join(', ')
+export const photoSrcSet = (url: string, widths: readonly number[]): string =>
+  widths.map((w) => `${photoSrc(url, w)} ${w}w`).join(', ')
 
 export const formatExif = (exif: PhotoExif): string => {
   const parts: string[] = []
