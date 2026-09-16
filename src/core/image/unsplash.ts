@@ -16,9 +16,6 @@ const attributionUrl = (path: string) => {
 
 export const UNSPLASH_USERNAME = 'sasazono'
 
-/** 全作品ではなく、トップに出す写真を厳選した Collection */
-export const UNSPLASH_COLLECTION_ID = 's56g0Eg2Fgg'
-
 /**
  * API 経由で表示する写真には、API Terms §9 が Unsplash・撮影者・撮影者の
  * プロフィールへのリンクを求める。

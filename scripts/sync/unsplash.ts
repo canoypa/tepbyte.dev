@@ -5,10 +5,12 @@ import {
   type PhotoExif,
   photoSchema,
 } from '../../src/core/image/photo.ts'
-import { UNSPLASH_COLLECTION_ID } from '../../src/core/image/unsplash.ts'
 import { writeJsonIfChanged } from './write_json.ts'
 
 const OUTPUT = new URL('../../src/content/synced/photo.json', import.meta.url)
+
+/** 全作品ではなく、トップに出す写真を厳選した Collection */
+const COLLECTION_ID = 's56g0Eg2Fgg'
 
 const PER_PAGE = 30
 
@@ -32,7 +34,7 @@ const fetchCollectionIds = async (unsplash: UnsplashApi): Promise<string[]> => {
       '/collections/{collectionId}/photos',
       {
         params: {
-          path: { collectionId: UNSPLASH_COLLECTION_ID },
+          path: { collectionId: COLLECTION_ID },
           query: { page, per_page: PER_PAGE },
         },
       },
