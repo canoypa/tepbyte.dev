@@ -1,5 +1,7 @@
 ---
 import './lightbox.css'
+import IconButton from '~/components/icon_button/icon_button.astro'
+import IconClose from '~/components/icons/close.astro'
 import { blurhashPlaceholderStyle } from '~/core/blurhash'
 import { css } from '~pandacss/css'
 import { flex } from '~pandacss/patterns'
@@ -22,7 +24,7 @@ const hasCaption = Astro.slots.has('caption')
 
 const id = `lightbox-${crypto.randomUUID().slice(0, 8)}`
 
-// focus ring の丸みは中身の画像しだいなので、ボタンから画像へ付け替える
+// focus ring の丸みは中身の画像しだいなので、ボタンではなく画像に出す
 const bareButton = {
   display: 'inline-flex',
   padding: 0,
@@ -41,15 +43,22 @@ const styles = {
   trigger: css({ ...bareButton, cursor: 'zoom-in' }),
   dialog: css({
     _open: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      margin: 'auto',
-      padding: 0,
-      width: 'auto',
-      maxWidth: '90vw',
-      height: 'auto',
-      maxHeight: '90vh',
+      display: 'grid',
+      // 余っている側からボタンの場所を取る。縦長の画面は縦に、横長の画面は横に余る
+      gridTemplate: '"close" auto "image" minmax(0, 1fr) / minmax(0, 1fr)',
+      placeItems: 'center',
+
+      '@media (orientation: landscape)': {
+        gridTemplate: '"close image" minmax(0, 1fr) / 48px minmax(0, 1fr)',
+      },
+      position: 'fixed',
+      inset: 0,
+      margin: 0,
+      padding: 12,
+      width: '100%',
+      maxWidth: 'none',
+      height: '100%',
+      maxHeight: 'none',
       backgroundColor: 'transparent',
       border: 'none',
 
@@ -63,21 +72,29 @@ const styles = {
     },
   }),
   figure: flex({
+    gridArea: 'image',
     direction: 'column',
+    justifyContent: 'center',
     // 縦長の写真はキャプションより狭く、stretch のままだと左に寄る
     alignItems: 'center',
+    // 写真の横に空く余白は scrim として扱う
+    pointerEvents: 'none',
+    '& > *': { pointerEvents: 'auto' },
     rowGap: 8,
+    minHeight: 0,
     maxWidth: '100%',
     maxHeight: '100%',
   }),
-  close: css({ ...bareButton, cursor: 'zoom-out' }),
+  close: css({ gridArea: 'close', placeSelf: 'start start' }),
   image: css({
-    // width: auto にしない。開いた直後は未ロードで、幅が 0 になる
-    width:
-      'min(90vw, var(--lightbox-max-width), calc((90vh - var(--lightbox-caption-space, 0px)) * var(--lightbox-ratio)))',
+    minHeight: 0,
+    maxWidth: '100%',
+    maxHeight: '100%',
+    width: 'auto',
     height: 'auto',
-    aspectRatio: 'var(--lightbox-ratio)',
+    objectFit: 'contain',
     rounded: 'extra-small',
+    cursor: 'zoom-out',
   }),
   caption: css({
     minHeight: 24,
@@ -87,14 +104,9 @@ const styles = {
   }),
 }
 
-const imageStyle = [
-  `--lightbox-ratio:${ratio}`,
-  `--lightbox-max-width:${maxWidth}px`,
-  hasCaption ? '--lightbox-caption-space:32px' : '',
-  placeholder ? blurhashPlaceholderStyle(placeholder) : '',
-]
-  .filter(Boolean)
-  .join(';')
+// 属性の幅・高さが無いと、読み込み前の画像は 0 になり、レイアウトが決まらない
+const width = maxWidth
+const height = Math.round(maxWidth / ratio)
 ---
 
 <button
@@ -112,25 +124,28 @@ const imageStyle = [
   data-lightbox
   class:list={styles.dialog}
 >
+  <IconButton
+    command="close"
+    commandfor={id}
+    aria-label="閉じる"
+    class:list={styles.close}
+  >
+    <IconClose />
+  </IconButton>
+
   <figure class:list={styles.figure}>
-    <button
-      type="button"
-      command="close"
-      commandfor={id}
-      aria-label="閉じる"
-      class:list={styles.close}
-    >
-      <img
-        src={src}
-        srcset={srcSet}
-        sizes="90vw"
-        alt={alt}
-        loading="lazy"
-        data-blurhash={placeholder ? true : undefined}
-        class:list={styles.image}
-        style={imageStyle}
-      />
-    </button>
+    <img
+      src={src}
+      srcset={srcSet}
+      sizes="90vw"
+      alt={alt}
+      width={width}
+      height={height}
+      loading="lazy"
+      data-blurhash={placeholder ? true : undefined}
+      class:list={styles.image}
+      style={placeholder ? blurhashPlaceholderStyle(placeholder) : undefined}
+    />
     {
       hasCaption && (
         <figcaption class:list={styles.caption}>

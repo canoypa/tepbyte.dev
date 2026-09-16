@@ -1,21 +1,21 @@
 /**
- * 閉じる経路をすべて受け、退場の transition が終わってから close() する。
- *
  * 先に close() すると、`overlay` の transition に未対応の Safari では
  * `::backdrop` がすぐに消え、scrim だけ退場を待たずに消える。
  *
- * `closedby` は beforetoggle が cancelable でなく退場を挟めないので使わず、
- * scrim のクリックもここで受ける。
+ * `closedby` は beforetoggle が cancelable でなく、退場を挟めない。
  */
 
 const closeAfterExit = async (dialog: HTMLDialogElement) => {
   if (dialog.dataset.lightboxClosing !== undefined) return
   dialog.dataset.lightboxClosing = ''
 
-  // getAnimations() はスタイルを flush するので、印を立てた直後でも退場の transition が取れる
-  await Promise.allSettled(dialog.getAnimations().map((a) => a.finished))
+  // getAnimations() はスタイルを flush するので、印を立てた直後でも退場の transition が取れる。
+  // subtree を付けないと ::backdrop と figure の transition が入らない
+  await Promise.allSettled(
+    dialog.getAnimations({ subtree: true }).map((a) => a.finished),
+  )
 
-  // 待っているあいだに開き直されていれば、印が外されている
+  // 待つあいだに開き直されると、印が外れる
   if (dialog.dataset.lightboxClosing === undefined) return
   delete dialog.dataset.lightboxClosing
   dialog.close()
@@ -25,16 +25,9 @@ for (const dialog of document.querySelectorAll<HTMLDialogElement>(
   'dialog[data-lightbox]',
 )) {
   dialog.addEventListener('command', (event) => {
-    switch ((event as Event & { command?: string }).command) {
-      case 'close':
-        event.preventDefault()
-        closeAfterExit(dialog)
-        break
-      case 'show-modal':
-        // 退場中に開き直された。dialog は開いたままなので、印を外せば戻る
-        delete dialog.dataset.lightboxClosing
-        break
-    }
+    if ((event as CommandEvent).command !== 'close') return
+    event.preventDefault()
+    closeAfterExit(dialog)
   })
 
   // Esc。既定の動作では退場を待たずに閉じる
@@ -43,18 +36,20 @@ for (const dialog of document.querySelectorAll<HTMLDialogElement>(
     closeAfterExit(dialog)
   })
 
-  // scrim。::backdrop へのクリックは dialog 自身に届く
-  let pressedScrim = false
+  const dismissible = (target: EventTarget | null) =>
+    target instanceof Element && !target.closest('button, figcaption')
+
+  let pressed = false
 
   dialog.addEventListener('pointerdown', (event) => {
     // 主ボタンだけ。右クリックでコンテキストメニューを出そうとしただけで閉じないように
-    pressedScrim = event.button === 0 && event.target === dialog
+    pressed = event.button === 0 && dismissible(event.target)
   })
 
   dialog.addEventListener('pointerup', (event) => {
-    // 押下と離上の両方が scrim のときだけ。画像から scrim へドラッグしただけで閉じないように
-    const dismissed = pressedScrim && event.target === dialog
-    pressedScrim = false
+    // 押下と離上の両方を見る。ドラッグして離しただけで閉じないように
+    const dismissed = pressed && dismissible(event.target)
+    pressed = false
     if (dismissed) closeAfterExit(dialog)
   })
 }

@@ -1,0 +1,76 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+import { css } from '~pandacss/css'
+
+const styles = {
+  root: css({
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 48,
+    height: 48,
+    padding: 0,
+    background: 'none',
+    border: 'none',
+    cursor: 'pointer',
+    fill: {
+      base: 'dark.on-surface-variant',
+      _osLight: 'light.on-surface-variant',
+    },
+
+    // 状態レイヤーは 40 だが、反応するのは当たり判定の 48 全体
+    '&:hover > span': {
+      backgroundColor: {
+        base: 'dark.on-surface-variant/8',
+        _osLight: 'light.on-surface-variant/8',
+      },
+    },
+    '&:active > span': {
+      backgroundColor: {
+        base: 'dark.on-surface-variant/10',
+        _osLight: 'light.on-surface-variant/10',
+      },
+      rounded: 8,
+    },
+
+    _focusVisible: {
+      outline: 'none',
+
+      '& > span': {
+        backgroundColor: {
+          base: 'dark.on-surface-variant/10',
+          _osLight: 'light.on-surface-variant/10',
+        },
+        outlineWidth: 2,
+        outlineStyle: 'solid',
+        outlineColor: { base: 'dark.primary', _osLight: 'light.primary' },
+        outlineOffset: 2,
+      },
+    },
+  }),
+  stateLayer: css({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 40,
+    height: 40,
+    rounded: 'full',
+    transitionProperty: 'background-color, border-radius',
+    transitionDuration: 'short-4',
+    transitionTimingFunction: 'standard',
+  }),
+  icon: css({ width: 24, height: 24 }),
+}
+
+type Props = HTMLAttributes<'button'>
+
+const { class: className, ...attrs } = Astro.props
+---
+
+<button type="button" {...attrs} class:list={[styles.root, className]}>
+  <span class:list={styles.stateLayer}>
+    <span class:list={styles.icon}>
+      <slot />
+    </span>
+  </span>
+</button>

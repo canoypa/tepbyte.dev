@@ -2,21 +2,19 @@ body:has(dialog[data-lightbox][open]) {
   overflow: hidden;
 }
 
-/* overlay / display の allow-discrete は付けない。閉じる時機は
-   close_transition.ts が持ち、退場のあいだ dialog は開いたまま */
+/* overlay / display の allow-discrete は要らない。退場のあいだ dialog は開いたまま */
 dialog[data-lightbox],
 dialog[data-lightbox]::backdrop {
   --lightbox-duration: var(--durations-medium-4);
   --lightbox-easing: var(--easings-emphasized-decelerate);
 
   opacity: 0;
-  transition:
-    opacity var(--lightbox-duration) var(--lightbox-easing),
-    scale var(--lightbox-duration) var(--lightbox-easing);
+  transition: opacity var(--lightbox-duration) var(--lightbox-easing);
 }
 
-dialog[data-lightbox] {
+dialog[data-lightbox] figure {
   scale: 0.8;
+  transition: scale var(--lightbox-duration) var(--lightbox-easing);
 }
 
 dialog[data-lightbox][open]:not([data-lightbox-closing]),
@@ -24,7 +22,7 @@ dialog[data-lightbox][open]:not([data-lightbox-closing])::backdrop {
   opacity: 1;
 }
 
-dialog[data-lightbox][open]:not([data-lightbox-closing]) {
+dialog[data-lightbox][open]:not([data-lightbox-closing]) figure {
   scale: 1;
 }
 
@@ -42,7 +40,7 @@ dialog[data-lightbox][data-lightbox-closing]::backdrop {
     opacity: 0;
   }
 
-  dialog[data-lightbox][open]:not([data-lightbox-closing]) {
+  dialog[data-lightbox][open]:not([data-lightbox-closing]) figure {
     scale: 0.8;
   }
 }
