@@ -13,7 +13,8 @@ const styles = {
     padding: 0,
     background: 'none',
     border: 'none',
-    rounded: 'full',
+    // full（9999px）から補間すると、見た目の半径 20px を切るまで形が変わらない
+    rounded: '50%',
     cursor: 'pointer',
     fill: {
       base: 'dark.on-surface-variant',
