@@ -55,10 +55,10 @@ const styles = {
 
 type Props = HTMLAttributes<'button'>
 
-const { class: className, ...attrs } = Astro.props
+const { type = 'button', class: className, ...attrs } = Astro.props
 ---
 
-<button type="button" {...attrs} class:list={[styles.root, className]}>
+<button type={type} {...attrs} class:list={[styles.root, className]}>
   <span class:list={styles.icon}>
     <slot />
   </span>
