@@ -76,12 +76,23 @@ const styles = {
       cursor: 'zoom-out',
     },
   }),
-  close: css({ gridArea: 'close', placeSelf: 'start start' }),
+  // scrim はテーマによらず黒いので、その上はダーク側の色にする
+  close: css.raw({
+    gridArea: 'close',
+    placeSelf: 'start start',
+    fill: 'dark.on-surface-variant',
+    _hover: { backgroundColor: 'dark.on-surface-variant/hover' },
+    _focusVisible: {
+      backgroundColor: 'dark.on-surface-variant/focus',
+      outlineColor: 'dark.primary',
+    },
+    _active: { backgroundColor: 'dark.on-surface-variant/pressed' },
+  }),
   caption: css({
     minHeight: 24,
     textAlign: 'center',
     textStyle: 'label-medium',
-    color: { base: 'dark.on-surface', _osLight: 'light.on-surface' },
+    color: 'dark.on-surface',
   }),
 }
 ---
@@ -95,7 +106,7 @@ const styles = {
     command="close"
     commandfor={id}
     aria-label="閉じる"
-    class:list={styles.close}
+    css={styles.close}
   >
     <IconClose />
   </IconButton>
