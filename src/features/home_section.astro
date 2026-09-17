@@ -17,13 +17,20 @@ const styles = {
     fontFamily: 'comfortaa',
     fontWeight: 'bold',
   }),
+  actions: flex({
+    direction: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    columnGap: 24,
+  }),
 }
 ---
 
 <section class:list={styles.root}>
   <h2 class:list={styles.title}>{title}</h2>
   <slot />
-  <div>
+  <div class:list={styles.actions}>
     <Button as="a" href={moreHref}>すべて見る</Button>
+    <slot name="actions-trailing" />
   </div>
 </section>

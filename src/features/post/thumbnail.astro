@@ -1,5 +1,6 @@
 ---
 import Image from '~/components/image/image.astro'
+import { resolveImage } from '~/components/image/resolve_image'
 import StyledLink from '~/components/styled_link/styled_link.astro'
 import type { UnsplashAttribution } from '~/core/image/unsplash'
 import { css } from '~pandacss/css'
@@ -11,6 +12,8 @@ type Props = {
 }
 
 const { image, attribution } = Astro.props
+
+const resolved = await resolveImage({ src: image, width: 1040 })
 
 const styles = {
   root: flex({ direction: 'column', rowGap: 8 }),
@@ -29,7 +32,12 @@ const styles = {
 ---
 
 <figure class:list={styles.root}>
-  <Image src={image} alt="" width={1040} class:list={styles.img} />
+  <Image
+    {...resolved.attributes}
+    alt=""
+    placeholder={resolved.placeholder}
+    class:list={styles.img}
+  />
   {
     attribution && (
       <figcaption>

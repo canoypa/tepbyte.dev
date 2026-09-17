@@ -14,6 +14,17 @@ const attributionUrl = (path: string) => {
   return url.toString()
 }
 
+export const UNSPLASH_USERNAME = 'sasazono'
+
+/**
+ * API 経由で表示する写真には、API Terms §9 が Unsplash・撮影者・撮影者の
+ * プロフィールへのリンクを求める。
+ */
+export const UNSPLASH_PROFILE_URL = attributionUrl(`/@${UNSPLASH_USERNAME}`)
+export const UNSPLASH_SITE_URL = attributionUrl('/')
+
+export const unsplashPhotoUrl = (id: string) => attributionUrl(`/photos/${id}`)
+
 /**
  * 写真そのものは Unsplash License の下でリポジトリに取り込み、frontmatter に
  * 持つのは帰属表示に必要な値だけとする。hotlink を求める API Guidelines は
@@ -28,7 +39,7 @@ export const unsplashAttributionSchema = z
     authorName,
     authorUrl: attributionUrl(`/@${authorUsername}`),
     siteName: 'Unsplash',
-    siteUrl: attributionUrl('/'),
+    siteUrl: UNSPLASH_SITE_URL,
   }))
 
 export type UnsplashAttribution = z.infer<typeof unsplashAttributionSchema>

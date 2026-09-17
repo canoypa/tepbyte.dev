@@ -1,0 +1,122 @@
+---
+import { imageConfig } from 'astro:assets'
+import Image from '~/components/image/image.astro'
+import Lightbox from '~/components/lightbox/lightbox.astro'
+import { lightboxSizes } from '~/components/lightbox/lightbox_sizes'
+import LightboxTrigger from '~/components/lightbox/lightbox_trigger.astro'
+import StyledLink from '~/components/styled_link/styled_link.astro'
+import { blurhashToDataUrl } from '~/core/blurhash'
+import {
+  formatExif,
+  type Photo,
+  photoSrc,
+  photoSrcSet,
+} from '~/core/image/photo'
+import { unsplashPhotoUrl } from '~/core/image/unsplash'
+import { css } from '~pandacss/css'
+import { flex, grid } from '~pandacss/patterns'
+import { token } from '~pandacss/tokens'
+
+type Props = {
+  photos: Photo[]
+}
+
+const { photos } = Astro.props
+
+const { breakpoints } = imageConfig
+if (!breakpoints) throw new Error('image.breakpoints が設定されていない')
+
+const items = await Promise.all(
+  photos.map(async (photo) => {
+    // 元の幅より大きい候補は引き伸ばしになる
+    const widths = breakpoints.filter((w) => w <= photo.width)
+    const largest = widths.at(-1) ?? photo.width
+    return {
+      photo,
+      id: `photo-${photo.id}`,
+      smallest: widths[0] ?? photo.width,
+      largest,
+      largestHeight: Math.round((largest * photo.height) / photo.width),
+      srcSet: photoSrcSet(photo.url, widths),
+      exif: photo.exif ? formatExif(photo.exif) : undefined,
+      placeholder: photo.blurHash
+        ? await blurhashToDataUrl(photo.blurHash)
+        : undefined,
+    }
+  }),
+)
+
+const columns = { base: 3, md: 6 }
+// auto を解釈しないブラウザ向けの上限。サムネイルは画面幅を列数で割った幅を超えない
+const sizes = `auto, (min-width: ${token('breakpoints.md')}) calc(100vw / ${columns.md}), calc(100vw / ${columns.base})`
+
+const styles = {
+  grid: grid({ columns, gap: { base: 8, md: 16 } }),
+  trigger: css({ rounded: 'medium' }),
+  caption: flex({
+    wrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'baseline',
+    columnGap: 24,
+    rowGap: 4,
+  }),
+  exif: css({ textWrap: 'balance' }),
+  // 拡大表示の scrim はテーマによらず黒いので、その上はダーク側の色にする
+  link: css.raw({
+    color: 'dark.info',
+    textDecorationColor: 'dark.info/60',
+    _focusVisible: { outlineColor: 'dark.primary' },
+  }),
+  image: css({
+    width: '100%',
+    aspectRatio: '1',
+    objectFit: 'cover',
+    backgroundColor: {
+      base: 'dark.surface-container',
+      _osLight: 'light.surface-container',
+    },
+  }),
+}
+---
+
+<ul class:list={styles.grid}>
+  {
+    items.map(
+      ({ photo, id, smallest, largest, largestHeight, srcSet, exif, placeholder }) => (
+        <li>
+          <LightboxTrigger for={id} class:list={styles.trigger}>
+            {/* decoding は既定(auto)のまま。async にすると、スクロールを止めた
+                あとデコード済みの画像が描かれず blurhash が残ることがある */}
+            <Image
+              src={photoSrc(photo.url, smallest)}
+              srcset={srcSet}
+              sizes={sizes}
+              width={smallest}
+              height={smallest}
+              alt={photo.alt ?? '写真を拡大表示'}
+              loading="lazy"
+              placeholder={placeholder}
+              class:list={styles.image}
+            />
+          </LightboxTrigger>
+          <Lightbox id={id} width={largest} height={largestHeight}>
+            <Image
+              src={photoSrc(photo.url, largest)}
+              srcset={srcSet}
+              sizes={lightboxSizes(largest, largestHeight)}
+              width={largest}
+              height={largestHeight}
+              alt={photo.alt ?? undefined}
+              loading="lazy"
+              placeholder={placeholder}
+            />
+            <div slot="caption" class:list={styles.caption}>
+              {exif && <span class:list={styles.exif}>{exif}</span>}
+              <StyledLink href={unsplashPhotoUrl(photo.id)} css={styles.link}>Unsplash</StyledLink>
+            </div>
+          </Lightbox>
+        </li>
+      ),
+    )
+  }
+</ul>

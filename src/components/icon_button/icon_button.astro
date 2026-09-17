@@ -1,0 +1,74 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+import { css } from '~pandacss/css'
+import type { SystemStyleObject } from '~pandacss/types'
+
+const styles = {
+  root: css.raw({
+    position: 'relative',
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 40,
+    height: 40,
+    padding: 0,
+    background: 'none',
+    border: 'none',
+    // full（9999px）から補間すると、見た目の半径 20px を切るまで形が変わらない
+    rounded: '50%',
+    cursor: 'pointer',
+    fill: {
+      base: 'dark.on-surface-variant',
+      _osLight: 'light.on-surface-variant',
+    },
+    transitionProperty: 'background-color, border-radius',
+    transitionDuration: 'short-4',
+    transitionTimingFunction: 'standard',
+
+    // 当たり判定は見た目の 40 より広い 48
+    _before: {
+      content: '""',
+      position: 'absolute',
+      inset: -4,
+    },
+
+    _hover: {
+      backgroundColor: {
+        base: 'dark.on-surface-variant/hover',
+        _osLight: 'light.on-surface-variant/hover',
+      },
+    },
+    _focusVisible: {
+      backgroundColor: {
+        base: 'dark.on-surface-variant/focus',
+        _osLight: 'light.on-surface-variant/focus',
+      },
+    },
+    _active: {
+      backgroundColor: {
+        base: 'dark.on-surface-variant/pressed',
+        _osLight: 'light.on-surface-variant/pressed',
+      },
+      rounded: 'small',
+    },
+  }),
+  icon: css({ width: 24, height: 24 }),
+}
+
+type Props = HTMLAttributes<'button'> & {
+  /** 既定のスタイルに合成する。同じプロパティは条件ごと置き換わる */
+  css?: SystemStyleObject
+}
+
+const { type = 'button', class: className, css: style, ...attrs } = Astro.props
+---
+
+<button
+  type={type}
+  {...attrs}
+  class:list={[css(styles.root, style), className]}
+>
+  <span class:list={styles.icon}>
+    <slot />
+  </span>
+</button>

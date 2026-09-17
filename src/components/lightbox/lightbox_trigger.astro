@@ -1,0 +1,33 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+import { css } from '~pandacss/css'
+
+type Props = Omit<HTMLAttributes<'button'>, 'command' | 'commandfor'> & {
+  /** 開く Lightbox の id */
+  for: string
+}
+
+const { for: target, type = 'button', class: className, ...attrs } = Astro.props
+
+const styles = {
+  root: css({
+    display: 'flex',
+    padding: 0,
+    background: 'none',
+    border: 'none',
+    cursor: 'zoom-in',
+    // 角丸はボタンに持たせる。フォーカスリングがボタンの外形に沿う
+    '& > *': { borderRadius: 'inherit' },
+  }),
+}
+---
+
+<button
+  type={type}
+  {...attrs}
+  command="show-modal"
+  commandfor={target}
+  class:list={[styles.root, className]}
+>
+  <slot />
+</button>

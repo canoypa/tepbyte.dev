@@ -1,6 +1,10 @@
 ---
 import type { CollectionEntry } from 'astro:content'
 import Image from '~/components/image/image.astro'
+import { resolveImage } from '~/components/image/resolve_image'
+import Lightbox from '~/components/lightbox/lightbox.astro'
+import { lightboxSizes } from '~/components/lightbox/lightbox_sizes'
+import LightboxTrigger from '~/components/lightbox/lightbox_trigger.astro'
 import { css } from '~pandacss/css'
 
 type Props = {
@@ -8,6 +12,15 @@ type Props = {
 }
 
 const { images } = Astro.props
+
+const screenshots = await Promise.all(
+  images.map(async (src, index) => ({
+    id: `screenshot-${index}`,
+    width: src.width,
+    height: src.height,
+    ...(await resolveImage({ src, width: src.width, height: src.height })),
+  })),
+)
 
 const styles = {
   root: css({
@@ -25,23 +38,33 @@ const styles = {
     width: 'auto',
     maxWidth: 'none',
     height: { base: 216, md: 288 },
-    rounded: 'extra-large',
     objectFit: 'cover',
   }),
+  trigger: css({ rounded: 'extra-large' }),
 }
 ---
 
 <div class:list={styles.root}>
   {
-    images.map((v) => (
-      <Image
-        src={v}
-        alt=""
-        width={v.width}
-        height={v.height}
-        class:list={styles.image}
-        lightbox
-      />
+    screenshots.map(({ id, width, height, attributes, placeholder }) => (
+      <>
+        <LightboxTrigger for={id} class:list={styles.trigger}>
+          <Image
+            {...attributes}
+            alt="スクリーンショットを拡大表示"
+            placeholder={placeholder}
+            class:list={styles.image}
+          />
+        </LightboxTrigger>
+        <Lightbox id={id} width={width} height={height}>
+          <Image
+            {...attributes}
+            sizes={lightboxSizes(width, height)}
+            alt=""
+            placeholder={placeholder}
+          />
+        </Lightbox>
+      </>
     ))
   }
 </div>
