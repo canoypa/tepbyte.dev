@@ -16,7 +16,7 @@ const { image, attribution } = Astro.props
 const resolved = await resolveImage({ src: image, width: 1176 })
 
 const styles = {
-  root: flex({ direction: 'column', rowGap: 8 }),
+  root: flex({ direction: 'column', rowGap: 'md.space100' }),
   img: css({
     width: '100%',
     height: { base: 216, mdExpanded: 288 },

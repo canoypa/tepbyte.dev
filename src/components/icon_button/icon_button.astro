@@ -15,7 +15,7 @@ const styles = {
     background: 'none',
     border: 'none',
     // full（9999px）から補間すると、見た目の半径 20px を切るまで形が変わらない
-    rounded: '50%',
+    rounded: 20,
     cursor: 'pointer',
     fill: 'md.on-surface-variant',
     transitionProperty: 'background-color, border-radius',
@@ -26,7 +26,7 @@ const styles = {
     _before: {
       content: '""',
       position: 'absolute',
-      inset: -4,
+      inset: '-md.space50',
     },
 
     _hover: {

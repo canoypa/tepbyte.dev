@@ -51,14 +51,17 @@ const columns = { base: 3, mdExpanded: 6 }
 const sizes = `auto, (min-width: ${token('breakpoints.mdExpanded')}) calc(100vw / ${columns.mdExpanded}), calc(100vw / ${columns.base})`
 
 const styles = {
-  grid: grid({ columns, gap: { base: 8, mdExpanded: 16 } }),
+  grid: grid({
+    columns,
+    gap: { base: 'md.space100', mdExpanded: 'md.space200' },
+  }),
   trigger: css({ rounded: 'md.medium' }),
   caption: flex({
     wrap: 'wrap',
     justifyContent: 'center',
     alignItems: 'baseline',
-    columnGap: 24,
-    rowGap: 4,
+    columnGap: 'md.space300',
+    rowGap: 'md.space50',
   }),
   exif: css({ textWrap: 'balance' }),
   // 拡大表示の scrim はテーマによらず黒いので、その上はダーク側の色にする

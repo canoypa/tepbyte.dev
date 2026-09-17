@@ -8,8 +8,8 @@ const styles = {
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
-      columnGap: 8,
-      paddingX: 16,
+      columnGap: 'md.space100',
+      paddingX: 'md.space200',
       minWidth: 48,
       height: 40,
       rounded: 'md.full',
@@ -46,19 +46,17 @@ const styles = {
     },
     variants: {
       withIcon: {
-        true: { paddingX: 16 },
+        true: { paddingX: 'md.space200' },
       },
     },
   }),
   leading: css({
     width: 18,
     height: 18,
-    marginLeft: -1,
   }),
   trailing: css({
     width: 18,
     height: 18,
-    marginRight: -1,
   }),
 }
 

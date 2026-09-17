@@ -3,14 +3,12 @@ import { css } from '~pandacss/css'
 import { flex } from '~pandacss/patterns'
 
 const styles = {
-  root: flex({ direction: 'column', rowGap: 16 }),
+  root: flex({ direction: 'column', rowGap: 'md.space200' }),
   title: css({
     textStyle: {
-      mdExpandedDown: 'md.display-medium',
-      mdExpanded: 'md.display-large',
+      mdExpandedDown: 'md.emphasized.display-medium',
+      mdExpanded: 'md.emphasized.display-large',
     },
-    fontFamily: 'comfortaa',
-    fontWeight: 'bold',
   }),
   subhead: css({
     textStyle: {

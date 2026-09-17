@@ -6,7 +6,7 @@ const style = {
     lineHeight: '1.8',
 
     '& :where(p,ul,ol,blockquote,table,hr)': {
-      marginBlock: '1rem',
+      marginBlock: 'md.space200',
 
       '&:first-child': {
         marginTop: '0',
@@ -17,8 +17,8 @@ const style = {
     },
 
     '& :where(h1,h2,h3,h4,h5,h6)': {
-      marginTop: '3rem',
-      marginBottom: '1rem',
+      marginTop: 'md.space600',
+      marginBottom: 'md.space200',
 
       '&:first-child': {
         marginTop: '0',
@@ -40,19 +40,15 @@ const style = {
 
     '& h1': {
       textStyle: 'md.headline-large',
-      fontFamily: 'comfortaa',
     },
     '& h2': {
       textStyle: 'md.headline-medium',
-      fontFamily: 'comfortaa',
     },
     '& h3': {
       textStyle: 'md.headline-small',
-      fontFamily: 'comfortaa',
     },
     '& h4': {
       textStyle: 'md.title-large',
-      fontFamily: 'comfortaa',
     },
     '& h5': {
       textStyle: 'md.title-medium',
@@ -74,7 +70,8 @@ const style = {
     '& blockquote': {
       borderLeft: '4px solid',
       borderColor: 'md.outline',
-      padding: '0.5rem 1rem',
+      paddingY: 'md.space100',
+      paddingX: 'md.space200',
     },
 
     '& sup>a': {
@@ -90,14 +87,15 @@ const style = {
       width: '100%',
 
       '& :where(th,td)': {
-        padding: '0.5rem 1rem',
+        paddingY: 'md.space100',
+        paddingX: 'md.space200',
         border: '1px solid',
         borderColor: 'md.outline-variant',
       },
     },
 
     '& :where(ul,ol)': {
-      paddingLeft: '1.5rem',
+      paddingLeft: 'md.space300',
 
       '& :where(ul,ol)': {
         marginTop: '0',
@@ -139,7 +137,7 @@ const style = {
     },
 
     '& .astro-code': {
-      padding: '1rem',
+      padding: 'md.space200',
       borderRadius: 'md.small',
     },
 
@@ -148,8 +146,8 @@ const style = {
     },
 
     '& .footnotes': {
-      marginTop: '3rem',
-      paddingTop: '1rem',
+      marginTop: 'md.space600',
+      paddingTop: 'md.space200',
       borderTop: '1px solid',
       borderColor: 'md.outline-variant',
       textStyle: 'md.body-medium',

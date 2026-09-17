@@ -51,16 +51,17 @@ export default defineConfig({
       fill: 'md.on-surface',
     },
     ':focus-visible': {
-      outlineWidth: 2,
+      outlineWidth: 'md.focus-indicator.thickness',
       outlineStyle: 'solid',
       outlineColor: 'md.primary',
-      outlineOffset: 2,
+      outlineOffset: 'md.focus-indicator.outer-offset',
     },
   },
 
   presets: [
     presetMaterialTokens({
       sourceColor: 0x8282f4,
+      typeface: { brand: '{fonts.comfortaa}' },
       customColors: [
         { name: 'info', value: 0x42a5f5, blend: true },
         { name: 'warning', value: 0xffee58, blend: true },

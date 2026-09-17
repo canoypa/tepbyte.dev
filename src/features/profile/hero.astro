@@ -27,10 +27,8 @@ const styles = {
       mdExpanded: '"photo name" "photo info"',
     },
     alignItems: 'center',
-    columnGap: { base: 24, mdExpanded: 24 },
-    rowGap: 8,
-
-    fontFamily: 'comfortaa',
+    columnGap: 'md.space300',
+    rowGap: 'md.space100',
   }),
   avatar: css({
     gridArea: 'photo',
@@ -42,14 +40,13 @@ const styles = {
   name: css({
     gridArea: 'name',
 
-    textStyle: 'md.display-large',
-    fontWeight: 'bold',
+    textStyle: 'md.emphasized.display-large',
   }),
   info: flex({
     gridArea: 'info',
 
     direction: 'column',
-    rowGap: 24,
+    rowGap: 'md.space300',
     textStyle: 'md.headline-small',
   }),
 }
