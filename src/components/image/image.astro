@@ -8,13 +8,13 @@ type Props = Omit<HTMLAttributes<'img'>, 'style'> & {
 }
 
 const { placeholder, ...attrs } = Astro.props
+
+const placeholderAttrs = placeholder
+  ? { 'data-blurhash': true, style: blurhashPlaceholderStyle(placeholder) }
+  : {}
 ---
 
-<img
-  {...attrs}
-  data-blurhash={placeholder ? true : undefined}
-  style={placeholder ? blurhashPlaceholderStyle(placeholder) : undefined}
-/>
+<img {...attrs} {...placeholderAttrs} />
 
 <script>
   import "~/components/image/blurhash_placeholder";
