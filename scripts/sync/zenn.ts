@@ -6,8 +6,8 @@ const OUTPUT = new URL('../../src/content/synced/article.json', import.meta.url)
 
 const API = 'https://zenn.dev/api/articles'
 
-/** 一覧に出す概要の長さ */
-const EXCERPT_LENGTH = 100
+/** 一覧に出す概要の長さ。本文の幅が最大のとき、全角でおよそ 1 行に収まる */
+const EXCERPT_LENGTH = 70
 
 type ListItem = { slug: string; path: string; published_at: string }
 type Detail = { title: string; body_html: string }

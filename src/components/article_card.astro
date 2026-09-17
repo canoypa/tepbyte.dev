@@ -9,6 +9,7 @@ const styles = {
   title: css({
     textStyle: 'md.title-medium',
   }),
+  subhead: css({ lineClamp: 1 }),
 }
 
 const dateFormatter = Intl.DateTimeFormat('en-us', { dateStyle: 'long' })
@@ -34,5 +35,5 @@ const { date, link, title, subhead } = Astro.props
       {title}
     </StyledLink>
   </h3>
-  <p>{subhead}</p>
+  <p class:list={styles.subhead}>{subhead}</p>
 </article>

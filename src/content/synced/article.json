@@ -3,49 +3,49 @@
     "id": "pwsh-bash-prompt",
     "url": "https://zenn.dev/canoypa/articles/pwsh-bash-prompt",
     "title": "PowerShell のプロンプトを bash っぽくする",
-    "excerpt": "最近 WSL などで Linux を触ってみている中で、bash のシンプルでカラフルなプロンプトをかなり気に入っちゃったので、普段使う PowerShell のプロンプトも bash っぽくしてみま…",
+    "excerpt": "最近 WSL などで Linux を触ってみている中で、bash のシンプルでカラフルなプロンプトをかなり気に入っちゃったので、普段使う P…",
     "publishedAt": "2022-09-23T19:51:22.098+09:00"
   },
   {
     "id": "m3-color-web",
     "url": "https://zenn.dev/canoypa/articles/m3-color-web",
     "title": "Web アプリにも Material 3 の Color System を導入する",
-    "excerpt": "Web 向けの Material 3 ライブラリは こちらのページ によると、現在「対応予定」となってますが、Flutter でも使用されている新しい Color System を実装するライブラリの…",
+    "excerpt": "Web 向けの Material 3 ライブラリは こちらのページ によると、現在「対応予定」となってますが、Flutter でも使用されて…",
     "publishedAt": "2022-10-19T10:50:16.595+09:00"
   },
   {
     "id": "new-graduate-pillar-tech",
     "url": "https://zenn.dev/port_inc/articles/new-graduate-pillar-tech",
     "title": "新卒エンジニアを支える技術",
-    "excerpt": "この記事は ポート株式会社 サービス開発部 Advent Calendar 2024 の 16 日目です。 はじめに こんにちは、新卒エンジニアとしてポート株式会社で就活会議の開発をやってます、Can…",
+    "excerpt": "この記事は ポート株式会社 サービス開発部 Advent Calendar 2024 の 16 日目です。 はじめに こんにちは、新卒エンジ…",
     "publishedAt": "2024-12-16T13:16:54.030+09:00"
   },
   {
     "id": "happy-1password-ssh",
     "url": "https://zenn.dev/port_inc/articles/happy-1password-ssh",
     "title": "1Password に SSH 接続もコミット署名も管理してもらおう",
-    "excerpt": "この記事は ポート株式会社 サービス開発部 その 2 Advent Calendar 2024 の 24 日目です。 はじめに ポートではパスワードマネージャーとして 1Password を使用してい…",
+    "excerpt": "この記事は ポート株式会社 サービス開発部 その 2 Advent Calendar 2024 の 24 日目です。 はじめに ポートではパ…",
     "publishedAt": "2024-12-24T14:24:12.005+09:00"
   },
   {
     "id": "gemini-lgtm-gen",
     "url": "https://zenn.dev/port_inc/articles/gemini-lgtm-gen",
     "title": "Gemini に LGTM 画像を生成してもらおう",
-    "excerpt": "この記事は ポート株式会社 サービス開発部 Advent Calendar 2025 3 日目の記事です。 はじめに Pull Request を Approve する際に、ちょっとした彩りを添えたく…",
+    "excerpt": "この記事は ポート株式会社 サービス開発部 Advent Calendar 2025 3 日目の記事です。 はじめに Pull Reques…",
     "publishedAt": "2025-12-03T14:15:56.451+09:00"
   },
   {
     "id": "lazy-copilot-customization",
     "url": "https://zenn.dev/port_inc/articles/lazy-copilot-customization",
     "title": "頑張らない Instructions 整備",
-    "excerpt": "TL;DR Instructions 整備は面倒くさい！エージェント自身にやらせよう そのために、メタプロンプトなどを用意しよう 調整したいことがあれば「更新しておいて」とお願いするだけで OK 👌…",
+    "excerpt": "TL;DR Instructions 整備は面倒くさい！エージェント自身にやらせよう そのために、メタプロンプトなどを用意しよう 調整したい…",
     "publishedAt": "2026-02-27T10:28:40.824+09:00"
   },
   {
     "id": "copilot-agent-plugins",
     "url": "https://zenn.dev/port_inc/articles/copilot-agent-plugins",
     "title": "Agent Plugins のチーム配布と、それに耐えられるスキル設計",
-    "excerpt": "はじめに ポート株式会社の Cano です。👋 以前、Instructions の整備をエージェントに任せる方法を書きました。 当時は指示ファイルを配置している .agents/ フォルダを git…",
+    "excerpt": "はじめに ポート株式会社の Cano です。👋 以前、Instructions の整備をエージェントに任せる方法を書きました。 当時は指示…",
     "publishedAt": "2026-05-06T23:47:17.363+09:00"
   }
 ]
