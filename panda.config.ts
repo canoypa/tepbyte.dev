@@ -46,20 +46,14 @@ export default defineConfig({
     },
     body: {
       minHeight: '100vh',
-      backgroundColor: 'dark.surface',
-      color: 'dark.on-surface',
-      fill: 'dark.on-surface',
-
-      _osLight: {
-        backgroundColor: 'light.surface',
-        color: 'light.on-surface',
-        fill: 'light.on-surface',
-      },
+      backgroundColor: 'md.surface',
+      color: 'md.on-surface',
+      fill: 'md.on-surface',
     },
     ':focus-visible': {
       outlineWidth: 2,
       outlineStyle: 'solid',
-      outlineColor: { base: 'dark.primary', _osLight: 'light.primary' },
+      outlineColor: 'md.primary',
       outlineOffset: 2,
     },
   },

@@ -9,15 +9,16 @@ const styles = {
   body: css({
     display: 'grid',
     gridTemplateColumns: {
-      smDown:
+      mdMediumDown:
         '[full-start] 16px [content-start] minmax(0, 1fr) [content-end] 16px [full-end]',
-      smToMd:
+      mdMediumToMdExpanded:
         '[full-start] 32px [content-start] minmax(0, 1fr) [content-end] 32px [full-end]',
-      mdToLg:
+      mdExpandedToMdLarge:
         '[full-start] minmax(0, 1fr) [content-start] minmax(0, 840px) [content-end] minmax(0, 1fr) [full-end]',
-      lgToXl:
+      mdLargeToMdExtraLarge:
         '[full-start] 200px [content-start] minmax(0, 1fr) [content-end] 200px [full-end]',
-      xl: '[full-start] minmax(0, 1fr) [content-start] minmax(0, 1040px) [content-end] minmax(0, 1fr) [full-end]',
+      mdExtraLarge:
+        '[full-start] minmax(0, 1fr) [content-start] minmax(0, 1040px) [content-end] minmax(0, 1fr) [full-end]',
     },
     gridTemplateRows: '1fr auto',
     rowGap: 128,

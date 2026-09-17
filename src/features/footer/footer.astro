@@ -4,19 +4,13 @@ import { css } from '~pandacss/css'
 
 const styles = {
   root: css({
-    paddingX: { sm: 24 },
-    paddingY: { smDown: 32, sm: 48 },
+    paddingX: { mdMedium: 24 },
+    paddingY: { mdMediumDown: 32, mdMedium: 48 },
     borderTopWidth: 1,
     borderTopStyle: 'solid',
-    borderTopColor: {
-      base: 'dark.outline-variant',
-      _osLight: 'light.outline-variant',
-    },
-    color: {
-      base: 'dark.on-surface-variant',
-      _osLight: 'light.on-surface-variant',
-    },
-    textStyle: 'body-small',
+    borderTopColor: 'md.outline-variant',
+    color: 'md.on-surface-variant',
+    textStyle: 'md.body-small',
   }),
 }
 ---

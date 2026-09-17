@@ -29,42 +29,42 @@ const style = {
     },
 
     '& hr': {
-      borderColor: { base: 'dark.outline', _osLight: 'light.outline' },
+      borderColor: 'md.outline',
     },
 
     '& a': {
-      color: { base: 'dark.info', _osLight: 'light.info' },
+      color: 'md.info',
       textDecoration: 'underline',
-      textDecorationColor: { base: 'dark.info/60', _osLight: 'light.info/60' },
+      textDecorationColor: 'md.info/60',
     },
 
     '& h1': {
-      textStyle: 'headline-large',
+      textStyle: 'md.headline-large',
       fontFamily: 'comfortaa',
     },
     '& h2': {
-      textStyle: 'headline-medium',
+      textStyle: 'md.headline-medium',
       fontFamily: 'comfortaa',
     },
     '& h3': {
-      textStyle: 'headline-small',
+      textStyle: 'md.headline-small',
       fontFamily: 'comfortaa',
     },
     '& h4': {
-      textStyle: 'title-large',
+      textStyle: 'md.title-large',
       fontFamily: 'comfortaa',
     },
     '& h5': {
-      textStyle: 'title-medium',
+      textStyle: 'md.title-medium',
       fontFamily: 'comfortaa',
     },
     '& h6': {
-      textStyle: 'title-small',
+      textStyle: 'md.title-small',
       fontFamily: 'comfortaa',
     },
 
     '& img': {
-      borderRadius: 'medium',
+      borderRadius: 'md.medium',
       marginInline: 'auto',
       // 高さ cap を幅側で算出。max-height だと width:auto 必須→未ロード時サイズ 0(CLS)。
       maxWidth:
@@ -73,7 +73,7 @@ const style = {
 
     '& blockquote': {
       borderLeft: '4px solid',
-      borderColor: { base: 'dark.outline', _osLight: 'light.outline' },
+      borderColor: 'md.outline',
       padding: '0.5rem 1rem',
     },
 
@@ -92,10 +92,7 @@ const style = {
       '& :where(th,td)': {
         padding: '0.5rem 1rem',
         border: '1px solid',
-        borderColor: {
-          base: 'dark.outline-variant',
-          _osLight: 'light.outline-variant',
-        },
+        borderColor: 'md.outline-variant',
       },
     },
 
@@ -127,48 +124,36 @@ const style = {
 
     '& :not(pre) code': {
       paddingInline: '0.2rem',
-      borderRadius: 'extra-small',
-      backgroundColor: {
-        base: 'dark.surface-variant',
-        _osLight: 'light.surface-variant',
-      },
-      textStyle: 'body-medium',
+      borderRadius: 'md.extra-small',
+      backgroundColor: 'md.surface-variant',
+      textStyle: 'md.body-medium',
     },
 
     '& kbd': {
       padding: '0.1rem 0.2rem',
       border: '1px solid',
       borderBottom: '2px solid',
-      borderColor: { base: 'dark.outline', _osLight: 'light.outline' },
-      borderRadius: 'extra-small',
-      textStyle: 'body-medium',
+      borderColor: 'md.outline',
+      borderRadius: 'md.extra-small',
+      textStyle: 'md.body-medium',
     },
 
     '& .astro-code': {
       padding: '1rem',
-      borderRadius: 'small',
+      borderRadius: 'md.small',
     },
 
     '& mark': {
-      backgroundColor: {
-        base: 'dark.warning-container/80',
-        _osLight: 'light.warning-container/80',
-      },
+      backgroundColor: 'md.warning-container/80',
     },
 
     '& .footnotes': {
       marginTop: '3rem',
       paddingTop: '1rem',
       borderTop: '1px solid',
-      borderColor: {
-        base: 'dark.outline-variant',
-        _osLight: 'light.outline-variant',
-      },
-      textStyle: 'body-medium',
-      color: {
-        base: 'dark.on-surface-variant',
-        _osLight: 'light.on-surface-variant',
-      },
+      borderColor: 'md.outline-variant',
+      textStyle: 'md.body-medium',
+      color: 'md.on-surface-variant',
 
       '& ol': {
         marginBlock: 0,

@@ -5,8 +5,8 @@ body:has(dialog[data-lightbox][open]) {
 /* overlay / display の allow-discrete は要らない。退場のあいだ dialog は開いたまま */
 dialog[data-lightbox],
 dialog[data-lightbox]::backdrop {
-  --lightbox-duration: var(--durations-medium-4);
-  --lightbox-easing: var(--easings-emphasized-decelerate);
+  --lightbox-duration: var(--durations-md-medium4);
+  --lightbox-easing: var(--easings-md-emphasized-decelerate);
 
   opacity: 0;
   transition: opacity var(--lightbox-duration) var(--lightbox-easing);
@@ -29,8 +29,8 @@ dialog[data-lightbox][open] figure {
 /* 退場。open は付いたままなので別の印で切り替える */
 dialog[data-lightbox][data-lightbox-closing],
 dialog[data-lightbox][data-lightbox-closing]::backdrop {
-  --lightbox-duration: var(--durations-short-4);
-  --lightbox-easing: var(--easings-emphasized);
+  --lightbox-duration: var(--durations-md-short4);
+  --lightbox-easing: var(--easings-md-emphasized);
 
   opacity: 0;
 }
