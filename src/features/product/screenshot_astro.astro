@@ -13,8 +13,8 @@ type Props = {
 const { images } = Astro.props
 
 const screenshots = await Promise.all(
-  images.map(async (src) => ({
-    id: `screenshot-${crypto.randomUUID().slice(0, 8)}`,
+  images.map(async (src, index) => ({
+    id: `screenshot-${index}`,
     ...(await resolveImage({ src, width: src.width, height: src.height })),
   })),
 )
