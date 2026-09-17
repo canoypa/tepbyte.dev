@@ -1,9 +1,10 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
 import { css } from '~pandacss/css'
+import type { SystemStyleObject } from '~pandacss/types'
 
 const styles = {
-  root: css({
+  root: css.raw({
     position: 'relative',
     display: 'inline-flex',
     alignItems: 'center',
@@ -54,12 +55,19 @@ const styles = {
   icon: css({ width: 24, height: 24 }),
 }
 
-type Props = HTMLAttributes<'button'>
+type Props = HTMLAttributes<'button'> & {
+  /** 既定のスタイルに合成する。同じプロパティは条件ごと置き換わる */
+  css?: SystemStyleObject
+}
 
-const { type = 'button', class: className, ...attrs } = Astro.props
+const { type = 'button', class: className, css: style, ...attrs } = Astro.props
 ---
 
-<button type={type} {...attrs} class:list={[styles.root, className]}>
+<button
+  type={type}
+  {...attrs}
+  class:list={[css(styles.root, style), className]}
+>
   <span class:list={styles.icon}>
     <slot />
   </span>

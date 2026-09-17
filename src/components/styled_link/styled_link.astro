@@ -1,20 +1,24 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
 import { css } from '~pandacss/css'
+import type { SystemStyleObject } from '~pandacss/types'
 
 const styles = {
-  root: css({
+  root: css.raw({
     color: { base: 'dark.info', _osLight: 'light.info' },
     textDecoration: 'underline',
     textDecorationColor: { base: 'dark.info/60', _osLight: 'light.info/60' },
   }),
 }
 
-type Props = HTMLAttributes<'a'>
+type Props = HTMLAttributes<'a'> & {
+  /** 既定のスタイルに合成する。同じプロパティは条件ごと置き換わる */
+  css?: SystemStyleObject
+}
 
-const { class: className, ...attrs } = Astro.props
+const { class: className, css: style, ...attrs } = Astro.props
 ---
 
-<a {...attrs} class:list={[className, styles.root]}>
+<a {...attrs} class:list={[className, css(styles.root, style)]}>
   <slot />
 </a>
