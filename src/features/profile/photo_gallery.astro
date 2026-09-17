@@ -50,13 +50,7 @@ const columns = { base: 3, md: 6 }
 const sizes = `auto, (min-width: ${token('breakpoints.md')}) calc(100vw / ${columns.md}), calc(100vw / ${columns.base})`
 
 const styles = {
-  grid: grid({
-    gridTemplateColumns: {
-      base: `repeat(${columns.base}, 1fr)`,
-      md: `repeat(${columns.md}, 1fr)`,
-    },
-    gap: { base: 8, md: 16 },
-  }),
+  grid: grid({ columns, gap: { base: 8, md: 16 } }),
   // トリガの button は inline-flex で中身に縮む。grid item にするとセル幅まで伸びる
   cell: css({ display: 'grid' }),
   trigger: css({ rounded: 'medium' }),
