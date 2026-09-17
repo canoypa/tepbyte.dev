@@ -9,15 +9,16 @@ const styles = {
   body: css({
     display: 'grid',
     gridTemplateColumns: {
-      smDown:
+      mdMediumDown:
         '[full-start] 16px [content-start] minmax(0, 1fr) [content-end] 16px [full-end]',
-      smToMd:
+      mdMediumToMdExpanded:
         '[full-start] 32px [content-start] minmax(0, 1fr) [content-end] 32px [full-end]',
-      mdToLg:
-        '[full-start] minmax(0, 1fr) [content-start] minmax(0, 840px) [content-end] minmax(0, 1fr) [full-end]',
-      lgToXl:
-        '[full-start] 200px [content-start] minmax(0, 1fr) [content-end] 200px [full-end]',
-      xl: '[full-start] minmax(0, 1fr) [content-start] minmax(0, 1040px) [content-end] minmax(0, 1fr) [full-end]',
+      mdExpandedToMdLarge:
+        '[full-start] minmax(0, 1fr) [content-start] minmax(0, 776px) [content-end] minmax(0, 1fr) [full-end]',
+      mdLargeToMdExtraLarge:
+        '[full-start] 212px [content-start] minmax(0, 1fr) [content-end] 212px [full-end]',
+      mdExtraLarge:
+        '[full-start] minmax(0, 1fr) [content-start] minmax(0, 1176px) [content-end] minmax(0, 1fr) [full-end]',
     },
     gridTemplateRows: '1fr auto',
     rowGap: 128,
@@ -27,8 +28,8 @@ const styles = {
   main: css({
     display: 'flex',
     flexDirection: 'column',
-    gap: 64,
-    marginTop: 64, // 下端は rowGap 側
+    gap: 'md.space800',
+    marginTop: 'md.space800', // 下端は rowGap 側
   }),
 }
 ---

@@ -11,17 +11,15 @@ type Props = {
 const { title, moreHref } = Astro.props
 
 const styles = {
-  root: flex({ direction: 'column', rowGap: 32 }),
+  root: flex({ direction: 'column', rowGap: 'md.space400' }),
   title: css({
-    textStyle: 'display-small',
-    fontFamily: 'comfortaa',
-    fontWeight: 'bold',
+    textStyle: 'md.emphasized.display-small',
   }),
   actions: flex({
     direction: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    columnGap: 24,
+    columnGap: 'md.space300',
   }),
 }
 ---

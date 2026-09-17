@@ -13,24 +13,25 @@ const { list } = Astro.props
 
 const styles = {
   list: flex({
-    gap: 4,
+    gap: 'md.space50',
     overflowX: 'auto',
 
-    // フォーカスリング（outline 2px + offset 2px）がスクロールコンテナに
-    // 見切られないよう、その分の余白を確保してレイアウトを負のマージンで戻す
-    padding: 4,
-    margin: -4,
-    textStyle: 'label-large',
+    // フォーカスリングがスクロールコンテナに見切られないよう、その分の余白を
+    // 確保してレイアウトを負のマージンで戻す
+    padding:
+      'calc(token(borderWidths.md.focus-indicator.thickness) + token(spacing.md.focus-indicator.outer-offset))',
+    margin:
+      'calc((token(borderWidths.md.focus-indicator.thickness) + token(spacing.md.focus-indicator.outer-offset)) * -1)',
+    textStyle: 'md.emphasized.label-large',
     fontFamily: 'comfortaa',
-    fontWeight: 'bold',
   }),
   item: flex({
     flexShrink: 0,
 
     '& + &::before': {
       content: '"/" / ""',
-      marginInlineEnd: 4,
-      color: 'dark.on-surface-variant',
+      marginInlineEnd: 'md.space50',
+      color: 'md.on-surface-variant',
     },
   }),
 }

@@ -8,45 +8,52 @@ const styles = {
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
-      columnGap: 8,
-      paddingX: 16,
+      columnGap: 'md.space100',
+      paddingX: 'md.space200',
       minWidth: 48,
       height: 40,
-      rounded: 'full',
-      textStyle: 'label-large',
+      rounded: 'md.full',
+      textStyle: 'md.label-large',
       fontFamily: 'comfortaa',
-      color: { base: 'dark.primary', _osLight: 'light.primary' },
-      fill: { base: 'dark.primary', _osLight: 'light.primary' },
+      position: 'relative',
+      color: 'md.on-secondary-container',
+      fill: 'md.on-secondary-container',
+      backgroundColor: 'md.secondary-container',
 
-      backgroundColor: {
-        base: 'dark.primary/1',
-        _osLight: 'light.primary-container',
+      // 状態レイヤーはコンテナの色の上に重ねる。中身はその上に出す
+      _before: {
+        content: '""',
+        position: 'absolute',
+        inset: 0,
+        rounded: 'inherit',
+        pointerEvents: 'none',
+      },
+      '& > *': { position: 'relative' },
 
-        _hover: {
-          base: 'dark.primary/hover',
-          _osLight: 'light.primary/hover',
-        },
-        _focusVisible: {
-          base: 'dark.primary/hover',
-          _osLight: 'light.primary/hover',
-        },
+      // M3 は hover で elevation level1 の影を付けるが、影があると安っぽく見えるので付けない
+      _hover: {
+        _before: { backgroundColor: 'md.on-secondary-container/md.hover' },
+      },
+      _focusVisible: {
+        _before: { backgroundColor: 'md.on-secondary-container/md.focus' },
+      },
+      _active: {
+        _before: { backgroundColor: 'md.on-secondary-container/md.pressed' },
       },
     },
     variants: {
       withIcon: {
-        true: { paddingX: 16 },
+        true: { paddingX: 'md.space200' },
       },
     },
   }),
   leading: css({
     width: 18,
     height: 18,
-    marginLeft: -1,
   }),
   trailing: css({
     width: 18,
     height: 18,
-    marginRight: -1,
   }),
 }
 

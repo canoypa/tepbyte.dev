@@ -6,27 +6,24 @@ const styles = {
   root: css({
     display: 'inline-flex',
     alignItems: 'center',
-    paddingX: 16,
+    paddingX: 'md.space200',
     height: 32,
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: { base: 'dark.outline', _osLight: 'light.outline' },
-    rounded: 'small',
-    textStyle: 'label-large',
+    borderColor: 'md.outline-variant',
+    color: 'md.on-surface',
+    rounded: 'md.small',
+    textStyle: 'md.label-large',
     fontFamily: 'comfortaa',
     cursor: 'pointer',
     transitionProperty: 'background-color',
-    transitionDuration: 'medium-1',
+    transitionDuration: 'md.spring.fast.effects',
+    transitionTimingFunction: 'md.spring.fast.effects',
 
     backgroundColor: {
-      _hover: {
-        base: 'dark.primary/hover',
-        _osLight: 'light.primary/hover',
-      },
-      _focusVisible: {
-        base: 'dark.primary/hover',
-        _osLight: 'light.primary/hover',
-      },
+      _hover: 'md.on-surface/md.hover',
+      _focusVisible: 'md.on-surface/md.focus',
+      _active: 'md.on-surface/md.pressed',
     },
   }),
 }

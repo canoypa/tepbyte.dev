@@ -46,27 +46,23 @@ export default defineConfig({
     },
     body: {
       minHeight: '100vh',
-      backgroundColor: 'dark.surface',
-      color: 'dark.on-surface',
-      fill: 'dark.on-surface',
-
-      _osLight: {
-        backgroundColor: 'light.surface',
-        color: 'light.on-surface',
-        fill: 'light.on-surface',
-      },
+      backgroundColor: 'md.surface',
+      color: 'md.on-surface',
+      fill: 'md.on-surface',
     },
     ':focus-visible': {
-      outlineWidth: 2,
+      outlineWidth: 'md.focus-indicator.thickness',
       outlineStyle: 'solid',
-      outlineColor: { base: 'dark.primary', _osLight: 'light.primary' },
-      outlineOffset: 2,
+      outlineColor: 'md.primary',
+      outlineOffset: 'md.focus-indicator.outer-offset',
     },
   },
 
   presets: [
     presetMaterialTokens({
       sourceColor: 0x8282f4,
+      typeface: { brand: '{fonts.comfortaa}' },
+      motionScheme: 'expressive',
       customColors: [
         { name: 'info', value: 0x42a5f5, blend: true },
         { name: 'warning', value: 0xffee58, blend: true },

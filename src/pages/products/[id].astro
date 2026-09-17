@@ -45,7 +45,7 @@ const { Content } = await render(entry)
     ]}
   />
 
-  <article class:list={flex({ direction: "column", gap: 64 })}>
+  <article class:list={flex({ direction: "column", gap: 'md.space800' })}>
     <Info product={entry.data} />
     <MarkdownContainer>
       <Content />

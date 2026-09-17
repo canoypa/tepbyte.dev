@@ -25,7 +25,7 @@ const screenshots = await Promise.all(
 const styles = {
   root: css({
     display: 'flex',
-    gap: 16,
+    gap: 'md.space200',
     overflowX: 'auto',
 
     scrollbarWidth: 'none',
@@ -37,10 +37,10 @@ const styles = {
     // Safari では固有サイズの確定に間に合わなかったときに固有幅へ落ちる
     width: 'auto',
     maxWidth: 'none',
-    height: { base: 216, md: 288 },
+    height: { base: 216, mdExpanded: 288 },
     objectFit: 'cover',
   }),
-  trigger: css({ rounded: 'extra-large' }),
+  trigger: css({ rounded: 'md.extra-large' }),
 }
 ---
 

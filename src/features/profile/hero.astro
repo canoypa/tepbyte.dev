@@ -24,33 +24,30 @@ const styles = {
     gridTemplate: 'auto / auto 1fr',
     gridTemplateAreas: {
       base: '"photo name" "info info"',
-      md: '"photo name" "photo info"',
+      mdExpanded: '"photo name" "photo info"',
     },
     alignItems: 'center',
-    columnGap: { base: 24, md: 24 },
-    rowGap: 8,
-
-    fontFamily: 'comfortaa',
+    columnGap: 'md.space300',
+    rowGap: 'md.space100',
   }),
   avatar: css({
     gridArea: 'photo',
 
-    width: { base: 96, md: 192 },
-    height: { base: 96, md: 192 },
-    rounded: 'full',
+    width: { base: 96, mdExpanded: 192 },
+    height: { base: 96, mdExpanded: 192 },
+    rounded: 'md.full',
   }),
   name: css({
     gridArea: 'name',
 
-    textStyle: 'display-large',
-    fontWeight: 'bold',
+    textStyle: 'md.emphasized.display-large',
   }),
   info: flex({
     gridArea: 'info',
 
     direction: 'column',
-    rowGap: 24,
-    textStyle: 'headline-small',
+    rowGap: 'md.space300',
+    textStyle: 'md.headline-small',
   }),
 }
 ---

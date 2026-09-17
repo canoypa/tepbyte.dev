@@ -13,18 +13,18 @@ type Props = {
 
 const { image, attribution } = Astro.props
 
-const resolved = await resolveImage({ src: image, width: 1040 })
+const resolved = await resolveImage({ src: image, width: 1176 })
 
 const styles = {
-  root: flex({ direction: 'column', rowGap: 8 }),
+  root: flex({ direction: 'column', rowGap: 'md.space100' }),
   img: css({
     width: '100%',
-    height: { base: 216, md: 288 },
-    rounded: 'extra-large',
+    height: { base: 216, mdExpanded: 288 },
+    rounded: 'md.extra-large',
     objectFit: 'cover',
   }),
   attribution: css({
-    textStyle: 'label-medium',
+    textStyle: 'md.label-medium',
     fontFamily: 'comfortaa',
     fontStyle: 'italic',
   }),

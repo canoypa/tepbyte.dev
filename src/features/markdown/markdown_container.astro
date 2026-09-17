@@ -6,7 +6,7 @@ const style = {
     lineHeight: '1.8',
 
     '& :where(p,ul,ol,blockquote,table,hr)': {
-      marginBlock: '1rem',
+      marginBlock: 'md.space200',
 
       '&:first-child': {
         marginTop: '0',
@@ -17,8 +17,8 @@ const style = {
     },
 
     '& :where(h1,h2,h3,h4,h5,h6)': {
-      marginTop: '3rem',
-      marginBottom: '1rem',
+      marginTop: 'md.space600',
+      marginBottom: 'md.space200',
 
       '&:first-child': {
         marginTop: '0',
@@ -29,42 +29,38 @@ const style = {
     },
 
     '& hr': {
-      borderColor: { base: 'dark.outline', _osLight: 'light.outline' },
+      borderColor: 'md.outline',
     },
 
     '& a': {
-      color: { base: 'dark.info', _osLight: 'light.info' },
+      color: 'md.info',
       textDecoration: 'underline',
-      textDecorationColor: { base: 'dark.info/60', _osLight: 'light.info/60' },
+      textDecorationColor: 'md.info/60',
     },
 
     '& h1': {
-      textStyle: 'headline-large',
-      fontFamily: 'comfortaa',
+      textStyle: 'md.headline-large',
     },
     '& h2': {
-      textStyle: 'headline-medium',
-      fontFamily: 'comfortaa',
+      textStyle: 'md.headline-medium',
     },
     '& h3': {
-      textStyle: 'headline-small',
-      fontFamily: 'comfortaa',
+      textStyle: 'md.headline-small',
     },
     '& h4': {
-      textStyle: 'title-large',
-      fontFamily: 'comfortaa',
+      textStyle: 'md.title-large',
     },
     '& h5': {
-      textStyle: 'title-medium',
+      textStyle: 'md.title-medium',
       fontFamily: 'comfortaa',
     },
     '& h6': {
-      textStyle: 'title-small',
+      textStyle: 'md.title-small',
       fontFamily: 'comfortaa',
     },
 
     '& img': {
-      borderRadius: 'medium',
+      borderRadius: 'md.medium',
       marginInline: 'auto',
       // 高さ cap を幅側で算出。max-height だと width:auto 必須→未ロード時サイズ 0(CLS)。
       maxWidth:
@@ -73,8 +69,9 @@ const style = {
 
     '& blockquote': {
       borderLeft: '4px solid',
-      borderColor: { base: 'dark.outline', _osLight: 'light.outline' },
-      padding: '0.5rem 1rem',
+      borderColor: 'md.outline',
+      paddingY: 'md.space100',
+      paddingX: 'md.space200',
     },
 
     '& sup>a': {
@@ -90,17 +87,15 @@ const style = {
       width: '100%',
 
       '& :where(th,td)': {
-        padding: '0.5rem 1rem',
+        paddingY: 'md.space100',
+        paddingX: 'md.space200',
         border: '1px solid',
-        borderColor: {
-          base: 'dark.outline-variant',
-          _osLight: 'light.outline-variant',
-        },
+        borderColor: 'md.outline-variant',
       },
     },
 
     '& :where(ul,ol)': {
-      paddingLeft: '1.5rem',
+      paddingLeft: 'md.space300',
 
       '& :where(ul,ol)': {
         marginTop: '0',
@@ -127,48 +122,36 @@ const style = {
 
     '& :not(pre) code': {
       paddingInline: '0.2rem',
-      borderRadius: 'extra-small',
-      backgroundColor: {
-        base: 'dark.surface-variant',
-        _osLight: 'light.surface-variant',
-      },
-      textStyle: 'body-medium',
+      borderRadius: 'md.extra-small',
+      backgroundColor: 'md.surface-variant',
+      textStyle: 'md.body-medium',
     },
 
     '& kbd': {
       padding: '0.1rem 0.2rem',
       border: '1px solid',
       borderBottom: '2px solid',
-      borderColor: { base: 'dark.outline', _osLight: 'light.outline' },
-      borderRadius: 'extra-small',
-      textStyle: 'body-medium',
+      borderColor: 'md.outline',
+      borderRadius: 'md.extra-small',
+      textStyle: 'md.body-medium',
     },
 
     '& .astro-code': {
-      padding: '1rem',
-      borderRadius: 'small',
+      padding: 'md.space200',
+      borderRadius: 'md.small',
     },
 
     '& mark': {
-      backgroundColor: {
-        base: 'dark.warning-container/80',
-        _osLight: 'light.warning-container/80',
-      },
+      backgroundColor: 'md.warning-container/80',
     },
 
     '& .footnotes': {
-      marginTop: '3rem',
-      paddingTop: '1rem',
+      marginTop: 'md.space600',
+      paddingTop: 'md.space200',
       borderTop: '1px solid',
-      borderColor: {
-        base: 'dark.outline-variant',
-        _osLight: 'light.outline-variant',
-      },
-      textStyle: 'body-medium',
-      color: {
-        base: 'dark.on-surface-variant',
-        _osLight: 'light.on-surface-variant',
-      },
+      borderColor: 'md.outline-variant',
+      textStyle: 'md.body-medium',
+      color: 'md.on-surface-variant',
 
       '& ol': {
         marginBlock: 0,

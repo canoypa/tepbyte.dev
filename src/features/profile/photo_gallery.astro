@@ -46,35 +46,35 @@ const items = await Promise.all(
   }),
 )
 
-const columns = { base: 3, md: 6 }
+const columns = { base: 3, mdExpanded: 6 }
 // auto を解釈しないブラウザ向けの上限。サムネイルは画面幅を列数で割った幅を超えない
-const sizes = `auto, (min-width: ${token('breakpoints.md')}) calc(100vw / ${columns.md}), calc(100vw / ${columns.base})`
+const sizes = `auto, (min-width: ${token('breakpoints.mdExpanded')}) calc(100vw / ${columns.mdExpanded}), calc(100vw / ${columns.base})`
 
 const styles = {
-  grid: grid({ columns, gap: { base: 8, md: 16 } }),
-  trigger: css({ rounded: 'medium' }),
+  grid: grid({
+    columns,
+    gap: { base: 'md.space100', mdExpanded: 'md.space200' },
+  }),
+  trigger: css({ rounded: 'md.medium' }),
   caption: flex({
     wrap: 'wrap',
     justifyContent: 'center',
     alignItems: 'baseline',
-    columnGap: 24,
-    rowGap: 4,
+    columnGap: 'md.space300',
+    rowGap: 'md.space50',
   }),
   exif: css({ textWrap: 'balance' }),
   // 拡大表示の scrim はテーマによらず黒いので、その上はダーク側の色にする
   link: css.raw({
-    color: 'dark.info',
-    textDecorationColor: 'dark.info/60',
-    _focusVisible: { outlineColor: 'dark.primary' },
+    color: 'md.dark.info',
+    textDecorationColor: 'md.dark.info/60',
+    _focusVisible: { outlineColor: 'md.dark.primary' },
   }),
   image: css({
     width: '100%',
     aspectRatio: '1',
     objectFit: 'cover',
-    backgroundColor: {
-      base: 'dark.surface-container',
-      _osLight: 'light.surface-container',
-    },
+    backgroundColor: 'md.surface-container',
   }),
 }
 ---

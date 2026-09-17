@@ -5,16 +5,20 @@ body:has(dialog[data-lightbox][open]) {
 /* overlay / display の allow-discrete は要らない。退場のあいだ dialog は開いたまま */
 dialog[data-lightbox],
 dialog[data-lightbox]::backdrop {
-  --lightbox-duration: var(--durations-medium-4);
-  --lightbox-easing: var(--easings-emphasized-decelerate);
+  --lightbox-effects-duration: var(--durations-md-spring-default-effects);
+  --lightbox-effects-easing: var(--easings-md-spring-default-effects);
+  --lightbox-spatial-duration: var(--durations-md-spring-default-spatial);
+  --lightbox-spatial-easing: var(--easings-md-spring-default-spatial);
 
   opacity: 0;
-  transition: opacity var(--lightbox-duration) var(--lightbox-easing);
+  transition: opacity var(--lightbox-effects-duration)
+    var(--lightbox-effects-easing);
 }
 
 dialog[data-lightbox] figure {
   scale: 0.8;
-  transition: scale var(--lightbox-duration) var(--lightbox-easing);
+  transition: scale var(--lightbox-spatial-duration)
+    var(--lightbox-spatial-easing);
 }
 
 dialog[data-lightbox][open],
@@ -29,8 +33,12 @@ dialog[data-lightbox][open] figure {
 /* 退場。open は付いたままなので別の印で切り替える */
 dialog[data-lightbox][data-lightbox-closing],
 dialog[data-lightbox][data-lightbox-closing]::backdrop {
-  --lightbox-duration: var(--durations-short-4);
-  --lightbox-easing: var(--easings-emphasized);
+  --lightbox-effects-duration: var(--durations-md-spring-fast-effects);
+  --lightbox-effects-easing: var(--easings-md-spring-fast-effects);
+  /* 縮みも消える動きの一部として effects に揃える。spatial のままだと、
+     見えなくなったあとも閉じるまで待たされる */
+  --lightbox-spatial-duration: var(--lightbox-effects-duration);
+  --lightbox-spatial-easing: var(--lightbox-effects-easing);
 
   opacity: 0;
 }
