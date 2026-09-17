@@ -37,8 +37,25 @@ jobs:
           if-no-files-found: error
           retention-days: 1
 
+  zenn:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/setup
+
+      - name: Fetch from Zenn
+        run: pnpm sync:zenn
+
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: synced-zenn
+          path: src/content/synced/article.json
+          if-no-files-found: error
+          retention-days: 1
+
   pr:
-    needs: [unsplash]
+    needs: [unsplash, zenn]
     # 取得元の job が失敗しても、成功した分は PR に載せる
     if: ${{ !cancelled() }}
     runs-on: ubuntu-latest

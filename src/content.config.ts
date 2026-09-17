@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content'
 import { file, glob } from 'astro/loaders'
 import { z } from 'astro/zod'
+import { articleSchema } from '~/core/article/article'
 import { photoSchema } from '~/core/image/photo'
 import { unsplashAttributionSchema } from '~/core/image/unsplash'
 
@@ -54,9 +55,15 @@ const photoCollection = defineCollection({
   schema: photoSchema,
 })
 
+const articleCollection = defineCollection({
+  loader: file('src/content/synced/article.json'),
+  schema: articleSchema,
+})
+
 export const collections = {
   post: postCollection,
   product: productCollection,
   profile: profileCollection,
   photo: photoCollection,
+  article: articleCollection,
 }

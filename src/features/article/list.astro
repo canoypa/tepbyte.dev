@@ -1,0 +1,33 @@
+---
+import ArticleCard from '~/components/article_card.astro'
+import type { Article } from '~/core/article/article'
+import { flex } from '~pandacss/patterns'
+
+const styles = {
+  root: flex({
+    direction: 'column',
+    gap: { base: 'md.space100', mdExpanded: 'md.space200' },
+  }),
+}
+
+type Props = {
+  items: Article[]
+}
+
+const { items } = Astro.props
+---
+
+<ul class:list={styles.root}>
+  {
+    items.map((item) => (
+      <li>
+        <ArticleCard
+          date={new Date(item.publishedAt)}
+          link={item.url}
+          title={item.title}
+          subhead={item.excerpt}
+        />
+      </li>
+    ))
+  }
+</ul>

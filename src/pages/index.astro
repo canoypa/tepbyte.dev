@@ -1,11 +1,13 @@
 ---
 import { getCollection, getEntry, render } from 'astro:content'
 import StyledLink from '~/components/styled_link/styled_link.astro'
+import { ZENN_PROFILE_URL } from '~/core/article/zenn'
 import {
   UNSPLASH_PROFILE_URL,
   UNSPLASH_SITE_URL,
   UNSPLASH_USERNAME,
 } from '~/core/image/unsplash'
+import ArticleList from '~/features/article/list.astro'
 import HomeSection from '~/features/home_section.astro'
 import MarkdownContainer from '~/features/markdown/markdown_container.astro'
 import PostList from '~/features/post/list.astro'
@@ -28,6 +30,10 @@ const products = (await getCollection('product'))
   .slice(0, 5)
 const posts = (await getCollection('post'))
   .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
+  .slice(0, 5)
+const articles = (await getCollection('article'))
+  .map((entry) => entry.data)
+  .sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt))
   .slice(0, 5)
 const photos = (await getCollection('photo'))
   .map((entry) => entry.data)
@@ -53,6 +59,10 @@ const styles = {
 
   <HomeSection title="Posts" moreHref="/posts">
     <PostList items={posts} />
+  </HomeSection>
+
+  <HomeSection title="Articles" moreHref={ZENN_PROFILE_URL}>
+    <ArticleList items={articles} />
   </HomeSection>
 
   <HomeSection title="Photos" moreHref={UNSPLASH_PROFILE_URL}>
