@@ -8,9 +8,12 @@ import { flex } from '~pandacss/patterns'
 type Props = {
   /** LightboxTrigger から開くときに指す id */
   id: string
+  /** 拡大画像を表示する最大の幅と高さ（px） */
+  width: number
+  height: number
 }
 
-const { id } = Astro.props
+const { id, width, height } = Astro.props
 
 const hasCaption = Astro.slots.has('caption')
 
@@ -55,16 +58,19 @@ const styles = {
     pointerEvents: 'none',
     '& > *': { pointerEvents: 'auto' },
     rowGap: 8,
-    minHeight: 0,
-    maxWidth: '100%',
-    maxHeight: '100%',
+    containerType: 'size',
+    width: '100%',
+    height: '100%',
 
+    // 読み込み前の画像には自然な大きさが無い。高さを最大の高さから flex で縮めて決め、
+    // 幅は縦横比から決める。幅で収まるときの高さは、領域の幅と縦横比から抑える
     '& > img': {
       minHeight: 0,
       maxWidth: '100%',
-      maxHeight: '100%',
+      height: 'calc(var(--lightbox-height) * 1px)',
+      maxHeight:
+        'min(100%, calc(100cqw * var(--lightbox-height) / var(--lightbox-width)))',
       width: 'auto',
-      height: 'auto',
       objectFit: 'contain',
       rounded: 'extra-small',
       cursor: 'zoom-out',
@@ -94,7 +100,7 @@ const styles = {
     <IconClose />
   </IconButton>
 
-  <figure class:list={styles.figure}>
+  <figure class:list={styles.figure} style={`--lightbox-width: ${width}; --lightbox-height: ${height}`}>
     <slot />
     {
       hasCaption && (

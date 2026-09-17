@@ -2,6 +2,7 @@
 import { imageConfig } from 'astro:assets'
 import Image from '~/components/image/image.astro'
 import Lightbox from '~/components/lightbox/lightbox.astro'
+import { lightboxSizes } from '~/components/lightbox/lightbox_sizes'
 import LightboxTrigger from '~/components/lightbox/lightbox_trigger.astro'
 import StyledLink from '~/components/styled_link/styled_link.astro'
 import { blurhashToDataUrl } from '~/core/blurhash'
@@ -92,10 +93,11 @@ const styles = {
               class:list={styles.image}
             />
           </LightboxTrigger>
-          <Lightbox id={id}>
+          <Lightbox id={id} width={largest} height={largestHeight}>
             <Image
               src={photoSrc(photo.url, largest)}
               srcset={srcSet}
+              sizes={lightboxSizes(largest, largestHeight)}
               width={largest}
               height={largestHeight}
               alt={photo.alt ?? undefined}

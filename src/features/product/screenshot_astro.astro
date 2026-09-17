@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content'
 import Image from '~/components/image/image.astro'
 import { resolveImage } from '~/components/image/resolve_image'
 import Lightbox from '~/components/lightbox/lightbox.astro'
+import { lightboxSizes } from '~/components/lightbox/lightbox_sizes'
 import LightboxTrigger from '~/components/lightbox/lightbox_trigger.astro'
 import { css } from '~pandacss/css'
 
@@ -15,6 +16,8 @@ const { images } = Astro.props
 const screenshots = await Promise.all(
   images.map(async (src, index) => ({
     id: `screenshot-${index}`,
+    width: src.width,
+    height: src.height,
     ...(await resolveImage({ src, width: src.width, height: src.height })),
   })),
 )
@@ -43,7 +46,7 @@ const styles = {
 
 <div class:list={styles.root}>
   {
-    screenshots.map(({ id, attributes, placeholder }) => (
+    screenshots.map(({ id, width, height, attributes, placeholder }) => (
       <>
         <LightboxTrigger for={id} class:list={styles.trigger}>
           <Image
@@ -53,9 +56,10 @@ const styles = {
             class:list={styles.image}
           />
         </LightboxTrigger>
-        <Lightbox id={id}>
+        <Lightbox id={id} width={width} height={height}>
           <Image
             {...attributes}
+            sizes={lightboxSizes(width, height)}
             alt=""
             placeholder={placeholder}
           />
