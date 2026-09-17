@@ -15,15 +15,33 @@ const styles = {
       rounded: 'md.full',
       textStyle: 'md.label-large',
       fontFamily: 'comfortaa',
-      color: 'md.primary',
-      fill: 'md.primary',
+      position: 'relative',
+      color: 'md.on-secondary-container',
+      fill: 'md.on-secondary-container',
+      backgroundColor: 'md.secondary-container',
+      transitionProperty: 'box-shadow',
+      transitionDuration: 'md.short4',
+      transitionTimingFunction: 'md.standard',
 
-      backgroundColor: {
-        base: 'md.dark.primary/1',
-        _osLight: 'md.light.primary-container',
+      // 状態レイヤーはコンテナの色の上に重ねる。中身はその上に出す
+      _before: {
+        content: '""',
+        position: 'absolute',
+        inset: 0,
+        rounded: 'inherit',
+        pointerEvents: 'none',
+      },
+      '& > *': { position: 'relative' },
 
-        _hover: 'md.primary/md.hover',
-        _focusVisible: 'md.primary/md.hover',
+      _hover: {
+        boxShadow: 'md.level1',
+        _before: { backgroundColor: 'md.on-secondary-container/md.hover' },
+      },
+      _focusVisible: {
+        _before: { backgroundColor: 'md.on-secondary-container/md.focus' },
+      },
+      _active: {
+        _before: { backgroundColor: 'md.on-secondary-container/md.pressed' },
       },
     },
     variants: {
