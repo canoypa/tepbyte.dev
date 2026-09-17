@@ -15,8 +15,6 @@ const closeAfterExit = async (dialog: HTMLDialogElement) => {
     dialog.getAnimations({ subtree: true }).map((a) => a.finished),
   )
 
-  // 待つあいだに開き直されると、印が外れる
-  if (dialog.dataset.lightboxClosing === undefined) return
   delete dialog.dataset.lightboxClosing
   dialog.close()
 }
