@@ -18,9 +18,12 @@ const styles = {
     rounded: 20,
     cursor: 'pointer',
     fill: 'md.on-surface-variant',
+    // 色は effects、形は spatial の spring
     transitionProperty: 'background-color, border-radius',
-    transitionDuration: 'md.short4',
-    transitionTimingFunction: 'md.standard',
+    transitionDuration:
+      'token(durations.md.spring.fast.effects), token(durations.md.spring.fast.spatial)',
+    transitionTimingFunction:
+      'token(easings.md.spring.fast.effects), token(easings.md.spring.fast.spatial)',
 
     // 当たり判定は見た目の 40 より広い 48
     _before: {

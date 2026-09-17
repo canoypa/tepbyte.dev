@@ -62,6 +62,7 @@ export default defineConfig({
     presetMaterialTokens({
       sourceColor: 0x8282f4,
       typeface: { brand: '{fonts.comfortaa}' },
+      motionScheme: 'expressive',
       customColors: [
         { name: 'info', value: 0x42a5f5, blend: true },
         { name: 'warning', value: 0xffee58, blend: true },
