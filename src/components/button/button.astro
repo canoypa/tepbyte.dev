@@ -19,9 +19,6 @@ const styles = {
       color: 'md.on-secondary-container',
       fill: 'md.on-secondary-container',
       backgroundColor: 'md.secondary-container',
-      transitionProperty: 'box-shadow',
-      transitionDuration: 'md.spring.fast.effects',
-      transitionTimingFunction: 'md.spring.fast.effects',
 
       // 状態レイヤーはコンテナの色の上に重ねる。中身はその上に出す
       _before: {
@@ -33,8 +30,8 @@ const styles = {
       },
       '& > *': { position: 'relative' },
 
+      // M3 は hover で elevation level1 の影を付けるが、影があると安っぽく見えるので付けない
       _hover: {
-        boxShadow: 'md.level1',
         _before: { backgroundColor: 'md.on-secondary-container/md.hover' },
       },
       _focusVisible: {
