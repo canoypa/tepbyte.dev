@@ -12,7 +12,11 @@ const styles = {
   subhead: css({ lineClamp: 2 }),
 }
 
-const dateFormatter = Intl.DateTimeFormat('en-us', { dateStyle: 'long' })
+// ビルドは UTC で走る。日本時間の朝に公開した記事が前日の日付にならないようにする
+const dateFormatter = Intl.DateTimeFormat('en-us', {
+  dateStyle: 'long',
+  timeZone: 'Asia/Tokyo',
+})
 
 type Props = {
   date: Date
