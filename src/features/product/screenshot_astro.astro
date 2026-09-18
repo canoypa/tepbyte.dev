@@ -5,6 +5,7 @@ import { resolveImage } from '~/components/image/resolve_image'
 import Lightbox from '~/components/lightbox/lightbox.astro'
 import { lightboxSizes } from '~/components/lightbox/lightbox_sizes'
 import LightboxTrigger from '~/components/lightbox/lightbox_trigger.astro'
+import { focusRingClearance } from '~/styles/focus_ring_clearance'
 import { css } from '~pandacss/css'
 
 type Props = {
@@ -23,7 +24,7 @@ const screenshots = await Promise.all(
 )
 
 const styles = {
-  root: css({
+  root: css(focusRingClearance, {
     display: 'flex',
     gap: 'md.space200',
     overflowX: 'auto',
