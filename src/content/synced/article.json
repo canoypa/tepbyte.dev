@@ -1,0 +1,37 @@
+[
+  {
+    "id": "new-graduate-pillar-tech",
+    "url": "https://zenn.dev/port_inc/articles/new-graduate-pillar-tech",
+    "title": "新卒エンジニアを支える技術",
+    "excerpt": "この記事は ポート株式会社 サービス開発部 Advent Calendar 2024 の 16 日目です。 はじめに こんにちは、新卒エンジニアとしてポート株式会社で就活会議の開発をやってます、Cano です。 ポートでは、Vim や Linux 使いの方もいたりいなかったりと、開発環境を各々の好みに合わせて選ぶことができます。 私もプライベートと変わらない環境で開発ができていて、生産性高く開発できるな〜と感じています。 一方で、以前までプライベートでは Windows を使用していたのですが、貸与 PC が MacBook だったため、使用できるツールの選択肢が変わりました。 またプライベー",
+    "publishedAt": "2024-12-16T13:16:54.030+09:00"
+  },
+  {
+    "id": "happy-1password-ssh",
+    "url": "https://zenn.dev/port_inc/articles/happy-1password-ssh",
+    "title": "1Password に SSH 接続もコミット署名も管理してもらおう",
+    "excerpt": "この記事は ポート株式会社 サービス開発部 その 2 Advent Calendar 2024 の 24 日目です。 はじめに ポートではパスワードマネージャーとして 1Password を使用しています。 1Password にはもちろんパスワードを保存できるのですが、実は開発者向けの機能をいくつか提供しており、その 1 つとして SSH キーを保存 & 使用できる機能があります。 SSH キーを 1Password に保存すると、以下のような嬉しいポイントがあります。 マシンの移行などで SSH キーを紛失する心配がなくて安心 SSH キーを使用するには 1Password のロックを解除",
+    "publishedAt": "2024-12-24T14:24:12.005+09:00"
+  },
+  {
+    "id": "gemini-lgtm-gen",
+    "url": "https://zenn.dev/port_inc/articles/gemini-lgtm-gen",
+    "title": "Gemini に LGTM 画像を生成してもらおう",
+    "excerpt": "この記事は ポート株式会社 サービス開発部 Advent Calendar 2025 3 日目の記事です。 はじめに Pull Request を Approve する際に、ちょっとした彩りを添えたくて LGTM 画像を貼りたいことがあります。 しかしながら、毎回画像を探しに行くのは面倒ですし、時間がもったいないものです。 ある時「そういえば Gemini で画像生成できるじゃん」と思い、試しに生成してもらったところ AI ならではの予想外なユーモアがあって良い感じでした。 プロンプトにすることで、時間をかけずに形式の安定した LGTM 画像を生成できるようにしてみたので、今回はその紹介です。",
+    "publishedAt": "2025-12-03T14:15:56.451+09:00"
+  },
+  {
+    "id": "lazy-copilot-customization",
+    "url": "https://zenn.dev/port_inc/articles/lazy-copilot-customization",
+    "title": "頑張らない Instructions 整備",
+    "excerpt": "TL;DR Instructions 整備は面倒くさい！エージェント自身にやらせよう そのために、メタプロンプトなどを用意しよう 調整したいことがあれば「更新しておいて」とお願いするだけで OK 👌 はじめに ポート株式会社で新卒 2 年目の Cano です。👋 ここ数ヶ月はエージェント向けの Instructions 整備に力を入れています。 Instructions 整備は、エージェントにチーム・プロジェクトのルールに沿って行動してもらうために重要であり、また自分の好みに合わせてカスタマイズする楽しみがあります。 一方で、いちエンジニアとして重視すべきなのは「成果物」です。 ここにはジレン",
+    "publishedAt": "2026-02-27T10:28:40.824+09:00"
+  },
+  {
+    "id": "copilot-agent-plugins",
+    "url": "https://zenn.dev/port_inc/articles/copilot-agent-plugins",
+    "title": "Agent Plugins のチーム配布と、それに耐えられるスキル設計",
+    "excerpt": "はじめに ポート株式会社の Cano です。👋 以前、Instructions の整備をエージェントに任せる方法を書きました。 当時は指示ファイルを配置している .agents/ フォルダを git 管理せず、チームへの共有は「よかったら使ってね」と Google Drive に入れておき、一応共有されてる程度の状態でした。 しかしながら、これでは導入のためにダウンロードして、適切なフォルダに配置して、更新があれば再ダウンロードして...と手間がかかります。 ちょうどこの課題をどうにかしたいと考えていたタイミングで、Agent Plugins が VS Code 1.110 でサポートされまし",
+    "publishedAt": "2026-05-06T23:47:17.363+09:00"
+  }
+]

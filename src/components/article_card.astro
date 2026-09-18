@@ -9,18 +9,25 @@ const styles = {
   title: css({
     textStyle: 'md.title-medium',
   }),
+  subhead: css({ lineClamp: 2 }),
 }
 
-const dateFormatter = Intl.DateTimeFormat('en-us', { dateStyle: 'long' })
+// ビルドは UTC で走る。日本時間の朝に公開した記事が前日の日付にならないようにする
+const dateFormatter = Intl.DateTimeFormat('en-us', {
+  dateStyle: 'long',
+  timeZone: 'Asia/Tokyo',
+})
 
 type Props = {
   date: Date
   link: URL | string
   title: string
   subhead: string
+  /** subhead を 2 行で省略する */
+  clampSubhead?: boolean
 }
 
-const { date, link, title, subhead } = Astro.props
+const { date, link, title, subhead, clampSubhead } = Astro.props
 ---
 
 <article>
@@ -34,5 +41,5 @@ const { date, link, title, subhead } = Astro.props
       {title}
     </StyledLink>
   </h3>
-  <p>{subhead}</p>
+  <p class:list={[clampSubhead && styles.subhead]}>{subhead}</p>
 </article>

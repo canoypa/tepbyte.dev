@@ -13,7 +13,8 @@
     "lint": "astro check",
     "format": "biome check --write src scripts",
     "prepare": "panda codegen",
-    "sync:unsplash": "node --env-file-if-exists=.env scripts/sync/unsplash.ts"
+    "sync:unsplash": "node --env-file-if-exists=.env scripts/sync/unsplash.ts",
+    "sync:zenn": "node scripts/sync/zenn.ts"
   },
   "browserslist": [
     "last 3 chrome major versions",
@@ -38,7 +39,10 @@
   "devDependencies": {
     "@biomejs/biome": "^2.5.10",
     "@pandacss/dev": "^1.12.0",
+    "@types/hast": "^3.0.5",
     "@types/node": "^24.13.3",
+    "hast-util-from-html": "^2.0.3",
+    "hast-util-to-text": "^4.0.2",
     "pandacss-preset-material-tokens": "^0.4.0",
     "typescript": "^6.0.3",
     "unsplash-js": "^8.0.1",

@@ -11,6 +11,7 @@ pnpm lint         # type-check only (astro check)
 pnpm format       # biome check --write src scripts (format + organize imports)
 pnpm prepare      # regenerate PandaCSS output (lib/generated/pandacss/)
 pnpm sync:unsplash  # refetch src/content/synced/photo.json from Unsplash (needs UNSPLASH_ACCESS_TOKEN)
+pnpm sync:zenn      # refetch src/content/synced/article.json from Zenn (no token)
 ```
 
 Run `pnpm lint` after any TypeScript changes to catch type errors. No test suite.

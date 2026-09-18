@@ -1,0 +1,20 @@
+---
+import ArticleCardList from '~/components/article_card_list.astro'
+import type { Article } from '~/core/article/article'
+
+type Props = {
+  items: Article[]
+}
+
+const { items } = Astro.props
+---
+
+<ArticleCardList
+  items={items.map((item) => ({
+    date: new Date(item.publishedAt),
+    link: item.url,
+    title: item.title,
+    subhead: item.excerpt,
+  }))}
+  clampSubhead
+/>
