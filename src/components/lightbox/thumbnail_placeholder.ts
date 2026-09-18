@@ -1,3 +1,8 @@
+/**
+ * 拡大画像の読み込み中、blurhash の代わりに、クリックされたサムネイルを背景画像にする。
+ * サムネイルは同じ写真の縮小版としてすでに読み込まれているため、ぼかしと違い、拡大画像の読み込みを待たずに写真の内容が分かる。
+ */
+
 for (const dialog of document.querySelectorAll<HTMLDialogElement>(
   'dialog[data-lightbox]',
 )) {
