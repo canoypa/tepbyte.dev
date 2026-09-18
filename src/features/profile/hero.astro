@@ -14,7 +14,11 @@ type Props = {
 
 const { profile } = Astro.props
 
-const cover = await resolveImage({ src: profile.cover, width: 1176 })
+const cover = await resolveImage({
+  src: profile.cover,
+  width: 1176,
+  priority: true,
+})
 
 const avatar = await resolveImage({
   src: profile.avatar,
@@ -25,7 +29,7 @@ const avatar = await resolveImage({
 const styles = {
   root: flex({ direction: 'column', gap: 'md.space300' }),
   identity: flex({ direction: 'column', gap: 'md.space200' }),
-  portrait: flex({ direction: 'column', alignItems: 'flex-start' }),
+  portrait: flex({ direction: 'column' }),
   cover: css({
     width: '100%',
     height: { base: 216, mdExpanded: 288 },
@@ -34,7 +38,6 @@ const styles = {
   }),
   avatar: css({
     '--avatar-size': { base: '144px', mdExpanded: '192px' },
-    position: 'relative',
     width: 'var(--avatar-size)',
     height: 'var(--avatar-size)',
     rounded: 'md.full',
