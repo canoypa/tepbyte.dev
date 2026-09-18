@@ -44,6 +44,7 @@ const profileCollection = defineCollection({
       subhead: z.string(),
       about: z.string(),
       avatar: image(),
+      cover: image(),
       links: z.record(z.string(), z.url()).transform((v) => {
         return Object.entries(v).map(([label, url]) => ({ label, url }))
       }),
