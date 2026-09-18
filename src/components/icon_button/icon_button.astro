@@ -1,6 +1,7 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
 import { css } from '~pandacss/css'
+import { token } from '~pandacss/tokens'
 import type { SystemStyleObject } from '~pandacss/types'
 
 const styles = {
@@ -20,10 +21,8 @@ const styles = {
     fill: 'md.on-surface-variant',
     // 色は effects、形は spatial の spring
     transitionProperty: 'background-color, border-radius',
-    transitionDuration:
-      'token(durations.md.spring.fast.effects), token(durations.md.spring.fast.spatial)',
-    transitionTimingFunction:
-      'token(easings.md.spring.fast.effects), token(easings.md.spring.fast.spatial)',
+    transitionDuration: `${token.var('durations.md.spring.fast.effects')}, ${token.var('durations.md.spring.fast.spatial')}`,
+    transitionTimingFunction: `${token.var('easings.md.spring.fast.effects')}, ${token.var('easings.md.spring.fast.spatial')}`,
 
     // 当たり判定は見た目の 40 より広い 48
     _before: {
