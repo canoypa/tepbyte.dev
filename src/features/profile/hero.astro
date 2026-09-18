@@ -43,9 +43,14 @@ const styles = {
     boxShadow: `0 0 0 6px ${token.var('colors.md.surface')}`,
   }),
   about: css({
-    maxWidth: '54ch',
     textStyle: 'md.body-large',
     color: 'md.on-surface-variant',
+  }),
+  // 狭い幅で折り返すときも、文節の途中や一語だけの行で切らない
+  line: css({
+    display: 'block',
+    wordBreak: 'auto-phrase',
+    textWrap: 'balance',
   }),
 }
 ---
@@ -69,5 +74,7 @@ const styles = {
     <PageHeadline title={profile.name} subhead={profile.subhead} />
   </div>
   <ProfileLink links={profile.links} />
-  <p class:list={styles.about}>{profile.about}</p>
+  <p class:list={styles.about}>
+    {profile.about.map((line) => <span class:list={styles.line}>{line}</span>)}
+  </p>
 </div>

@@ -42,7 +42,7 @@ const profileCollection = defineCollection({
     z.object({
       name: z.string(),
       subhead: z.string(),
-      about: z.string(),
+      about: z.array(z.string()),
       avatar: image(),
       cover: image(),
       links: z.record(z.string(), z.url()).transform((v) => {

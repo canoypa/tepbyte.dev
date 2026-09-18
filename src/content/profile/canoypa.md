@@ -1,7 +1,10 @@
 ---
 name: Cano
 subhead: Fuwa-fuwa software developer.
-about: Next.js と React を軸に Web を作っている。モバイルは Flutter。エディタは VS Code と Neovim を気分で行き来する。休みの日はカメラを持って散歩に出るのが好き。
+about:
+  - なにかを開発したりしなかったり、写真を撮ったり撮らなかったりする。
+  - ここ最近は休日に夜更かし AI 開発をして、月曜日に後悔している。
+  - ポケットがたくさんあるのでジャケットが好き。
 avatar: canoypa_avatar.png
 cover: canoypa_cover.jpg
 links:
