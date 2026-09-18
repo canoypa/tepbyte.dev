@@ -68,7 +68,7 @@ const unsplash = createApi({
 const ids = await fetchCollectionIds(unsplash)
 const photos = await Promise.all(ids.map((id) => fetchPhoto(unsplash, id)))
 
-// Collection 上で並べ替えただけで差分が出ないようにする
+// 選ばれた 6 枚が同じなら、Collection 上の順番が変わっても差分が出ないようにする
 photos.sort(
   (a, b) => a.createdAt.localeCompare(b.createdAt) || a.id.localeCompare(b.id),
 )
