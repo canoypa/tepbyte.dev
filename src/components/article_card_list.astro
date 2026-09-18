@@ -1,0 +1,34 @@
+---
+import ArticleCard from '~/components/article_card.astro'
+import { flex } from '~pandacss/patterns'
+
+const styles = {
+  root: flex({
+    direction: 'column',
+    gap: { base: 'md.space100', mdExpanded: 'md.space200' },
+  }),
+}
+
+type Props = {
+  items: {
+    date: Date
+    link: string
+    title: string
+    subhead: string
+  }[]
+  /** subhead が本文から切り出した概要で、長さが揃っていない */
+  clampSubhead?: boolean
+}
+
+const { items, clampSubhead } = Astro.props
+---
+
+<ul class:list={styles.root}>
+  {
+    items.map((item) => (
+      <li>
+        <ArticleCard {...item} clampSubhead={clampSubhead} />
+      </li>
+    ))
+  }
+</ul>

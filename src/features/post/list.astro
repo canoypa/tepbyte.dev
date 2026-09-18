@@ -1,14 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content'
-import ArticleCard from '~/components/article_card.astro'
-import { flex } from '~pandacss/patterns'
-
-const styles = {
-  root: flex({
-    direction: 'column',
-    gap: { base: 'md.space100', mdExpanded: 'md.space200' },
-  }),
-}
+import ArticleCardList from '~/components/article_card_list.astro'
 
 type Props = {
   items: CollectionEntry<'post'>[]
@@ -17,17 +9,11 @@ type Props = {
 const { items } = Astro.props
 ---
 
-<ul class:list={styles.root}>
-  {
-    items.map((item) => (
-      <li>
-        <ArticleCard
-          date={item.data.publishedAt}
-          link={`/posts/${item.id}`}
-          title={item.data.title}
-          subhead={item.data.subhead}
-        />
-      </li>
-    ))
-  }
-</ul>
+<ArticleCardList
+  items={items.map((item) => ({
+    date: item.data.publishedAt,
+    link: `/posts/${item.id}`,
+    title: item.data.title,
+    subhead: item.data.subhead,
+  }))}
+/>
