@@ -4,6 +4,8 @@ import Image from '~/components/image/image.astro'
 import { resolveImage } from '~/components/image/resolve_image'
 import { css } from '~pandacss/css'
 import { flex } from '~pandacss/patterns'
+import { token } from '~pandacss/tokens'
+import PageHeadline from '../page_headline/page_headline.astro'
 import ProfileLink from './profile_link.astro'
 
 type Props = {
@@ -12,6 +14,12 @@ type Props = {
 
 const { profile } = Astro.props
 
+const cover = await resolveImage({
+  src: profile.cover,
+  width: 1176,
+  priority: true,
+})
+
 const avatar = await resolveImage({
   src: profile.avatar,
   width: 192,
@@ -19,49 +27,59 @@ const avatar = await resolveImage({
 })
 
 const styles = {
-  root: css({
-    display: 'grid',
-    gridTemplate: 'auto / auto 1fr',
-    gridTemplateAreas: {
-      base: '"photo name" "info info"',
-      mdExpanded: '"photo name" "photo info"',
-    },
-    alignItems: 'center',
-    columnGap: 'md.space300',
-    rowGap: 'md.space100',
+  root: flex({ direction: 'column', gap: 'md.space300' }),
+  identity: flex({ direction: 'column', gap: 'md.space200' }),
+  portrait: flex({ direction: 'column' }),
+  cover: css({
+    width: '100%',
+    height: { base: 216, mdExpanded: 288 },
+    rounded: 'md.extra-large',
+    objectFit: 'cover',
   }),
   avatar: css({
-    gridArea: 'photo',
-
-    width: { base: 96, mdExpanded: 192 },
-    height: { base: 96, mdExpanded: 192 },
+    '--avatar-size': { base: '144px', mdExpanded: '192px' },
+    width: 'var(--avatar-size)',
+    height: 'var(--avatar-size)',
     rounded: 'md.full',
+    // カバーに高さの半分だけ重ね、背景色の縁で切り離す
+    marginTop: 'calc(var(--avatar-size) / -2)',
+    boxShadow: `0 0 0 6px ${token.var('colors.md.surface')}`,
   }),
-  name: css({
-    gridArea: 'name',
-
-    textStyle: 'md.emphasized.display-large',
-  }),
-  info: flex({
-    gridArea: 'info',
-
+  // 文の間は、文の中の折り返しより空ける
+  about: flex({
     direction: 'column',
-    rowGap: 'md.space300',
-    textStyle: 'md.headline-small',
+    gap: 'md.space100',
+    textStyle: 'md.body-large',
+    color: 'md.on-surface-variant',
+  }),
+  // 狭い幅で折り返すときも、文節の途中や一語だけの行で切らない
+  line: css({
+    wordBreak: 'auto-phrase',
+    textWrap: 'balance',
   }),
 }
 ---
 
 <div class:list={styles.root}>
-  <Image
-    {...avatar.attributes}
-    alt=""
-    placeholder={avatar.placeholder}
-    class:list={styles.avatar}
-  />
-  <h1 class:list={styles.name}>{profile.name}</h1>
-  <div class:list={styles.info}>
-    <span>{profile.subhead}</span>
-    <ProfileLink links={profile.links} />
+  <div class:list={styles.identity}>
+    <div class:list={styles.portrait}>
+      <Image
+        {...cover.attributes}
+        alt=""
+        placeholder={cover.placeholder}
+        class:list={styles.cover}
+      />
+      <Image
+        {...avatar.attributes}
+        alt=""
+        placeholder={avatar.placeholder}
+        class:list={styles.avatar}
+      />
+    </div>
+    <PageHeadline title={profile.name} subhead={profile.subhead} />
   </div>
+  <ProfileLink links={profile.links} />
+  <p class:list={styles.about}>
+    {profile.about.map((line) => <span class:list={styles.line}>{line}</span>)}
+  </p>
 </div>

@@ -1,5 +1,5 @@
 ---
-import { getCollection, getEntry, render } from 'astro:content'
+import { getCollection, getEntry } from 'astro:content'
 import StyledLink from '~/components/styled_link/styled_link.astro'
 import { ZENN_PROFILE_URL } from '~/core/article/zenn'
 import {
@@ -9,7 +9,6 @@ import {
 } from '~/core/image/unsplash'
 import ArticleList from '~/features/article/list.astro'
 import HomeSection from '~/features/home_section.astro'
-import MarkdownContainer from '~/features/markdown/markdown_container.astro'
 import PostList from '~/features/post/list.astro'
 import ProductList from '~/features/product/list.astro'
 import Hero from '~/features/profile/hero.astro'
@@ -17,13 +16,12 @@ import PhotoGallery from '~/features/profile/photo_gallery.astro'
 import Seo from '~/features/seo/seo.astro'
 import Application from '~/layouts/application.astro'
 import { css } from '~pandacss/css'
+import { flex } from '~pandacss/patterns'
 
 const entry = await getEntry('profile', 'canoypa')
 if (!entry) {
   throw new Error('Profile not found')
 }
-
-const { Content } = await render(entry)
 
 const products = (await getCollection('product'))
   .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
@@ -41,6 +39,8 @@ const photos = (await getCollection('photo'))
   .slice(0, 6)
 
 const styles = {
+  // Hero と本文は、セクション同士より遠く、フッターより近い
+  sections: flex({ direction: 'column', gap: 'md.space800', marginTop: 32 }),
   credit: css({ textStyle: 'md.body-small' }),
 }
 ---
@@ -49,27 +49,26 @@ const styles = {
   <Seo slot="head" />
 
   <Hero profile={entry.data} />
-  <MarkdownContainer>
-    <Content />
-  </MarkdownContainer>
 
-  <HomeSection title="Products" moreHref="/products">
-    <ProductList items={products} />
-  </HomeSection>
+  <div class:list={styles.sections}>
+    <HomeSection title="Products" moreHref="/products">
+      <ProductList items={products} />
+    </HomeSection>
 
-  <HomeSection title="Posts" moreHref="/posts">
-    <PostList items={posts} />
-  </HomeSection>
+    <HomeSection title="Posts" moreHref="/posts">
+      <PostList items={posts} />
+    </HomeSection>
 
-  <HomeSection title="Articles" moreHref={ZENN_PROFILE_URL}>
-    <ArticleList items={articles} />
-  </HomeSection>
+    <HomeSection title="Articles" moreHref={ZENN_PROFILE_URL}>
+      <ArticleList items={articles} />
+    </HomeSection>
 
-  <HomeSection title="Photos" moreHref={UNSPLASH_PROFILE_URL}>
-    <PhotoGallery photos={photos} />
-    <span slot="actions-trailing" class:list={styles.credit}>
-      <StyledLink href={UNSPLASH_PROFILE_URL}>@{UNSPLASH_USERNAME}</StyledLink> on{" "}
-      <StyledLink href={UNSPLASH_SITE_URL}>Unsplash</StyledLink>
-    </span>
-  </HomeSection>
+    <HomeSection title="Photos" moreHref={UNSPLASH_PROFILE_URL}>
+      <PhotoGallery photos={photos} />
+      <span slot="actions-trailing" class:list={styles.credit}>
+        <StyledLink href={UNSPLASH_PROFILE_URL}>@{UNSPLASH_USERNAME}</StyledLink> on{" "}
+        <StyledLink href={UNSPLASH_SITE_URL}>Unsplash</StyledLink>
+      </span>
+    </HomeSection>
+  </div>
 </Application>
