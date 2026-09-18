@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content'
+import { focusRingClearance } from '~/components/focus_ring_clearance'
 import Image from '~/components/image/image.astro'
 import { resolveImage } from '~/components/image/resolve_image'
 import Lightbox from '~/components/lightbox/lightbox.astro'
@@ -23,7 +24,7 @@ const screenshots = await Promise.all(
 )
 
 const styles = {
-  root: css({
+  root: css(focusRingClearance, {
     display: 'flex',
     gap: 'md.space200',
     overflowX: 'auto',
