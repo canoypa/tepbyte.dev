@@ -7,24 +7,22 @@
 for (const dialog of document.querySelectorAll<HTMLDialogElement>(
   'dialog[data-lightbox]',
 )) {
-  dialog.addEventListener('beforetoggle', (event) => {
-    if (event.newState !== 'open') return
+  const image = dialog.querySelector<HTMLImageElement>(
+    'figure > img[data-blurhash]',
+  )
+  if (!image) continue
+  // 開き直すたびに重ねないよう、元の blurhash を土台に毎回組み直す
+  const blurhash = image.style.backgroundImage
 
-    const image = dialog.querySelector<HTMLImageElement>(
-      'figure > img[data-blurhash]',
-    )
-    if (!image || image.complete) return
+  // command は表示より先に届くので、開いた直後から敷ける
+  dialog.addEventListener('command', (event) => {
+    const { command, source } = event as CommandEvent
+    if (command !== 'show-modal' || image.complete) return
 
-    const thumbnail = document.querySelector<HTMLImageElement>(
-      `[command="show-modal"][commandfor="${CSS.escape(dialog.id)}"] img`,
-    )
+    const thumbnail = source?.querySelector('img')
     // 読み込めていないサムネイルは敷いても出ない。blurhash のままにする
     if (!thumbnail?.complete || thumbnail.naturalWidth === 0) return
 
-    const layers = [
-      `url("${thumbnail.currentSrc}")`,
-      image.style.backgroundImage,
-    ]
-    image.style.backgroundImage = layers.filter(Boolean).join(', ')
+    image.style.backgroundImage = `url("${thumbnail.currentSrc}"), ${blurhash}`
   })
 }
