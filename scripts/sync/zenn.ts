@@ -1,3 +1,6 @@
+import type { Nodes } from 'hast'
+import { fromHtml } from 'hast-util-from-html'
+import { toText } from 'hast-util-to-text'
 import type { Article } from '../../src/core/article/article.ts'
 import { ZENN_USERNAME, zennArticleUrl } from '../../src/core/article/zenn.ts'
 import { writeJsonIfChanged } from './write_json.ts'
@@ -38,46 +41,38 @@ const fetchList = async (): Promise<ListItem[]> => {
   return articles
 }
 
-const ENTITIES: Record<string, string> = {
-  amp: '&',
-  lt: '<',
-  gt: '>',
-  quot: '"',
-  nbsp: ' ',
+// 概要に含めない、本文ではない要素
+const isExcluded = (node: Nodes) => {
+  if (node.type !== 'element') return false
+  const classes = node.properties.className
+  const hasClass = (name: string) =>
+    Array.isArray(classes) && classes.includes(name)
+  return (
+    // コードブロックは、<pre> の外に出るファイル名も含めて概要にならない
+    node.tagName === 'pre' ||
+    hasClass('code-block-filename-container') ||
+    // 数式のソース、脚注の番号、メッセージボックスの「!」「?」の記号
+    node.tagName === 'embed-katex' ||
+    hasClass('footnote-ref') ||
+    hasClass('msg-symbol') ||
+    // 埋め込みのリンクカードに添えられた、非表示の URL
+    String(node.properties.style ?? '').includes('display:none')
+  )
 }
 
-const decodeEntity = (entity: string, name: string) => {
-  if (name.startsWith('#x') || name.startsWith('#X')) {
-    return String.fromCodePoint(Number.parseInt(name.slice(2), 16))
-  }
-  if (name.startsWith('#')) {
-    return String.fromCodePoint(Number.parseInt(name.slice(1), 10))
-  }
-  return ENTITIES[name.toLowerCase()] ?? entity
+const prune = (node: Nodes) => {
+  if (!('children' in node)) return
+  node.children = node.children.filter(
+    (child) => !isExcluded(child),
+  ) as typeof node.children
+  for (const child of node.children) prune(child)
 }
-
-// ブロックの境目だけ空白にする。インライン要素の前後に空白を入れると、
-// 「ライブラリは<a>こちら</a>によると」が「ライブラリは こちら によると」になる
-const BLOCK_TAG =
-  /<\/?(?:p|div|h[1-6]|ul|ol|li|dl|dt|dd|blockquote|table|thead|tbody|tr|td|th|aside|details|summary|figure|figcaption|section)\b[^>]*>|<(?:br|hr)\b[^>]*>/gi
 
 const toExcerpt = (bodyHtml: string) => {
-  const text = bodyHtml
-    // コードブロックは、<pre> の外に出るファイル名も含めて概要にならない
-    .replace(/<pre[\s\S]*?<\/pre>/g, ' ')
-    .replace(/<div class="code-block-filename-container">[\s\S]*?<\/div>/g, ' ')
-    // 数式のソースと脚注の番号は本文ではない
-    .replace(/<embed-katex[\s\S]*?<\/embed-katex>/g, ' ')
-    .replace(/<sup class="footnote-ref">[\s\S]*?<\/sup>/g, '')
-    // メッセージボックスの「!」「?」の記号は本文ではない
-    .replace(/<span class="msg-symbol">[\s\S]*?<\/span>/g, ' ')
-    .replace(BLOCK_TAG, ' ')
-    .replace(/<[^>]*>/g, '')
-    // 埋め込みのリンクカードは URL がそのまま本文に出る
-    .replace(/https?:\/\/[\w\-.~:/?#[\]@!$&'()*+,;=%]+/g, ' ')
-    .replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, decodeEntity)
-    .replace(/\s+/g, ' ')
-    .trim()
+  const tree = fromHtml(bodyHtml, { fragment: true })
+  prune(tree)
+  // innerText と同じく、ブロックの境目だけが改行になり、インライン要素の前後は詰まる
+  const text = toText(tree).replace(/\s+/g, ' ').trim()
   // 絵文字を途中で切らないよう、UTF-16 の単位ではなく文字で数える
   return Array.from(text).slice(0, EXCERPT_LENGTH).join('').trimEnd()
 }
