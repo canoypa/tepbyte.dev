@@ -7,7 +7,8 @@ const OUTPUT = new URL('../../src/content/synced/photo.json', import.meta.url)
 /** 全作品ではなく、トップに出す写真を厳選した Collection */
 const COLLECTION_ID = 's56g0Eg2Fgg'
 
-const PER_PAGE = 30
+/** トップに出す、Collection 順の件数 */
+const COUNT = 6
 
 const toExif = (raw: AssetExif | undefined): PhotoExif | null => {
   if (!raw) return null
@@ -23,21 +24,17 @@ const toExif = (raw: AssetExif | undefined): PhotoExif | null => {
 }
 
 const fetchCollectionIds = async (unsplash: UnsplashApi): Promise<string[]> => {
-  const ids: string[] = []
-  for (let page = 1; ; page++) {
-    const { data, error } = await unsplash.GET(
-      '/collections/{collectionId}/photos',
-      {
-        params: {
-          path: { collectionId: COLLECTION_ID },
-          query: { page, per_page: PER_PAGE },
-        },
+  const { data, error } = await unsplash.GET(
+    '/collections/{collectionId}/photos',
+    {
+      params: {
+        path: { collectionId: COLLECTION_ID },
+        query: { per_page: COUNT },
       },
-    )
-    if (error) throw new Error(`list page ${page}: ${JSON.stringify(error)}`)
-    ids.push(...data.map((asset) => asset.id))
-    if (data.length < PER_PAGE) return ids
-  }
+    },
+  )
+  if (error) throw new Error(`list: ${JSON.stringify(error)}`)
+  return data.map((asset) => asset.id)
 }
 
 // EXIF は一覧に含まれないので、1 枚ずつ取る
