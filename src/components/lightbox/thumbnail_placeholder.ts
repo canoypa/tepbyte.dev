@@ -6,7 +6,6 @@
 for (const dialog of document.querySelectorAll<HTMLDialogElement>(
   'dialog[data-lightbox]',
 )) {
-  // 背景画像の消去は blurhash の処理に任せるため、blurhash のある画像だけを対象にする
   const image = dialog.querySelector<HTMLImageElement>(
     'figure > img[data-blurhash]',
   )
