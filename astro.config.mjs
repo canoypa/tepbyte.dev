@@ -5,6 +5,8 @@ import { unified } from '@astrojs/markdown-remark'
 
 import remarkBreaks from 'remark-breaks'
 
+import { blurDataUrlPlugin } from './src/core/image/blur_vite_plugin'
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://tepbyte.dev',
@@ -18,6 +20,10 @@ export default defineConfig({
   },
 
   integrations: [solidJs()],
+
+  vite: {
+    plugins: [blurDataUrlPlugin()],
+  },
 
   markdown: {
     processor: unified({

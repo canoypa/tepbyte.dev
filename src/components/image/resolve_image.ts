@@ -1,6 +1,6 @@
 import { getImage, imageConfig } from 'astro:assets'
 import type { UnresolvedImageTransform } from 'astro'
-import { getBlurhashDataUrlFromImage } from '~/core/blurhash'
+import { blurDataUrlOf } from '~/core/image/blur'
 
 /** Astro で変換した画像の属性と、読み込みを待つあいだ敷くぼかしの data URL を返す */
 export const resolveImage = async (options: UnresolvedImageTransform) => {
@@ -22,6 +22,6 @@ export const resolveImage = async (options: UnresolvedImageTransform) => {
       srcset:
         image.srcSet.values.length > 0 ? image.srcSet.attribute : undefined,
     },
-    placeholder: await getBlurhashDataUrlFromImage(image),
+    placeholder: blurDataUrlOf(image.options.src),
   }
 }
