@@ -1,7 +1,7 @@
 import { css } from '~pandacss/css'
+import { token } from '~pandacss/tokens'
 
-const ring =
-  'token(borderWidths.md.focus-indicator.thickness) + token(spacing.md.focus-indicator.outer-offset)'
+const ring = `${token.var('borderWidths.md.focus-indicator.thickness')} + ${token.var('spacing.md.focus-indicator.outer-offset')}`
 
 /**
  * スクロールコンテナは中身のフォーカスリングを見切るので、その分の余白を確保し、
