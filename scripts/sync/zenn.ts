@@ -9,8 +9,8 @@ const API = 'https://zenn.dev/api/articles'
 /** トップに出す、新しい順の件数 */
 const COUNT = 5
 
-/** 一覧に出す概要の長さ。本文の幅が最大のとき、全角でおよそ 2 行に収まる */
-const EXCERPT_LENGTH = 140
+/** 本文を丸ごと持ち込まないための上限。見える長さはカード側の 2 行の省略で決まる */
+const EXCERPT_LENGTH = 300
 
 type ListItem = {
   slug: string
@@ -79,10 +79,7 @@ const toExcerpt = (bodyHtml: string) => {
     .replace(/\s+/g, ' ')
     .trim()
   // 絵文字を途中で切らないよう、UTF-16 の単位ではなく文字で数える
-  const chars = Array.from(text)
-  return chars.length > EXCERPT_LENGTH
-    ? `${chars.slice(0, EXCERPT_LENGTH).join('').trimEnd()}…`
-    : text
+  return Array.from(text).slice(0, EXCERPT_LENGTH).join('').trimEnd()
 }
 
 const fetchArticle = async (item: ListItem): Promise<Article> => {
