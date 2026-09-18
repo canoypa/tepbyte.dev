@@ -42,13 +42,15 @@ const styles = {
     marginTop: 'calc(var(--avatar-size) / -2)',
     boxShadow: `0 0 0 6px ${token.var('colors.md.surface')}`,
   }),
-  about: css({
+  // 文の間は、文の中の折り返しより空ける
+  about: flex({
+    direction: 'column',
+    gap: 'md.space100',
     textStyle: 'md.body-large',
     color: 'md.on-surface-variant',
   }),
   // 狭い幅で折り返すときも、文節の途中や一語だけの行で切らない
   line: css({
-    display: 'block',
     wordBreak: 'auto-phrase',
     textWrap: 'balance',
   }),
