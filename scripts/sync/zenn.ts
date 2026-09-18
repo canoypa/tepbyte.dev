@@ -9,8 +9,14 @@ const API = 'https://zenn.dev/api/articles'
 /** 一覧に出す概要の長さ。本文の幅が最大のとき、全角でおよそ 2 行に収まる */
 const EXCERPT_LENGTH = 140
 
-type ListItem = { slug: string; path: string; published_at: string }
-type Detail = { title: string; body_html: string }
+type ListItem = {
+  slug: string
+  path: string
+  title: string
+  published_at: string
+  user: { username: string }
+}
+type Detail = { body_html: string }
 
 const get = async <T>(url: string): Promise<T> => {
   const response = await fetch(url)
@@ -25,6 +31,10 @@ const fetchList = async (): Promise<ListItem[]> => {
     const page: { articles: ListItem[]; next_page: number | null } = await get(
       `${API}?username=${ZENN_USERNAME}&order=latest&page=${next}`,
     )
+    // 一致しない username は無視され、Zenn 全体の新着が返る
+    if (page.articles.some((a) => a.user.username !== ZENN_USERNAME)) {
+      throw new Error(`articles by other users returned for "${ZENN_USERNAME}"`)
+    }
     items.push(...page.articles)
     next = page.next_page
   }
@@ -36,24 +46,45 @@ const ENTITIES: Record<string, string> = {
   lt: '<',
   gt: '>',
   quot: '"',
-  '#39': "'",
   nbsp: ' ',
 }
 
+const decodeEntity = (entity: string, name: string) => {
+  if (name.startsWith('#x') || name.startsWith('#X')) {
+    return String.fromCodePoint(Number.parseInt(name.slice(2), 16))
+  }
+  if (name.startsWith('#')) {
+    return String.fromCodePoint(Number.parseInt(name.slice(1), 10))
+  }
+  return ENTITIES[name.toLowerCase()] ?? entity
+}
+
+// ブロックの境目だけ空白にする。インライン要素の前後に空白を入れると、
+// 「ライブラリは<a>こちら</a>によると」が「ライブラリは こちら によると」になる
+const BLOCK_TAG =
+  /<\/?(?:p|div|h[1-6]|ul|ol|li|dl|dt|dd|blockquote|table|thead|tbody|tr|td|th|aside|details|summary|figure|figcaption|section)\b[^>]*>|<(?:br|hr)\b[^>]*>/gi
+
 const toExcerpt = (bodyHtml: string) => {
   const text = bodyHtml
-    // コードブロックは概要にならない
+    // コードブロックは、<pre> の外に出るファイル名も含めて概要にならない
     .replace(/<pre[\s\S]*?<\/pre>/g, ' ')
+    .replace(/<div class="code-block-filename-container">[\s\S]*?<\/div>/g, ' ')
+    // 数式のソースと脚注の番号は本文ではない
+    .replace(/<embed-katex[\s\S]*?<\/embed-katex>/g, ' ')
+    .replace(/<sup class="footnote-ref">[\s\S]*?<\/sup>/g, '')
     // メッセージボックスの「!」「?」の記号は本文ではない
     .replace(/<span class="msg-symbol">[\s\S]*?<\/span>/g, ' ')
-    .replace(/<[^>]*>/g, ' ')
+    .replace(BLOCK_TAG, ' ')
+    .replace(/<[^>]*>/g, '')
     // 埋め込みのリンクカードは URL がそのまま本文に出る
-    .replace(/https?:\/\/\S+/g, ' ')
-    .replace(/&(#\d+|[a-z]+);/gi, (entity, name) => ENTITIES[name] ?? entity)
+    .replace(/https?:\/\/[\w\-.~:/?#[\]@!$&'()*+,;=%]+/g, ' ')
+    .replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, decodeEntity)
     .replace(/\s+/g, ' ')
     .trim()
-  return text.length > EXCERPT_LENGTH
-    ? `${text.slice(0, EXCERPT_LENGTH)}…`
+  // 絵文字を途中で切らないよう、UTF-16 の単位ではなく文字で数える
+  const chars = Array.from(text)
+  return chars.length > EXCERPT_LENGTH
+    ? `${chars.slice(0, EXCERPT_LENGTH).join('').trimEnd()}…`
     : text
 }
 
@@ -63,7 +94,7 @@ const fetchArticle = async (item: ListItem): Promise<Article> => {
   return {
     id: item.slug,
     url: zennArticleUrl(item.path),
-    title: article.title,
+    title: item.title,
     excerpt: toExcerpt(article.body_html),
     publishedAt: item.published_at,
   }

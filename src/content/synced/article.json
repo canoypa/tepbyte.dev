@@ -10,7 +10,7 @@
     "id": "m3-color-web",
     "url": "https://zenn.dev/canoypa/articles/m3-color-web",
     "title": "Web アプリにも Material 3 の Color System を導入する",
-    "excerpt": "Web 向けの Material 3 ライブラリは こちらのページ によると、現在「対応予定」となってますが、Flutter でも使用されている新しい Color System を実装するライブラリの NPM 版が公開されていたりするので、こちらを使用して Web アプリにも M…",
+    "excerpt": "Web 向けの Material 3 ライブラリはこちらのページによると、現在「対応予定」となってますが、Flutter でも使用されている新しい Color System を実装するライブラリの NPM 版が公開されていたりするので、こちらを使用して Web アプリにも Mat…",
     "publishedAt": "2022-10-19T10:50:16.595+09:00"
   },
   {
@@ -38,14 +38,14 @@
     "id": "lazy-copilot-customization",
     "url": "https://zenn.dev/port_inc/articles/lazy-copilot-customization",
     "title": "頑張らない Instructions 整備",
-    "excerpt": "TL;DR Instructions 整備は面倒くさい！エージェント自身にやらせよう そのために、メタプロンプトなどを用意しよう 調整したいことがあれば「更新しておいて」とお願いするだけで OK 👌 はじめに ポート株式会社で新卒 2 年目の Cano です。👋 ここ数ヶ月は…",
+    "excerpt": "TL;DR Instructions 整備は面倒くさい！エージェント自身にやらせよう そのために、メタプロンプトなどを用意しよう 調整したいことがあれば「更新しておいて」とお願いするだけで OK 👌 はじめに ポート株式会社で新卒 2 年目の Cano です。👋 ここ数ヶ月はエー…",
     "publishedAt": "2026-02-27T10:28:40.824+09:00"
   },
   {
     "id": "copilot-agent-plugins",
     "url": "https://zenn.dev/port_inc/articles/copilot-agent-plugins",
     "title": "Agent Plugins のチーム配布と、それに耐えられるスキル設計",
-    "excerpt": "はじめに ポート株式会社の Cano です。👋 以前、Instructions の整備をエージェントに任せる方法を書きました。 当時は指示ファイルを配置している .agents/ フォルダを git 管理せず、チームへの共有は「よかったら使ってね」と Google Drive …",
+    "excerpt": "はじめに ポート株式会社の Cano です。👋 以前、Instructions の整備をエージェントに任せる方法を書きました。 当時は指示ファイルを配置している .agents/ フォルダを git 管理せず、チームへの共有は「よかったら使ってね」と Google Drive に…",
     "publishedAt": "2026-05-06T23:47:17.363+09:00"
   }
 ]
