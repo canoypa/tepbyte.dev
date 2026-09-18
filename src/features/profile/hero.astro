@@ -1,16 +1,21 @@
 ---
+import { imageConfig } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
 import Image from '~/components/image/image.astro'
 import { resolveImage } from '~/components/image/resolve_image'
-import { css } from '~pandacss/css'
+import { blurhashToDataUrl } from '~/core/blurhash'
+import { type Photo, photoSrc, photoSrcSet } from '~/core/image/photo'
+import { css, cx } from '~pandacss/css'
 import { flex } from '~pandacss/patterns'
+import PageHeadline from '../page_headline/page_headline.astro'
 import ProfileLink from './profile_link.astro'
 
 type Props = {
   profile: CollectionEntry<'profile'>['data']
+  cover?: Photo
 }
 
-const { profile } = Astro.props
+const { profile, cover } = Astro.props
 
 const avatar = await resolveImage({
   src: profile.avatar,
@@ -18,50 +23,73 @@ const avatar = await resolveImage({
   height: 192,
 })
 
+const { breakpoints } = imageConfig
+if (!breakpoints) throw new Error('image.breakpoints が設定されていない')
+
+const coverImage = cover && {
+  // 元の幅より大きい候補は引き伸ばしになる
+  widths: breakpoints.filter((w) => w <= cover.width),
+  placeholder: cover.blurHash
+    ? await blurhashToDataUrl(cover.blurHash)
+    : undefined,
+}
+
 const styles = {
-  root: css({
-    display: 'grid',
-    gridTemplate: 'auto / auto 1fr',
-    gridTemplateAreas: {
-      base: '"photo name" "info info"',
-      mdExpanded: '"photo name" "photo info"',
-    },
-    alignItems: 'center',
-    columnGap: 'md.space300',
-    rowGap: 'md.space100',
+  root: flex({ direction: 'column', gap: 'md.space300' }),
+  identity: flex({ direction: 'column', gap: 'md.space200' }),
+  portrait: flex({ direction: 'column', alignItems: 'flex-start' }),
+  cover: css({
+    width: '100%',
+    height: { base: 216, mdExpanded: 288 },
+    rounded: 'md.extra-large',
+    objectFit: 'cover',
   }),
   avatar: css({
-    gridArea: 'photo',
-
-    width: { base: 96, mdExpanded: 192 },
-    height: { base: 96, mdExpanded: 192 },
+    '--avatar-size': { base: '144px', mdExpanded: '192px' },
+    position: 'relative',
+    width: 'var(--avatar-size)',
+    height: 'var(--avatar-size)',
     rounded: 'md.full',
   }),
-  name: css({
-    gridArea: 'name',
-
-    textStyle: 'md.emphasized.display-large',
+  // カバーに高さの半分だけ重ね、背景色の縁で切り離す
+  overlap: css({
+    marginTop: 'calc(var(--avatar-size) / -2)',
+    boxShadow: '0 0 0 6px token(colors.md.surface)',
   }),
-  info: flex({
-    gridArea: 'info',
-
-    direction: 'column',
-    rowGap: 'md.space300',
-    textStyle: 'md.headline-small',
+  about: css({
+    maxWidth: '54ch',
+    textStyle: 'md.body-large',
+    color: 'md.on-surface-variant',
   }),
 }
 ---
 
 <div class:list={styles.root}>
-  <Image
-    {...avatar.attributes}
-    alt=""
-    placeholder={avatar.placeholder}
-    class:list={styles.avatar}
-  />
-  <h1 class:list={styles.name}>{profile.name}</h1>
-  <div class:list={styles.info}>
-    <span>{profile.subhead}</span>
-    <ProfileLink links={profile.links} />
+  <div class:list={styles.identity}>
+    <div class:list={styles.portrait}>
+      {
+        cover && coverImage && (
+          <Image
+            src={photoSrc(cover.url, coverImage.widths.at(-1) ?? cover.width)}
+            srcset={photoSrcSet(cover.url, coverImage.widths)}
+            sizes="min(100vw, 1176px)"
+            width={cover.width}
+            height={cover.height}
+            alt=""
+            placeholder={coverImage.placeholder}
+            class:list={styles.cover}
+          />
+        )
+      }
+      <Image
+        {...avatar.attributes}
+        alt=""
+        placeholder={avatar.placeholder}
+        class:list={cx(styles.avatar, cover && styles.overlap)}
+      />
+    </div>
+    <PageHeadline title={profile.name} subhead={profile.subhead} />
   </div>
+  <ProfileLink links={profile.links} />
+  <p class:list={styles.about}>{profile.about}</p>
 </div>

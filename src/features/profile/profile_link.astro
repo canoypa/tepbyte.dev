@@ -17,7 +17,7 @@ const { links } = Astro.props
   {
     links.map(({ label, url }) => (
       <li>
-        <Chip as="a" href={url}>
+        <Chip as="a" href={url} rel="me">
           {label}
         </Chip>
       </li>

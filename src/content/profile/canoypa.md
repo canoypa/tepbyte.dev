@@ -1,25 +1,12 @@
 ---
 name: Cano
-subhead: I'm a Japanese software developer, and I love cats 😺 and tea 🫖.
+subhead: Fuwa-fuwa software developer.
+about: Next.js と React を軸に Web を作っている。モバイルは Flutter。エディタは VS Code と Neovim を気分で行き来する。休みの日はカメラを持って散歩に出るのが好き。
 avatar: canoypa_avatar.png
 links:
   GitHub: https://github.com/canoypa
-  Misskey: https://misskey.io/@canoypa
   Zenn: https://zenn.dev/canoypa
-  Qiita: https://qiita.com/canoypa
+  Unsplash: https://unsplash.com/@sasazono
+  Misskey: https://misskey.io/@canoypa
+  X: https://x.com/canoypa
 ---
-
-## Hello World 👋
-
-猫派で紅茶派なソフトウェアエンジニアです。
-
-### Loves
-
-- Next.js / React / TypeScript / Flutter
-- VSCode / Neovim / Figma
-- GitHub / Google Cloud / Firebase
-
-## Contacts
-
-- GitHub ([@canoypa](https://github.com/canoypa))
-- Twitter ([@canoypa](https://twitter.com/canoypa))
