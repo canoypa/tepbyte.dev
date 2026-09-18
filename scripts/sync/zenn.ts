@@ -6,6 +6,9 @@ const OUTPUT = new URL('../../src/content/synced/article.json', import.meta.url)
 
 const API = 'https://zenn.dev/api/articles'
 
+/** トップに出す、新しい順の件数 */
+const COUNT = 5
+
 /** 一覧に出す概要の長さ。本文の幅が最大のとき、全角でおよそ 2 行に収まる */
 const EXCERPT_LENGTH = 140
 
@@ -25,20 +28,14 @@ const get = async <T>(url: string): Promise<T> => {
 }
 
 const fetchList = async (): Promise<ListItem[]> => {
-  const items: ListItem[] = []
-  let next: number | null = 1
-  while (next !== null) {
-    const page: { articles: ListItem[]; next_page: number | null } = await get(
-      `${API}?username=${ZENN_USERNAME}&order=latest&page=${next}`,
-    )
-    // 一致しない username は無視され、Zenn 全体の新着が返る
-    if (page.articles.some((a) => a.user.username !== ZENN_USERNAME)) {
-      throw new Error(`articles by other users returned for "${ZENN_USERNAME}"`)
-    }
-    items.push(...page.articles)
-    next = page.next_page
+  const { articles } = await get<{ articles: ListItem[] }>(
+    `${API}?username=${ZENN_USERNAME}&order=latest&count=${COUNT}`,
+  )
+  // 一致しない username は無視され、Zenn 全体の新着が返る
+  if (articles.some((a) => a.user.username !== ZENN_USERNAME)) {
+    throw new Error(`articles by other users returned for "${ZENN_USERNAME}"`)
   }
-  return items
+  return articles
 }
 
 const ENTITIES: Record<string, string> = {

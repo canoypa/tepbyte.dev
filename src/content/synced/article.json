@@ -1,19 +1,5 @@
 [
   {
-    "id": "pwsh-bash-prompt",
-    "url": "https://zenn.dev/canoypa/articles/pwsh-bash-prompt",
-    "title": "PowerShell のプロンプトを bash っぽくする",
-    "excerpt": "最近 WSL などで Linux を触ってみている中で、bash のシンプルでカラフルなプロンプトをかなり気に入っちゃったので、普段使う PowerShell のプロンプトも bash っぽくしてみます。 コピーライトなどを表示しないようにする まずは起動時に表示されるコピーライ…",
-    "publishedAt": "2022-09-23T19:51:22.098+09:00"
-  },
-  {
-    "id": "m3-color-web",
-    "url": "https://zenn.dev/canoypa/articles/m3-color-web",
-    "title": "Web アプリにも Material 3 の Color System を導入する",
-    "excerpt": "Web 向けの Material 3 ライブラリはこちらのページによると、現在「対応予定」となってますが、Flutter でも使用されている新しい Color System を実装するライブラリの NPM 版が公開されていたりするので、こちらを使用して Web アプリにも Mat…",
-    "publishedAt": "2022-10-19T10:50:16.595+09:00"
-  },
-  {
     "id": "new-graduate-pillar-tech",
     "url": "https://zenn.dev/port_inc/articles/new-graduate-pillar-tech",
     "title": "新卒エンジニアを支える技術",
