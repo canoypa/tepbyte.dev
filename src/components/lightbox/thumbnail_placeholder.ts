@@ -1,26 +1,19 @@
-/**
- * 拡大画像の読み込みを待つあいだ、開く元のサムネイルを敷く。
- * サムネイルは同じ写真の縮小版なので、blurhash より本物に近く、キャッシュから即座に表示される。
- * 剥がすのは blurhash の仕組みに任せる。blurhash の無い画像には敷かない。
- */
-
 for (const dialog of document.querySelectorAll<HTMLDialogElement>(
   'dialog[data-lightbox]',
 )) {
+  // 背景画像の消去は blurhash の処理に任せるため、blurhash のある画像だけを対象にする
   const image = dialog.querySelector<HTMLImageElement>(
     'figure > img[data-blurhash]',
   )
   if (!image) continue
-  // 再度開くたびに重ねないよう、元の blurhash を土台に毎回組み直す
+  // 開くたびに現在の背景画像に追加すると、読み込み前に開き直したとき同じサムネイルが重複して重なる
   const blurhash = image.style.backgroundImage
 
-  // command は表示より先に届くので、開いた直後から敷ける
   dialog.addEventListener('command', (event) => {
     const { command, source } = event as CommandEvent
     if (command !== 'show-modal' || image.complete) return
 
     const thumbnail = source?.querySelector('img')
-    // 読み込めていないサムネイルは敷いても表示されない。blurhash のままにする
     if (!thumbnail?.complete || thumbnail.naturalWidth === 0) return
 
     image.style.backgroundImage = `url("${thumbnail.currentSrc}"), ${blurhash}`
