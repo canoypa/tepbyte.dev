@@ -21,13 +21,16 @@ const styles = {
   dialog: css({
     _open: {
       display: 'grid',
-      // 余っている側からボタンの場所を取る。縦長の画面は縦に、横長の画面は横に余る
-      gridTemplate: '"close" auto "image" minmax(0, 1fr) / minmax(0, 1fr)',
+      // 余っている側からボタンの場所を取る。縦長の画面は縦に、横長の画面は横に余る。
+      // 反対側にも同じ幅を空けて、画像を画面の中央に置く。40 は IconButton の大きさ
+      gridTemplate:
+        '"close" 40px "image" minmax(0, 1fr) "." 40px / minmax(0, 1fr)',
       placeItems: 'center',
       gap: 'md.space150',
 
       '@media (orientation: landscape)': {
-        gridTemplate: '"close image" minmax(0, 1fr) / auto minmax(0, 1fr)',
+        gridTemplate:
+          '"close image ." minmax(0, 1fr) / 40px minmax(0, 1fr) 40px',
       },
       position: 'fixed',
       inset: 0,
