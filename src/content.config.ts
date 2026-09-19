@@ -6,7 +6,7 @@ import { photoSchema } from '~/core/image/photo'
 import { unsplashAttributionSchema } from '~/core/image/unsplash'
 
 const postCollection = defineCollection({
-  loader: glob({ pattern: '*.md', base: './src/content/post' }),
+  loader: glob({ pattern: '*.mdx', base: './src/content/post' }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -21,7 +21,7 @@ const postCollection = defineCollection({
 })
 
 const productCollection = defineCollection({
-  loader: glob({ pattern: '*.md', base: './src/content/product' }),
+  loader: glob({ pattern: '*.mdx', base: './src/content/product' }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -37,7 +37,7 @@ const productCollection = defineCollection({
 })
 
 const profileCollection = defineCollection({
-  loader: glob({ pattern: '*.md', base: './src/content/profile' }),
+  loader: glob({ pattern: '*.mdx', base: './src/content/profile' }),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
