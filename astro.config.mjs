@@ -1,5 +1,6 @@
 import { defineConfig, fontProviders } from 'astro/config'
 
+import mdx from '@astrojs/mdx'
 import solidJs from '@astrojs/solid-js'
 import { unified } from '@astrojs/markdown-remark'
 
@@ -20,7 +21,7 @@ export default defineConfig({
     breakpoints: [640, 750, 828, 1080, 1280, 1668, 2048, 2560],
   },
 
-  integrations: [solidJs()],
+  integrations: [solidJs(), mdx()],
 
   vite: {
     plugins: [blurDataUrlPlugin()],
