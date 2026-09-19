@@ -1,0 +1,32 @@
+---
+import type { UnresolvedImageTransform } from 'astro'
+import Image from '~/components/image/image.astro'
+import { resolveImage } from '~/components/image/resolve_image'
+import { css } from '~pandacss/css'
+
+type Props = Omit<UnresolvedImageTransform, 'src'> & {
+  /** 本文から相対パスで参照した画像は ImageMetadata、URL や public の画像は文字列のまま来る */
+  src: ImageMetadata | string
+}
+
+const { src, ...attrs } = Astro.props
+
+const resolved =
+  typeof src === 'string'
+    ? { attributes: { ...attrs, src }, placeholder: undefined }
+    : await resolveImage({ ...attrs, src })
+
+const style = css({
+  borderRadius: 'md.medium',
+  marginInline: 'auto',
+  // 高さ cap を幅側で算出。max-height だと width:auto 必須→未ロード時サイズ 0(CLS)。
+  maxWidth:
+    'min(100%, calc(80vh * attr(width type(<number>)) / attr(height type(<number>))))',
+})
+---
+
+<Image
+  {...resolved.attributes}
+  placeholder={resolved.placeholder}
+  class:list={style}
+/>

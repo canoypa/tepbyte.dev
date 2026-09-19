@@ -1,1 +1,2 @@
-@layer reset, base, tokens, recipes, utilities;
+/* astro.images はページによってこのファイルより後に <style> で入るので、ここで最下層に固定する */
+@layer astro.images, reset, base, tokens, recipes, utilities;
