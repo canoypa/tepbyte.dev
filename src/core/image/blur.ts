@@ -10,8 +10,8 @@ const cache = new Map<string, Promise<string>>()
 /**
  * 元画像のファイルからぼかしの data URL を作る。
  *
- * vite プラグインと rehype プラグインは同じ画像に別の経路で行き着くため、
- * 同じファイルを二度読まないよう、このキャッシュを両者で共有する。
+ * 同じ画像でもクエリの違うインポート（コンテンツコレクションの画像と本文の画像）は
+ * 別々に transform されるため、同じファイルを二度読まないようキャッシュする。
  */
 export const blurDataUrlFromFile = (path: string): Promise<string> => {
   // vite の id は Windows でも `/` 区切りなので、区切りをそろえてから引く

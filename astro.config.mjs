@@ -6,7 +6,6 @@ import { unified } from '@astrojs/markdown-remark'
 
 import remarkBreaks from 'remark-breaks'
 
-import { rehypeBlurPlaceholder } from './src/core/image/blur_rehype_plugin'
 import { blurDataUrlPlugin } from './src/core/image/blur_vite_plugin'
 
 // https://astro.build/config
@@ -30,7 +29,6 @@ export default defineConfig({
   markdown: {
     processor: unified({
       remarkPlugins: [remarkBreaks],
-      rehypePlugins: [rehypeBlurPlaceholder],
 
       remarkRehype: {
         footnoteLabelProperties: {

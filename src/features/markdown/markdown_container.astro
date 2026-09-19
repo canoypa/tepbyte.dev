@@ -59,14 +59,6 @@ const style = {
       fontFamily: 'comfortaa',
     },
 
-    '& img': {
-      borderRadius: 'md.medium',
-      marginInline: 'auto',
-      // 高さ cap を幅側で算出。max-height だと width:auto 必須→未ロード時サイズ 0(CLS)。
-      maxWidth:
-        'min(100%, calc(80vh * attr(width type(<number>)) / attr(height type(<number>))))',
-    },
-
     '& blockquote': {
       borderLeft: '4px solid',
       borderColor: 'md.outline',
@@ -170,7 +162,3 @@ const style = {
 <div class:list={style.root}>
   <slot />
 </div>
-
-<script>
-  import "~/components/image/blurhash_placeholder";
-</script>

@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content'
 import { getCollection, render } from 'astro:content'
 import type { GetStaticPaths } from 'astro'
 import Breadcrumb from '~/features/breadcrumb.astro'
+import { markdownComponents } from '~/features/markdown/markdown_components'
 import MarkdownContainer from '~/features/markdown/markdown_container.astro'
 import Info from '~/features/product/info.astro'
 import Seo from '~/features/seo/seo.astro'
@@ -48,7 +49,7 @@ const { Content } = await render(entry)
   <article class:list={flex({ direction: "column", gap: 'md.space800' })}>
     <Info product={entry.data} />
     <MarkdownContainer>
-      <Content />
+      <Content components={markdownComponents} />
     </MarkdownContainer>
     {entry.data.tags.length > 0 && <Tags tags={entry.data.tags} />}
   </article>

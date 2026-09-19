@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content'
 import { getCollection, render } from 'astro:content'
 import type { GetStaticPaths } from 'astro'
 import Breadcrumb from '~/features/breadcrumb.astro'
+import { markdownComponents } from '~/features/markdown/markdown_components'
 import MarkdownContainer from '~/features/markdown/markdown_container.astro'
 import PostInfo from '~/features/post/info.astro'
 import Seo from '~/features/seo/seo.astro'
@@ -50,7 +51,7 @@ const image = entry.data.image
   <article class:list={flex({ direction: "column", gap: 'md.space800' })}>
     <PostInfo post={entry.data} />
     <MarkdownContainer>
-      <Content />
+      <Content components={markdownComponents} />
     </MarkdownContainer>
     {
       entry.data.tags && entry.data.tags.length > 0 && (
