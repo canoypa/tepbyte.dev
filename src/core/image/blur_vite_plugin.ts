@@ -1,8 +1,5 @@
 import type { Plugin } from 'vite'
-import { blurDataUrlFromFile } from './blur'
-
-/** astro:assets が ImageMetadata として出力する形式のうち、sharp で読めるもの（svg を除く） */
-const RASTER_IMAGE = /\.(avif|gif|jpeg|jpg|png|tiff|webp)$/i
+import { blurDataUrlFromFile, RASTER_IMAGE } from './blur'
 
 /**
  * コンテンツコレクションの画像インポートに付くクエリ。

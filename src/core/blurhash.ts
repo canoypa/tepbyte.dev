@@ -31,6 +31,7 @@ export async function blurhashToDataUrl(blurhash: string) {
 
 export async function blurDataUrlFromImage(data: SharpInput) {
   const { data: buffer, info } = await sharp(data)
+    .rotate()
     .resize(4, 4, { fit: 'fill' })
     .ensureAlpha()
     .modulate({ saturation: 1.2 })

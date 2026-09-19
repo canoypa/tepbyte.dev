@@ -1,5 +1,9 @@
 import { readFile } from 'node:fs/promises'
+import { resolve } from 'node:path'
 import { blurDataUrlFromImage } from '../blurhash'
+
+/** astro:assets が ImageMetadata として扱う形式のうち、sharp で読めるもの（svg を除く） */
+export const RASTER_IMAGE = /\.(apng|avif|gif|jpeg|jpg|png|tiff|webp)$/i
 
 const cache = new Map<string, Promise<string>>()
 
@@ -10,11 +14,16 @@ const cache = new Map<string, Promise<string>>()
  * 同じファイルを二度読まないよう、このキャッシュを両者で共有する。
  */
 export const blurDataUrlFromFile = (path: string): Promise<string> => {
-  const cached = cache.get(path)
+  // vite の id は Windows でも `/` 区切りなので、区切りをそろえてから引く
+  const key = resolve(path)
+
+  const cached = cache.get(key)
   if (cached) return cached
 
-  const task = readFile(path).then(blurDataUrlFromImage)
-  cache.set(path, task)
+  const task = readFile(key).then(blurDataUrlFromImage)
+  cache.set(key, task)
+  // 書き込み途中のファイルを読んだ失敗を、ファイルが揃ったあとも返し続けないように
+  task.catch(() => cache.delete(key))
 
   return task
 }
