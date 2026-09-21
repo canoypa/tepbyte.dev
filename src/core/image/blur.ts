@@ -1,4 +1,4 @@
-import { readFile } from 'node:fs/promises'
+import { readFile, stat } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { blurDataUrlFromImage } from '../blurhash'
 
@@ -12,15 +12,18 @@ const cache = new Map<string, Promise<string>>()
  *
  * 同じ画像でもクエリの違うインポート（コンテンツコレクションの画像と本文の画像）は
  * 別々に transform されるため、同じファイルを二度読まないようキャッシュする。
+ * dev では同じパスのまま中身が差し替わるので、更新時刻もキーに含める。
  */
-export const blurDataUrlFromFile = (path: string): Promise<string> => {
+export const blurDataUrlFromFile = async (path: string): Promise<string> => {
   // vite の id は Windows でも `/` 区切りなので、区切りをそろえてから引く
-  const key = resolve(path)
+  const file = resolve(path)
+  const { mtimeMs } = await stat(file)
+  const key = `${file}:${mtimeMs}`
 
   const cached = cache.get(key)
   if (cached) return cached
 
-  const task = readFile(key).then(blurDataUrlFromImage)
+  const task = readFile(file).then(blurDataUrlFromImage)
   cache.set(key, task)
   // 書き込み途中のファイルを読んだ失敗を、ファイルが揃ったあとも返し続けないように
   task.catch(() => cache.delete(key))

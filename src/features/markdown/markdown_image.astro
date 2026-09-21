@@ -4,10 +4,8 @@ import Image from '~/components/image/image.astro'
 import { resolveImage } from '~/components/image/resolve_image'
 import { css } from '~pandacss/css'
 
-type Props = Omit<UnresolvedImageTransform, 'src'> & {
-  /** 本文から相対パスで参照した画像は ImageMetadata、URL や public の画像は文字列のまま来る */
-  src: ImageMetadata | string
-}
+/** 本文から相対パスで参照した画像は ImageMetadata、URL や public の画像は文字列のまま来る */
+type Props = UnresolvedImageTransform
 
 const { src, ...attrs } = Astro.props
 
