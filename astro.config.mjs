@@ -13,7 +13,7 @@ export default defineConfig({
 
   image: {
     layout: 'constrained',
-    responsiveStyles: true,
+    responsiveStyles: false,
     // 既定値と同じ。写真の srcset も同じ候補を使うので、imageConfig から読めるように明示する
     breakpoints: [640, 750, 828, 1080, 1280, 1668, 2048, 2560],
   },
