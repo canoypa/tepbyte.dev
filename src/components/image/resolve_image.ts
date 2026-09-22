@@ -9,7 +9,7 @@ import { blurDataUrlFromFile } from '~/core/image/blur'
  */
 const sourcePathOf = async (src: UnresolvedImageTransform['src']) => {
   const image = await resolveSrc(src)
-  if (!isESMImportedImage(image) || image.format === 'svg') return undefined
+  if (!isESMImportedImage(image)) return undefined
 
   const { fsPath } = image as { fsPath?: unknown }
   // 複製した ImageMetadata（`{ ...image }` など）ではパスが落ちている。ぼかしを黙って失わないよう止める
@@ -17,7 +17,8 @@ const sourcePathOf = async (src: UnresolvedImageTransform['src']) => {
     throw new Error(`画像の元ファイルのパスが読めない: ${image.src}`)
   }
 
-  return fsPath
+  // format ではなく拡張子で見る。ビルドでは fsPath 以外のプロパティを読むと、Astro が元画像もそのまま出力する
+  return fsPath.toLowerCase().endsWith('.svg') ? undefined : fsPath
 }
 
 /** Astro で変換した画像の属性と、読み込みを待つあいだ敷くぼかしの data URL を返す */
