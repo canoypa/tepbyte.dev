@@ -1,9 +1,6 @@
 import { readFile, stat } from 'node:fs/promises'
 import { blurDataUrlFromImage } from '../blurhash'
 
-/** astro:assets が ImageMetadata として扱う形式のうち、sharp で読めるもの（svg を除く） */
-export const RASTER_IMAGE = /\.(apng|avif|gif|jpeg|jpg|png|tiff|webp)$/i
-
 const cache = new Map<string, Promise<string>>()
 
 /**
