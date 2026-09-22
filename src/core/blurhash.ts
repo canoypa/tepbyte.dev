@@ -31,6 +31,3 @@ export async function blurDataUrlFromImage(data: SharpInput) {
 
   return await blurhashToDataUrl(blurhash)
 }
-
-export const blurhashPlaceholderStyle = (dataUrl: string) =>
-  `background-image:url(${dataUrl});background-size:cover;background-position:50% 50%`
