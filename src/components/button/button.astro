@@ -65,17 +65,9 @@ const { as: Tag = 'button', ...attrs } = Astro.props
 
 const hasLeading = Astro.slots.has('leading')
 const hasTrailing = Astro.slots.has('trailing')
-
-const defaultAttrs =
-  Tag === 'button'
-    ? {
-        type: 'button',
-      }
-    : {}
 ---
 
 <Tag
-  {...defaultAttrs}
   {...attrs}
   class:list={styles.root({ withIcon: Boolean(hasLeading || hasTrailing) })}
 >
