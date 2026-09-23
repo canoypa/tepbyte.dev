@@ -16,7 +16,7 @@ importers:
         version: 7.3.1
       '@astrojs/mdx':
         specifier: 8.0.1
-        version: 8.0.1(@astrojs/markdown-remark@7.3.1)(@astrojs/markdown-satteri@0.4.1)(astro@7.3.3(@astrojs/markdown-remark@7.3.1)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@24.13.5)(terser@5.49.2)(yaml@2.9.0))
+        version: 8.0.1(@astrojs/markdown-remark@7.3.1)(@astrojs/markdown-satteri@0.4.1)(astro@7.3.3(@astrojs/markdown-remark@7.3.1)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@24.13.6)(terser@5.49.2)(yaml@2.9.0))
       '@astrojs/solid-js':
         specifier: 7.0.2
         version: 7.0.2(@types/node@24.13.6)(esbuild@0.28.1)(solid-js@1.9.15)(terser@5.49.2)(yaml@2.9.0)
@@ -58,8 +58,8 @@ importers:
         specifier: ^4.0.2
         version: 4.0.2
       pandacss-preset-material-tokens:
-        specifier: ^0.4.0
-        version: 0.4.0(@pandacss/dev@1.12.1(typescript@6.0.3))
+        specifier: ^0.5.0
+        version: 0.5.0(@pandacss/dev@1.12.1(typescript@6.0.3))
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -2416,8 +2416,8 @@ packages:
   package-manager-detector@1.6.0:
     resolution: {integrity: sha512-61A5ThoTiDG/C8s8UMZwSorAGwMJ0ERVGj2OjoW5pAalsNOg15+iQiPzrLJ4jhZ1HJzmC2PIHT2oEiH3R5fzNA==}
 
-  pandacss-preset-material-tokens@0.4.0:
-    resolution: {integrity: sha512-N7LiuNX/ICTTFmD5wsOOc+lkg8wSegacwTwevl5Wwhbk9oBfb/huxF3/BtANmIn1c706F08lgAqeMveOZca9/g==}
+  pandacss-preset-material-tokens@0.5.0:
+    resolution: {integrity: sha512-8p0DSTl+jwcLVj00NZVHbPfqHMKPJPDCIPKAFxMWDF+NnJmV/7oQGUqS1/5dGa4LJcwGxb6MhX3VXOTXGGEmGw==}
     peerDependencies:
       '@pandacss/dev': ^1.0.0
 
@@ -3350,11 +3350,11 @@ snapshots:
       github-slugger: 2.0.0
       satteri: 0.10.5
 
-  '@astrojs/mdx@8.0.1(@astrojs/markdown-remark@7.3.1)(@astrojs/markdown-satteri@0.4.1)(astro@7.3.3(@astrojs/markdown-remark@7.3.1)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@24.13.5)(terser@5.49.2)(yaml@2.9.0))':
+  '@astrojs/mdx@8.0.1(@astrojs/markdown-remark@7.3.1)(@astrojs/markdown-satteri@0.4.1)(astro@7.3.3(@astrojs/markdown-remark@7.3.1)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@24.13.6)(terser@5.49.2)(yaml@2.9.0))':
     dependencies:
       '@astrojs/internal-helpers': 0.11.0
       '@astrojs/markdown-satteri': 0.4.1
-      astro: 7.3.3(@astrojs/markdown-remark@7.3.1)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@24.13.5)(terser@5.49.2)(yaml@2.9.0)
+      astro: 7.3.3(@astrojs/markdown-remark@7.3.1)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@24.13.6)(terser@5.49.2)(yaml@2.9.0)
       es-module-lexer: 2.1.0
     optionalDependencies:
       '@astrojs/markdown-remark': 7.3.1
@@ -5906,7 +5906,7 @@ snapshots:
 
   package-manager-detector@1.6.0: {}
 
-  pandacss-preset-material-tokens@0.4.0(@pandacss/dev@1.12.1(typescript@6.0.3)):
+  pandacss-preset-material-tokens@0.5.0(@pandacss/dev@1.12.1(typescript@6.0.3)):
     dependencies:
       '@pandacss/dev': 1.12.1(typescript@6.0.3)
 
