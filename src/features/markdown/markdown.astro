@@ -1,0 +1,19 @@
+---
+import type { RenderResult } from 'astro:content'
+import MarkdownContainer from './markdown_container.astro'
+import MarkdownImage from './markdown_image.astro'
+
+type Props = {
+  content: RenderResult['Content']
+}
+
+const { content: Content } = Astro.props
+
+const components = {
+  img: MarkdownImage,
+}
+---
+
+<MarkdownContainer>
+  <Content components={components} />
+</MarkdownContainer>
