@@ -42,4 +42,4 @@ lib/generated/pandacss/  # Auto-generated; never edit by hand, run `pnpm prepare
   - only `.mdx` is collected — a `.md` file is skipped without a warning.
   - `<!-- -->`, `<https://…>` and unclosed tags such as `<br>` fail the build.
   - indented code blocks render as paragraphs (use fences).
-  - a raw `<img>` bypasses the image pipeline, so write `![]()`.
+  - only `![]()` with a relative path goes through the image pipeline — a raw `<img>`, a URL or a `/public` path is output as a plain `<img>`.
