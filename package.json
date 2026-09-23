@@ -16,15 +16,6 @@
     "sync:unsplash": "node --env-file-if-exists=.env scripts/sync/unsplash.ts",
     "sync:zenn": "node scripts/sync/zenn.ts"
   },
-  "browserslist": [
-    "last 3 chrome major versions",
-    "last 3 edge major versions",
-    "last 3 firefox major versions",
-    "last 3 safari major versions",
-    "last 3 chromeandroid major versions",
-    "last 3 firefoxandroid major versions",
-    "last 3 ios major versions"
-  ],
   "dependencies": {
     "@astrojs/check": "^0.9.10",
     "@astrojs/markdown-remark": "7.3.1",
