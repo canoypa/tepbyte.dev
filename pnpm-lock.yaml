@@ -58,8 +58,8 @@ importers:
         specifier: ^4.0.2
         version: 4.0.2
       pandacss-preset-material-tokens:
-        specifier: ^0.4.0
-        version: 0.4.0(@pandacss/dev@1.12.1(typescript@6.0.3))
+        specifier: ^0.5.0
+        version: 0.5.0(@pandacss/dev@1.12.1(typescript@6.0.3))
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -2416,8 +2416,8 @@ packages:
   package-manager-detector@1.6.0:
     resolution: {integrity: sha512-61A5ThoTiDG/C8s8UMZwSorAGwMJ0ERVGj2OjoW5pAalsNOg15+iQiPzrLJ4jhZ1HJzmC2PIHT2oEiH3R5fzNA==}
 
-  pandacss-preset-material-tokens@0.4.0:
-    resolution: {integrity: sha512-N7LiuNX/ICTTFmD5wsOOc+lkg8wSegacwTwevl5Wwhbk9oBfb/huxF3/BtANmIn1c706F08lgAqeMveOZca9/g==}
+  pandacss-preset-material-tokens@0.5.0:
+    resolution: {integrity: sha512-8p0DSTl+jwcLVj00NZVHbPfqHMKPJPDCIPKAFxMWDF+NnJmV/7oQGUqS1/5dGa4LJcwGxb6MhX3VXOTXGGEmGw==}
     peerDependencies:
       '@pandacss/dev': ^1.0.0
 
@@ -5906,7 +5906,7 @@ snapshots:
 
   package-manager-detector@1.6.0: {}
 
-  pandacss-preset-material-tokens@0.4.0(@pandacss/dev@1.12.1(typescript@6.0.3)):
+  pandacss-preset-material-tokens@0.5.0(@pandacss/dev@1.12.1(typescript@6.0.3)):
     dependencies:
       '@pandacss/dev': 1.12.1(typescript@6.0.3)
 
