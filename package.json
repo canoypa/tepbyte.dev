@@ -44,7 +44,7 @@
     "@types/node": "^24.13.3",
     "hast-util-from-html": "^2.0.3",
     "hast-util-to-text": "^4.0.2",
-    "pandacss-preset-material-tokens": "^0.4.0",
+    "pandacss-preset-material-tokens": "^0.5.0",
     "typescript": "^6.0.3",
     "unsplash-js": "^8.0.1",
     "wrangler": "^4.131.1"
