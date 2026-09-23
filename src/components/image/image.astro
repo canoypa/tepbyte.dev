@@ -1,6 +1,5 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
-import { blurhashPlaceholderStyle } from '~/core/blurhash'
 
 type Props = Omit<HTMLAttributes<'img'>, 'style'> & {
   /** 読み込みを待つあいだ敷いておくぼかしの data URL */
@@ -10,7 +9,10 @@ type Props = Omit<HTMLAttributes<'img'>, 'style'> & {
 const { placeholder, ...attrs } = Astro.props
 
 const placeholderAttrs = placeholder
-  ? { 'data-blurhash': true, style: blurhashPlaceholderStyle(placeholder) }
+  ? {
+      'data-blurhash': true,
+      style: `background-image:url(${placeholder});background-size:cover;background-position:50% 50%`,
+    }
   : {}
 ---
 

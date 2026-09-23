@@ -1,18 +1,5 @@
 import { decode, encode } from 'blurhash'
-import sharp from 'sharp'
-
-type SharpInput =
-  | Buffer
-  | Uint8Array
-  | Uint8ClampedArray
-  | Int8Array
-  | Uint16Array
-  | Int16Array
-  | Uint32Array
-  | Int32Array
-  | Float32Array
-  | Float64Array
-  | string
+import sharp, { type SharpInput } from 'sharp'
 
 export async function blurhashToDataUrl(blurhash: string) {
   const size = 8
@@ -30,7 +17,8 @@ export async function blurhashToDataUrl(blurhash: string) {
 }
 
 export async function blurDataUrlFromImage(data: SharpInput) {
-  const { data: buffer, info } = await sharp(data)
+  // Astro の sharp サービスに揃える。Astro が変換できる壊れかけの画像を、ぼかしでだけ落とさないように
+  const { data: buffer, info } = await sharp(data, { failOn: 'none' })
     .rotate()
     .resize(4, 4, { fit: 'fill' })
     .ensureAlpha()
@@ -43,6 +31,3 @@ export async function blurDataUrlFromImage(data: SharpInput) {
 
   return await blurhashToDataUrl(blurhash)
 }
-
-export const blurhashPlaceholderStyle = (dataUrl: string) =>
-  `background-image:url(${dataUrl});background-size:cover;background-position:50% 50%`

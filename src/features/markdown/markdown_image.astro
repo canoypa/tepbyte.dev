@@ -9,22 +9,29 @@ type Props = UnresolvedImageTransform
 
 const { src, ...attrs } = Astro.props
 
-const resolved =
-  typeof src === 'string'
-    ? { attributes: { ...attrs, src }, placeholder: undefined }
-    : await resolveImage({ ...attrs, src })
+// Astro の Markdown と同じく、URL や public の画像は変換せず素の img で出す
+const isPassthrough = typeof src === 'string'
 
-const style = css({
-  borderRadius: 'md.medium',
-  marginInline: 'auto',
-  // 高さ cap を幅側で算出。max-height だと width:auto 必須→未ロード時サイズ 0(CLS)。
-  maxWidth:
-    'min(100%, calc(80vh * attr(width type(<number>)) / attr(height type(<number>))))',
-})
+const resolved = isPassthrough
+  ? { attributes: { ...attrs, src }, placeholder: undefined }
+  : await resolveImage({ ...attrs, src })
+
+const style = {
+  root: css({
+    borderRadius: 'md.medium',
+    marginInline: 'auto',
+  }),
+  // width と height の属性がないと宣言ごと無効になり、max-width: 100% まで消えるので、寸法のある画像にだけ当てる
+  heightCap: css({
+    // 高さ cap を幅側で算出。max-height だと width:auto 必須→未ロード時サイズ 0(CLS)。
+    maxWidth:
+      'min(100%, calc(80vh * attr(width type(<number>)) / attr(height type(<number>))))',
+  }),
+}
 ---
 
 <Image
   {...resolved.attributes}
   placeholder={resolved.placeholder}
-  class:list={style}
+  class:list={[style.root, !isPassthrough && style.heightCap]}
 />
