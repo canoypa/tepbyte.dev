@@ -27,7 +27,7 @@ type Props = {
 const { title, subhead } = Astro.props
 ---
 
-<div class:list={styles.root}>
+<hgroup class:list={styles.root}>
   <h1 class:list={styles.title}>{title}</h1>
   {subhead && <p class:list={styles.subhead}>{subhead}</p>}
-</div>
+</hgroup>
