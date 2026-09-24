@@ -41,14 +41,16 @@ const styles = {
     height: { base: 216, mdExpanded: 288 },
     objectFit: 'cover',
   }),
+  // 中のボタンを並びの flex item だったときと同じ大きさにする。inline のままだと行の高さのぶん下に隙間が出る
+  item: css({ display: 'flex' }),
   trigger: css({ rounded: 'md.extra-large' }),
 }
 ---
 
-<div class:list={styles.root}>
+<ul class:list={styles.root}>
   {
     screenshots.map(({ id, width, height, attributes, placeholder }) => (
-      <>
+      <li class:list={styles.item}>
         <LightboxTrigger for={id} class:list={styles.trigger}>
           <Image
             {...attributes}
@@ -65,7 +67,7 @@ const styles = {
             placeholder={placeholder}
           />
         </Lightbox>
-      </>
+      </li>
     ))
   }
-</div>
+</ul>
