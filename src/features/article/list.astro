@@ -4,10 +4,10 @@ import type { Article } from '~/core/article/article'
 
 type Props = {
   items: Article[]
-  headingLevel: 2 | 3
+  itemHeadingLevel: 2 | 3
 }
 
-const { items, headingLevel } = Astro.props
+const { items, itemHeadingLevel } = Astro.props
 ---
 
 <ArticleCardList
@@ -20,5 +20,5 @@ const { items, headingLevel } = Astro.props
     subhead: item.excerpt,
   }))}
   clampSubhead
-  headingLevel={headingLevel}
+  itemHeadingLevel={itemHeadingLevel}
 />

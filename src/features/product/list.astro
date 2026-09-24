@@ -5,10 +5,10 @@ import { toJstDateString } from '~/core/date'
 
 type Props = {
   items: CollectionEntry<'product'>[]
-  headingLevel: 2 | 3
+  itemHeadingLevel: 2 | 3
 }
 
-const { items, headingLevel } = Astro.props
+const { items, itemHeadingLevel } = Astro.props
 ---
 
 <ArticleCardList
@@ -20,5 +20,5 @@ const { items, headingLevel } = Astro.props
     title: item.data.title,
     subhead: item.data.subhead,
   }))}
-  headingLevel={headingLevel}
+  itemHeadingLevel={itemHeadingLevel}
 />

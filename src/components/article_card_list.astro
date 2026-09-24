@@ -19,10 +19,10 @@ type Props = {
   }[]
   /** subhead が本文から切り出した概要で、長さが揃っていない */
   clampSubhead?: boolean
-  headingLevel: 2 | 3
+  itemHeadingLevel: 2 | 3
 }
 
-const { items, clampSubhead, headingLevel } = Astro.props
+const { items, clampSubhead, itemHeadingLevel } = Astro.props
 ---
 
 <ul class:list={styles.root}>
@@ -32,7 +32,7 @@ const { items, clampSubhead, headingLevel } = Astro.props
         <ArticleCard
           {...item}
           clampSubhead={clampSubhead}
-          headingLevel={headingLevel}
+          headingLevel={itemHeadingLevel}
         />
       </li>
     ))
