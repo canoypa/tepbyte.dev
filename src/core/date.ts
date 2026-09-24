@@ -5,7 +5,6 @@ const jstDateFormatter = new Intl.DateTimeFormat('en-US', {
   day: '2-digit',
 })
 
-/** 日本時間の暦の日付を YYYY-MM-DD で返す */
 export const toJstDateString = (date: Date) => {
   const parts = jstDateFormatter.formatToParts(date)
   const part = (type: Intl.DateTimeFormatPartTypes) =>

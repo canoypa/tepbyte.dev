@@ -14,7 +14,6 @@ const { items, itemHeadingLevel } = Astro.props
 <ArticleCardList
   items={items.map((item) => ({
     date: item.data.publishedAt,
-    // frontmatter には日付しか書いていない
     datetime: toJstDateString(item.data.publishedAt),
     link: `/products/${item.id}`,
     title: item.data.title,
