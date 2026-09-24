@@ -112,7 +112,7 @@ const styles = {
             />
             <div slot="caption" class:list={styles.caption}>
               {exif && <span class:list={styles.exif}>{exif}</span>}
-              <StyledLink href={unsplashPhotoUrl(photo.id)} css={styles.link}>Unsplash</StyledLink>
+              <StyledLink href={unsplashPhotoUrl(photo.id)} css={styles.link} aria-label="Unsplash でこの写真を見る">Unsplash</StyledLink>
             </div>
           </Lightbox>
         </li>
