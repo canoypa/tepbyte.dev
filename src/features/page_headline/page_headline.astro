@@ -22,13 +22,12 @@ const styles = {
 type Props = {
   title: string
   subhead?: string
-  lang?: string
 }
 
-const { title, subhead, lang } = Astro.props
+const { title, subhead } = Astro.props
 ---
 
-<hgroup class:list={styles.root} lang={lang}>
+<hgroup class:list={styles.root}>
   <h1 class:list={styles.title}>{title}</h1>
   {subhead && <p class:list={styles.subhead}>{subhead}</p>}
 </hgroup>
