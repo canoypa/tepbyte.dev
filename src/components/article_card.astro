@@ -1,4 +1,5 @@
 ---
+import { toJstDateString } from '~/core/date'
 import { css } from '~pandacss/css'
 import StyledLink from './styled_link/styled_link.astro'
 
@@ -15,10 +16,6 @@ const styles = {
 // ビルドは UTC で走る。日本時間の朝に公開した記事が前日の日付にならないようにする
 const dateFormatter = Intl.DateTimeFormat('en-us', {
   dateStyle: 'long',
-  timeZone: 'Asia/Tokyo',
-})
-// en-CA は YYYY-MM-DD で出る。表示と同じく日付だけにし、書いていない時刻を持たせない
-const datetimeFormatter = Intl.DateTimeFormat('en-CA', {
   timeZone: 'Asia/Tokyo',
 })
 
@@ -46,7 +43,7 @@ const Heading = `h${headingLevel}` as const
 
 <article>
   <p class:list={styles.time}>
-    <time datetime={datetimeFormatter.format(date)}>
+    <time datetime={toJstDateString(date)}>
       {dateFormatter.format(date)}
     </time>
   </p>
