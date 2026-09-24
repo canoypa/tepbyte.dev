@@ -4,6 +4,7 @@ import Footer from '~/features/footer/footer.astro'
 
 import '~/styles/globals.css'
 import { css } from '~pandacss/css'
+import { token } from '~pandacss/tokens'
 
 const styles = {
   body: css({
@@ -39,6 +40,16 @@ const styles = {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <meta name="color-scheme" content="light dark" />
+    <meta
+      name="theme-color"
+      content={token('colors.md.light.surface')}
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content={token('colors.md.dark.surface')}
+      media="(prefers-color-scheme: dark)"
+    />
 
     <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="32x32" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" sizes="any" />
