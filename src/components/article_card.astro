@@ -27,6 +27,8 @@ type Props = {
   /** subhead を 2 行で省略する */
   clampSubhead?: boolean
   headingLevel?: 2 | 3
+  /** date が時刻まで意味を持つ。表示は日付だけでも、datetime には時刻まで出す */
+  hasTime?: boolean
 }
 
 const {
@@ -36,6 +38,7 @@ const {
   subhead,
   clampSubhead,
   headingLevel = 3,
+  hasTime,
 } = Astro.props
 
 const Heading = `h${headingLevel}` as const
@@ -43,7 +46,7 @@ const Heading = `h${headingLevel}` as const
 
 <article>
   <p class:list={styles.time}>
-    <time datetime={toJstDateString(date)}>
+    <time datetime={hasTime ? date.toISOString() : toJstDateString(date)}>
       {dateFormatter.format(date)}
     </time>
   </p>

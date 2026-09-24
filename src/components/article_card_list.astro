@@ -19,9 +19,10 @@ type Props = {
   /** subhead が本文から切り出した概要で、長さが揃っていない */
   clampSubhead?: boolean
   headingLevel?: 2 | 3
+  hasTime?: boolean
 }
 
-const { items, clampSubhead, headingLevel } = Astro.props
+const { items, clampSubhead, headingLevel, hasTime } = Astro.props
 ---
 
 <ul class:list={styles.root}>
@@ -32,6 +33,7 @@ const { items, clampSubhead, headingLevel } = Astro.props
           {...item}
           clampSubhead={clampSubhead}
           headingLevel={headingLevel}
+          hasTime={hasTime}
         />
       </li>
     ))
