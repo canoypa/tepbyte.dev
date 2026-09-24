@@ -47,7 +47,7 @@ const styles = {
 }
 ---
 
-<ul class:list={styles.root}>
+<ul role="list" class:list={styles.root}>
   {
     screenshots.map(({ id, width, height, attributes, placeholder }) => (
       <li class:list={styles.item}>
