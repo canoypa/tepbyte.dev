@@ -13,11 +13,11 @@ const { items, itemHeadingLevel } = Astro.props
 <ArticleCardList
   items={items.map((item) => ({
     date: new Date(item.publishedAt),
-    datetime: new Date(item.publishedAt).toISOString(),
     link: item.url,
     title: item.title,
     subhead: item.excerpt,
   }))}
   clampSubhead
   itemHeadingLevel={itemHeadingLevel}
+  itemDatePrecision="datetime"
 />

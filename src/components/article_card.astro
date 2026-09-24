@@ -1,4 +1,5 @@
 ---
+import { toJstDateString } from '~/core/date'
 import { css } from '~pandacss/css'
 import StyledLink from './styled_link/styled_link.astro'
 
@@ -20,7 +21,8 @@ const dateFormatter = Intl.DateTimeFormat('en-us', {
 
 type Props = {
   date: Date
-  datetime: string
+  /** Date は日付だけの値にも時刻を持たせてしまうので、どちらの値かを別に受け取る */
+  datePrecision: 'date' | 'datetime'
   link: URL | string
   title: string
   subhead: string
@@ -31,7 +33,7 @@ type Props = {
 
 const {
   date,
-  datetime,
+  datePrecision,
   link,
   title,
   subhead,
@@ -44,7 +46,9 @@ const Heading = `h${headingLevel}` as const
 
 <article>
   <p class:list={styles.time}>
-    <time datetime={datetime}>
+    <time
+      datetime={datePrecision === 'date' ? toJstDateString(date) : date.toISOString()}
+    >
       {dateFormatter.format(date)}
     </time>
   </p>

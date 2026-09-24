@@ -12,7 +12,6 @@ const styles = {
 type Props = {
   items: {
     date: Date
-    datetime: string
     link: string
     title: string
     subhead: string
@@ -20,9 +19,10 @@ type Props = {
   /** subhead が本文から切り出した概要で、長さが揃っていない */
   clampSubhead?: boolean
   itemHeadingLevel: 2 | 3
+  itemDatePrecision: 'date' | 'datetime'
 }
 
-const { items, clampSubhead, itemHeadingLevel } = Astro.props
+const { items, clampSubhead, itemHeadingLevel, itemDatePrecision } = Astro.props
 ---
 
 <ul class:list={styles.root}>
@@ -33,6 +33,7 @@ const { items, clampSubhead, itemHeadingLevel } = Astro.props
           {...item}
           clampSubhead={clampSubhead}
           headingLevel={itemHeadingLevel}
+          datePrecision={itemDatePrecision}
         />
       </li>
     ))
