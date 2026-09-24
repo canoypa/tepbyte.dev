@@ -43,6 +43,8 @@ const ogImageSrc = (
     width: 1200,
     // webp はクローラ側の対応にばらつきがあるため jpeg で固定する
     format: 'jpeg',
+    // 既定の constrained だと srcset の幅違いも生成されるが、og:image は 1 枚しか使わない
+    layout: 'none',
   })
 ).src
 
