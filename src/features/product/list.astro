@@ -4,9 +4,10 @@ import ArticleCardList from '~/components/article_card_list.astro'
 
 type Props = {
   items: CollectionEntry<'product'>[]
+  headingLevel?: 2 | 3
 }
 
-const { items } = Astro.props
+const { items, headingLevel } = Astro.props
 ---
 
 <ArticleCardList
@@ -16,4 +17,5 @@ const { items } = Astro.props
     title: item.data.title,
     subhead: item.data.subhead,
   }))}
+  headingLevel={headingLevel}
 />

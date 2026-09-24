@@ -25,9 +25,19 @@ type Props = {
   subhead: string
   /** subhead を 2 行で省略する */
   clampSubhead?: boolean
+  headingLevel?: 2 | 3
 }
 
-const { date, link, title, subhead, clampSubhead } = Astro.props
+const {
+  date,
+  link,
+  title,
+  subhead,
+  clampSubhead,
+  headingLevel = 3,
+} = Astro.props
+
+const Heading = `h${headingLevel}` as const
 ---
 
 <article>
@@ -36,10 +46,10 @@ const { date, link, title, subhead, clampSubhead } = Astro.props
       {dateFormatter.format(date)}
     </time>
   </p>
-  <h3>
+  <Heading>
     <StyledLink href={link} class:list={styles.title}>
       {title}
     </StyledLink>
-  </h3>
+  </Heading>
   <p class:list={[clampSubhead && styles.subhead]}>{subhead}</p>
 </article>
