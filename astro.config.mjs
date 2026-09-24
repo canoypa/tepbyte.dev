@@ -27,7 +27,6 @@ export default defineConfig({
       remarkRehype: {
         footnoteLabel: '脚注',
         footnoteLabelProperties: {
-          ariaHidden: true,
           hidden: true,
         },
         footnoteBackLabel: (referenceIndex, rereferenceIndex) =>
