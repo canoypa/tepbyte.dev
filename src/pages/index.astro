@@ -52,15 +52,15 @@ const styles = {
 
   <div class:list={styles.sections}>
     <HomeSection title="Products" moreHref="/products">
-      <ProductList items={products} />
+      <ProductList items={products} headingLevel={3} />
     </HomeSection>
 
     <HomeSection title="Posts" moreHref="/posts">
-      <PostList items={posts} />
+      <PostList items={posts} headingLevel={3} />
     </HomeSection>
 
     <HomeSection title="Articles" moreHref={ZENN_PROFILE_URL}>
-      <ArticleList items={articles} />
+      <ArticleList items={articles} headingLevel={3} />
     </HomeSection>
 
     <HomeSection title="Photos" moreHref={UNSPLASH_PROFILE_URL}>

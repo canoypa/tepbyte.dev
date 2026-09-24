@@ -27,7 +27,7 @@ type Props = {
   subhead: string
   /** subhead を 2 行で省略する */
   clampSubhead?: boolean
-  headingLevel?: 2 | 3
+  headingLevel: 2 | 3
 }
 
 const {
@@ -37,7 +37,7 @@ const {
   title,
   subhead,
   clampSubhead,
-  headingLevel = 3,
+  headingLevel,
 } = Astro.props
 
 const Heading = `h${headingLevel}` as const
