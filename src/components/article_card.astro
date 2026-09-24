@@ -1,5 +1,6 @@
 ---
 import { css } from '~pandacss/css'
+import DateTime from './date_time.astro'
 import StyledLink from './styled_link/styled_link.astro'
 
 const styles = {
@@ -12,34 +13,38 @@ const styles = {
   subhead: css({ lineClamp: 2 }),
 }
 
-// ビルドは UTC で走る。日本時間の朝に公開した記事が前日の日付にならないようにする
-const dateFormatter = Intl.DateTimeFormat('en-us', {
-  dateStyle: 'long',
-  timeZone: 'Asia/Tokyo',
-})
-
 type Props = {
   date: Date
+  datePrecision: 'date' | 'datetime'
   link: URL | string
   title: string
   subhead: string
   /** subhead を 2 行で省略する */
   clampSubhead?: boolean
+  headingLevel: 2 | 3
 }
 
-const { date, link, title, subhead, clampSubhead } = Astro.props
+const {
+  date,
+  datePrecision,
+  link,
+  title,
+  subhead,
+  clampSubhead,
+  headingLevel,
+} = Astro.props
+
+const Heading = `h${headingLevel}` as const
 ---
 
 <article>
   <p class:list={styles.time}>
-    <time datetime={date.toISOString()}>
-      {dateFormatter.format(date)}
-    </time>
+    <DateTime date={date} precision={datePrecision} />
   </p>
-  <h3>
+  <Heading>
     <StyledLink href={link} class:list={styles.title}>
       {title}
     </StyledLink>
-  </h3>
+  </Heading>
   <p class:list={[clampSubhead && styles.subhead]}>{subhead}</p>
 </article>

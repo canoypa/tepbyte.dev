@@ -8,12 +8,13 @@ import { flex } from '~pandacss/patterns'
 type Props = {
   /** LightboxTrigger から開くときに指す id */
   id: string
+  label: string
   /** 拡大画像を表示する最大の幅と高さ（px） */
   width: number
   height: number
 }
 
-const { id, width, height } = Astro.props
+const { id, label, width, height } = Astro.props
 
 const hasCaption = Astro.slots.has('caption')
 
@@ -100,6 +101,7 @@ const styles = {
 
 <dialog
   id={id}
+  aria-label={label}
   data-lightbox
   class:list={styles.dialog}
 >

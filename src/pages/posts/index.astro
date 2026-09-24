@@ -16,5 +16,5 @@ const posts = (await getCollection('post')).sort(
 
   <Breadcrumb list={[{ label: "Home", href: "/" }, { label: "Posts" }]} />
   <PageHeadline title="Posts" subhead="書いたもの" />
-  <PostList items={posts} />
+  <PostList items={posts} itemHeadingLevel={2} />
 </Application>

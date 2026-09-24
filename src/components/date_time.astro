@@ -1,0 +1,23 @@
+---
+import { toJstDateString } from '~/core/date'
+
+// ビルドは UTC で走る。日本時間の朝に公開した記事が前日の日付にならないようにする
+const formatter = Intl.DateTimeFormat('en-us', {
+  dateStyle: 'long',
+  timeZone: 'Asia/Tokyo',
+})
+
+type Props = {
+  date: Date
+  /** Date は日付だけの値にも時刻を持たせてしまうので、どちらの値かを別に受け取る */
+  precision: 'date' | 'datetime'
+}
+
+const { date, precision } = Astro.props
+---
+
+<time
+  datetime={precision === 'date' ? toJstDateString(date) : date.toISOString()}
+>
+  {formatter.format(date)}
+</time>

@@ -79,7 +79,7 @@ const styles = {
 }
 ---
 
-<ul class:list={styles.grid}>
+<ul role="list" class:list={styles.grid}>
   {
     items.map(
       ({ photo, id, smallest, largest, largestHeight, srcSet, exif, placeholder }) => (
@@ -99,7 +99,7 @@ const styles = {
               class:list={styles.image}
             />
           </LightboxTrigger>
-          <Lightbox id={id} width={largest} height={largestHeight}>
+          <Lightbox id={id} label="写真" width={largest} height={largestHeight}>
             <Image
               src={photoSrc(photo.url, largest)}
               srcset={srcSet}

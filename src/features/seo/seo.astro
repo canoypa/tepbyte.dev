@@ -19,6 +19,8 @@ type Props = {
     }
   }
 
+  canonical?: URL | string | null
+
   noindex?: boolean
   nofollow?: boolean
 }
@@ -65,6 +67,7 @@ const ogImage = new URL(ogImageSrc, Astro.site).toString()
       ...props.openGraph?.optional,
     },
   }}
+  canonical={props.canonical}
   noindex={props.noindex}
   nofollow={props.nofollow}
 />
