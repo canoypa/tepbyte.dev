@@ -25,10 +25,13 @@ export default defineConfig({
       remarkPlugins: [remarkBreaks],
 
       remarkRehype: {
+        footnoteLabel: '脚注',
         footnoteLabelProperties: {
           ariaHidden: true,
           hidden: true,
         },
+        footnoteBackLabel: (referenceIndex, rereferenceIndex) =>
+          `参照元 ${referenceIndex + 1}${rereferenceIndex > 1 ? `-${rereferenceIndex}` : ''} に戻る`,
       },
     }),
 
