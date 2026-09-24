@@ -15,7 +15,6 @@ const { image, attribution } = Astro.props
 
 const resolved = await resolveImage({ src: image, width: 1176 })
 
-// キャプションがなければ figure にしない。飾りの画像だけでは figure として伝える中身がない
 const Wrapper = attribution ? 'figure' : 'div'
 
 const styles = {
