@@ -1,6 +1,6 @@
 ---
-import { toJstDateString } from '~/core/date'
 import { css } from '~pandacss/css'
+import DateTime from './date_time.astro'
 import StyledLink from './styled_link/styled_link.astro'
 
 const styles = {
@@ -13,15 +13,8 @@ const styles = {
   subhead: css({ lineClamp: 2 }),
 }
 
-// ビルドは UTC で走る。日本時間の朝に公開した記事が前日の日付にならないようにする
-const dateFormatter = Intl.DateTimeFormat('en-us', {
-  dateStyle: 'long',
-  timeZone: 'Asia/Tokyo',
-})
-
 type Props = {
   date: Date
-  /** Date は日付だけの値にも時刻を持たせてしまうので、どちらの値かを別に受け取る */
   datePrecision: 'date' | 'datetime'
   link: URL | string
   title: string
@@ -46,11 +39,7 @@ const Heading = `h${headingLevel}` as const
 
 <article>
   <p class:list={styles.time}>
-    <time
-      datetime={datePrecision === 'date' ? toJstDateString(date) : date.toISOString()}
-    >
-      {dateFormatter.format(date)}
-    </time>
+    <DateTime date={date} precision={datePrecision} />
   </p>
   <Heading>
     <StyledLink href={link} class:list={styles.title}>

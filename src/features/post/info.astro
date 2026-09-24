@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content'
-import { toJstDateString } from '~/core/date'
+import DateTime from '~/components/date_time.astro'
 import { css } from '~pandacss/css'
 import { flex } from '~pandacss/patterns'
 import PageHeadline from '../page_headline/page_headline.astro'
@@ -16,27 +16,18 @@ type Props = {
 }
 
 const { post } = Astro.props
-
-const dateFormatter = Intl.DateTimeFormat('en-us', {
-  dateStyle: 'long',
-  timeZone: 'Asia/Tokyo',
-})
 ---
 
 <header class:list={styles.root}>
   <Thumbnail image={post.image} attribution={post.attribution} />
   <PageHeadline title={post.title} subhead={post.subhead} />
   <div class:list={styles.dateTime}>
-    <time datetime={toJstDateString(post.publishedAt)}>
-      {dateFormatter.format(post.publishedAt)}
-    </time>
+    <DateTime date={post.publishedAt} precision="date" />
     {
       post.updatedAt && (
         <>
           <span> - </span>
-          <time datetime={toJstDateString(post.updatedAt)}>
-            Updated {dateFormatter.format(post.updatedAt)}
-          </time>
+          Updated <DateTime date={post.updatedAt} precision="date" />
         </>
       )
     }
