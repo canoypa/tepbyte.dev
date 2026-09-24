@@ -58,3 +58,21 @@ dialog[data-lightbox][data-lightbox-closing] figure {
     scale: 0.8;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  dialog[data-lightbox] figure {
+    scale: 1;
+    transition: none;
+  }
+
+  dialog[data-lightbox][open] figure,
+  dialog[data-lightbox][data-lightbox-closing] figure {
+    scale: 1;
+  }
+
+  @starting-style {
+    dialog[data-lightbox][open] figure {
+      scale: 1;
+    }
+  }
+}
