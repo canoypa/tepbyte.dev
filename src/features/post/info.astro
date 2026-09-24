@@ -22,7 +22,7 @@ const publishedAt = dateFormatter.format(post.publishedAt)
 const updatedAt = post.updatedAt && dateFormatter.format(post.updatedAt)
 ---
 
-<div class:list={styles.root}>
+<header class:list={styles.root}>
   <Thumbnail image={post.image} attribution={post.attribution} />
   <PageHeadline title={post.title} subhead={post.subhead} />
   <div class:list={styles.dateTime}>
@@ -38,4 +38,4 @@ const updatedAt = post.updatedAt && dateFormatter.format(post.updatedAt)
       )
     }
   </div>
-</div>
+</header>

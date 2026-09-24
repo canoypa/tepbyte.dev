@@ -16,8 +16,8 @@ type Props = {
 const { product } = Astro.props
 ---
 
-<div class:list={styles.root}>
+<header class:list={styles.root}>
   <ScreenshotAstro images={product.images} />
   <PageHeadline title={product.title} subhead={product.subhead} />
   <Link links={product.links} />
-</div>
+</header>
