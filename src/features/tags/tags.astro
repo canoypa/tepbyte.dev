@@ -13,7 +13,7 @@ type Props = {
 const { tags } = Astro.props
 ---
 
-<ul class:list={styles.root}>
+<ul role="list" aria-label="タグ" class:list={styles.root}>
   {
     tags.map((label) => (
       <li>
