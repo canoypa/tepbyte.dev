@@ -12,10 +12,11 @@ const { items } = Astro.props
 <ArticleCardList
   items={items.map((item) => ({
     date: new Date(item.publishedAt),
+    // Zenn の公開日時は時刻まである
+    datetime: new Date(item.publishedAt).toISOString(),
     link: item.url,
     title: item.title,
     subhead: item.excerpt,
   }))}
   clampSubhead
-  hasTime
 />

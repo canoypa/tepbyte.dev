@@ -1,5 +1,4 @@
 ---
-import { toJstDateString } from '~/core/date'
 import { css } from '~pandacss/css'
 import StyledLink from './styled_link/styled_link.astro'
 
@@ -21,24 +20,24 @@ const dateFormatter = Intl.DateTimeFormat('en-us', {
 
 type Props = {
   date: Date
+  /** time 要素の datetime。日付だけか時刻まであるかは、値の持ち主が決める */
+  datetime: string
   link: URL | string
   title: string
   subhead: string
   /** subhead を 2 行で省略する */
   clampSubhead?: boolean
   headingLevel?: 2 | 3
-  /** date が時刻まで意味を持つ。表示は日付だけでも、datetime には時刻まで出す */
-  hasTime?: boolean
 }
 
 const {
   date,
+  datetime,
   link,
   title,
   subhead,
   clampSubhead,
   headingLevel = 3,
-  hasTime,
 } = Astro.props
 
 const Heading = `h${headingLevel}` as const
@@ -46,7 +45,7 @@ const Heading = `h${headingLevel}` as const
 
 <article>
   <p class:list={styles.time}>
-    <time datetime={hasTime ? date.toISOString() : toJstDateString(date)}>
+    <time datetime={datetime}>
       {dateFormatter.format(date)}
     </time>
   </p>
