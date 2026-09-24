@@ -17,6 +17,8 @@ type Props = {
 const { post } = Astro.props
 
 const dateFormatter = Intl.DateTimeFormat('en-us', { dateStyle: 'long' })
+// frontmatter は日付だけで、時刻は UTC の 0 時として読まれる。datetime も日付だけにする
+const toDatetime = (date: Date) => date.toISOString().slice(0, 10)
 
 const publishedAt = dateFormatter.format(post.publishedAt)
 const updatedAt = post.updatedAt && dateFormatter.format(post.updatedAt)
@@ -26,12 +28,12 @@ const updatedAt = post.updatedAt && dateFormatter.format(post.updatedAt)
   <Thumbnail image={post.image} attribution={post.attribution} />
   <PageHeadline title={post.title} subhead={post.subhead} />
   <div class:list={styles.dateTime}>
-    <time datetime={post.publishedAt.toISOString()}>{publishedAt}</time>
+    <time datetime={toDatetime(post.publishedAt)}>{publishedAt}</time>
     {
-      updatedAt && (
+      post.updatedAt && updatedAt && (
         <>
           <span> - </span>
-          <time datetime={post.updatedAt?.toISOString()}>
+          <time datetime={toDatetime(post.updatedAt)}>
             Updated {updatedAt}
           </time>
         </>

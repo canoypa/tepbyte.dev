@@ -17,6 +17,10 @@ const dateFormatter = Intl.DateTimeFormat('en-us', {
   dateStyle: 'long',
   timeZone: 'Asia/Tokyo',
 })
+// en-CA は YYYY-MM-DD で出る。表示と同じく日付だけにし、書いていない時刻を持たせない
+const datetimeFormatter = Intl.DateTimeFormat('en-CA', {
+  timeZone: 'Asia/Tokyo',
+})
 
 type Props = {
   date: Date
@@ -42,7 +46,7 @@ const Heading = `h${headingLevel}` as const
 
 <article>
   <p class:list={styles.time}>
-    <time datetime={date.toISOString()}>
+    <time datetime={datetimeFormatter.format(date)}>
       {dateFormatter.format(date)}
     </time>
   </p>
