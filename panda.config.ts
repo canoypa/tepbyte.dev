@@ -58,6 +58,8 @@ export default defineConfig({
   },
 
   presets: [
+    // v2 は base のユーティリティと patterns を自動では足さない
+    '@pandacss/preset-base',
     presetMaterialTokens({
       sourceColor: 0x8282f4,
       typeface: { brand: '{fonts.comfortaa}' },
