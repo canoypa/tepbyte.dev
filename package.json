@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "24.x"
+    "node": "26.x"
   },
   "scripts": {
     "dev": "astro dev",
@@ -33,7 +33,7 @@
     "@pandacss/dev": "^2.6.0",
     "@pandacss/preset-base": "^2.6.0",
     "@types/hast": "^3.0.5",
-    "@types/node": "^24.13.3",
+    "@types/node": "^26.0.0",
     "hast-util-from-html": "^2.0.3",
     "hast-util-to-text": "^4.0.2",
     "pandacss-preset-material-tokens": "^0.5.0",
