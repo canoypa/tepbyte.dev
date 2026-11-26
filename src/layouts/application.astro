@@ -69,6 +69,17 @@ const styles = {
       import { init } from "astro/virtual-modules/prefetch.js";
       init({ prefetchAll: true });
     </script>
+    <script>
+      // ページ内リンク（脚注など）の移動だけを滑らかにする。:root に常に置くと、リロードで位置を戻すスクロールにも効いてアニメーションになるため
+      document.addEventListener("click", (event) => {
+        if (
+          event.target instanceof Element &&
+          event.target.closest('a[href^="#"]')
+        ) {
+          document.documentElement.style.scrollBehavior = "smooth";
+        }
+      });
+    </script>
   </head>
   <body class:list={styles.body}>
     <main class:list={styles.main}>
