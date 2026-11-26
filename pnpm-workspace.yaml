@@ -5,3 +5,4 @@ onlyBuiltDependencies:
 allowBuilds:
   esbuild: true
   workerd: false
+  '@parcel/watcher': false

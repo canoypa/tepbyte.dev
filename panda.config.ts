@@ -58,6 +58,7 @@ export default defineConfig({
   },
 
   presets: [
+    '@pandacss/preset-base',
     presetMaterialTokens({
       sourceColor: 0x8282f4,
       typeface: { brand: '{fonts.comfortaa}' },
