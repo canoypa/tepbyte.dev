@@ -1,0 +1,32 @@
+name: Actions lockfile
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+# 同じブランチへの連続 push では最新のみ検証する
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_ACTIONS_LOCK_VERSION: v0.5.1
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: gh-actions-lock を入れる
+        run: gh extension install github/gh-actions-lock --pin "$GH_ACTIONS_LOCK_VERSION"
+
+      # lockfile に載っていない workflow や、固定した commit を runner が受け付けないものを検出する
+      - name: lockfile を検証
+        run: gh actions-lock --verify
