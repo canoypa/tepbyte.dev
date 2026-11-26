@@ -70,7 +70,7 @@ const styles = {
       init({ prefetchAll: true });
     </script>
     <script>
-      // ページ内リンク（脚注など）の移動だけを滑らかにする。:root に常に置くと、リロードで位置を戻すスクロールにも効いてアニメーションになるため
+      // ページ内リンク（脚注など）を押したときだけ、移動を滑らかにする。scroll-behavior はリロードで元の位置へ戻すスクロールにも効くので、ページを開いた時点では付けない
       document.addEventListener("click", (event) => {
         if (
           event.target instanceof Element &&
