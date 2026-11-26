@@ -1,16 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended",
-    ":semanticCommitTypeAll(chore)",
-    "security:minimumReleaseAgeNpm",
-    ":maintainLockFilesWeekly",
-    ":configMigration",
-    "group:pnpm"
-  ],
+  "extends": ["github>canoypa/renovate-config", "group:pnpm"],
   "semanticCommits": "enabled",
   "timezone": "Asia/Tokyo",
-  "labels": ["dependencies"],
   "customManagers": [
     {
       "customType": "regex",
@@ -25,11 +17,19 @@
       "datasourceTemplate": "github-releases",
       "extractVersionTemplate": "^v\\d+\\.(?<version>\\d{8})\\.\\d+$",
       "versioningTemplate": "regex:^(?<major>\\d{4})(?<minor>\\d{2})(?<patch>\\d{2})$"
+    },
+    {
+      "customType": "regex",
+      "description": "github-actions マネージャが見ない gh-actions-lock 拡張の版を追う",
+      "managerFilePatterns": [".github/workflows/actions-lock.yaml"],
+      "matchStrings": ["GH_ACTIONS_LOCK_VERSION:\\s*(?<currentValue>v\\S+)"],
+      "depNameTemplate": "github/gh-actions-lock",
+      "datasourceTemplate": "github-releases"
     }
   ],
   "packageRules": [
     {
-      "matchManagers": ["!custom.regex"],
+      "matchDepNames": ["!cloudflare/workerd"],
       "matchUpdateTypes": ["patch", "digest"],
       "groupName": "patch and digest updates",
       "automerge": true
