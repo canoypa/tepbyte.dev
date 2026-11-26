@@ -41,7 +41,6 @@ export default defineConfig({
     },
     ':root': {
       scrollbarGutter: 'stable',
-      scrollBehavior: 'smooth',
       WebkitTapHighlightColor: 'transparent',
     },
     body: {
